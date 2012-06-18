@@ -1,0 +1,17 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/mtpBSL.master" AutoEventWireup="true" CodeFile="~/uc/ucRegistry.ascx.cs" Inherits="ucRegistry" Title="Registry" %>
+
+<%@ Register src="~/uc/ucRegistry.ascx" tagname="Registry" tagprefix="uc1" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ctContent" Runat="Server">
+    <div id="main" style="width:75%;">
+        <uc1:Registry ID="ucRegistry1" runat="server" />
+	<div class="content-separator">
+        
+    </div>
+    </div>	
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="cphRight" Runat="Server">
+</asp:Content>
+

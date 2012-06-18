@@ -1,0 +1,57 @@
+﻿.Grid { border: dotted 1px #e6e6e6; }
+.Grid td
+{
+    margin: 1px 1px 1px 1px;
+    text-align: left;
+    padding: 5px;
+	line-height: 1.6em;
+    vertical-align: top;
+}
+.GridHeader
+{   border-top:dotted 1px #e6e6e6;
+    font-weight: bold;
+}
+.GridItem
+{
+background-color: #e6e6e6;
+}
+
+.GridAltItem
+{
+    background-color: #E8EDFF;
+}
+.Grid a {
+	text-decoration: none;
+
+	color: #f60;
+	font-weight: bold;
+}
+
+.Grid a:hover {
+	text-decoration: none;
+	color: #756a4f;
+	
+}
+table.footlink a {
+	text-decoration: none;
+	border-bottom: 1px dotted #f60;
+	color: #756a4f;
+	font-weight: bold;
+}
+
+table.footlink a:hover {
+	text-decoration: none;
+	color: #f60;
+	
+}
+a {
+	text-decoration: none;
+
+	color: #756a4f;
+	font-weight: bold;
+}
+a:hover {
+	text-decoration: none;
+	color: #f60;
+}
+

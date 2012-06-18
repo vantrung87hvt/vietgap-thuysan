@@ -1,0 +1,125 @@
+﻿#googleMap{
+        border: 1px dashed #C0C0C0;
+        width: 766px;
+        height: 500px;
+      }
+      
+        #box
+        {
+            height: 64;
+            font-size: 11px;
+            zoom: 1;
+            filter: alpha(opacity=60);
+            opacity: 0.5;
+            border: 1px solid #000;
+            background-color: gray;
+            width: 300px;
+            padding-left: 5px;
+            color: White;
+        }
+        
+        #box .line
+        {
+            border-bottom: 1px solid #FF0000;
+            overflow: auto;
+            clear: both;
+            height: 16px;
+        }
+        #box #lng-west
+        {
+            border-bottom: 0px;
+        }
+        
+        #box .name
+        {
+            width: 80px;
+            border-right: 1px solid #FF0000;
+            float: left;
+        }
+        #box .value
+        {
+            float: left;
+        }
+        #map
+        {
+            width: 940px;
+            height: 600px;
+            float: left;
+            margin-left: 2px;
+            margin-bottom: 5px;
+            border: 1px dashed #C0C0C0;
+        }
+        #gmap
+        {
+            width: 940px;
+            height: 700px;
+            float: left;
+            margin-left: 2px;
+            margin-bottom: 5px;
+            border: 1px dashed #C0C0C0;
+        }
+        #side_bar{
+        float:left;
+        width: 940px;
+        height:350px;
+        text-align:left;
+        border: 1px solid #999999;
+        font-family: verdana;
+        font-size: 11px;
+        
+        color:#000000;
+        
+        line-height:17px;
+      }
+      #bot
+      {
+        float:right;
+        width: 350px;
+        height:100px;
+        text-align:right;
+        font-family: verdana;
+        font-size: 11px;
+        color:#000000;
+        line-height:17px;
+      }
+    .label-orange
+    {
+        border-left-color: #FA8F6F;
+    }
+     #hor-minimalist-b
+    {
+        font-size: 12px;
+        background: #fff;
+        margin-left:5px;
+        margin-top: 5px;
+        border-collapse: collapse;
+        text-align: left;
+    }
+    #hor-minimalist-b th
+    {
+        font-size: 12px;
+        font-weight: normal;
+        color: #039;
+        padding: 8px 6px;
+        border-bottom: 2px solid #6678b1;
+    }
+    #hor-minimalist-b td
+    {
+        border-bottom: 1px solid #ccc;
+        color: #669;
+        padding: 4px 6px;
+    }
+    #hor-minimalist-b tbody tr:hover td
+    {
+        color: #009;
+    }
+    .dvFooter
+    {
+         font-size: 12px;
+        background: #fff;
+        margin-left:30px;
+        margin-top: 5px;
+        width: 90%;
+        border-collapse: collapse;
+        text-align: right;
+    }

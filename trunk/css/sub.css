@@ -1,0 +1,56 @@
+﻿@import url(style.css);
+/*      ========================================================        */
+
+.columnleft,.columnmid,.columnright
+{
+    background-color:White;
+    padding-bottom:10px;
+}
+.columnleft
+{
+    float:left;
+    width:532px;
+    margin-right:5px;
+}
+.columnmid
+{
+    float:left;
+    width:232px;
+    margin-right:5px;
+}
+.columnmid .panel_content
+{
+    width:458px;
+}
+.columnright
+{
+    float:left;
+    padding:10px 0 10px 8px;
+    width:179px;
+}
+.cattitle
+{
+    width:470px;
+    height:21px;
+    padding:7px 10px 10px 30px;
+    background-image:url(../images/cattitle_bg.jpg);
+    border-left:solid #DEDEDE 1px;
+    border-right:solid #DEDEDE 1px;
+    margin:10px;
+    margin-bottom:30px;
+    color:Red;
+    font-size:12pt;
+}
+.danhsachtin
+{
+    background-color:#F4F5F7;
+    margin:10px;
+    float:left;
+    width:470px;
+    padding:7px 10px 10px 30px;
+}
+.panel_title
+{
+    padding-top:5px;
+    background-image:none;
+}

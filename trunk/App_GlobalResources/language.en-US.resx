@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnSubmit" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="camonbinhchon" xml:space="preserve">
+    <value>Thank for your vote</value>
+  </data>
+  <data name="chatroom" xml:space="preserve">
+    <value>Chat Room</value>
+  </data>
+  <data name="chuacophanhoi" xml:space="preserve">
+    <value>No feedback ,send one please</value>
+  </data>
+  <data name="dadangnhap" xml:space="preserve">
+    <value>You are logged in</value>
+  </data>
+  <data name="dadangxuat" xml:space="preserve">
+    <value>You are logged out</value>
+  </data>
+  <data name="dangnhap" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="diachi" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="diendan" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="docrss" xml:space="preserve">
+    <value>RSS</value>
+  </data>
+  <data name="dscacquyen" xml:space="preserve">
+    <value>Danh sách các quyền</value>
+  </data>
+  <data name="footer" xml:space="preserve">
+    <value>Powered by INVI</value>
+  </data>
+  <data name="giatri" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="gui" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="homthu" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="huybo" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ketquatim" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="khongtimthay" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="lblAboutMenu" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="lblCategory" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="lblDangOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="lblDownloadMenu" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="lblHomeMenu" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="lblHomNay" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="lblHomQua" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="lblMostReadNews" xml:space="preserve">
+    <value>Most read news</value>
+  </data>
+  <data name="lblNewsMenu" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="lblServicesMenu" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="lblSitePartNers" xml:space="preserve">
+    <value>Site Partners</value>
+  </data>
+  <data name="lblSupportMenu" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="lblTatCa" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="lblThangNay" xml:space="preserve">
+    <value>Current Month</value>
+  </data>
+  <data name="lblThangTruoc" xml:space="preserve">
+    <value>Before Month</value>
+  </data>
+  <data name="lblThongKeTruyCap" xml:space="preserve">
+    <value>Visitor</value>
+  </data>
+  <data name="lienhe" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="lienket" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="luotbinhchon" xml:space="preserve">
+    <value>vote times</value>
+  </data>
+  <data name="moibinhchon" xml:space="preserve">
+    <value>Rate this post</value>
+  </data>
+  <data name="moiguiphanhoi" xml:space="preserve">
+    <value>Give a feedback please</value>
+  </data>
+  <data name="ngaydang" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ngaygui" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ngonngu" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="nguoigui" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="noidung" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="pageview" xml:space="preserve">
+    <value>Page Views</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="phanhoidagui" xml:space="preserve">
+    <value>Feedback sent success,wait for verify</value>
+  </data>
+  <data name="phanquyennhomnguoidung" xml:space="preserve">
+    <value>Grain permission to group of users</value>
+  </data>
+  <data name="readmore" xml:space="preserve">
+    <value>Read more</value>
+  </data>
+  <data name="sitemap" xml:space="preserve">
+    <value>Site Map</value>
+  </data>
+  <data name="soanthu" xml:space="preserve">
+    <value>Write New</value>
+  </data>
+  <data name="sua" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="tenbanla" xml:space="preserve">
+    <value>Your name</value>
+  </data>
+  <data name="thoat" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="thongtin" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="thudagui" xml:space="preserve">
+    <value>Sentbox</value>
+  </data>
+  <data name="tieude" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="timkiem" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="tinnong" xml:space="preserve">
+    <value>Hot News</value>
+  </data>
+  <data name="trangchu" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="trogiup" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="txtSearch_query" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="vidu" xml:space="preserve">
+    <value>Ex</value>
+  </data>
+  <data name="visitor" xml:space="preserve">
+    <value>Visitor</value>
+  </data>
+  <data name="weblink" xml:space="preserve">
+    <value>Weblinks</value>
+  </data>
+  <data name="xoamucdachon" xml:space="preserve">
+    <value>Delete selected items</value>
+  </data>
+  <data name="lblTuanNay" xml:space="preserve">
+    <value>Current week</value>
+  </data>
+  <data name="lblTuanTruoc" xml:space="preserve">
+    <value>Before week</value>
+  </data>
+  <data name="dangxuat" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="lblDocumentMenu" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="lblMaps" xml:space="preserve">
+    <value>Maps</value>
+  </data>
+  <data name="lblAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="lblContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="lblFaq" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="lblRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="lblTieudeTailieu" xml:space="preserve">
+    <value>List of document:</value>
+  </data>
+  <data name="ltrMatkhau" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ltrTendangnhap" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ltrTracumasoVietGAP" xml:space="preserve">
+    <value>Look up VietGAP codes</value>
+  </data>
+  <data name="btnSearchVietGAPCode" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="lblBoNNPTNT" xml:space="preserve">
+    <value>Ministry of Agriculture and Rural Development</value>
+  </data>
+  <data name="lblDangTruyCap" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="lblNoiDungCanTim" xml:space="preserve">
+    <value>Content to find:</value>
+  </data>
+  <data name="lblTapChiThuySan" xml:space="preserve">
+    <value>Fisheries magazine</value>
+  </data>
+  <data name="lblSoKyHieu" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblLoaiVanBan" xml:space="preserve">
+    <value>Type of text:</value>
+  </data>
+  <data name="lblSTT" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="lblTenTaiLieu" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblAnNoiDung" xml:space="preserve">
+    <value>Hide content</value>
+  </data>
+  <data name="lblBanHanh" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCQBanHanh" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDangCongBao" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblHieuLucDen" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblLanTai" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="lblLoaiTaiLieu" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lblNgayBanHanh" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNgayDang" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="lblTacGia" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="lblThongTinTaiLieu" xml:space="preserve">
+    <value>Document information</value>
+  </data>
+  <data name="lblTomTatNoiDung" xml:space="preserve">
+    <value>Summary content:</value>
+  </data>
+  <data name="btnGui" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="btnTimKiemLD" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="lblChucVu" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="lblContent" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="lblDanhSachDichVu" xml:space="preserve">
+    <value>List of services</value>
+  </data>
+  <data name="lblDanhSachLienHe" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="lblDienThoai" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="lblHoTen" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblNextPage" xml:space="preserve">
+    <value>[Next page]</value>
+  </data>
+  <data name="lblPreviousPage" xml:space="preserve">
+    <value>[Previous page]</value>
+  </data>
+  <data name="lblQuayLai" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="lblSubject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="ValidationSummary1_CL" xml:space="preserve">
+    <value>You must enter the field (*)</value>
+  </data>
+  <data name="lblLoggedInMsg" xml:space="preserve">
+    <value>Logged in as</value>
+  </data>
+  <data name="btnDongYL" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="chkKiemDuyetL" xml:space="preserve">
+    <value>Censorship</value>
+  </data>
+  <data name="EKhongDeTrongL" xml:space="preserve">
+    <value>Do not blank!</value>
+  </data>
+  <data name="lblApL" xml:space="preserve">
+    <value>Hamlet</value>
+  </data>
+  <data name="lblBoPhieu" xml:space="preserve">
+    <value>Vote</value>
+  </data>
+  <data name="lblCacCauHoiL" xml:space="preserve">
+    <value>Question:</value>
+  </data>
+  <data name="lblChuKyNuoiL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblChuSoHuu" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="lblChuyenMucL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCoSoNuoiTrong" xml:space="preserve">
+    <value>Aquaculture facility</value>
+  </data>
+  <data name="lblDaoTao" xml:space="preserve">
+    <value>Training</value>
+  </data>
+  <data name="lblDiaChiL" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="lblDienThoaiL" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="lblDienTichAoLangL" xml:space="preserve">
+    <value>The area of ​​ponds</value>
+  </data>
+  <data name="lblDoiTuongNuoiL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDongL" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="lblGioiThieu" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="lblHinhThucNuoiL" xml:space="preserve">
+    <value>Type of aquaculture</value>
+  </data>
+  <data name="lblHuyL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="lblKhoaHoc" xml:space="preserve">
+    <value>Science</value>
+  </data>
+  <data name="lblKinhDoL" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="lblLienHe" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="lblMaSoVietGapL" xml:space="preserve">
+    <value>VietGap code:</value>
+  </data>
+  <data name="lblMatKhauL" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="lblNamL" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="lblNamSanXuatL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNgayL" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="lblNhapLaiEmailL" xml:space="preserve">
+    <value>Confirm e-mail:</value>
+  </data>
+  <data name="lblNhapLaiMatKhauL" xml:space="preserve">
+    <value>Confirm password:</value>
+  </data>
+  <data name="lblNoiDungL" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="lblQuanHuyenL" xml:space="preserve">
+    <value>County/District</value>
+  </data>
+  <data name="lblSanLuongDuKienL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSoDoAoNuoiL" xml:space="preserve">
+    <value>Pond map</value>
+  </data>
+  <data name="lblSTTL" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="lblSuaL" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="lblTenChuCoSo" xml:space="preserve">
+    <value>Name of facility</value>
+  </data>
+  <data name="lblTenCoSoL" xml:space="preserve">
+    <value>Name of establishment:</value>
+  </data>
+  <data name="lblTenCoSoNuoiTrong" xml:space="preserve">
+    <value>Aquaculture facilities name</value>
+  </data>
+  <data name="lblTenDoiTuongL" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblTenTaiKhoanL" xml:space="preserve">
+    <value>Account name</value>
+  </data>
+  <data name="lblThamDoYKienL" xml:space="preserve">
+    <value>Poll</value>
+  </data>
+  <data name="lblThangL" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="lblThemMoiL" xml:space="preserve">
+    <value>Add   |</value>
+  </data>
+  <data name="lblThongTinCoSoNuoiTrong" xml:space="preserve">
+    <value>Aquaculture facilities information</value>
+  </data>
+  <data name="lblThongTinDoiTuongNuoiL" xml:space="preserve">
+    <value>Information on species</value>
+  </data>
+  <data name="lblThongTinTaiKhoanL" xml:space="preserve">
+    <value>Account information</value>
+  </data>
+  <data name="lblThuVien" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="lblTinhL" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="lblTongDienTichMatNuocL" xml:space="preserve">
+    <value>The total surface area</value>
+  </data>
+  <data name="lblTongDTCSNuoiTrongL" xml:space="preserve">
+    <value>Total area of ​​farms</value>
+  </data>
+  <data name="lblTrangThaiL" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lblViDoL" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="lblXaL" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="lblXemL" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="lblXemViTriTrenBD" xml:space="preserve">
+    <value>View location on map</value>
+  </data>
+  <data name="lblXoaDaChonL" xml:space="preserve">
+    <value>Delete selected</value>
+  </data>
+  <data name="them" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="EDinhDangEmailSaiL" xml:space="preserve">
+    <value>Wrong email format!</value>
+  </data>
+  <data name="EEMailKhongTrungL" xml:space="preserve">
+    <value>Email does not match!</value>
+  </data>
+  <data name="EMatKhauKhongTrungL" xml:space="preserve">
+    <value>Passwords do not match!</value>
+  </data>
+  <data name="lblAboutL" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="lblBThongTinCoSoNuoiTrong" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBThongTinTaiKhoanL" xml:space="preserve">
+    <value>THÔNG TIN TÀI KHOẢN</value>
+  </data>
+  <data name="lblCauHoiL" xml:space="preserve">
+    <value>Question:</value>
+  </data>
+  <data name="lblDangKyL" xml:space="preserve">
+    <value>Registry</value>
+  </data>
+  <data name="lblKetQuaTimKiemL" xml:space="preserve">
+    <value>Search results</value>
+  </data>
+  <data name="lblKhongTimThayKQL" xml:space="preserve">
+    <value>No matches found</value>
+  </data>
+  <data name="lblKyHieuL" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="lblPlzRegistryL" xml:space="preserve">
+    <value>Please registry here</value>
+  </data>
+  <data name="lblSChuCoSoL" xml:space="preserve">
+    <value>Home base:</value>
+  </data>
+  <data name="lblSChuKyNuoiL" xml:space="preserve">
+    <value>Cycle:</value>
+  </data>
+  <data name="lblSDiaChiL" xml:space="preserve">
+    <value>Address :</value>
+  </data>
+  <data name="lblSDienThoaiL" xml:space="preserve">
+    <value>Phone number:</value>
+  </data>
+  <data name="lblSDoiTuongNuoiL" xml:space="preserve">
+    <value>Objects of culture:</value>
+  </data>
+  <data name="lblSNamSanXuatL" xml:space="preserve">
+    <value>Year:</value>
+  </data>
+  <data name="lblSNgayDangKyL" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="lblSTongDienTichL" xml:space="preserve">
+    <value>Total area:</value>
+  </data>
+  <data name="lblSTongDienTichMatNuocL" xml:space="preserve">
+    <value>Total surface area:</value>
+  </data>
+  <data name="lblTenTinhL" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="lblThongTinTimKiemL" xml:space="preserve">
+    <value>Information search</value>
+  </data>
+  <data name="lblThongTinTinhL" xml:space="preserve">
+    <value>Province information</value>
+  </data>
+  <data name="lblTraLoiL" xml:space="preserve">
+    <value>Ans:</value>
+  </data>
+  <data name="ltrMSVietGAPL" xml:space="preserve">
+    <value>VietGAP code</value>
+  </data>
+  <data name="ltrTraCuuMSVietGAP" xml:space="preserve">
+    <value>Search VietGAP code</value>
+  </data>
+  <data name="tracuu" xml:space="preserve">
+    <value>Look up</value>
+  </data>
+  <data name="lblMasoTochucchungnhanL" xml:space="preserve">
+    <value>Code of Certification organization:</value>
+  </data>
+  <data name="lblTentochucL" xml:space="preserve">
+    <value>Name of Organization:</value>
+  </data>
+  <data name="lblTieudeDanhsachTCCN" xml:space="preserve">
+    <value>List of Certificated Organization</value>
+  </data>
+  <data name="lblMasoTochucchungnhanTieude" xml:space="preserve">
+    <value>Code</value>
+  </data>
+</root>
