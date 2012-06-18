@@ -1,0 +1,133 @@
+﻿fieldset
+{
+-moz-border-radius: 7px; 
+border: 1px #dddddd solid;
+margin-bottom: 20px;
+width: 550px;
+}
+
+fieldset legend
+{
+border: 1px #1a6f93 solid; 
+color: black; 
+font-weight:bold;
+font-family: Verdana;
+font-weight: none;
+font-size: 13px;
+
+padding-right: 5px;
+padding-left: 5px;
+padding-top: 2px;
+padding-bottom: 2px;
+
+-moz-border-radius: 3px;
+}
+
+/* Main DIV */
+.m 
+{
+width: 560px;
+padding: 20px;
+height: auto;
+}
+
+/* Left DIV */
+.l
+{
+width: 140px;
+margin: 0px;
+padding: 0px; 
+
+float: left;  
+text-align: right;
+}
+
+
+/* Right DIV */
+.r
+{
+width: 257px;
+margin: 0px;
+padding-left:20px;
+float: left; 
+
+text-align: left;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.rr
+{
+width: 30px;
+margin: 0px;
+padding: 0px; 
+
+float: left; 
+
+text-align: center;
+
+}
+.a
+{
+clear: both;
+width: 500px;
+padding: 10px;
+}
+input
+{
+}
+    
+    #backgroundPopup{
+
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:100%;
+width:100%;
+top:0;
+left:0;
+background:#000000;
+border:1px solid #cecece;
+z-index:1;
+opacity: 0.7; 
+}
+#popupContact{
+
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+
+background:#FFFFFF;
+border:2px solid #cecece;
+z-index:2;
+padding:12px;
+font-size:13px;
+margin:auto;
+margin-top:-200px;
+
+}
+#popupContact h1{
+text-align:left;
+color:#6FA5FD;
+font-size:22px;
+font-weight:700;
+border-bottom:1px dotted #D3D3D3;
+padding-bottom:2px;
+margin-bottom:20px;
+}
+#popupContactClose{
+font-size:14px;
+line-height:14px;
+right:6px;
+top:4px;
+position:absolute;
+color:#6fa5fd;
+font-weight:700;
+display:block;
+}
+#button{
+text-align:center;
+margin:100px;
+}
+.txtbox
+{
+    width:250px;
+}

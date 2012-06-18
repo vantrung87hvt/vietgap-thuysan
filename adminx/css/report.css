@@ -1,0 +1,153 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*
+A4: 210x297 (7980px x 7770px)
+size: 932x589
+*/
+.clear{height:10px; clear:both;}
+
+#chung_nhan
+{
+    width:820px;
+	height:560px;
+	background-image:url(../img/giaycnbg.jpg) ;
+	background-repeat:no-repeat;
+	font-family:"Times New Roman", Times, serif;
+	padding-top:35px;
+	padding-bottom:65px;
+
+}
+#chung_nhan *{text-align:center;}
+.head{
+	padding:25px 100px;
+	height:100px;
+	overflow:hidden;
+}
+.head div{
+	float:left;
+}
+.head_left{
+	width:120px;
+	margin-left:15px;
+}
+.head_center{
+	margin-left:15px;
+	width:450px;
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+}
+.head_center p{
+	text-align:center;
+}
+.head_right{
+	width:120px;
+}
+.head_left, .head_right{
+	margin-top:20px;
+}
+.s11{font-size:12px;}
+.s12{font-size:14px;}
+.s14{font-size:16px;}
+
+#logo
+{
+	width:120px;
+	height:120px;
+	text-align:left;
+	margin-left:200px;
+	margin-top:10px;
+}
+.logo img
+{
+	max-width:100px;
+	max-height:120px;
+}
+.logo
+{
+    margin-top:20px;    
+}
+
+.left_1{padding-left:130px; text-align:left !important;}
+.left_2{padding-left:120px; text-align:left !important;}
+.left_3{padding-left:120px; text-align:left !important;}
+
+.in_hoa{text-transform:uppercase; margin-bottom:10px;}
+
+.bold{font-weight:bold;}
+
+.in_nghieng{font-style:italic;}
+.uper{text-transform:uppercase;}
+
+.chu_ky{padding-left:400px; margin-top:15px; margin-bottom:20px;}
+
+.thong_tin{margin-bottom:20px;}
+.thong_tin ul{ padding-left:165px;}
+.thong_tin li{list-style:none; text-align:left !important; margin-bottom:5px;}
+.medium{font-weight:100;}
+
+/*----------- Báo cáo đánh giá nội bộ ------------*/
+
+#baocao_noibo{
+	font-family:"Times New Roman", Times, serif;
+	font-size:14px;
+	width:595px;
+	height:842px;
+	border:1px solid #000;
+	padding:50px 50px;
+}
+.inhoa{
+	text-transform:uppercase;
+}
+.bold{
+	font-weight:bold;
+}
+.innghieng{
+	font-style:italic;
+}
+.s13{
+	font-size:15px;
+}
+.s14{
+	font-size:14px;
+}
+#baocao_noibo .bc_head{
+	text-align:center;
+}
+#baocao_noibo .content ul{
+	list-style:decimal;
+	padding-left:18px;
+}
+#baocao_noibo .foot_left{
+	width:160px;
+	float:left;
+	text-align:center;
+}
+#baocao_noibo .foot_right{
+	width:200px;
+	float:right;
+	text-align:center;
+	margin-right:100px;
+}
+.f_right{
+	text-align:right;
+	padding-right:130px;
+}
+.khunggiahan
+{
+    float:left;
+    width:350px;
+    height:200px;
+    
+     border:1px solid black;   
+}
+.khunggiahan ul
+{
+    margin:0 0 0 0;
+    padding:0 0 0 0;
+    }
+.khunggiahan  li
+{
+    list-style-type:none;
+    }

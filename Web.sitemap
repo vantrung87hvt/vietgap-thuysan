@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap>
+  <siteMapNode url="~/Default.aspx" title="Trang chủ"  description="Trang chủ website" >
+    <siteMapNode url="~/adminx/Default.aspx" title="Trang chủ"  description="Trang chủ website" icon="~/images/homeicon.png" />
+    <siteMapNode url="~/adminx/Default.aspx?page=CategoryManager" title="Quản lý chủ đề"  description="Trang Quản lý chủ đề" icon="~/images/folder_page.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=NewsManager" title="Quản lý tin tức"  description="Trang Quản lý tin tức" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=NewsUpdate&amp;do=add" title="Nhập tin mới"  description="Trang nhập tin tức mới" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=Group" title="Quản lý nhóm"  description="Trang quản lý nhóm người dùng" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=Adv" title="Quản lý Quảng cáo"  description="Trang quản lý Quảng cáo" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=GroupPermission" title="Phân quyền nhóm"  description="Trang quản lý Quyền nhóm người dùng" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=UserManager" title="Quản lý thành viên"  description="Trang quản lý thành viên" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=FeedManager" title="Quản lý phản hồi"  description="Trang quản lý phản hồi" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=AnswerManager" title="Quản lý trả lời"  description="Trang quản lý trả lời" icon="~/images/page_text.gif" />
+    <siteMapNode url="~/adminx/Default.aspx?page=PollManager" title="Câu hỏi thăm dò"  description="Trang quản lý các câu hỏi thăm dò" icon="~/images/page_text.gif" />
+  </siteMapNode>
+</siteMap>

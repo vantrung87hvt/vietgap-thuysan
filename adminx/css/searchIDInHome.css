@@ -1,0 +1,72 @@
+﻿    .boxradius
+    {
+	    -moz-border-radius:4px;
+	    -webkit-border-radius:4px;
+	    color: #828282;
+    }
+
+.hidden {
+    display: none;
+}
+        
+.boxes {
+    width: 173px;    
+    padding: 0px; margin: 0px 0px 0px 0px;
+    background: white;
+}
+        
+
+.boxes ul {
+    list-style: none;   
+    margin:0;
+    padding:0; 
+}
+        
+.boxes ul li {
+    position: relative;
+
+}
+        
+.boxes ul li a {
+   
+}
+        
+.boxes ul li:hover {
+  
+    
+}
+            
+ul#nav li p 
+{
+width:300px;
+position: absolute;
+font-size:10pt;
+padding:10px;
+color:white;
+background-color: #0090ff;
+padding:20px;
+margin-top:10px;
+border-bottom:5px solid #01477d;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+background-color: black;
+z-index:10000;
+padding: 10px;
+margin-top: 5px;
+margin-bottom: 5px;
+font-family: Tahoma,Arial,Helvetica,sans-serif;
+font-size: 1em;
+text-align: left;
+
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+ margin:auto;
+   
+}
+        
+table.info {
+    margin: 15px;
+    float: left;
+    clear: both;
+}
+

@@ -1,0 +1,124 @@
+﻿
+body 
+{
+    margin:0 auto;
+    padding:0;
+    font-family:Arial;
+    font-size:11pt;
+    color:#454d58;
+    text-align:center;
+    background-color:#333333;
+}
+img
+{
+    border-style: none;
+    border-color: inherit;
+    border-width: 0;
+}
+a
+{
+    text-decoration:none;
+    color:#756a4f;
+}
+a:visited
+{
+}
+a:hover
+{
+    color:#000000;
+}
+.left
+{
+    float:left;
+}
+.right
+{
+    float:right;
+}
+/*      ---------------------   */
+#dvMain
+{
+    width:1000px;
+    height:1000px;
+    text-align:left;
+    margin:0 auto;
+    padding:0;
+    background-color:White;
+}
+.dvLeft
+{
+    float:left;
+    width:20%;
+    background-color:#fafbf6;
+}
+.dvSeparator
+{
+    float:left;
+    background-image:url(../images/menuBorder.gif);
+    width:5px;
+    height:736px;
+}
+
+.dvMenu
+{
+    margin-top:10px;
+    margin-left:10px;
+}
+.dvMenuItem
+{
+    width:160px;
+    height:25px;
+    padding-top:3px;
+    cursor:pointer;
+    color:#756a4f;
+    font-size:10pt;
+}
+.dvMenuItem:hover
+{
+    color:#000000;
+    background-color:#e7f5ff;
+    border:solid 1px #b2c4d2;
+}
+/*                                   */
+.dvRight
+{
+    width:78%;
+    float:left;
+}
+.dvTabbar
+{
+    width:100%;
+    height:33px;
+    background-image:url(../images/tabBackground.gif);
+    border-bottom:solid 1px #e3e4de;
+    border-right:solid 1px #e3e4de;
+}
+.dvTab
+{
+    width:200px;
+    height:33px;
+    float:left;
+    cursor:pointer;
+    border-right:solid 1px #e4e1da;
+}
+.dvTab:hover
+{
+    background-image:url(../images/tabBgHover.gif);
+}
+.dvTabtext
+{
+    margin-top:8px;
+    margin-left:5px;
+    font-weight:bold;
+}
+.dvTabSeparator
+{
+    float:left;
+    width:1px;
+    height:30px;
+    background-image:url(../images/tabBorder.gif);
+}
+.dvContent
+{
+    margin:20px;
+}

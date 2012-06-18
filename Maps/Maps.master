@@ -1,0 +1,83 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Maps.master.cs" Inherits="Maps_Maps"%>
+
+<%@ Register Src="../uc/footer.ascx" TagName="footer" TagPrefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>VietGAP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../CSS/BrightSide.css" type="text/css" />
+    <link href="../CSS/GMAP.css" rel="stylesheet" type="text/css" />
+    
+    <link href="../CSS/styleOfReg.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/tooltip.css" rel="stylesheet" type="text/css" />
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form" runat="server">
+    <div id="wrap" style="height: auto;">
+        <div id="header">
+            
+            
+            <%--<p class="searchform">
+                <asp:TextBox ID="txtSearch_query" Text="<%$ Resources:Language, btnSubmit%>" class="textbox"
+                    runat="server" />
+                <asp:Button ID="btnSubmit" class="button" Text="<%$ Resources:Language, btnSubmit%>"
+                    runat="server" />
+            </p>--%>
+            <ul>
+                <li id="current"><a href="../Default.aspx"><span>
+                    <asp:Literal ID="lblHomeMenu" Text="<%$ Resources:Language, lblHomeMenu%>" runat="server" />
+                </span></a></li>
+                <li><a href="../Content.aspx?mode=uc&page=ListNewsInCat"><span>
+                    <asp:Literal ID="lblNewsMenu" Text="<%$ Resources:Language, lblNewsMenu%>" runat="server" />
+                </span></a></li>
+                <li><a href="../Content.aspx?mode=uc&page=ListDocument"><span>
+                    <asp:Literal ID="lblDocumentMenu" Text="<%$ Resources:Language, lblDocumentMenu %>"
+                        runat="server" />
+                </span></a></li>
+                <li><a href="../Content.aspx?mode=uc&page=ListServices"><span>
+                    <asp:Literal ID="lblServicesMenu" Text="<%$ Resources:Language, lblServicesMenu%>"
+                        runat="server" />
+                </span></a></li>
+                <li><a href="Maps.aspx"><span>
+                    <asp:Literal ID="lblSupportMenu" Text="<%$ Resources:Language, lblMaps%>"
+                        runat="server" />
+                </span></a></li>
+                <li><a href="../Content.aspx?mode=uc&page=About"><span>
+                    <asp:Literal ID="lblAboutMenu" Text="<%$ Resources:Language, lblAboutMenu%>" runat="server" />
+                </span></a></li>
+            </ul>
+        </div>
+        <div id="content-wrap">
+            <div class="rawimages">
+                <span>
+                    <asp:LinkButton ID="LinkButton1" runat="server" Style="" OnClick="lnkTiengViet_Click">
+                        <img src="../Images/Vietnam-Flag-32.png" alt="Tiếng Việt" title="Tiếng Việt"/>
+                    </asp:LinkButton>
+                </span><span id="Span1">
+                    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="lnkEnglish_Click">
+                        <img src="../Images/United-Kingdom-flag-32.png" alt="English" title="English"/>
+                    </asp:LinkButton>
+                </span>
+            </div>
+            <!-- Flash Header -->
+            <embed src="../Images/Banner.swf" width="960" height="120" wmode="transparent" type="application/x-shockwave-flash"></embed>
+            <!-- End Flash Header -->
+            <!--<img src="../Images/headerphoto_.jpg" width="960" height="120" alt="headerphoto" class="no-border" />-->
+           
+            <asp:ContentPlaceHolder ID="ctContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="cphRight" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="footer">
+            <uc1:footer ID="footer1" runat="server" />
+        </div>
+    </div>
+    </form>
+</body>
+</html>
+
