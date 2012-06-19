@@ -1,10 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListFeedback.ascx.cs" Inherits="INVI.INVINews.Module.ListFeedback" %>
-<style type="text/css">
-	.cssDiv { MARGIN-TOP: 4px; TEXT-ALIGN: left;color:black;font-family:Tahoma }
-	.noidung { }
-	.Hoten { FONT-SIZE: 15px }
-	.tieude { FONT-WEIGHT: bold }
-</style>
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
 <div class="cssDiv">
 	<hr width="400px" align="left"/>
 	<asp:Label id="lblMessage" runat="server"></asp:Label>
