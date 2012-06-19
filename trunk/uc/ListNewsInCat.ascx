@@ -1,37 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListNewsInCat.ascx.cs"
-    Inherits="uc_ListNews" %>
-<style>
-    .bluelink
-    {
-        clear: both;
-        float: left;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 100%;
-        font-size:12px;
-    }
-    .bluelink a
-    {
-        color: #006599;
-        font-size: 12pt;
-    }
-    .anhtin
-    {
-        margin-right: 5px;
-        text-align:center;
-        max-width:730px;
-        max-height: 700px;
-        /*float: left;*/
-    }
-    .bluelink .divImg
-    {
-        width:740px;
-        text-align:center;
-        margin:auto;
-        margin-top:5px;
-        margin-bottom:5px;
-    }
-</style>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListNewsInCat.ascx.cs" Inherits="uc_ListNews" %>
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
 <div class="cattitle">
     <asp:Label ID="lblCatTitle" runat="server" />
 </div>

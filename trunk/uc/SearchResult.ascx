@@ -1,30 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SearchResult.ascx.cs" Inherits="uc_SearchResult" %>
-<style>
-    .bluelink
-    {
-        clear: both;
-        float: left;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    .bluelink a
-    {
-        color: #006599;
-        font-size: 9pt;
-    }
-    .anhtin
-    {
-        width: 100px;
-        height: 100px;
-        margin-right: 5px;
-        float: left;
-    }
-</style>
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
 <div class="danhsachtin">
-<asp:Label ID="lblMessage" runat="server" />
-<asp:Repeater ID="rptrNews" runat="server" onitemdatabound="rptrNews_ItemDataBound">
-<ItemTemplate>
+    <asp:Label ID="lblMessage" runat="server" />
+    <asp:Repeater ID="rptrNews" runat="server" onitemdatabound="rptrNews_ItemDataBound">
+        <ItemTemplate>
             <div class="bluelink">
                 <asp:HyperLink ID="lnkImage" runat="server" NavigateUrl='<%#"~/Category.aspx?newsID="+Eval("iNewsID") %>'>
                 <asp:Image ID="imgMinhhoa" runat="server" ImageUrl="~/upload/nophoto.jpg" BorderWidth="1"
@@ -43,7 +22,7 @@
         <SeparatorTemplate>
             <hr style="float: left; width: 100%; border: dashed 1px silver" />
         </SeparatorTemplate>
-</asp:Repeater>
-<asp:HyperLink ID="lnkPrev" runat="server" Text="<%$ Resources:Language, lblPreviousPage%>"  />&nbsp;
-<asp:HyperLink ID="lnkNext" runat="server" Text="<%$ Resources:Language, lblNextPage%>" />
+    </asp:Repeater>
+    <asp:HyperLink ID="lnkPrev" runat="server" Text="<%$ Resources:Language, lblPreviousPage%>"  />&nbsp;
+    <asp:HyperLink ID="lnkNext" runat="server" Text="<%$ Resources:Language, lblNextPage%>" />
 </div>

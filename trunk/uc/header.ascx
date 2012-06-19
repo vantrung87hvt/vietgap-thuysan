@@ -1,22 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="header.ascx.cs" Inherits="uc_header" %>
 <%@ Register src="ListEventNews.ascx" tagname="ListEventNews" tagprefix="uc1" %>
 <%@ Register src="SearchNews.ascx" tagname="SearchNews" tagprefix="uc2" %>
-<style>
-.topmenu_item
-{
-    padding-left:10px;
-    padding-right:50px;
-    font-weight:bold;
-    height:20px;
-    color:#000000;
-    border:solid 1px skyblue;
-    border-bottom:solid 1px white;
-}
-.topmenu_hover a
-{
-    color:Red;
-}
-</style>
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
 <div class="header">
     <a name="top" />
   <div class="dvNav">

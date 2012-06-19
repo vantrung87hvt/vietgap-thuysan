@@ -1,10 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Feedback.ascx.cs" Inherits="INVI.INVINews.Module.Feedback" %>
-<style type="text/css">
-.txtNoidung {OVERFLOW: scroll; WIDTH: 400px; HEIGHT: 200px }
-.dvPhanhoi { MARGIN-TOP: 4px;color:#906732; }
-.lbl {clear:both;float:left; WIDTH:100px }
-.dvButton {MARGIN-TOP: 4px; MARGIN-LEFT: 150px;}
-</style>
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
 <DIV class="dvPhanhoi">
     <asp:Label ID="lblMessage" runat="server" Text="<%$Resources:language,moiguiphanhoi %>" ForeColor="Red"></asp:Label></DIV>
 <DIV class="dvPhanhoi">
