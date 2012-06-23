@@ -66,24 +66,34 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
 
                     // Coquancaptrren
                     CoquancaptrenEntity cqct = CoquancaptrenBRL.GetOne(Convert.ToInt32(row["PK_iTochucchungnhanID"]));
-                    lblCoQuanCapTren.Text = cqct.sTencoquan;
+                    //lblCoQuanCapTren.Text = cqct.sTencoquan;
 
                     //
                     lblMaso.Text = row["sMaso"].ToString();
                     lblTencoquan.Text = row["sTochucchungnhan"].ToString();
-                    imgTochuc.ImageUrl = "ViewImage.aspx?ID=" + row["PK_iTochucchungnhanID"].ToString();
+
+                    if (row["imgLogo"] != null)
+                    {
+                        imgTochuc.ImageUrl = ResolveUrl("~/adminx/img/logo thuysan.png");
+                    }
+                    else
+                    {
+                        imgTochuc.ImageUrl = "ViewImage.aspx?ID=" + row["PK_iTochucchungnhanID"].ToString();
+                    }
                     lblCosonuoi.Text = row["sTencoso"].ToString();
-                    lblDiachi.Text = "Xã " + row["sXa"].ToString() + ", ấp " + row["sAp"].ToString();
-                    lblMasocoso.Text = row["sMasocoso"].ToString();
+                    lblDienthoai.Text = row["sDienthoai"].ToString();
+                    lblMasochidinh.Text = row["sMasotochuc"].ToString();
+                    lblDiachi.Text = "xã " + row["sXa"].ToString() + ", ấp " + row["sAp"].ToString();
+                    lblDiadiemsanxuat.Text = "Xã " + row["sXa"].ToString() + ", ấp " + row["sAp"].ToString();
+                    //lblMasocoso.Text = row["sMasocoso"].ToString();
                     DateTime dt = DateTime.Parse(row["dNgaycap"].ToString());
-                    lblNgaycap.Text = "...................ngày " + dt.Day + " tháng " + dt.Month + " năm " + dt.Year;
+                    //lblNgaycap.Text = "...................ngày " + dt.Day + " tháng " + dt.Month + " năm " + dt.Year;
                     dt = DateTime.Parse(row["dNgayhethan"].ToString());
                     lblNgayhethan.Text = String.Format("{0:dd/MM/yyyy}", dt);
                     lblDoituong.Text = row["sTendoituong"].ToString();
                     lblDientich.Text = String.Format("{0:0,0.#}", row["fTongdienTichMatNuoc"].ToString()) + " m<sup>2</sup>";
                     lblSanluongdukien.Text = String.Format("{0:#,###}", row["iSanluongdukien"].ToString());
-
-
+                    
                     //gia hạn
                     List<MasovietgapEntity> lst = MasovietgapBRL.GetByFK_iCosonuoitrongID(Convert.ToInt32(row["PK_iCosonuoitrongID"]));
                     lst = MasovietgapEntity.Sort(lst, "PK_iMasoVietGapID", "DESC");
@@ -161,7 +171,6 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
 
         protected void ExportToWord(object sender, EventArgs e)
         {
-            if (btnExportToWord.CommandArgument == null) return;
             iVietGAPID = Int32.Parse(btnExportToWord.CommandArgument);
             Document doc = new Document();
             DocumentBuilder builder = new DocumentBuilder(doc);
@@ -169,8 +178,9 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
 
             builder.PageSetup.Orientation = Aspose.Words.Orientation.Landscape;
             builder.PageSetup.VerticalAlignment = PageVerticalAlignment.Top;
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-
+            builder.PageSetup.LeftMargin = 130;
+            builder.PageSetup.TopMargin = 20;
+            builder.PageSetup.RightMargin = 50;
 
             DataTable tbl = getGetInforById(iVietGAPID);
             DataRow row = tbl.Rows[0];
@@ -178,105 +188,126 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             DateTime dt2 = DateTime.Parse(row["dNgayhethan"].ToString());
             CoquancaptrenEntity cqct = CoquancaptrenBRL.GetOne(Convert.ToInt32(row["PK_iTochucchungnhanID"]));
             
-            
-            builder.Font.Size = 12;
+            builder.Font.Size = 14;
             builder.Font.Bold = true;
-            builder.Font.Underline = Underline.Single;
-            builder.Writeln(cqct.sTencoquan);
-            builder.Font.Bold = true;
-            builder.Writeln("");
-            builder.Font.Underline = Underline.None;
-            builder.Writeln(row["sTochucchungnhan"].ToString().ToUpper());
-            builder.Writeln("");
-            builder.Writeln("");
-            builder.Writeln("");
-            builder.Writeln("");
-
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Font.Bold = false;
-            builder.Write("Số (VGN): ");
-            builder.Font.Bold = true;
-            builder.Writeln(row["sMaso"].ToString());
-            builder.Writeln("");
-            builder.Font.Bold = true;
+            builder.ParagraphFormat.Alignment = ParagraphAlignment.Right;
+            builder.StartTable(); //Tạo bảng
+            builder.RowFormat.AllowAutoFit = false;
+            builder.CellFormat.Width = 320;
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            builder.Writeln("CHỨNG NHẬN");
+            //Tạo chứa logo
+            builder.InsertCell();
+            builder.Writeln();
+            if (row["imgLogo"] != null)
+            {
+                builder.InsertImage(System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png");
+            }
+            else
+            {
+                builder.InsertImage("ViewImage.aspx?ID=" + row["PK_iTochucchungnhanID"].ToString());
+            }
+            //Tạo ô chứa từ Chứng nhận...
+            builder.InsertCell();
             builder.Writeln("");
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            //----
-            builder.Font.Size = 12;
-            builder.ParagraphFormat.SpaceAfter = 6.0;
+            builder.Writeln("GIẤY CHỨNG NHẬN VietGAP");
+            builder.EndRow();// Kết thúc một hàng
+            //Tạo ô rỗng
+            builder.InsertCell();
             
+            //Tạo ô chứa thông tin tổ chức chứng nhận
+            builder.InsertCell();
+            builder.Writeln(row["sTochucchungnhan"].ToString().ToUpper());
+            builder.Font.Bold = false;
+            builder.Writeln("Mã số (chỉ định): " + row["sMaso"].ToString());
             builder.Font.Bold = true;
-            builder.Write("\t\tCơ sở nuôi: ");
+            builder.Writeln("CHỨNG NHẬN");
+            builder.EndRow(); //Kết thúc hàng
+            builder.EndTable(); //Kết thúc bảng
+            //----Thông tin cơ sở nuôi trồng
+            builder.ParagraphFormat.SpaceAfter = 2.0;
+            builder.Font.Size = 14;
+            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+
+            builder.Writeln();
+            builder.Font.Bold = true;
+            builder.Write("Cơ sở nuôi/Nhà sản xuất/sơ chế: ");
             builder.Font.Bold = false;
             builder.Writeln(row["sTencoso"].ToString());
 
             builder.Font.Bold = true;
-            builder.Write("\t\tĐịa chỉ: ");
+            builder.Write("Địa chỉ: ");
+            builder.Font.Bold = false;
+            builder.Write("Xã " + row["sXa"].ToString() + ", ấp " + row["sAp"].ToString());
+
+            builder.Font.Bold = true;
+            builder.Write("\tĐiện thoại: ");
+            builder.Font.Bold = false;
+            builder.Write(row["sDienthoai"].ToString());
+
+            builder.Font.Bold = true;
+            builder.Write("\t\tEmail/Website: ");
+            builder.Font.Bold = false;
+            builder.Writeln();
+
+            builder.Font.Bold = true;
+            builder.Write("Địa điểm suản xuất/sơ chế: ");
             builder.Font.Bold = false;
             builder.Writeln("Xã " + row["sXa"].ToString() + ", ấp " + row["sAp"].ToString());
 
             builder.Font.Bold = true;
-            builder.Write("\t\tMã số cơ sở: ");
+            builder.Write("Mã số chứng nhận VietGAP: ");
             builder.Font.Bold = false;
-            builder.Writeln(row["sMasocoso"].ToString());
+            builder.Writeln(row["sMaso"].ToString());
 
             builder.Font.Bold = true;
-            builder.Write("\t\tDiện tích: ");
-            builder.Font.Bold = false;
-
-            builder.Write(row["fTongdienTichMatNuoc"].ToString() + " ");
-            builder.InsertHtml("m<sup>2</sup>");
-            builder.Writeln("");
-            builder.Font.Bold = true;
-            builder.Write("\t\tĐối tượng, hình thức nuôi: ");
+            builder.Write("Tên sản phẩm hoặc nhóm sản phẩm: ");
             builder.Font.Bold = false;
             builder.Writeln(row["sTendoituong"].ToString());
 
             builder.Font.Bold = true;
-            builder.Write("\t\tSản lượng dự kiến (kg): ");
+            builder.Write("Diện tích nuôi/Quy mô sản xuất/Diện tích sản xuất/sơ chế:: ");
+            builder.Font.Bold = false;
+            builder.Write(row["fTongdienTichMatNuoc"].ToString() + " ");
+            builder.InsertHtml("m<sup>2</sup>");
+            builder.Writeln("");
+
+            builder.Font.Bold = true;
+            builder.Write("Sản lượng dự kiến: ");
             builder.Font.Bold = false;
             builder.Writeln(row["iSanluongdukien"].ToString());
-            //-----------
-            builder.Writeln(""); builder.Writeln("");
-            builder.Font.Bold = true;
-            
-            
 
-            builder.Writeln("\t\tSẢN XUẤT THEO QUY PHẠM THỰC HÀNH NUÔI TRỒNG THỦY SẢN TỐT ");
-            builder.Writeln("");
-            //---------
+            builder.Font.Bold = false;
+            builder.InsertHtml("Chứng nhận sản phẩm được sản xuất/sơ chế phù hợp Quy phạm thực hành sản xuất nông nghiệp tốt theo <br/>Quyết định số ..., __/__/_____, ký hiệu ....");
+            builder.Writeln();
+
+            builder.Font.Bold = true;
+            builder.Write("Giấy chứng nhận có giá trị đến ngày: ");
+            builder.Font.Bold = false;
+            builder.Writeln(String.Format("{0:dd/MM/yyyy}", dt));
+
+            //Hiển thị ngày tháng và chữ ký
+            builder.StartTable(); //Tạo bảng
+            builder.RowFormat.AllowAutoFit = false;
+            builder.CellFormat.Width = 320;
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-
+            //Tạo rỗng
+            builder.InsertCell();
+            //
+            builder.InsertCell();
+            builder.Writeln("");
+            builder.Writeln("");
             builder.Font.Bold = false;
-            builder.Font.Size = 12;
-            builder.Font.Italic = true;
-            builder.Writeln("\t\t\t\t\t\t\t\t\t\t...........ngày.....tháng.....năm.....");
+            builder.Writeln("................ngày,.......tháng.........năm..........");
             builder.Font.Bold = true;
-            
-            builder.Font.Italic = false;
-            builder.Writeln("\t\t\t\t\t\t\t\t\t\tTHỦ TRƯỞNG CƠ QUAN CHỨNG NHẬN\t");
+            builder.Writeln("ĐẠI DIỆN TỔ CHỨC CHỨNG NHẬN");
             builder.Font.Bold = false;
-            builder.Font.Size = 12;
             builder.Font.Italic = true;
-            builder.Writeln("\t\t\t\t\t\t\t\t\t\t(Ký tên và đóng dấu)");
+            builder.Writeln("(ký tên và đóng dấu)");
+            builder.EndRow();//Kết thúc hàng
+            builder.EndTable(); //Kết thúc bảng
 
-
-            
             //----------
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Font.Size = 12;
-            builder.Font.Bold = true;
-            builder.Font.Italic = false;
-            builder.ParagraphFormat.SpaceAfter = 0;
-            builder.Writeln("\tGiấy chứng nhận có giá trị đến ngày: " + String.Format("{0:dd/MM/yyyy}", dt2));            
-            builder.Writeln("\tVà được gia hạn ở mặt sau căn cứ vào kết quả kiểm tra và giám sát");
-            
-            /*
-             * Lưu file
-             */
-            InsertWatermarkText(doc,Convert.ToInt32(row["PK_iTochucchungnhanID"]));
+            //InsertWatermarkText(doc,Convert.ToInt32(row["PK_iTochucchungnhanID"]));
 
             builder.InsertBreak(BreakType.PageBreak);
             //Gia hạn
@@ -330,6 +361,9 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             //end gia hạn
            
           //  InsertWatermarkText2(doc);
+            /*
+             * Lưu file
+             */
             doc.Save("GiayChungNhanVietGap.doc", SaveFormat.Doc, SaveType.OpenInBrowser, Response);
             
         }
@@ -350,13 +384,10 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             builder.Writeln();
             builder.Writeln();
             builder.Writeln();
-            builder.Writeln();
-            builder.Writeln();
-            builder.Writeln();                        
+            builder.Writeln();                    
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
             builder.Font.Bold = true;
             builder.Writeln(thutruong);
-           
         }    
         private static void InsertWatermarkText(Document doc, int PK_iTochucchungnhanID)
         {
