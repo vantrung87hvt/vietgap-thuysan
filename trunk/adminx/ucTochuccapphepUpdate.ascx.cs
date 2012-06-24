@@ -154,20 +154,22 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 {
                     if (Convert.ToInt32(ddlTaikhoan.SelectedValue) > 0)
                         lstTochucTaikhoan[0].FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
-                }
-                else
-                {
-                    TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
-                    oTochucTaikhoan.bActive = cbDuyet.Checked;
-                    oTochucTaikhoan.dNgaythuchien = DateTime.Today;
-                    oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
-                    oTochucTaikhoan.FK_iTochucchungnhanID = Convert.ToInt32(btnOk.CommandArgument);
-                    TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
-                }
+                    ddlTaikhoan.SelectedValue = lstTochucTaikhoan[0].FK_iTaikhoanID.ToString();
+                }// Xử lý lại. Vì khi tạo mới làm gì đã có tổ chức chứng nhận mà gắn vào.
+                //else
+                //{
+                //    TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
+                //    oTochucTaikhoan.bActive = cbDuyet.Checked;
+                //    oTochucTaikhoan.dNgaythuchien = DateTime.Today;
+                //    oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
+
+                //    oTochucTaikhoan.FK_iTochucchungnhanID = Convert.ToInt32(btnOk.CommandArgument);
+                //    TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
+                //}
                 entity.FK_iQuanHuyenID = Convert.ToInt32(ddlQuanHuyen.SelectedValue);
                 entity.FK_iCoquancaptrenID = Convert.ToInt32(ddlCoquancaptren.SelectedValue);
                 entity.bDuyet = false;
-                ddlTaikhoan.SelectedValue = lstTochucTaikhoan[0].FK_iTaikhoanID.ToString();
+                
                 byte[] bytImage = null;
                 // xu ly anh
                 if (fuLogo.PostedFile != null)
@@ -224,13 +226,29 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                         entity.sKytuviettat = oTochucchungnhan.sKytuviettat;
                     entity.PK_iTochucchungnhanID = Convert.ToInt32(btnOk.CommandArgument);
                     
-
-                        TochucchungnhanBRL.Edit(entity);
+                    TochucchungnhanBRL.Edit(entity);
+                    List<TochucchungnhanTaikhoanEntity> lsTochucchungnhantaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(Convert.ToInt32(ddlTaikhoan.SelectedValue));
+                    if (lsTochucchungnhantaikhoan.Count > 0)
+                    {
+                        TochucchungnhanTaikhoanEntity oTochucchungnhanTaikhoan = lsTochucchungnhantaikhoan[0];
+                        oTochucchungnhanTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
+                        oTochucchungnhanTaikhoan.FK_iTochucchungnhanID = entity.PK_iTochucchungnhanID;
+                        TochucchungnhanTaikhoanBRL.Edit(oTochucchungnhanTaikhoan);
+                    }
                 }
                 else
-                    TochucchungnhanBRL.Add(entity);
-                lblLoi.Text = "Cập nhật thành công";
-                Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
+                {
+                    int iTochucchungnhanID=TochucchungnhanBRL.Add(entity);
+                    lblLoi.Text = "Cập nhật thành công";
+                    TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
+                    oTochucTaikhoan.bActive = cbDuyet.Checked;
+                    oTochucTaikhoan.dNgaythuchien = DateTime.Today;
+                    oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
+                    oTochucTaikhoan.FK_iTochucchungnhanID = iTochucchungnhanID;
+                    TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
+                    Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
+
+                }
                 //Nạp lại dữ liệu
             }
             catch (Exception ex)

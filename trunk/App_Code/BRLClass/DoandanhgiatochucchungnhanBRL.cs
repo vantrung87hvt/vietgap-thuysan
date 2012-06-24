@@ -144,7 +144,7 @@ namespace INVI.Business
 			{
 				throw new Exception("Không tìm thấy :FK_iDanhgiatochucchungnhanID");
 			}
-			DanhgiavienEntity oDanhgiavien = DanhgiavienDAL.GetOne(entity.FK_iDanhgiavienID);
+			ChuyengiaEntity oDanhgiavien = ChuyengiaDAL.GetOne(entity.FK_iDanhgiavienID);
 			if (oDanhgiavien==null)
 			{
 				throw new Exception("Không tìm thấy :FK_iDanhgiavienID");
