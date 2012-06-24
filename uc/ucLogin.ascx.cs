@@ -90,6 +90,12 @@ public partial class uc_ucLogin : System.Web.UI.UserControl
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
+        //Kiểm tra số lần đăng nhập vượt quá số lần quy đinhj
+        if (bIsOverTry())
+        {
+            lblThongbao.Text = "Nhập sai quá số lần quy định, vui lòng quay lại sau!";
+            return;
+        }
         resetInput();
         //Valid empty
         if (login_user.Value == "" || login_user.Value == "Tên đăng nhập")
@@ -122,6 +128,7 @@ public partial class uc_ucLogin : System.Web.UI.UserControl
             Session["UserID"] = oUser.iUserID;
             Session["Username"] = oUser.sUsername;
             Session["GroupID"] = oUser.iGroupID;
+            Session["LoginCount"] = null; //Xóa Session lưu số lần đăng nhập
             if (oUser.iGroupID == 3)
             {
                 List<CosonuoitrongEntity> csnt = CosonuoitrongBRL.GetByFK_iUserID(oUser.iUserID);
@@ -137,5 +144,32 @@ public partial class uc_ucLogin : System.Web.UI.UserControl
                 //Response.Write("<script>alert('Đăng nhập thành công');location='./Default.aspx';</script>");
             }
         }
+    }
+
+    /// <summary>
+    /// Hàm kiểm tra số lần đăng nhập sai
+    /// </summary>
+    /// <returns>Boolean: true, nếu đăng nhập quá 10 lần, ngược lại false</returns>
+    public Boolean bIsOverTry()
+    {
+        Boolean bRes = false;
+        if (Session["LoginCount"] == null)
+        {
+            Session["LoginCount"] = 1;
+        }
+        else
+        {
+            short iLoginCount = short.Parse(Session["LoginCount"].ToString());
+            if (iLoginCount >= 10)
+            {
+                bRes = true;
+            }
+            else
+            {
+                iLoginCount++;
+                Session["LoginCount"] = iLoginCount;
+            }
+        }
+        return bRes;
     }
 }
