@@ -169,7 +169,7 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 entity.FK_iQuanHuyenID = Convert.ToInt32(ddlQuanHuyen.SelectedValue);
                 entity.FK_iCoquancaptrenID = Convert.ToInt32(ddlCoquancaptren.SelectedValue);
                 entity.bDuyet = false;
-                
+                entity.sKytuviettat = " ";
                 byte[] bytImage = null;
                 // xu ly anh
                 if (fuLogo.PostedFile != null)
@@ -239,14 +239,15 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 else
                 {
                     int iTochucchungnhanID=TochucchungnhanBRL.Add(entity);
-                    lblLoi.Text = "Cập nhật thành công";
+                    lblLoi.Text = "Bổ sung thành công";
                     TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
                     oTochucTaikhoan.bActive = cbDuyet.Checked;
+
                     oTochucTaikhoan.dNgaythuchien = DateTime.Today;
                     oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
                     oTochucTaikhoan.FK_iTochucchungnhanID = iTochucchungnhanID;
                     TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
-                    Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
+                    Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
 
                 }
                 //Nạp lại dữ liệu
