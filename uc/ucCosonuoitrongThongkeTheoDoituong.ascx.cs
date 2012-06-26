@@ -19,10 +19,10 @@ public partial class adminx_BaocaoThongke_ucCosonuoitrongThongkeTheoDoituong : S
     {
         if (!Page.IsPostBack)
         {
-            if (Session["UserID"] != null)
+            if (Session["GroupID"] != null)
             {
-                int GroupID = Convert.ToInt32(Session["UserID"].ToString());
-                if (GroupID != 4 || GroupID != 1 || GroupID != 2)
+                int GroupID = Convert.ToInt32(Session["GroupID"].ToString());
+                if (GroupID != 4 && GroupID != 1 && GroupID != 2)
                     Response.Write("<script>alert('Bạn không có quyền sử dụng chức năng này.');location='../Default.aspx';</script>");
             }
             napDoituong();
