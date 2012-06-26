@@ -729,4 +729,10 @@
   <data name="lblMasoTochucchungnhanTieude" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="lblDanhsachTrinhdoChuyengia" xml:space="preserve">
+    <value>List of expert's degree</value>
+  </data>
+  <data name="lblTrinhdo" xml:space="preserve">
+    <value>Degree</value>
+  </data>
 </root>

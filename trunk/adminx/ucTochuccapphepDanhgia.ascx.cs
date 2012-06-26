@@ -44,18 +44,18 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     }
      public void napDoandanhgiavien(int iTochucchungnhanID)
     {
-        List<DanhgiavienEntity> lstDoandanhgia = DanhgiavienBRL.GetByFK_iTochucchungnhanID(iTochucchungnhanID);
+        List<ChuyengiaEntity> lstDoandanhgia = ChuyengiaBRL.GetByFK_iTochucchungnhanID(iTochucchungnhanID);
 
         ddlTruongdoan.Items.Clear();
         ddlTruongdoan.DataSource = lstDoandanhgia;
         ddlTruongdoan.DataTextField = "sHoten";
-        ddlTruongdoan.DataValueField = "PK_iDanhgiavienID";
+        ddlTruongdoan.DataValueField = "PK_iChuyengiaID";
         ddlTruongdoan.DataBind();
 
         cblDoandanhgia.Items.Clear();
         cblDoandanhgia.DataSource = lstDoandanhgia;
         cblDoandanhgia.DataTextField = "sHoten";
-        cblDoandanhgia.DataValueField = "PK_iDanhgiavienID";
+        cblDoandanhgia.DataValueField = "PK_iChuyengiaID";
         cblDoandanhgia.DataBind();
     }
     public void NapThongtin(int PK_iTochucchungnhanID)
@@ -85,7 +85,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             if(ddlTruongdoan.Items.Count>0)
                 ddlTruongdoan.Items.FindByValue(oDanhgia.FK_iTruongdoandanhgiaID.ToString()).Selected = true;
             //----------Nạp danh sách đánh giá viên
-            List<DanhgiavienEntity> lstDoandg = DanhgiavienBRL.GetByFK_iTochucchungnhanID(PK_iTochucchungnhanID);
+            List<ChuyengiaEntity> lstDoandg = ChuyengiaBRL.GetByFK_iTochucchungnhanID(PK_iTochucchungnhanID);
             //if (lstDoandg.Count > 0)
             //{
             //    for (int i = 0; i < cblDoandanhgia.Items.Count; ++i)
@@ -104,8 +104,8 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                 //
                 String sDoan = "<ul style='list-style-type:decimal;'>";
                 //DanhgiavienEntity oDanhgiavien = new DanhgiavienEntity();
-                foreach(DanhgiavienEntity oDanhgiavien in lstDoandg)
-                    sDoan += "<li>" + oDanhgiavien.sHoten + "</li>";
+                foreach(ChuyengiaEntity oChuyengia in lstDoandg)
+                    sDoan += "<li>" + oChuyengia.sHoten + "</li>";
                 sDoan += "</ul>";
                 lblCacthanhvien.Text = sDoan;
             }
@@ -121,8 +121,8 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
         TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
         PK_iDanhgiatochucID = getThongtindanhgia(PK_iTochucchungnhanID);
-        DanhgiatochucchungnhanEntity oDanhgia = DanhgiatochucchungnhanBRL.GetOne(PK_iDanhgiatochucID);
-        DanhgiavienEntity oTruongdoan = DanhgiavienBRL.GetOne(oDanhgia.FK_iTruongdoandanhgiaID);
+        DanhgiatochucchungnhanEntity oDoandanhgia = DanhgiatochucchungnhanBRL.GetOne(PK_iDanhgiatochucID);
+        ChuyengiaEntity oTruongdoan = ChuyengiaBRL.GetOne(oDoandanhgia.FK_iTruongdoandanhgiaID);
         List<DoandanhgiatochucchungnhanEntity> lstDoandanhgia = DoandanhgiatochucchungnhanBRL.GetByFK_iDanhgiatochucchungnhanID(PK_iDanhgiatochucID);
         //-----------
         Document doc = new Document();
@@ -171,7 +171,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         builder.Bold = true;
         builder.Writeln("2. Phạm vi đề nghị chỉ định: ");
         builder.Bold = false;
-        builder.Writeln("\t" + oDanhgia.sPhamvinghidinh);
+        builder.Writeln("\t" + oDoandanhgia.sPhamvinghidinh);
         builder.Bold = true;
         builder.Writeln("3. Đoàn đánh giá hoặc thành viên đoàn đánh giá: ");
         builder.Bold = false;
@@ -179,12 +179,12 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                builder.Writeln("\t- " + DanhgiavienBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                builder.Writeln("\t- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
             }
         }
-        DateTime dt = DateTime.Parse(oDanhgia.tGiodanhgia.ToString());
+        DateTime dt = DateTime.Parse(oDoandanhgia.tGiodanhgia.ToString());
         String sGiodanhgia = String.Format("{0:HH:mm:ss}", dt);
-        dt = DateTime.Parse(oDanhgia.dNgaydanhgia.ToString());
+        dt = DateTime.Parse(oDoandanhgia.dNgaydanhgia.ToString());
         String sNgaydanhgia = String.Format("{0:dd/MM/yyyy}", dt);
         builder.Bold = true;
         builder.Writeln("4. Thời gian đánh giá;");
@@ -193,20 +193,20 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         builder.Bold = true;
         builder.Writeln("5. Các căn cứ để đánh giá: ");
         builder.Bold = false;
-        builder.Writeln("\t" + oDanhgia.sCancudanhgia);
+        builder.Writeln("\t" + oDoandanhgia.sCancudanhgia);
         builder.Bold = true;
         builder.Writeln("6. Nội dung đánh giá: ");
         builder.Bold = false;
-        builder.Writeln("\t" + oDanhgia.sNoidungdanhgia);
+        builder.Writeln("\t" + oDoandanhgia.sNoidungdanhgia);
         builder.Bold = true;
         builder.Writeln("7. Kết quả đánh giá: ");
         builder.Bold = false;
-        builder.Writeln("\t" + oDanhgia.sKetquadanhgia);
+        builder.Writeln("\t" + oDoandanhgia.sKetquadanhgia);
         builder.Bold = true;
         builder.Write("8. Kết luận và kiến nghị của Đoàn đánh giá: ");
         builder.Bold = false;
-        builder.Writeln(oDanhgia.iKetquadanhgia == 1 ? "Đạt" : "Không đạt");
-        builder.Writeln("\t" + oDanhgia.sKiennghi);
+        builder.Writeln(oDoandanhgia.iKetquadanhgia == 1 ? "Đạt" : "Không đạt");
+        builder.Writeln("\t" + oDoandanhgia.sKiennghi);
         //-------Table
         Aspose.Words.Table table = builder.StartTable();
         builder.CellFormat.Width = 260;
@@ -221,9 +221,9 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                if (lstDoandanhgia[i].FK_iDanhgiavienID != oTruongdoan.PK_iDanhgiavienID)
+                if (lstDoandanhgia[i].FK_iDanhgiavienID != oTruongdoan.PK_iChuyengiaID)
                 {
-                    builder.Writeln("- " + DanhgiavienBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                    builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
                 }
             }
         }

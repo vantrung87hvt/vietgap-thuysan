@@ -14,7 +14,7 @@
                 <tr>
                     <td width="30%" colspan="2" style="width: 100%" align="center">
                         <asp:Label ID="lblInfo" runat="server" 
-                            Text="<%$Resources:language,DanhsachTrinhdoChuyengia %>"></asp:Label>
+                            Text="<%$Resources:language,lblDanhsachTrinhdoChuyengia %>"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td valign="top" width="20%">
-                        <asp:Label ID="lblName" runat="server" Text="<%$Resources:language,Trinhdo %>"></asp:Label>
+                        <asp:Label ID="lblName" runat="server" Text="<%$Resources:language,lblTrinhdo %>"></asp:Label>
                     </td>
                     <td valign="middle" width="70%">
                         

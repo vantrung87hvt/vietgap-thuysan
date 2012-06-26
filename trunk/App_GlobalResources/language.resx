@@ -828,4 +828,10 @@
   <data name="lblTochucchungnhanL" xml:space="preserve">
     <value>Tổ chức chứng nhận</value>
   </data>
+  <data name="lblDanhsachTrinhdoChuyengia" xml:space="preserve">
+    <value>Danh sách trình độ chuyên gia</value>
+  </data>
+  <data name="lblTrinhdo" xml:space="preserve">
+    <value>Trình độ</value>
+  </data>
 </root>
