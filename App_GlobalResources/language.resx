@@ -834,4 +834,10 @@
   <data name="lblTrinhdo" xml:space="preserve">
     <value>Trình độ</value>
   </data>
+  <data name="lblChungchi" xml:space="preserve">
+    <value>Chứng chỉ</value>
+  </data>
+  <data name="lblDanhsachChungchiChuyengia" xml:space="preserve">
+    <value>Danh sách chứng chỉ chuyên gia</value>
+  </data>
 </root>

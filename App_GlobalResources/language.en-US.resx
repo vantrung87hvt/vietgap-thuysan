@@ -735,4 +735,10 @@
   <data name="lblTrinhdo" xml:space="preserve">
     <value>Degree</value>
   </data>
+  <data name="lblChungchi" xml:space="preserve">
+    <value>Certificate</value>
+  </data>
+  <data name="lblDanhsachChungchiChuyengia" xml:space="preserve">
+    <value>List of Expert's Certificate</value>
+  </data>
 </root>

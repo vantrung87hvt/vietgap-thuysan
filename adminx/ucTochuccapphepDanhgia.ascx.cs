@@ -94,7 +94,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             //            (
             //                delegate(DoandanhgiatochucchungnhanEntity oDg)
             //                {
-            //                    return (oDg.FK_iDanhgiavienID == int.Parse(cblDoandanhgia.Items[i].Value));
+            //                    return (oDg.FK_iChuyengiaID == int.Parse(cblDoandanhgia.Items[i].Value));
             //                }
             //            ).Count > 0)
             //        {
@@ -179,7 +179,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                builder.Writeln("\t- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                builder.Writeln("\t- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iChuyengiaID).sHoten);
             }
         }
         DateTime dt = DateTime.Parse(oDoandanhgia.tGiodanhgia.ToString());
@@ -221,9 +221,9 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                if (lstDoandanhgia[i].FK_iDanhgiavienID != oTruongdoan.PK_iChuyengiaID)
+                if (lstDoandanhgia[i].FK_iChuyengiaID != oTruongdoan.PK_iChuyengiaID)
                 {
-                    builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                    builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iChuyengiaID).sHoten);
                 }
             }
         }
@@ -278,7 +278,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                 if (cblDoandanhgia.Items[i].Selected)
                 {
                     oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                    oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(cblDoandanhgia.Items[i].Value);
+                    oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
                     DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
                     if (ddlTruongdoan.SelectedValue == cblDoandanhgia.Items[i].Value)
                     {
@@ -289,7 +289,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             if (!bTruongdoancotrongdanhsach)
             {
                 oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(ddlTruongdoan.SelectedValue);
+                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
                 DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
             }
             //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
@@ -321,7 +321,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                 if (cblDoandanhgia.Items[i].Selected)
                 {
                     oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                    oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(cblDoandanhgia.Items[i].Value);
+                    oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
                     DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
                     if (ddlTruongdoan.SelectedValue == cblDoandanhgia.Items[i].Value)
                     {
@@ -332,7 +332,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             if (!bTruongdoancotrongdanhsach)
             {
                 oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(ddlTruongdoan.SelectedValue);
+                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
                 DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
             }
             //Cập nhật trạng thái duyệt của tổ chức được chứng nhận

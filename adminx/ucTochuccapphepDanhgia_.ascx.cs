@@ -107,7 +107,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         //    {
         //        for (int j = 0; j < lstDoandanhgiaE.Count; ++j)
         //        {
-        //            if (lstDanhgiavien[i].PK_iDanhgiavienID != lstDoandanhgiaE[j].FK_iDanhgiavienID)
+        //            if (lstDanhgiavien[i].PK_iDanhgiavienID != lstDoandanhgiaE[j].FK_iChuyengiaID)
         //            {
         //                lstDanhgiavienchuachon.Add(lstDanhgiavien[i]);
         //            }
@@ -227,7 +227,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iChuyengiaID).sHoten);
             }
         }
         DateTime dt = DateTime.Parse(oDoandanhgia.tGiodanhgia.ToString());
@@ -256,9 +256,9 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
-                if (lstDoandanhgia[i].FK_iDanhgiavienID != oTruongdoan.PK_iChuyengiaID)
+                if (lstDoandanhgia[i].FK_iChuyengiaID != oTruongdoan.PK_iChuyengiaID)
                 {
-                    builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iDanhgiavienID).sHoten);
+                    builder.Writeln("- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iChuyengiaID).sHoten);
                 }
             }
         }
@@ -299,7 +299,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             for(int i=0;i<lstDoandanhgiachon.Items.Count; ++i)
             {
                 oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(lstDoandanhgiachon.Items[i].Value);
+                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(lstDoandanhgiachon.Items[i].Value);
                 DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
             }
             //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
@@ -325,7 +325,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             for(int i=0;i<lstDoandanhgiachon.Items.Count; ++i)
             {
                 oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iDanhgiavienID = int.Parse(lstDoandanhgiachon.Items[i].Value);
+                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(lstDoandanhgiachon.Items[i].Value);
                 DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
             }
             //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
