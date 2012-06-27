@@ -11,8 +11,11 @@ public partial class adminx_Default2 : System.Web.UI.Page
     {
         if (Session["UserID"] == null || Session["GroupID"] == null)
         {
-            Response.Write("<script>alert('Bạn không có quyền vào trang này');location='./Logon.aspx'</script>");
-            Response.End();
+            if (!(Convert.ToInt32(Session["GroupID"].ToString()) == 1))
+            {
+                Response.Write("<script>alert('Bạn không có quyền vào trang này');location='./Logon.aspx'</script>");
+                Response.End();
+            }
         }
         if (Request.QueryString["page"] != null)
         {

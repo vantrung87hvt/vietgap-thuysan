@@ -61,13 +61,13 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Bài viết<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_2" runat="server" Visible="false">
+								<asp:Panel ID="p_2" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?page=NewsUpdate&amp;do=add">Thêm mới</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_10" runat="server" Visible="false">
+								<asp:Panel ID="p_10" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?page=NewsUnVertified">Bài viết chưa kiểm duyệt</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_5" runat="server" Visible="false">
+								<asp:Panel ID="p_5" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?page=NewsManager">Quản lý bài viết</a></li>
 								</asp:Panel>
 							</ul> 
@@ -75,16 +75,16 @@
 						<li>
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Thống kê<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_64" runat="server" Visible="false">
+								<asp:Panel ID="p_64" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?m=BaocaoThongke&page=CosonuoitrongThongke">Tổng hợp</a></li>
 								</asp:Panel>
-                                <asp:Panel ID="p_40" runat="server" Visible="false">
+                                <asp:Panel ID="p_40" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?m=BaocaoThongke&page=CosonuoitrongThongkeTheoDoituong">Theo đối tượng nuôi</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_41" runat="server" Visible="false">
+								<asp:Panel ID="p_41" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?m=BaocaoThongke&page=CosonuoitrongThongkeTheoTinh1">Theo địa lý</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_42" runat="server" Visible="false">
+								<asp:Panel ID="p_42" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?m=BaocaoThongke&page=ThongkeCosonuoitrongTheoTochucchungnhan">Theo Tổ chức chứng nhận</a></li>
 								</asp:Panel>
 							</ul> 
@@ -92,28 +92,28 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Hộ nuôi trồng Thủy Sản<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_13" runat="server" Visible="false">
+								<asp:Panel ID="p_13" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?ctr=uc&page=CosonuoitrongUpdate_&do=add">Bổ sung</a></li>
 								</asp:Panel>
 								<%--<asp:Panel ID="pnKiemDuyetCSNT" runat="server">
 								<li><a href="../adminx/Default.aspx?page=Cachochuacapphep">Duyệt hồ sơ Cơ sở nuôi trồng</a></li>
 								</asp:Panel>--%>
-								<asp:Panel ID="p_44" runat="server" Visible="false">
+								<asp:Panel ID="p_44" runat="server" Visible="true">
 									<li><a href="../adminx/Default.aspx?page=Cosonuoitrong">Quản lý cơ sở nuôi trồng</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_12" runat="server" Visible="false">
+								<asp:Panel ID="p_12" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=CapmasoVietGap">Cấp mã số VietGAP</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_39" runat="server" Visible="false">
+								<asp:Panel ID="p_39" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=MasoVietGapQuanLy">Quản lý mã số VietGAP</a></li>
 								</asp:Panel>
-                                <asp:Panel ID="p_65" runat="server" Visible="false">
+                                <asp:Panel ID="p_65" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?m=Tochucchungnhan&page=TCCN_TaikhoanDangky">Tài khoản CSNT đăng ký</a></li>
 								</asp:Panel>
 								<%--<asp:Panel ID="pnCapGiayChungNhan" runat="server">
 								<li><a href="../adminx/Default.aspx?page=GiayphepVietGap">Cấp giấy chứng nhận</a></li>
 								</asp:Panel>--%>
-								<asp:Panel ID="p_38" runat="server" Visible="false">
+								<asp:Panel ID="p_38" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=GiahanGiayphepVietGap">Gia hạn giấy chứng nhận</a></li>
 								</asp:Panel>
 								<%--<asp:Panel ID="Panel11" runat="server">
@@ -124,26 +124,26 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png"/>Tổ chức chứng nhận<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_15" runat="server" Visible="false">
+								<asp:Panel ID="p_15" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=TochuccapphepUpdate&amp;do=add">Bổ sung</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_28" runat="server" Visible="false">
+								<asp:Panel ID="p_28" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=TochuccapphepQuanLy">Quản lý các tổ chức</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_43" runat="server" Visible="false">
+								<asp:Panel ID="p_43" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?m=Tochucchungnhan&page=Dangkytochucchungnhan">Gửi đăng ký</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_47" runat="server" Visible="false">
+								<asp:Panel ID="p_47" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?m=Tochucchungnhan&page=Giaydangkyhoatdongchungnhan">Giấy đăng ký</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_45" runat="server" Visible="false">
+								<asp:Panel ID="p_45" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=DanhgiavienManager">Quản lý Đánh giá viên</a></li>
 								</asp:Panel>
                                 
-								<asp:Panel ID="p_48" runat="server" Visible="false">
+								<asp:Panel ID="p_48" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=CoquancaptrenQuanly">Quản lý Cơ quan cấp trên</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_49" runat="server" Visible="false">
+								<asp:Panel ID="p_49" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=TochucchungnhanDanhsachDangky">Danh sách tổ chức đăng ký</a></li>
 								</asp:Panel>
 							</ul> 
@@ -151,13 +151,13 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Phản hồi<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_32" runat="server" Visible="false">
+								<asp:Panel ID="p_32" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=PollManager">Câu hỏi trưng cầu</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_24" runat="server" Visible="false">
+								<asp:Panel ID="p_24" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=FeedbackManager">Phản hồi</a></li>
 								</asp:Panel>
-								<%--<asp:Panel ID="pnThongKeTruyCap" runat="server" Visible="false">
+								<%--<asp:Panel ID="pnThongKeTruyCap" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=Chart">Thống kê truy cập</a></li>
 								</asp:Panel>--%>
 							</ul> 
@@ -165,13 +165,13 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Quản lý nhóm<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_26" runat="server" Visible="false">
+								<asp:Panel ID="p_26" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=Permission">Cập nhập Quyền</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_4" runat="server" Visible="false">
+								<asp:Panel ID="p_4" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=GroupPermission">Phân quyền</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_8" runat="server" Visible="false">
+								<asp:Panel ID="p_8" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=Group">Nhóm</a></li>
 								</asp:Panel>
 							</ul> 
@@ -186,10 +186,10 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Chuyên mục<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_36" runat="server" Visible="false">
+								<asp:Panel ID="p_36" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=CategoryEdit">Dạng cây</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_35" runat="server" Visible="false">
+								<asp:Panel ID="p_35" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=CategoryManager">Dạng bảng</a></li>
 								</asp:Panel>
 							</ul> 
@@ -197,56 +197,59 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Hệ thống<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_50" runat="server" Visible="false">
+								<asp:Panel ID="p_50" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=Config">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Cấu hình</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_19" runat="server" Visible="false">
+								<asp:Panel ID="p_19" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=TinhManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Quản lý tỉnh</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="P_51" runat="server" Visible="false">
+								<asp:Panel ID="P_51" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=QuanHuyenManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Quản lý Quận/Huyện</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_52" runat="server" Visible="false">
+								<asp:Panel ID="p_52" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=DanhmucchitieuManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Danh mục chỉ tiêu</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_53" runat="server" Visible="false">
+								<asp:Panel ID="p_53" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=MucdoManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Mức độ chỉ tiêu</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_54" runat="server" Visible="false">
+								<asp:Panel ID="p_54" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=PhuongphapkiemtraManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Phương pháp kiểm tra</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_21" runat="server" Visible="false">
+								<asp:Panel ID="p_21" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=DoituongnuoiManager">Quản lý đối tượng nuôi</a></li>
 								</asp:Panel>
 
-								<asp:Panel ID="p_46" runat="server" Visible="false">
+								<asp:Panel ID="p_46" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=HinhThucNuoiManager">Quản lý hình thức nuôi</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_55" runat="server" Visible="false">
+								<asp:Panel ID="p_55" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=ChitieuManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Chỉ tiêu</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_3" runat="server" Visible="false">
+								<asp:Panel ID="p_3" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=UserManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Thành viên</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_63" runat="server" Visible="false">
+								<asp:Panel ID="p_63" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=GiaytoManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Quản lý Giấy tờ kèm theo</a></li> 
+								</asp:Panel>
+                                <asp:Panel ID="p_66" runat="server" Visible="true">
+								<li><a href="../adminx/Default.aspx?page=ChungchiChuyengia"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Loại chứng chỉ</a></li> 
 								</asp:Panel>
 							</ul> 
 						</li> 
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Tài liệu<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_37" runat="server" Visible="false">
+								<asp:Panel ID="p_37" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=DocumentCategoryManager">Loại tài liệu</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_6" runat="server" Visible="false">
+								<asp:Panel ID="p_6" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=DocumentManager">Tài liệu</a></li> 
 								</asp:Panel>
 							</ul> 
@@ -254,11 +257,11 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >FAQ<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_34" runat="server" Visible="false">
+								<asp:Panel ID="p_34" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=FAQCategoryManager">
 								Chuyên mục</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_57" runat="server" Visible="false">
+								<asp:Panel ID="p_57" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=FAQManager">FAQ</a></li>
 								</asp:Panel>
 							</ul> 
@@ -266,17 +269,17 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Liên hệ<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-								<asp:Panel ID="p_58" runat="server" Visible="false">
+								<asp:Panel ID="p_58" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=PhongBanManager">
 								Phòng ban</a></li> 
 								</asp:Panel>
-								<asp:Panel ID="p_59" runat="server" Visible="false">
+								<asp:Panel ID="p_59" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=ChucVuManager">Chức vụ</a></li>
 								</asp:Panel>
-								<asp:Panel ID="p_60" runat="server" Visible="false">
+								<asp:Panel ID="p_60" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=ContactManager">Danh sách liên hệ</a></li>
 								</asp:Panel>
-								<%--<asp:Panel ID="p_61" runat="server" Visible="false">
+								<%--<asp:Panel ID="p_61" runat="server" Visible="true">
 								<li><a href="../adminx/Default.aspx?page=ContactManager">Danh sách liên hệ</a></li>
 								</asp:Panel>--%>
 							</ul> 

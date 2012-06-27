@@ -32,7 +32,7 @@
                     </td>
                     <td valign="middle" width="70%">
                         
-                        <asp:TextBox ID="txtTentrinhdo" runat="server" 
+                        <asp:TextBox ID="txtChungchi" runat="server" 
                             Width="95%"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator ID="rqTentrinhdo" runat="server" 
@@ -63,11 +63,11 @@
         <td align="center">
             <asp:GridView ID="grvChungchi" runat="server" AutoGenerateColumns="False"
                 AllowPaging="True" AllowSorting="True" 
-                            onselectedindexchanging="grvPosition_SelectedIndexChanging" 
-                            onsorting="grvPosition_Sorting" Width="100%"
+                            onsorting="grvChungchi_Sorting" Width="100%"
                             AlternatingRowStyle-CssClass="GridAltItem"
                             HeaderStyle-CssClass="GridHeader"
-                            CssClass="Grid" EnableModelValidation="True">
+                            CssClass="Grid" EnableModelValidation="True" 
+                onselectedindexchanged="grvChungchi_SelectedIndexChanged">
 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
                 <Columns>
                      <asp:TemplateField HeaderText="Chọn tất">
