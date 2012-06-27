@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:12/25/2011 10:30:46 PM
+Create On:6/27/2012 8:38:16 AM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -20,7 +20,7 @@ namespace INVI.Business
         #region Init
         private static string EX_NOT_EXIST="Không Tồn Tại Doandanhgiatochucchungnhan Này";
 		private static string EX_FK_IDANHGIATOCHUCCHUNGNHANID_INVALID="FK_iDanhgiatochucchungnhanID không hợp lệ";
-		private static string EX_FK_IDANHGIAVIENID_INVALID="FK_iDanhgiavienID không hợp lệ";
+		private static string EX_FK_ICHUYENGIAID_INVALID="FK_iChuyengiaID không hợp lệ";
 		private static string EX_ID_INVALID="PK_iDoandanhgiatochucchungnhanID không hợp lệ";
         #endregion
         #region Public Methods
@@ -49,11 +49,11 @@ namespace INVI.Business
 			if(FK_iDanhgiatochucchungnhanID<=0)
 				throw new Exception(EX_FK_IDANHGIATOCHUCCHUNGNHANID_INVALID);
 			return DoandanhgiatochucchungnhanDAL.GetByFK_iDanhgiatochucchungnhanID(FK_iDanhgiatochucchungnhanID);
-		}public static List<DoandanhgiatochucchungnhanEntity> GetByFK_iDanhgiavienID(Int32 FK_iDanhgiavienID)
+		}public static List<DoandanhgiatochucchungnhanEntity> GetByFK_iChuyengiaID(Int32 FK_iChuyengiaID)
 		{
-			if(FK_iDanhgiavienID<=0)
-				throw new Exception(EX_FK_IDANHGIAVIENID_INVALID);
-			return DoandanhgiatochucchungnhanDAL.GetByFK_iDanhgiavienID(FK_iDanhgiavienID);
+			if(FK_iChuyengiaID<=0)
+				throw new Exception(EX_FK_ICHUYENGIAID_INVALID);
+			return DoandanhgiatochucchungnhanDAL.GetByFK_iChuyengiaID(FK_iChuyengiaID);
 		}
         /// <summary>
         /// Kiểm tra và thêm mới Doandanhgiatochucchungnhan
@@ -106,8 +106,8 @@ namespace INVI.Business
         {   
 			if (entity.FK_iDanhgiatochucchungnhanID < 0)
 				throw new Exception(EX_FK_IDANHGIATOCHUCCHUNGNHANID_INVALID);
-			if (entity.FK_iDanhgiavienID < 0)
-				throw new Exception(EX_FK_IDANHGIAVIENID_INVALID);
+			if (entity.FK_iChuyengiaID < 0)
+				throw new Exception(EX_FK_ICHUYENGIAID_INVALID);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi
@@ -144,10 +144,10 @@ namespace INVI.Business
 			{
 				throw new Exception("Không tìm thấy :FK_iDanhgiatochucchungnhanID");
 			}
-			ChuyengiaEntity oDanhgiavien = ChuyengiaDAL.GetOne(entity.FK_iDanhgiavienID);
-			if (oDanhgiavien==null)
+			ChuyengiaEntity oChuyengia = ChuyengiaDAL.GetOne(entity.FK_iChuyengiaID);
+			if (oChuyengia==null)
 			{
-				throw new Exception("Không tìm thấy :FK_iDanhgiavienID");
+				throw new Exception("Không tìm thấy :FK_iChuyengiaID");
 			}
         }
         #endregion
