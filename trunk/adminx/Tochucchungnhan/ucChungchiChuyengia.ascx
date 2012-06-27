@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucTrinhdoChuyengia.ascx.cs" Inherits="adminx_Tochucchungnhan_ucTrinhdoChuyengia" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucChungchiChuyengia.ascx.cs" Inherits="adminx_Tochucchungnhan_ucChungchiChuyengia" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <table width="100%">
     <tr>
@@ -14,7 +14,7 @@
                 <tr>
                     <td width="30%" colspan="2" style="width: 100%" align="center">
                         <asp:Label ID="lblInfo" runat="server" 
-                            Text="<%$Resources:language,lblDanhsachTrinhdoChuyengia %>"></asp:Label>
+                            Text="<%$Resources:language,lblDanhsachChungchiChuyengia %>"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -61,13 +61,14 @@
     <tr>
         <td></td>
         <td align="center">
-            <asp:GridView ID="grvTrinhdoChuyengia" runat="server" AutoGenerateColumns="False"
+            <asp:GridView ID="grvChungchi" runat="server" AutoGenerateColumns="False"
                 AllowPaging="True" AllowSorting="True" 
                             onselectedindexchanging="grvPosition_SelectedIndexChanging" 
                             onsorting="grvPosition_Sorting" Width="100%"
                             AlternatingRowStyle-CssClass="GridAltItem"
                             HeaderStyle-CssClass="GridHeader"
-                            CssClass="Grid">
+                            CssClass="Grid" EnableModelValidation="True">
+<AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
                 <Columns>
                      <asp:TemplateField HeaderText="Chọn tất">
                         <HeaderTemplate>
@@ -78,14 +79,16 @@
                         </ItemTemplate>
                         <HeaderStyle Width="25px" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="PK_iTrinhdoChuyengiaID" HeaderText="ID" 
-                        SortExpression="sTitle" />
-                    <asp:BoundField DataField="sTrinhdo" HeaderText="Trình độ" 
-                        SortExpression="sTrinhdo" >
+                    <asp:BoundField DataField="PK_iChungchiID" HeaderText="ID" 
+                        SortExpression="PK_iChungchiID" />
+                    <asp:BoundField DataField="sTenChungchi" HeaderText="Chứng chỉ" 
+                        SortExpression="sTenChungchi" >
                         <ItemStyle HorizontalAlign="Left" />
                     </asp:BoundField>
                     <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false" Text="Sửa" />
                 </Columns>
+
+<HeaderStyle CssClass="GridHeader"></HeaderStyle>
             </asp:GridView>
         </td>
         <td></td>
