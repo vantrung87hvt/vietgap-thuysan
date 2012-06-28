@@ -110,7 +110,7 @@
 
 			        <ul class="box">
 				        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=TrinhdoChuyengia") %>">Quản lý trình độ chuyên gia</a></li>
-				        <%--<li><a href="#">Lorem ipsum</a></li>
+				        <li><a href="#">Lorem ipsum</a></li>
 				        <li><a href="#">Lorem ipsum</a></li>
 				        <li id="submenu-active"><a href="#">Active Page</a> <!-- Active -->
 					        <ul>
@@ -129,7 +129,7 @@
 						        <li><a href="#">Lorem ipsum</a></li>
 					        </ul>
                         </li>
-				        <li><a href="#">Lorem ipsum</a></li>--%>
+				        <li><a href="#">Lorem ipsum</a></li>
 			        </ul>
 
 		        </div> <!-- /aside -->
