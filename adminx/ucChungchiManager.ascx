@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucChungchiChuyengia.ascx.cs" Inherits="adminx_Tochucchungnhan_ucChungchiChuyengia" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucChungchiManager.ascx.cs" Inherits="adminx_Tochucchungnhan_ucChungchiChuyengia" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <table width="100%">
     <tr>
@@ -33,10 +33,24 @@
                     <td valign="middle" width="70%">
                         
                         <asp:TextBox ID="txtChungchi" runat="server" 
-                            Width="95%"></asp:TextBox>
+                            Width="95%" Height="22px"></asp:TextBox>
                         
-                        <asp:RequiredFieldValidator ID="rqTentrinhdo" runat="server" 
-                            ControlToValidate="txtTentrinhdo" ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rqTenChungchi" runat="server" 
+                            ControlToValidate="txtChungchi" ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" width="20%">
+                        <asp:Label ID="lblMota" runat="server" Text="<%$Resources:language,lblMota %>"></asp:Label>
+                    </td>
+                    <td valign="middle" width="70%">
+                        
+                        <asp:TextBox ID="txtMota" runat="server" 
+                            Width="95%" Height="22px"></asp:TextBox>
+                        
+                        <asp:RequiredFieldValidator ID="rqMota" runat="server" 
+                            ControlToValidate="txtMota" ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
                         
                     </td>
                 </tr>
@@ -67,7 +81,7 @@
                             AlternatingRowStyle-CssClass="GridAltItem"
                             HeaderStyle-CssClass="GridHeader"
                             CssClass="Grid" EnableModelValidation="True" 
-                onselectedindexchanged="grvChungchi_SelectedIndexChanged">
+                onselectedindexchanging="grvChungchi_SelectedIndexChanging">
 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
                 <Columns>
                      <asp:TemplateField HeaderText="Chọn tất">
@@ -85,6 +99,7 @@
                         SortExpression="sTenChungchi" >
                         <ItemStyle HorizontalAlign="Left" />
                     </asp:BoundField>
+                     <asp:BoundField DataField="sMota" HeaderText="Mô tả" SortExpression="sMota" />
                     <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false" Text="Sửa" />
                 </Columns>
 

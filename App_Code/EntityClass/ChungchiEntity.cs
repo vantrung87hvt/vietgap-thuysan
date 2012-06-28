@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/24/2012 2:35:50 PM
+Create On:6/28/2012 3:55:47 PM
 ------------------------------------------------------*/
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace INVI.Entity
         {
 			m_pk_ichungchiid=0;
 			m_stenchungchi="";
+			m_smota="";
         }
 		private Int32 m_pk_ichungchiid;
 		public Int32 PK_iChungchiID
@@ -28,6 +29,12 @@ namespace INVI.Entity
 		{
 			get { return m_stenchungchi ; }
 			set { m_stenchungchi = value; }
+		}
+		private String m_smota;
+		public String sMota
+		{
+			get { return m_smota ; }
+			set { m_smota = value; }
 		}
 
         #region Comparison
@@ -61,6 +68,16 @@ namespace INVI.Entity
 				return delegate(ChungchiEntity entity,ChungchiEntity other)
 				{
 					return entity.sTenChungchi.CompareTo(other.sTenChungchi);
+				};
+			}
+		}
+		public static Comparison<ChungchiEntity> COMPARISON_sMota
+		{
+			get
+			{
+				return delegate(ChungchiEntity entity,ChungchiEntity other)
+				{
+					return entity.sMota.CompareTo(other.sMota);
 				};
 			}
 		}

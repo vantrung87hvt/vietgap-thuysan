@@ -18,6 +18,7 @@ public partial class adminx_BaocaoThongke_ucCosonuoitrongThongkeTheoTinh : Syste
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Xemcacthongketonghop")) Response.End();
         if (!Page.IsPostBack)
         {
             List<TinhEntity> lstTinh = TinhBRL.GetAll();

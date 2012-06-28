@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/24/2012 2:35:43 PM
+Create On:6/28/2012 3:55:44 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -19,8 +19,8 @@ namespace INVI.Business
     {
         #region Init
         private static string EX_NOT_EXIST="Không Tồn Tại Chungchi Này";
-		private static string EX_PK_ICHUNGCHIID_INVALID="PK_iChungchiID không hợp lệ";
 		private static string EX_STENCHUNGCHI_EMPTY="sTenChungchi không được để trống";
+		private static string EX_SMOTA_EMPTY="sMota không được để trống";
 		private static string EX_ID_INVALID="PK_iChungchiID không hợp lệ";
         #endregion
         #region Public Methods
@@ -94,10 +94,10 @@ namespace INVI.Business
         /// <param name="entity">ChungchiEntity: entity</param>
         private static void checkLogic(ChungchiEntity entity)
         {   
-			if (entity.PK_iChungchiID < 0)
-				throw new Exception(EX_PK_ICHUNGCHIID_INVALID);
 			if (String.IsNullOrEmpty(entity.sTenChungchi))
 				throw new Exception(EX_STENCHUNGCHI_EMPTY);
+			if (String.IsNullOrEmpty(entity.sMota))
+				throw new Exception(EX_SMOTA_EMPTY);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi

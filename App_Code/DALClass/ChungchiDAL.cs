@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/24/2012 2:36:00 PM
+Create On:6/28/2012 3:55:50 PM
 ------------------------------------------------------*/
 using INVI.DataAccess.Base;
 using INVI.Entity;
@@ -29,6 +29,7 @@ namespace INVI.DataAccess
                 ChungchiEntity entity = new ChungchiEntity();
 				entity.PK_iChungchiID = Int32.Parse("0"+dr["PK_iChungchiID"].ToString());
 				entity.sTenChungchi = dr["sTenChungchi"].ToString();
+				entity.sMota = dr["sMota"].ToString();
                 return entity;
             };
         }
@@ -65,9 +66,10 @@ namespace INVI.DataAccess
         #region private
         private static SqlParameter[] initParams(ChungchiEntity entity)
         {
-            SqlParameter[] p = new SqlParameter[2];
+            SqlParameter[] p = new SqlParameter[3];
 			p[0] = new SqlParameter("@PK_iChungchiID", entity.PK_iChungchiID);
 			p[1] = new SqlParameter("@sTenChungchi", entity.sTenChungchi);
+			p[2] = new SqlParameter("@sMota", entity.sMota);
             return p;
         }
         #endregion
