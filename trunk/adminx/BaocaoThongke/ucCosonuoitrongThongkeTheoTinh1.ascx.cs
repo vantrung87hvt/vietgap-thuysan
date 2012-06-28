@@ -14,6 +14,7 @@ public partial class adminx_BaocaoThongke_ucCosonuoitrongThongkeTheoTinh1 : Syst
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Xemcacthongketonghop")) Response.End();
         if (!Page.IsPostBack)
         {
             napGridParent();

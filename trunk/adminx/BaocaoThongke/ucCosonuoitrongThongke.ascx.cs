@@ -15,6 +15,7 @@ public partial class adminx_BaocaoThongke_ucCosonuoitrongThongke : System.Web.UI
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Xemcacthongketonghop")) Response.End();
         if (!Page.IsPostBack)
         {
             napTinh();

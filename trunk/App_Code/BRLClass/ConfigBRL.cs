@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:1/12/2009 11:16:02 AM
+Create On:6/27/2012 10:39:00 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -22,8 +22,6 @@ namespace INVI.Business
 		private static string EX_SNAME_EMPTY="sName không được để trống";
 		private static string EX_SVALUE_EMPTY="sValue không được để trống";
 		private static string EX_ID_INVALID="iConfigID không hợp lệ";
-        private static string EX_IDCONFIG_NOTFOUND = "Không tìm thấy config này";
-        private static string EX_CONFIG_EXISTED="Config này đã tồn tại";
         #endregion
         #region Public Methods
         /// <summary>
@@ -46,6 +44,7 @@ namespace INVI.Business
         {
             return ConfigDAL.GetAll();
         }
+        
         /// <summary>
         /// Kiểm tra và thêm mới Config
         /// </summary>
@@ -54,8 +53,8 @@ namespace INVI.Business
         public static Int32 Add(ConfigEntity entity)
         {
             checkLogic(entity);
-            checkDuplicate(entity, true);
-            //checkFK(entity);
+            checkDuplicate(entity, false);
+            checkFK(entity);
             return ConfigDAL.Add(entity);
         }
         /// <summary>
@@ -65,28 +64,27 @@ namespace INVI.Business
         /// <returns>bool:kết quả thực hiện</returns>
         public static bool Edit(ConfigEntity entity)
         {
-            checkExist(entity);
+            checkExist(entity.iConfigID);
             checkLogic(entity);
-            checkDuplicate(entity, false);
-            //checkFK(entity);
+            checkDuplicate(entity, true);
+            checkFK(entity);
             return ConfigDAL.Edit(entity);
         }
         /// <summary>
         /// Kiểm tra và xoá Config
         /// </summary>
-        /// <param name="entity">ConfigEntity</param>
+        /// <param name="iConfigID">Int32 : iConfigID</param>
         /// <returns>bool:kết quả thực hiện</returns>
-        public static bool Remove(ConfigEntity entity)
+        public static bool Remove(Int32 iConfigID)
         {
-            checkExist(entity);
-            
-            return ConfigDAL.Remove(entity.iConfigID);
+            checkExist(iConfigID);
+            return ConfigDAL.Remove(iConfigID);
         }
         #endregion
         #region Private Methods
-        private static void checkExist(ConfigEntity entity)
+        private static void checkExist(Int32 iConfigID)
         {
-            ConfigEntity oConfig=ConfigDAL.GetOne(entity.iConfigID);
+            ConfigEntity oConfig=ConfigDAL.GetOne(iConfigID);
             if(oConfig==null)
                 throw new Exception(EX_NOT_EXIST);
         }
@@ -105,36 +103,32 @@ namespace INVI.Business
         /// Kiểm tra trùng lặp bản ghi
         /// </summary>
         /// <param name="entity">ConfigEntity: ConfigEntity</param>
-        private static void checkDuplicate(ConfigEntity entity,bool CheckInsert)
+        private static void checkDuplicate(ConfigEntity entity,bool checkPK)
         {
-             
+            /* 
+            Example
             List<ConfigEntity> list = ConfigDAL.GetAll();
             if (list.Exists(
                 delegate(ConfigEntity oldEntity)
                 {
-                    bool result =oldEntity.sName.Equals(entity.sName, StringComparison.OrdinalIgnoreCase);
-                    if(!CheckInsert)
+                    bool result =oldEntity.FIELD.Equals(entity.FIELD, StringComparison.OrdinalIgnoreCase);
+                    if(checkPK)
                         result=result && oldEntity.iConfigID != entity.iConfigID;
                     return result;
                 }
             ))
             {
                 list.Clear();
-                throw new Exception(EX_CONFIG_EXISTED);
+                throw new Exception(EX_FIELD_EXISTED);
             }
-            
+            */
         }
         /// <summary>
         /// Kiểm tra tồn tại khóa ngoại
         /// </summary>
         /// <param name="entity">ConfigEntity:entity</param>
         private static void checkFK(ConfigEntity entity)
-        {
-            ConfigEntity oConfig = ConfigDAL.GetOne(entity.iConfigID);
-            if (oConfig == null)
-            {
-                throw new Exception(EX_IDCONFIG_NOTFOUND);
-            }
+        {            
         }
         #endregion
     }

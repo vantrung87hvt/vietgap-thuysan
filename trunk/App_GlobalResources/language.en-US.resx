@@ -741,4 +741,7 @@
   <data name="lblDanhsachChungchiChuyengia" xml:space="preserve">
     <value>List of Expert's Certificate</value>
   </data>
+  <data name="lblMota" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>

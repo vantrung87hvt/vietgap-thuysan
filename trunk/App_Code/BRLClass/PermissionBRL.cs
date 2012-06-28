@@ -87,7 +87,12 @@ namespace INVI.Business
             Permission.Add("QuanlyDanhba", 60);
             Permission.Add("QuanlyDanhsachDanhba", 61);
             Permission.Add("QuanlyGiayto", 63);
+            Permission.Add("Xemcacthongketonghop", 65);
             Permission.Add("QuanlyThanhvienDangkyBoiTochucchungnhan", 65);
+            Permission.Add("QuanlyCacloaichungchiMachuyengiacotheco", 66);
+            Permission.Add("Dangkyhoatdongchungnhan", 67);
+            Permission.Add("Xemgiaydangkyhoatdongchungnhan_TCCN", 68);
+            Permission.Add("Quanlycacloaitrinhdocuachuyengia", 69);
         }
         public static bool CheckPermission(string key)
         {

@@ -840,4 +840,7 @@
   <data name="lblDanhsachChungchiChuyengia" xml:space="preserve">
     <value>Danh sách chứng chỉ chuyên gia</value>
   </data>
+  <data name="lblMota" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
 </root>

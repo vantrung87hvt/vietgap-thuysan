@@ -16,7 +16,7 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (!PermissionBRL.CheckPermission("ManagerGroup")) Response.End();
+        if (!PermissionBRL.CheckPermission("Quanlycacloaitrinhdocuachuyengia")) Response.End();
         if (!IsPostBack)
         {
             this.napGridView();
@@ -53,7 +53,7 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
     }
     protected void grvPosition_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
     {
-        short PK_iTrinhdoChuyengiaID = Convert.ToInt16(grvTrinhdoChuyengia.DataKeys[e.NewSelectedIndex].Values["PK_PK_iTrinhdoChuyengiaID"]);
+        short PK_iTrinhdoChuyengiaID = Convert.ToInt16(grvTrinhdoChuyengia.DataKeys[e.NewSelectedIndex].Values["PK_iTrinhdoChuyengiaID"]);
         btnOK.CommandName = "EDIT";
         btnOK.Text = "Sửa";
         bAddnew = false;
