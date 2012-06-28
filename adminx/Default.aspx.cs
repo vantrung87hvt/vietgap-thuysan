@@ -9,13 +9,18 @@ public partial class adminx_Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserID"] == null || Session["GroupID"] == null)
+        if (Session["GroupID"] != null)
         {
-            if (!(Convert.ToInt32(Session["GroupID"].ToString()) == 1))
+            if (Convert.ToInt32(Session["GroupID"].ToString()) != 1)
             {
-                Response.Write("<script>alert('Bạn không có quyền vào trang này');location='./Logon.aspx'</script>");
-                Response.End();
+                //Response.Write("<script>alert('Bạn không có quyền vào trang này');location='../Default.aspx'</script>");
+                //Response.End();
             }
+        }
+        else
+        {
+            Response.Write("<script>alert('Bạn hãy đăng nhập');location='./Logon.aspx'</script>");
+            Response.End();
         }
         if (Request.QueryString["page"] != null)
         {

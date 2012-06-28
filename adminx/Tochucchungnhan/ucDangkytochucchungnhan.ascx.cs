@@ -42,14 +42,11 @@ public partial class adminx_ucDangkytochucchungnhan : System.Web.UI.UserControl
         if (lstTochucTaikhoan.Count > 0)
             iTochucID = lstTochucTaikhoan[0].FK_iTochucchungnhanID;
         PK_iUserID = int.Parse(Session["userID"].ToString());
-        if (!IsPostBack)
+        if (!Page.IsPostBack)
         {
             LoadGiayToKemTheo();
             NapDllQuanhuyen();
             CheckByUserID(PK_iUserID);
-        }
-        if (!Page.IsPostBack)
-        {
             // Lấy dữ liệu ra đưa vào Cache
             List<DangkyHoatdongchungnhanEntity> lstDangkyhoatdongChungnhan = DangkyHoatdongchungnhanBRL.GetByFK_iTochucchungnhanID(iTochucID);
             if (lstDangkyhoatdongChungnhan != null && lstDangkyhoatdongChungnhan.Count > 0) // Nếu đã từng đăng ký
@@ -181,6 +178,8 @@ public partial class adminx_ucDangkytochucchungnhan : System.Web.UI.UserControl
         cblGiaytonopkem.DataTextField = "sTengiayto";
         cblGiaytonopkem.DataValueField = "PK_iGiaytoID";
         cblGiaytonopkem.DataBind();
+        
+
     }
     public void AddTochucchungnhan(object sender, EventArgs e)
     {
