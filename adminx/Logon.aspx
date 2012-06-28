@@ -24,6 +24,7 @@
   <div id="stylized" class="myform">
     <h1>Đăng nhập</h1>
     <p>Hệ thống quản trị thông tin</p>
+      <asp:Label ID="lblThongbao" runat="server" CssClass="login-err" Text=""></asp:Label>
     <label>Username:
         <span class="small">tên truy cập</span>
     </label>
@@ -31,10 +32,9 @@
     <label>Password:
         <span class="small">Ít nhất là 6 ký tự</span>
     </label>
-    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="202px"></asp:TextBox>   
+    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="202px"></asp:TextBox>
     <div class="loginbutton">
-    <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" 
-                        Text="Đăng nhập" CssClass="button" Width="92"/>
+        <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" Text="Đăng nhập" CssClass="button" Width="92"/>
     </div>
     <div class="spacer"></div>
 </div>

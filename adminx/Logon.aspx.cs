@@ -28,7 +28,9 @@ public partial class adminx_Logon : System.Web.UI.Page
         string password = INVISecurity.MD5(txtPassword.Text);
         UserEntity oUser=UserBRL.GetByUserPass(username, password);
         if (oUser == null)
+        {
             Response.Write("<script>alert('Đăng nhập không thành công');location='./Logon.aspx';</script>");
+        }
         else
         {
             Session["UserID"] = oUser.iUserID;
@@ -39,4 +41,6 @@ public partial class adminx_Logon : System.Web.UI.Page
 
         
     }
+
+    
 }

@@ -13,16 +13,37 @@ public partial class adminx_ViewImage : System.Web.UI.Page
         {
             if(Request.QueryString["ID"]!=null)
             {
-                TochucchungnhanEntity entity    = new TochucchungnhanEntity();
-                entity = TochucchungnhanBRL.GetOne(Convert.ToInt32(Request.QueryString["ID"]));
-                Byte[] bytImage = entity.imgLogo;
-                if (bytImage !=null) 
+                if (Request.QueryString["type"] != null)
                 {
-                          Response.ContentType ="image/jpg"; 
-                          Response.Expires = 0; Response.Buffer =true; 
-                          Response.Clear(); 
-                          Response.BinaryWrite(bytImage); 
-                          Response.End();
+                    String sType = Request.QueryString["type"].ToString();
+                    if(sType.Equals("Chuyengia"))
+                    {
+                        ChuyengiaEntity entity;
+                        entity = ChuyengiaBRL.GetOne(Convert.ToInt32(Request.QueryString["ID"]));
+                        Byte bytImage = entity.imAnh;
+                        if (bytImage != null)
+                        {
+                            Response.ContentType = "image/jpg";
+                            Response.Expires = 0; Response.Buffer = true;
+                            Response.Clear();
+                            //Response.BinaryWrite(bytImage);
+                            Response.End();
+                        }
+                    }
+                }
+                else
+                {
+                    TochucchungnhanEntity entity;
+                    entity = TochucchungnhanBRL.GetOne(Convert.ToInt32(Request.QueryString["ID"]));
+                    Byte[] bytImage = entity.imgLogo;
+                    if (bytImage !=null) 
+                    {
+                              Response.ContentType ="image/jpg"; 
+                              Response.Expires = 0; Response.Buffer =true; 
+                              Response.Clear(); 
+                              Response.BinaryWrite(bytImage); 
+                              Response.End();
+                    }
                 }
             }
         }
