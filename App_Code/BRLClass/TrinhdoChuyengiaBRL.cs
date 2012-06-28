@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/24/2012 2:35:39 PM
+Create On:6/28/2012 10:02:59 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -19,7 +19,6 @@ namespace INVI.Business
     {
         #region Init
         private static string EX_NOT_EXIST="Không Tồn Tại TrinhdoChuyengia Này";
-		private static string EX_PK_ITRINHDOCHUYENGIAID_INVALID="PK_iTrinhdoChuyengiaID không hợp lệ";
 		private static string EX_STRINHDO_EMPTY="sTrinhdo không được để trống";
 		private static string EX_ID_INVALID="PK_iTrinhdoChuyengiaID không hợp lệ";
         #endregion
@@ -94,8 +93,6 @@ namespace INVI.Business
         /// <param name="entity">TrinhdoChuyengiaEntity: entity</param>
         private static void checkLogic(TrinhdoChuyengiaEntity entity)
         {   
-			if (entity.PK_iTrinhdoChuyengiaID < 0)
-				throw new Exception(EX_PK_ITRINHDOCHUYENGIAID_INVALID);
 			if (String.IsNullOrEmpty(entity.sTrinhdo))
 				throw new Exception(EX_STRINHDO_EMPTY);
         }

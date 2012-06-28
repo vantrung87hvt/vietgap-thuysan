@@ -151,7 +151,7 @@ public partial class adminx_ucDangkytochucchungnhan : System.Web.UI.UserControl
             }
             else
             {
-                btnAdd.Visible = false;
+                btnAdd.Visible = true;
                 btnAdd.Text = "Đăng ký";
             }
             TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(iTochucID);
