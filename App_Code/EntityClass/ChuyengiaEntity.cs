@@ -21,7 +21,7 @@ namespace INVI.Entity
 			m_smaso="";
 			m_bduyet=false;
 			m_itrangthai=0;
-			m_imanh=0;
+			m_imanh=null;
 			m_fk_itrinhdoid=0;
         }
 		private Int32 m_pk_ichuyengiaid;
@@ -66,12 +66,13 @@ namespace INVI.Entity
 			get { return m_itrangthai ; }
 			set { m_itrangthai = value; }
 		}
-		private Byte m_imanh;
-		public Byte imAnh
-		{
-			get { return m_imanh ; }
-			set { m_imanh = value; }
-		}
+		
+        private Byte[] m_imanh;
+        public Byte[] imAnh
+        {
+            get { return m_imanh; }
+            set { m_imanh = value; }
+        }
 		private Int16 m_fk_itrinhdoid;
 		public Int16 FK_iTrinhdoID
 		{
@@ -169,10 +170,14 @@ namespace INVI.Entity
 			{
 				return delegate(ChuyengiaEntity entity,ChuyengiaEntity other)
 				{
-					return entity.imAnh.CompareTo(other.imAnh);
+                    if (entity.imAnh.Equals(other.imAnh) == true)
+                        return 1;
+                    else
+                        return 0;
 				};
 			}
 		}
+       
 		public static Comparison<ChuyengiaEntity> COMPARISON_FK_iTrinhdoID
 		{
 			get

@@ -116,7 +116,7 @@ namespace INVI.Business
 				throw new Exception(EX_INAMKINHNGHIEM_INVALID);
 			if (entity.iTrangthai < 0)
 				throw new Exception(EX_ITRANGTHAI_INVALID);
-			if (entity.imAnh < 0)
+			if (entity.imAnh==null)
 				throw new Exception(EX_IMANH_INVALID);
 			if (entity.FK_iTrinhdoID < 0)
 				throw new Exception(EX_FK_ITRINHDOID_INVALID);
