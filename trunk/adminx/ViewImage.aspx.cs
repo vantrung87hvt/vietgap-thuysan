@@ -20,13 +20,13 @@ public partial class adminx_ViewImage : System.Web.UI.Page
                     {
                         ChuyengiaEntity entity;
                         entity = ChuyengiaBRL.GetOne(Convert.ToInt32(Request.QueryString["ID"]));
-                        Byte bytImage = entity.imAnh;
+                        Byte[] bytImage = entity.imAnh;
                         if (bytImage != null)
                         {
                             Response.ContentType = "image/jpg";
                             Response.Expires = 0; Response.Buffer = true;
                             Response.Clear();
-                            //Response.BinaryWrite(bytImage);
+                            Response.BinaryWrite(bytImage);
                             Response.End();
                         }
                     }
