@@ -106,7 +106,7 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
         lstUser.ForEach(
                 delegate(UserEntity oUser)
                 {
-                    if (oUser.iGroupID == 4)
+                    if (oUser.iGroupID == 4 && TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(oUser.iUserID).Count==0)
                         lst.Add(oUser);
                 }
             );
@@ -275,6 +275,11 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
         if (lstTochucTaikhoan != null && lstTochucTaikhoan.Count > 0 && lstTochucTaikhoan[0].FK_iTochucchungnhanID!=Convert.ToInt32(btnOk.CommandArgument))
         {
             lblLoi.Text = "User này đã sử dụng cho Tổ chức CN khác";
+            return;
+        }
+        else if (UserBRL.GetOne(iUserID).bActive == false)
+        {
+            lblLoi.Text = "Tài khoản này chưa được kích hoạt";
             return;
         }
     }
