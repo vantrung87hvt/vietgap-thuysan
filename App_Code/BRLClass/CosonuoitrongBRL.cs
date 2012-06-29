@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:5/12/2012 10:54:22 AM
+Create On:6/29/2012 9:49:24 AM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -29,11 +29,11 @@ namespace INVI.Business
 		private static string EX_INAMSANXUAT_INVALID="iNamsanxuat không hợp lệ";
 		private static string EX_ICHUKYNUOI_INVALID="iChukynuoi không hợp lệ";
 		private static string EX_DNGAYDANGKY_INVALID="dNgaydangky không hợp lệ";
-		private static string EX_FK_IUSERID_INVALID="FK_iUserID không hợp lệ";
 		private static string EX_ISANLUONGDUKIEN_INVALID="iSanluongdukien không hợp lệ";
 		private static string EX_FDIENTICHAOLANG_INVALID="fDientichAolang không hợp lệ";
 		private static string EX_FK_IHINHTHUCNUOIID_INVALID="FK_iHinhthucnuoiID không hợp lệ";
 		private static string EX_FK_ITOCHUCCHUNGNHANID_INVALID="FK_iTochucchungnhanID không hợp lệ";
+		private static string EX_FK_IUSERID_INVALID="FK_iUserID không hợp lệ";
 		private static string EX_ID_INVALID="PK_iCosonuoitrongID không hợp lệ";
         #endregion
         #region Public Methods
@@ -72,11 +72,6 @@ namespace INVI.Business
 			if(FK_iDoituongnuoiID<=0)
 				throw new Exception(EX_FK_IDOITUONGNUOIID_INVALID);
 			return CosonuoitrongDAL.GetByFK_iDoituongnuoiID(FK_iDoituongnuoiID);
-		}public static List<CosonuoitrongEntity> GetByFK_iUserID(Int64 FK_iUserID)
-		{
-			if(FK_iUserID<=0)
-				throw new Exception(EX_FK_IUSERID_INVALID);
-			return CosonuoitrongDAL.GetByFK_iUserID(FK_iUserID);
 		}public static List<CosonuoitrongEntity> GetByFK_iHinhthucnuoiID(Int32 FK_iHinhthucnuoiID)
 		{
 			if(FK_iHinhthucnuoiID<=0)
@@ -87,6 +82,11 @@ namespace INVI.Business
 			if(FK_iTochucchungnhanID<=0)
 				throw new Exception(EX_FK_ITOCHUCCHUNGNHANID_INVALID);
 			return CosonuoitrongDAL.GetByFK_iTochucchungnhanID(FK_iTochucchungnhanID);
+		}public static List<CosonuoitrongEntity> GetByFK_iUserID(Int64 FK_iUserID)
+		{
+			if(FK_iUserID<=0)
+				throw new Exception(EX_FK_IUSERID_INVALID);
+			return CosonuoitrongDAL.GetByFK_iUserID(FK_iUserID);
 		}
         /// <summary>
         /// Kiểm tra và thêm mới Cosonuoitrong
@@ -157,8 +157,6 @@ namespace INVI.Business
 				throw new Exception(EX_ICHUKYNUOI_INVALID);
 			if (DateTime.Parse("1753-01-01")>entity.dNgaydangky)
 				throw new Exception(EX_DNGAYDANGKY_INVALID);
-			if (entity.FK_iUserID < 0)
-				throw new Exception(EX_FK_IUSERID_INVALID);
 			if (entity.iSanluongdukien < 0)
 				throw new Exception(EX_ISANLUONGDUKIEN_INVALID);
 			if (entity.fDientichAolang < 0)
@@ -167,6 +165,8 @@ namespace INVI.Business
 				throw new Exception(EX_FK_IHINHTHUCNUOIID_INVALID);
 			if (entity.FK_iTochucchungnhanID < 0)
 				throw new Exception(EX_FK_ITOCHUCCHUNGNHANID_INVALID);
+			if (entity.FK_iUserID < 0)
+				throw new Exception(EX_FK_IUSERID_INVALID);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi
@@ -213,11 +213,6 @@ namespace INVI.Business
 			{
 				throw new Exception("Không tìm thấy :FK_iDoituongnuoiID");
 			}
-			UserEntity oUser = UserDAL.GetOne(entity.FK_iUserID);
-			if (oUser==null)
-			{
-				throw new Exception("Không tìm thấy :FK_iUserID");
-			}
 			HinhthucnuoiEntity oHinhthucnuoi = HinhthucnuoiDAL.GetOne(entity.FK_iHinhthucnuoiID);
 			if (oHinhthucnuoi==null)
 			{
@@ -227,6 +222,11 @@ namespace INVI.Business
 			if (oTochucchungnhan==null)
 			{
 				throw new Exception("Không tìm thấy :FK_iTochucchungnhanID");
+			}
+			UserEntity oUser = UserDAL.GetOne(entity.FK_iUserID);
+			if (oUser==null)
+			{
+				throw new Exception("Không tìm thấy :FK_iUserID");
 			}
         }
         #endregion

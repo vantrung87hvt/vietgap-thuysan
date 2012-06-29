@@ -17,18 +17,18 @@ public partial class uc_ucDangky : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["PK_iTochucchungnhanID"] != null)
-        {
-            int PK_iTochucchungnhanID = 0;
-            try
-            {
-                PK_iTochucchungnhanID = int.Parse(Session["PK_iTochucchungnhanID"].ToString());
-            }
-            catch
-            {
-                return;
-            }
-        }
+        //if (Session["PK_iTochucchungnhanID"] != null)
+        //{
+        //    int PK_iTochucchungnhanID = 0;
+        //    try
+        //    {
+        //        PK_iTochucchungnhanID = int.Parse(Session["PK_iTochucchungnhanID"].ToString());
+        //    }
+        //    catch
+        //    {
+        //        return;
+        //    }
+        //}
     }
     protected void btnRegistry_Click(object sender, EventArgs e)
     {
@@ -51,13 +51,13 @@ public partial class uc_ucDangky : System.Web.UI.UserControl
             int FK_iUserID = UserBRL.Add(oUser);
             TaiKhoanDangKyToChucChungNhanEntity oTaikhoanDangkyTCCN = new TaiKhoanDangKyToChucChungNhanEntity();
             oTaikhoanDangkyTCCN.dNgaydangky = DateTime.Today;
-            oTaikhoanDangkyTCCN.FK_iTochucchungnhanID = int.Parse(Session["PK_iTochucchungnhanID"].ToString());
+            oTaikhoanDangkyTCCN.FK_iTochucchungnhanID = int.Parse(Session["TCCNID"].ToString());
             oTaikhoanDangkyTCCN.bDuyet = false;
             oTaikhoanDangkyTCCN.FK_iTaikhoanID = FK_iUserID;
             TaiKhoanDangKyToChucChungNhanBRL.Add(oTaikhoanDangkyTCCN);
             litThongtin.Text = "<b>Đăng ký thành công.</b>Các thông tin của bạn sẽ được gửi đến Tổ chức chứng nhận để kiểm duyệt. Kết quả sẽ được gửi đến email mà bạn đã khai báo";
         }
-        catch
+        catch(Exception ex)
         {
 
         }

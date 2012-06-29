@@ -197,6 +197,23 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             oCoso.FK_iDoituongnuoiID = lstDoituong[0].PK_iDoituongnuoiID;
             oCoso.FK_iHinhthucnuoiID = lstHinhthuc[0].PK_iHinhthucnuoiID;
             oCoso.FK_iUserID = fk_user;
+            // Lấy thông tin về Tổ chức chứng nhận
+            // Dựa trên User và GroupID
+            // Từ đó lấy được ID của Tổ chức chứng nhận
+            if(Session["userID"]!=null)
+            {
+                int iUserID_TCCN = Convert.ToInt32(Session["userID"].ToString());
+                List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID_TCCN);
+                if (lstTochucTaikhoan.Count > 0)
+                {
+                    oCoso.FK_iTochucchungnhanID = lstTochucTaikhoan[0].FK_iTochucchungnhanID;
+                }
+                else
+                {
+                    Response.Write("<script>alert('Tổ chức chứng nhận không hợp lệ!');</script>");
+                }
+            }
+            
             iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
             FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
             btnDKThongtinCoSoNuoi.CommandName = "Edit";
