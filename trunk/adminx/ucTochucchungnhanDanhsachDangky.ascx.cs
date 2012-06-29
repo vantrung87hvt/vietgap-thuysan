@@ -212,7 +212,6 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
         try
         {
             
-
             int DangKyID = Convert.ToInt32(btnCapPhep.CommandArgument);
             DangkyHoatdongchungnhanEntity oDangkyhd = DangkyHoatdongchungnhanBRL.GetOne(DangKyID);
             int idTochucchungnhan = oDangkyhd.FK_iTochucchungnhanID;
@@ -242,17 +241,31 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             // Đếm số lượng tổ chức chứng nhận đã được chỉ định
 
             List<TochucchungnhanEntity> lstTochucchungnhan = new List<TochucchungnhanEntity>();
+            TochucchungnhanEntity oTCCN = TochucchungnhanBRL.GetOne(idTochucchungnhan);
+            TinhEntity oTinh = TinhBRL.GetOne(QuanHuyenBRL.GetOne(oTCCN.FK_iQuanHuyenID).FK_iTinhThanhID);
             // Lấy danh sách các ID tổ chức chứng nhận rồi lọc
             List<DangkyHoatdongchungnhanEntity> lstDanhsachTCCNDangky = DangkyHoatdongchungnhanBRL.GetAll();
             foreach (DangkyHoatdongchungnhanEntity oDanhsachTCCN in lstDanhsachTCCNDangky)
                 if (!lstTochucchungnhan.Contains(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID)) && oDanhsachTCCN.iTrangthaidangky==2)
-                    lstTochucchungnhan.Add(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID));
-            maso += lstTochucchungnhan.Count + 1;
-            TochucchungnhanEntity oTCCN = TochucchungnhanBRL.GetOne(idTochucchungnhan);
-            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2)+"-"+lstTochucchungnhan.Count + 1+"";
+                    if((QuanHuyenBRL.GetOne(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID).FK_iQuanHuyenID).FK_iTinhThanhID)==oTinh.PK_iTinhID)
+                        lstTochucchungnhan.Add(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID));
+            // Sắp xếp lại Danh sách các tổ chức chứng nhận để lấy mã số của TCCN có giá trị lớn nhất + 1.
+            lstTochucchungnhan.Sort(delegate(TochucchungnhanEntity firstEntity, TochucchungnhanEntity secondEntity)
+            {
+                return secondEntity.sMaso.CompareTo(firstEntity.sMaso);
+            }
+            );
+            // Lấy thằng mới nhất
+            String sMasomoinhat = lstTochucchungnhan[lstTochucchungnhan.Count - 1].sMaso;
+            String[] sDulieutrongmaso = sMasomoinhat.Split('-');
+            maso += Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length-1])+1;
+
+            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1 + "";
             oTCCN.sMaso = maso;
+            oTCCN.iTrangthai = 2;
             TochucchungnhanBRL.Edit(oTCCN);
             oDangkyhd.iTrangthaidangky = 2;
+            
             DangkyHoatdongchungnhanBRL.Edit(oDangkyhd);
             pnThongTin.Visible = false;
         }

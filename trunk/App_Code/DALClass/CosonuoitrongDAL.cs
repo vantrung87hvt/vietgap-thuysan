@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:5/12/2012 10:54:31 AM
+Create On:6/29/2012 9:49:30 AM
 ------------------------------------------------------*/
 using INVI.DataAccess.Base;
 using INVI.Entity;
@@ -44,16 +44,16 @@ namespace INVI.DataAccess
 				entity.iChukynuoi = Int32.Parse("0"+dr["iChukynuoi"].ToString());
 				entity.dNgaydangky =String.IsNullOrEmpty(dr["dNgaydangky"].ToString())?DateTime.Now:DateTime.Parse(dr["dNgaydangky"].ToString());
 				entity.bDuyet =String.IsNullOrEmpty(dr["bDuyet"].ToString())?false:Boolean.Parse(dr["bDuyet"].ToString());
-				entity.FK_iUserID = Int64.Parse("0"+dr["FK_iUserID"].ToString());
 				entity.sMasocoso = dr["sMasocoso"].ToString();
 				entity.iSanluongdukien = Int32.Parse("0"+dr["iSanluongdukien"].ToString());
 				entity.fDientichAolang = float.Parse("0"+dr["fDientichAolang"].ToString());
 				entity.FK_iHinhthucnuoiID = Int32.Parse("0"+dr["FK_iHinhthucnuoiID"].ToString());
 				entity.FK_iTochucchungnhanID = Int32.Parse("0"+dr["FK_iTochucchungnhanID"].ToString());
+				entity.FK_iUserID = Int64.Parse("0"+dr["FK_iUserID"].ToString());
                 return entity;
             };
         }
-        public static CosonuoitrongEntity GetOne(long PK_iCosonuoitrongID)
+        public static CosonuoitrongEntity GetOne(Int64 PK_iCosonuoitrongID)
         {
             string cmdName = "spCosonuoitrong_GetByPK";
             SqlParameter p = new SqlParameter("@PK_iCosonuoitrongID", PK_iCosonuoitrongID);
@@ -83,12 +83,6 @@ namespace INVI.DataAccess
 			SqlParameter p = new SqlParameter("@FK_iDoituongnuoiID",FK_iDoituongnuoiID);
 			List<CosonuoitrongEntity> list = GetList(cmdName, p);
 			return list;
-		}public static List<CosonuoitrongEntity> GetByFK_iUserID(Int64 FK_iUserID)
-		{
-			string cmdName = "spCosonuoitrong_GetByFK_FK_iUserID";
-			SqlParameter p = new SqlParameter("@FK_iUserID",FK_iUserID);
-			List<CosonuoitrongEntity> list = GetList(cmdName, p);
-			return list;
 		}public static List<CosonuoitrongEntity> GetByFK_iHinhthucnuoiID(Int32 FK_iHinhthucnuoiID)
 		{
 			string cmdName = "spCosonuoitrong_GetByFK_FK_iHinhthucnuoiID";
@@ -99,6 +93,12 @@ namespace INVI.DataAccess
 		{
 			string cmdName = "spCosonuoitrong_GetByFK_FK_iTochucchungnhanID";
 			SqlParameter p = new SqlParameter("@FK_iTochucchungnhanID",FK_iTochucchungnhanID);
+			List<CosonuoitrongEntity> list = GetList(cmdName, p);
+			return list;
+		}public static List<CosonuoitrongEntity> GetByFK_iUserID(Int64 FK_iUserID)
+		{
+			string cmdName = "spCosonuoitrong_GetByFK_FK_iUserID";
+			SqlParameter p = new SqlParameter("@FK_iUserID",FK_iUserID);
 			List<CosonuoitrongEntity> list = GetList(cmdName, p);
 			return list;
 		}
@@ -140,12 +140,12 @@ namespace INVI.DataAccess
 			p[14] = new SqlParameter("@iChukynuoi", entity.iChukynuoi);
 			p[15] = new SqlParameter("@dNgaydangky", entity.dNgaydangky);
 			p[16] = new SqlParameter("@bDuyet", entity.bDuyet);
-			p[17] = new SqlParameter("@FK_iUserID", entity.FK_iUserID);
-			p[18] = new SqlParameter("@sMasocoso", entity.sMasocoso);
-			p[19] = new SqlParameter("@iSanluongdukien", entity.iSanluongdukien);
-			p[20] = new SqlParameter("@fDientichAolang", entity.fDientichAolang);
-			p[21] = new SqlParameter("@FK_iHinhthucnuoiID", entity.FK_iHinhthucnuoiID);
-			p[22] = new SqlParameter("@FK_iTochucchungnhanID", entity.FK_iTochucchungnhanID);
+			p[17] = new SqlParameter("@sMasocoso", entity.sMasocoso);
+			p[18] = new SqlParameter("@iSanluongdukien", entity.iSanluongdukien);
+			p[19] = new SqlParameter("@fDientichAolang", entity.fDientichAolang);
+			p[20] = new SqlParameter("@FK_iHinhthucnuoiID", entity.FK_iHinhthucnuoiID);
+			p[21] = new SqlParameter("@FK_iTochucchungnhanID", entity.FK_iTochucchungnhanID);
+			p[22] = new SqlParameter("@FK_iUserID", entity.FK_iUserID);
             return p;
         }
         #endregion

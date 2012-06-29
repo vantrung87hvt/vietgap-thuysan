@@ -16,6 +16,7 @@ public partial class uc_ucTochucchungnhanChitiet : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //if (Session["userID"] == null || Session["GroupID"] == null) Response.End();
         if (Session["TCCNID"] != null)
         {
             int PK_iTochucchungnhanID = 0;
@@ -42,6 +43,7 @@ public partial class uc_ucTochucchungnhanChitiet : System.Web.UI.UserControl
                     lblCoquancapDangkyKinhdoanh.Text = oTochucchungnhan.sCoquancap;
                     lblCoquanQuanlyCaptren.Text = CoquancaptrenBRL.GetOne(oTochucchungnhan.FK_iCoquancaptrenID).sTencoquan;
                     imgLogo.ImageUrl = "adminx/ViewImage.aspx?ID=" + PK_iTochucchungnhanID;
+                    //hypDangkyTaikhoanChungnhan.Visible = (Convert.ToInt16(Session["GroupID"].ToString()))==3?true:false;
                     imgLogo.Visible = true;
                 }
                 else
