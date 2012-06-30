@@ -79,7 +79,9 @@
 			        <div class="padding box">
 
 				        <!-- Logo (Max. width = 200px) -->
-				        <p id="logo"><a href="#"><img src="../../Images/logoVietGap.jpg" alt="Logo VietGAP" title="VietGAP" /></a></p>
+				        <p id="logo">
+                            <asp:Image ID="imgLogo" Width="110px" Height="110px" runat="server" />
+                        </p>
 
 				        <!-- Search -->
 				        <%--<form action="#" method="get" id="search">
@@ -145,5 +147,6 @@
                  <!-- Content (End Right Column) -->
             </div>
         </div>
+        
     </body>
 </html>

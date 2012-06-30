@@ -480,7 +480,7 @@
 <div style="margin: 30px; margin-bottom: 0;">
     <asp:Label ID="lblLoi" ForeColor="Red" runat="server"></asp:Label>
 </div>
-<asp:Panel ID="pnDangKyTV" runat="server">
+<asp:Panel ID="pnDangKyTV" runat="server" Visible="False">
     <div class="m">
         <fieldset>
             <legend>Thông tin tài khoản</legend>
@@ -585,6 +585,18 @@
     <div class="m">
         <fieldset>
             <legend>Thông tin cơ sở nuôi trồng</legend>
+            <div class="a">
+                <div class="l">
+                    Tài khoản</div>
+                <div class="r">
+                    <asp:DropDownList ID="ddlTaikhoan" runat="server" 
+                        onselectedindexchanged="ddlTaikhoan_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </div>
+                <div class="rr">
+                    
+                </div>
+            </div>
             <div class="a">
                 <div class="l">
                     Tên cơ sở nuôi trồng</div>
