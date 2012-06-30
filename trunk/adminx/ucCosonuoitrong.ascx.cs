@@ -122,8 +122,6 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
-        if (Page.IsValid)
-        {
             try
             {
                 foreach (GridViewRow row in grvCosonuoitrong.Rows)
@@ -140,7 +138,6 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             {
                 Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Cosonuoitrong';</script>");
             }
-        }
     }
     protected void grvNews_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {

@@ -35,6 +35,8 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             napDoituongnuoi();
             napHinhThucNuoi();
             napNamsanxuat();
+            napTaikhoan();
+            taoCosonuoitronggiadinh();
            // LoadMap(getAdd());
             if (Session["iCosonuoitrongID"] != null&&Request.QueryString["do"]==null)
             {
@@ -54,6 +56,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
                 chkKiemduyet.Visible = false;
             }
             FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
+            FK_iUser.Value = ddlTaikhoan.SelectedValue;
         }
     }
 
@@ -80,6 +83,26 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         ddlDoituongnuoi.DataValueField = "PK_iDoituongnuoiID";
         ddlDoituongnuoi.DataBind();
         ddlDoituongnuoi.Items.Insert(0, new ListItem("--- Chọn ---", "0"));
+
+    }
+    protected void napTaikhoan()
+    {
+        ddlTaikhoan.Items.Clear();
+        List<UserEntity> lstUser = UserBRL.GetAll();
+        List<UserEntity> lst = new List<UserEntity>();
+        lstUser.ForEach(
+                delegate(UserEntity oUser)
+                {
+                    if (oUser.iGroupID == 2 && CosonuoitrongBRL.GetByFK_iUserID(oUser.iUserID).Count == 0)
+                        lst.Add(oUser);
+                }
+            );
+        ddlTaikhoan.DataTextField = "sUsername";
+        ddlTaikhoan.DataValueField = "iUserID";
+        ddlTaikhoan.DataSource = lst;
+        ddlTaikhoan.DataBind();
+        ddlTaikhoan.SelectedIndex = 0;
+        //ddlTaikhoan.Items.Insert(0, new ListItem("--- Chọn ---", "0"));
 
     }
     protected void napHinhThucNuoi()
@@ -161,29 +184,75 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             
         }
     }
-    protected void btnRegistry_Click(object sender, EventArgs e)
+    private void taoCosonuoitronggiadinh()
     {
-        ccJoin.ValidateCaptcha(txtCapcha.Text);
-        if (!ccJoin.UserValidated)
-        {
-            lblLoi.Text = "Mã xác nhận không đúng!";
-            return;
-        }
         try
         {
-            string password = INVISecurity.MD5(txtPassword.Text);
+            ////Thêm cơ sở nuôi trồng giả định
+            List<ToadoEntity> lstToado = ToadoBRL.GetAll();
+            List<DoituongnuoiEntity> lstDoituong = DoituongnuoiBRL.GetAll();
+            List<HinhthucnuoiEntity> lstHinhthuc = HinhthucnuoiBRL.GetAll();
+            CosonuoitrongEntity oCoso = new CosonuoitrongEntity();
+            oCoso.sTencoso = "Tên cơ sở";
+            oCoso.sTenchucoso = "Tên chủ cơ sở";
+            oCoso.FK_iQuanHuyenID = 2;
+            oCoso.FK_iToadoID = lstToado[0].PK_iToadoID; // Sửa lại tọa độ ở đây - để lấy tọa độ trung tâm của CSNT
+            oCoso.FK_iDoituongnuoiID = lstDoituong[0].PK_iDoituongnuoiID;
+            oCoso.FK_iHinhthucnuoiID = lstHinhthuc[0].PK_iHinhthucnuoiID;
+            oCoso.FK_iUserID = Convert.ToInt64(ddlTaikhoan.SelectedValue);
+            // Lấy thông tin về Tổ chức chứng nhận
+            // Dựa trên User và GroupID
+            // Từ đó lấy được ID của Tổ chức chứng nhận
+            if (Session["userID"] != null)
+            {
+                int iUserID_TCCN = Convert.ToInt32(Session["userID"].ToString());
+                List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID_TCCN);
+                if (lstTochucTaikhoan.Count > 0)
+                {
+                    oCoso.FK_iTochucchungnhanID = lstTochucTaikhoan[0].FK_iTochucchungnhanID;
+                }
+                else
+                {
+                    Response.Write("<script>alert('Tổ chức chứng nhận không hợp lệ!');</script>");
+                }
+            }
+            iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
+            FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
+            btnDKThongtinCoSoNuoi.CommandName = "Edit";
+            
+            SendEmailVerificationToUser(txtUsername.Text, fk_user.ToString());
+            lblLoi.Text = "";
+            pnDangKyTV.Visible = false;
+            pnCSNT.Visible = true;
+        }
+        catch (Exception ex)
+        {
+            lblLoi.Text = ex.Message.ToString();
+        }
+    }
+    protected void btnRegistry_Click(object sender, EventArgs e)
+    {
+        //ccJoin.ValidateCaptcha(txtCapcha.Text);
+        //if (!ccJoin.UserValidated)
+        //{
+        //    lblLoi.Text = "Mã xác nhận không đúng!";
+        //    return;
+        //}
+        try
+        {
+            //string password = INVISecurity.MD5(txtPassword.Text);
 
-            UserEntity us = new UserEntity();
-            us.sUsername = txtUsername.Text;
-            us.sPassword = password;
-            us.sEmail = txtEmail.Text;
-            us.bActive = false;
-            us.tLastVisit = DateTime.Now;
-            us.sIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
-            us.iGroupID = 2;
-            fk_user = UserBRL.Add(us);
-            FK_iUser.Value = fk_user.ToString();
-            //Thêm cơ sở nuôi trồng giả định
+            //UserEntity us = new UserEntity();
+            //us.sUsername = txtUsername.Text;
+            //us.sPassword = password;
+            //us.sEmail = txtEmail.Text;
+            //us.bActive = false;
+            //us.tLastVisit = DateTime.Now;
+            //us.sIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
+            //us.iGroupID = 2;
+            //fk_user = UserBRL.Add(us);
+            //FK_iUser.Value = fk_user.ToString();
+            ////Thêm cơ sở nuôi trồng giả định
             List<ToadoEntity> lstToado = ToadoBRL.GetAll();
             List<DoituongnuoiEntity> lstDoituong = DoituongnuoiBRL.GetAll();
             List<HinhthucnuoiEntity> lstHinhthuc = HinhthucnuoiBRL.GetAll();
@@ -195,9 +264,26 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             oCoso.FK_iDoituongnuoiID = lstDoituong[0].PK_iDoituongnuoiID;
             oCoso.FK_iHinhthucnuoiID = lstHinhthuc[0].PK_iHinhthucnuoiID;
             oCoso.FK_iUserID = fk_user;
+            // Lấy thông tin về Tổ chức chứng nhận
+            // Dựa trên User và GroupID
+            // Từ đó lấy được ID của Tổ chức chứng nhận
+            if (Session["userID"] != null)
+            {
+                int iUserID_TCCN = Convert.ToInt32(Session["userID"].ToString());
+                List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID_TCCN);
+                if (lstTochucTaikhoan.Count > 0)
+                {
+                    oCoso.FK_iTochucchungnhanID = lstTochucTaikhoan[0].FK_iTochucchungnhanID;
+                }
+                else
+                {
+                    Response.Write("<script>alert('Tổ chức chứng nhận không hợp lệ!');</script>");
+                }
+            }
             iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
             FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
             btnDKThongtinCoSoNuoi.CommandName = "Edit";
+            
             //List<UserEntity> list = UserBRL.GetAll();
             //list.Sort(
             //    delegate(UserEntity firstEntity, UserEntity secondEntity)
@@ -409,5 +495,9 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
     protected void ddlHuyen_SelectedIndexChanged(object sender, EventArgs e)
     {
         PK_iHuyenID.Value = ddlHuyen.SelectedValue.ToString();
+    }
+    protected void ddlTaikhoan_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        FK_iUser.Value = ddlTaikhoan.SelectedValue;
     }
 }
