@@ -11,7 +11,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
 {
     private static int fk_user;    
     private static string addr = "";
-    private static int iCosonuoitrongID;
+    private static Int64 iCosonuoitrongID;
 
     public int iTinhID
     {
@@ -35,10 +35,18 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             napDoituongnuoi();
             napHinhThucNuoi();
             napNamsanxuat();
+            napTochucchungnhan();
            // LoadMap(getAdd());
-            if (Session["iCosonuoitrongID"] != null&&Request.QueryString["do"]==null)
+            List<CosonuoitrongEntity> lstCosonuoitrong=null;
+            if (Session["userID"] != null)
             {
-                iCosonuoitrongID = Convert.ToInt32(Session["iCosonuoitrongID"].ToString());
+                fk_user = Convert.ToInt32(Session["userID"].ToString());
+                lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iUserID(fk_user);
+            }
+            if (lstCosonuoitrong.Count>0)
+            {
+                iCosonuoitrongID = lstCosonuoitrong[0].PK_iCosonuoitrongID;
+
                 // nếu có ID được truyền vào thì là cập nhập
                 // không cập nhập thông tin về User ở đây
                 // vì 1 cơ sơ nuôi trồng có thể có nhiều Username
@@ -46,14 +54,15 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
                 btnDKThongtinCoSoNuoi.CommandArgument = iCosonuoitrongID.ToString();                
                 pnCSNT.Visible = true;
                 napForm(iCosonuoitrongID);
-                
+                FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();    
             }
             else
             {
                 pnCSNT.Visible = true;
                 chkKiemduyet.Visible = false;
+                taoCSNT_giadinh();
             }
-            FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
+            
         }
     }
 
@@ -93,6 +102,17 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         ddlHinhThucNuoi.Items.Insert(0, new ListItem("--- Chọn ---", "0"));
 
     }
+    protected void napTochucchungnhan()
+    {
+        ddlTochucchungnhan.Items.Clear();
+        List<TochucchungnhanEntity> lstTochucchungnhan = TochucchungnhanBRL.GetAll();
+        ddlTochucchungnhan.DataSource = lstTochucchungnhan;
+        ddlTochucchungnhan.DataTextField = "sTochucchungnhan";
+        ddlTochucchungnhan.DataValueField = "PK_iTochucchungnhanID";
+        ddlTochucchungnhan.DataBind();
+        ddlTochucchungnhan.SelectedIndex = 0;
+        FK_iTochucchungnhanID.Value = ddlTochucchungnhan.SelectedValue;
+    }
     private void LoadQuanHuyen(int fk_Tinh)
     {
         ddlHuyen.Items.Clear();
@@ -110,7 +130,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             ddlNamSanXuat.Items.Add(i.ToString());
         }
     }
-    protected void napForm(int iCosonuoitrongID)
+    protected void napForm(Int64 iCosonuoitrongID)
     {
         CosonuoitrongEntity oCosonuoitrong;
         try
@@ -161,7 +181,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             
         }
     }
-    protected void btnRegistry_Click(object sender, EventArgs e)
+    private void taoCSNT_giadinh()
     {
         try
         {
@@ -177,19 +197,13 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             oCoso.FK_iToadoID = lstToado[0].PK_iToadoID;
             oCoso.FK_iDoituongnuoiID = lstDoituong[0].PK_iDoituongnuoiID;
             oCoso.FK_iHinhthucnuoiID = lstHinhthuc[0].PK_iHinhthucnuoiID;
+            fk_user = Convert.ToInt32(Session["userID"].ToString());
             oCoso.FK_iUserID = fk_user;
+            oCoso.FK_iTochucchungnhanID = Convert.ToInt32(ddlTochucchungnhan.SelectedValue);
             iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
             FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
-            btnDKThongtinCoSoNuoi.CommandName = "Edit";
-            //List<UserEntity> list = UserBRL.GetAll();
-            //list.Sort(
-            //    delegate(UserEntity firstEntity, UserEntity secondEntity)
-            //    {
-            //        return secondEntity.iUserID.CompareTo(firstEntity.iUserID);
-            //    }
-            //);
-            //fk_user = list[0].iUserID;
-            //SendEmailVerificationToUser(txtUsername.Text, fk_user.ToString());
+            btnDKThongtinCoSoNuoi.CommandName = "ADD";
+
             lblLoi.Text = "";
             pnCSNT.Visible = true;
         }
@@ -198,6 +212,43 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             lblLoi.Text = ex.Message.ToString();
         }
     }
+    //protected void btnRegistry_Click(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+
+    //        //Thêm cơ sở nuôi trồng giả định
+    //        List<ToadoEntity> lstToado = ToadoBRL.GetAll();
+    //        List<DoituongnuoiEntity> lstDoituong = DoituongnuoiBRL.GetAll();
+    //        List<HinhthucnuoiEntity> lstHinhthuc = HinhthucnuoiBRL.GetAll();
+    //        CosonuoitrongEntity oCoso = new CosonuoitrongEntity();
+    //        oCoso.sTencoso = "Tên cơ sở";
+    //        oCoso.sTenchucoso = "Tên chủ cơ sở";
+    //        oCoso.FK_iQuanHuyenID = 2;
+    //        oCoso.FK_iToadoID = lstToado[0].PK_iToadoID;
+    //        oCoso.FK_iDoituongnuoiID = lstDoituong[0].PK_iDoituongnuoiID;
+    //        oCoso.FK_iHinhthucnuoiID = lstHinhthuc[0].PK_iHinhthucnuoiID;
+    //        oCoso.FK_iUserID = fk_user;
+    //        iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
+    //        FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
+    //        btnDKThongtinCoSoNuoi.CommandName = "Edit";
+    //        //List<UserEntity> list = UserBRL.GetAll();
+    //        //list.Sort(
+    //        //    delegate(UserEntity firstEntity, UserEntity secondEntity)
+    //        //    {
+    //        //        return secondEntity.iUserID.CompareTo(firstEntity.iUserID);
+    //        //    }
+    //        //);
+    //        //fk_user = list[0].iUserID;
+    //        //SendEmailVerificationToUser(txtUsername.Text, fk_user.ToString());
+    //        lblLoi.Text = "";
+    //        pnCSNT.Visible = true;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        lblLoi.Text = ex.Message.ToString();
+    //    }
+    //}
     //public void SendEmailVerificationToUser(string strUsername,string iduser)
     //{
     //    string body = "<b>Tài khoản</b>: ##UserName## đã được kích hoạt thành công. Bạn có thể sử dụng tài khoản này để đăng nhập và nhập các thông tin về Cơ sở nuôi trồng.";
@@ -258,9 +309,10 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
 
     private void EditCosonuoitrong()
     {
+        CosonuoitrongEntity oCosonuoitrong = null;
         try
         {
-            CosonuoitrongEntity oCosonuoitrong = null;
+            
             if (iCosonuoitrongID > 0)
             {
                 oCosonuoitrong = CosonuoitrongBRL.GetOne(iCosonuoitrongID);
@@ -336,6 +388,19 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         {
             lblLoi.Text = ex.Message;
             pnCSNT.Visible = true;
+            // Nếu xảy ra lỗi phải khử CSNT giả định
+            if (btnDKThongtinCoSoNuoi.CommandName.ToUpper() == "ADD")
+            {
+                //Trước khi khử phải xóa các thông tin trong các bảng liên quan
+                //1. Tọa độ cơ sở nuôi
+                List<ToadoCosonuoiEntity> lstToadoCSNT = ToadoCosonuoiBRL.GetByFK_iCosonuoiID((int)oCosonuoitrong.PK_iCosonuoitrongID);
+                if (lstToadoCSNT.Count > 0)
+                {
+                    foreach (ToadoCosonuoiEntity oToadoCSNT in lstToadoCSNT)
+                        ToadoCosonuoiBRL.Remove(oToadoCSNT.PK_iToadocosonuoiID);
+                }
+                CosonuoitrongBRL.Remove(oCosonuoitrong.PK_iCosonuoitrongID);
+            }
         }
     }
     
@@ -392,5 +457,9 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
     protected void ddlHuyen_SelectedIndexChanged(object sender, EventArgs e)
     {
         PK_iHuyenID.Value = ddlHuyen.SelectedValue.ToString();
+    }
+    protected void ddlTochucchungnhan_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        FK_iTochucchungnhanID.Value = ddlTochucchungnhan.SelectedValue;
     }
 }

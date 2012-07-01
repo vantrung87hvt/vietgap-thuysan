@@ -60,8 +60,10 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
         QuanHuyenEntity oQuanHuyen = QuanHuyenBRL.GetOne(int.Parse(oEntity.FK_iQuanHuyenID.ToString()));
         TinhEntity oTinh = TinhBRL.GetOne(oQuanHuyen.FK_iTinhThanhID);
         TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
-
-        sVietGapCode += oTochucchungnhan.sKytuviettat + "-";
+        // Theo Thông tư mới - chỗ này phải lấy tiền tố của TCCN
+        String[] sDulieutuTCCN = oTochucchungnhan.sMaso.Split('-');
+        if(sDulieutuTCCN.Length>0)
+            sVietGapCode += sDulieutuTCCN[2] + "-"+sDulieutuTCCN[3]+"-";
         sVietGapCode += oTinh.sKyhieu + "-";
         //sVietGapCode += oQuanHuyen.sKytuviettat+"-";
         //DoituongnuoiEntity oDoituongnuoi = DoituongnuoiBRL.GetOne(oEntity.FK_iDoituongnuoiID);
@@ -74,9 +76,13 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
         }
         );
         // Sắp xếp rồi lấy ra bác có giá trị lớn nhất rồi cộng
-        String sMasomoinhat = CosonuoitrongBRL.GetOne(lstHosoCSNTDangkyChungnhan[lstHosoCSNTDangkyChungnhan.Count - 1].FK_iCosonuoiID).sMaso_vietgap;
+        String sMasomoinhat = String.Empty;
+        String sMasocoso = String.Empty;
+        if(lstHosoCSNTDangkyChungnhan.Count>0)
+            sMasomoinhat = CosonuoitrongBRL.GetOne(lstHosoCSNTDangkyChungnhan[lstHosoCSNTDangkyChungnhan.Count - 1].FK_iCosonuoiID).sMaso_vietgap;
         String[] sDulieutrongmaso = sMasomoinhat.Split('-');
-        String sMasocoso = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1+"";
+        if (sDulieutrongmaso.Length>0)
+            sMasocoso = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1+"";
         //Session["sMasocoso"] = sMasocoso;
         sVietGapCode += sMasocoso;
         return sVietGapCode;

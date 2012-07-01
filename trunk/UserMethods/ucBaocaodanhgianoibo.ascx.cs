@@ -52,7 +52,7 @@ public partial class adminx_ucBaocaodanhgianoibo : System.Web.UI.UserControl
                 else
                 {
                     oCosonuoitrong = null;
-                    Response.Write("<script>alert('Không có cơ sở nuôi trồng nào đăng ký!');</script>");
+                    //Response.Write("<script>alert('Không có cơ sở nuôi trồng nào đăng ký!');</script>");
                     return;
                 }
                 Cosonuoitrong = oCosonuoitrong;

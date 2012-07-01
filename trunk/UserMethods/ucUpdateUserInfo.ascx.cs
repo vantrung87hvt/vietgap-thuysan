@@ -12,7 +12,7 @@ public partial class UserMethods_ucUpdateUserInfo : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            if (Session["UserID"] == null)
+            if (Session["UserID"] != null)
             {
                 LoadToText();
             }
