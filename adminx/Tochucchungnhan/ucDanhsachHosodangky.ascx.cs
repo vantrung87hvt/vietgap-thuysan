@@ -6,10 +6,12 @@ using System.Web.UI.WebControls;
 using INVI.Entity;
 using INVI.DataAccess;
 using INVI.Business;
+using System.Globalization;
 public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
 {
     private byte m_pagesize = 20;
     protected int currentPage = 0;
+    public Int32 PK_iHosodangky;
     public byte PageSize
     {
         get { return m_pagesize; }
@@ -165,6 +167,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
                 cblGiaytonopkem.Items.Clear();
                 napCblGiaytonopkem();
                 panGiaytonopkem.Visible = true;
+                panCapmaso.Visible = false;
                 break;
             case "Capmaso":
                 Session["iHosodangkyCSNT"] = lbtnSource.CommandArgument;
@@ -172,8 +175,15 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
                 {
                     phCapmasoContent.Controls.Remove(ctr);
                 }
-                Control ctrThongtinCapmaso = LoadControl("~/adminx/Tochucchungnhan/ucCapmasoVietGap.ascx");
+                Control ctrThongtinCapmaso = LoadControl("~/adminx/Tochucchungnhan/ucThongtinDangky.ascx");
                 phCapmasoContent.Controls.Add(ctrThongtinCapmaso);
+                panCapmaso.Visible = true;
+                panGiaytonopkem.Visible = false;
+                //Kiểm tra nút cấp mã số
+                if(Session["bDanhgiaDat"] != null && Boolean.Parse(Session["bDanhgiaDat"].ToString()) == true)
+                {
+                    btnCapmaso.Enabled = true;
+                }
                 break;
         }
     }
@@ -269,6 +279,151 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
     }
     protected void btnCapmaso_Click(object sender, EventArgs e)
     {
+        
+        try
+        {
+            if (Session["UserID"] == null || Session["GroupID"] == null)
+            {
+                Response.Write("<script>alert('Bạn không có quyền vào trang này');location='./Logon.aspx'</script>");
+                Response.End();
+            }
 
+            if (Session["iHosodangkyCSNT"] != null)
+                PK_iHosodangky = Convert.ToInt32(Session["iHosodangkyCSNT"].ToString());
+            else
+            {
+                Response.Redirect(ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=DanhsachHosodangky"));
+            }
+            HosodangkychungnhanEntity oHosodangky = HosodangkychungnhanBRL.GetOne(PK_iHosodangky);
+            Int64 PK_iCosonuoitrongID = oHosodangky.FK_iCosonuoiID;
+
+            if (!PermissionBRL.CheckPermission("licenseGAP")) Response.End();
+            String sMasovietgap = String.Empty;
+            CosonuoitrongEntity oCosonuoitrong = new CosonuoitrongEntity();
+            //if (Session["iCosonuoitrongID"] == null) return;
+            //PK_iCosonuoitrongID = Convert.ToInt32(Session["iCosonuoitrongID"].ToString());
+            MasovietgapEntity oMasoVietGap = new MasovietgapEntity();
+            oMasoVietGap.dNgaycap = DateTime.ParseExact(txtNgaycap_datepicker.Value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            oMasoVietGap.iThoihan = byte.Parse(txtThoihan.Value);
+            txtNgayhethan_datepicker.Value = DateTime.ParseExact(txtNgaycap_datepicker.Value, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddMonths(byte.Parse(txtThoihan.Value)).ToString("dd/MM/yyyy");
+            oMasoVietGap.dNgayhethan = DateTime.ParseExact(txtNgayhethan_datepicker.Value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            oMasoVietGap.FK_iCosonuoitrongID = PK_iCosonuoitrongID;
+            int iUserID = int.Parse(Session["UserID"].ToString());
+            // Chỗ này phải check permission --> vì Admin không thuộc Group hay tổ chức nào
+            int iGroupID = Convert.ToInt32(Session["GroupID"].ToString());
+
+            if (iGroupID != 4)
+            {
+                Response.Write("<script>alert('Tài khoản bạn đang truy cập không phải dành cho Tổ chức chứng nhận. Bạn không thể cấp mã số!!!');location='./Logon.aspx'</script>");
+                Response.End();
+            }
+            List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID);
+            if (lstTochucTaikhoan.Count <= 0)
+            {
+                Response.Write("<script language=\"javascript\">alert('Tài khoản của bạn không gắn với bất cứ Tổ chức chứng nhận nào!!!');</script>");
+                return;
+            }
+            TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(lstTochucTaikhoan[0].FK_iTochucchungnhanID);
+            List<XulyTochucchungnhanEntity> lstThongtinxuly = XulyTochucchungnhanBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID);
+            if (lstThongtinxuly.Count > 0)
+            {
+                XulyTochucchungnhanEntity.Sort(lstThongtinxuly, "dNgaythuchien", "DESC");
+                if (lstThongtinxuly[0].iMucdo == 2 || lstThongtinxuly[0].iMucdo == 3)
+                {
+                    Response.Write("<script language=\"javascript\">alert('Bạn không thể cấp mã số, vì đang bị xử lý phạt');</script>");
+                    return;
+                }
+            }
+            oMasoVietGap.FK_iTochucchungnhanID = oTochucchungnhan.PK_iTochucchungnhanID;
+
+            //Kiểm tra xem mã số VietGap này đã có hay chưa
+            sMasovietgap = genVietGapCode((int)PK_iCosonuoitrongID, oTochucchungnhan.PK_iTochucchungnhanID);
+            oMasoVietGap.sMaso = sMasovietgap;
+            // Kiểm tra xem CSNT đã tồn tại hay chưa, vì mỗi một CSNT chỉ được cấp mã số 1 lần
+            // Có thể cập nhập mã số - viết một chức năng khác
+            List<MasovietgapEntity> lstMasovietgap = MasovietgapBRL.GetByFK_iCosonuoitrongID(PK_iCosonuoitrongID);
+            if (lstMasovietgap.Capacity == 0)
+            {
+                MasovietgapBRL.Add(oMasoVietGap);
+                oCosonuoitrong = CosonuoitrongBRL.GetOne(PK_iCosonuoitrongID);
+                //oCosonuoitrong.sMasocoso = Session["sMasocoso"].ToString();
+                oCosonuoitrong.sMasocoso = oTochucchungnhan.sKytuviettat;
+                oCosonuoitrong.sMaso_vietgap = sMasovietgap;
+                CosonuoitrongBRL.Edit(oCosonuoitrong);
+                HosodangkychungnhanEntity oHoso = HosodangkychungnhanBRL.GetOne(PK_iHosodangky);
+                oHoso.iTrangthai = 1; //Đã duyệt
+                HosodangkychungnhanBRL.Edit(oHoso);
+            }
+            else
+            {
+                INVI.INVILibrary.MessageBox.Show("Cơ sở nuôi trồng đã được cấp mã số");
+            }
+            //CosonuoitrongBRL.SetVerify(PK_iCosonuoitrongID, chk.Checked);
+            //Nap lai du lieu
+            //Response.Redirect(Request.Url.ToString());
+
+
+            Response.Write("<script>alert('CSNT:" + oCosonuoitrong.sTencoso + " đã được cấp mã số:" + oMasoVietGap.sMaso + "');</script>");
+            //Ẩn panel
+            panCapmaso.Visible = false;
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=CapmasoVietGap';</script>");
+        }
+    }
+    protected void btnAncapmaso_Click(object sender, EventArgs e)
+    {
+        panCapmaso.Visible = false;
+    }
+
+    private String genVietGapCode(int PK_iCosonuoitrongID, int PK_iTochucchungnhanID)
+    {
+        String sVietGapCode = string.Empty;
+        CosonuoitrongEntity oEntity = CosonuoitrongBRL.GetOne(PK_iCosonuoitrongID);
+        ////Cần phải sửa lại chỗ này để lấy ra mã tỉnh + huyện
+        QuanHuyenEntity oQuanHuyen = QuanHuyenBRL.GetOne(int.Parse(oEntity.FK_iQuanHuyenID.ToString()));
+        TinhEntity oTinh = TinhBRL.GetOne(oQuanHuyen.FK_iTinhThanhID);
+        TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
+        // Theo Thông tư mới - chỗ này phải lấy tiền tố của TCCN
+        sVietGapCode += oTinh.sKyhieu + "-";
+        //sVietGapCode += oQuanHuyen.sKytuviettat+"-";
+        //DoituongnuoiEntity oDoituongnuoi = DoituongnuoiBRL.GetOne(oEntity.FK_iDoituongnuoiID);
+        //sVietGapCode += oDoituongnuoi.sKytu + "-";
+        // Không sinh ngẫu nhiên nữa mà phải đếm xem có bao nhiêu
+        //1. Lấy danh sách các CSNT đã được cấp mã số
+        List<MasovietgapEntity> lstCSNT_daduocmaso = MasovietgapBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(MasovietgapEntity oHoso)
+        {
+            return oHoso.iTrangthai == 2 && (QuanHuyenBRL.GetOne(CosonuoitrongBRL.GetOne(oHoso.FK_iCosonuoitrongID).FK_iQuanHuyenID).FK_iTinhThanhID == oTinh.PK_iTinhID);
+        }
+        );
+        lstCSNT_daduocmaso.Sort(delegate(MasovietgapEntity firstEntity, MasovietgapEntity secondEntity)
+        {
+            return secondEntity.sMaso.CompareTo(firstEntity.sMaso);
+        }
+        );
+        // Sắp xếp rồi lấy ra bác có giá trị lớn nhất rồi cộng
+        String sMasomoinhat = String.Empty;
+        String sMasocoso = String.Empty;
+        if (lstCSNT_daduocmaso.Count > 0)
+            sMasomoinhat = CosonuoitrongBRL.GetOne(lstCSNT_daduocmaso[lstCSNT_daduocmaso.Count - 1].FK_iCosonuoitrongID).sMaso_vietgap;
+        String[] sDulieutrongmaso = sMasomoinhat.Split('-');
+        if (sDulieutrongmaso.Length > 0)
+            sMasocoso = taoMacoso(Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1);
+        //Session["sMasocoso"] = sMasocoso;
+        sVietGapCode += sMasocoso;
+        return sVietGapCode;
+    }
+
+    private String taoMacoso(int iSoCosonuoitrong)
+    {
+        String sMacoso = String.Empty;
+        if (iSoCosonuoitrong > 100)
+            sMacoso = "0" + iSoCosonuoitrong + 1;
+        else if (iSoCosonuoitrong > 10)
+            sMacoso = "00" + iSoCosonuoitrong + 1;
+        else if (iSoCosonuoitrong > 0)
+            sMacoso = "000" + iSoCosonuoitrong + 1;
+        return sMacoso;
     }
 }
