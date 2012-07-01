@@ -42,7 +42,7 @@ public partial class uc_ucLogin : System.Web.UI.UserControl
                 }
                 else if (Session["GroupID"].ToString() == "4")
                 {
-                    strLink = "adminx/Default.aspx";
+                    strLink = "adminx/Tochucchungnhan/Default.aspx";
                 }
                 else if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "9")
                 {

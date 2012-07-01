@@ -13,6 +13,7 @@
 	    <!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]--> <!-- MSIE6 -->
 	    <link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" /> <!-- GRAPHIC THEME -->
 	    <link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" /> <!-- WRITE YOUR CSS CODE HERE -->
+
 	    <script type="text/javascript" src="js/jquery.js"></script>
 	    <script type="text/javascript" src="js/switcher.js"></script>
 	    <script type="text/javascript" src="js/toggle.js"></script>
@@ -117,9 +118,10 @@
                         <li><a href="#">Lorem ipsum</a></li>
 				        <li id="submenu-active"><a href="#">Cơ sở nuôi trồng</a> <!-- Active -->
 					        <ul>
-						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Cosonuoitrong") %>">Quản lý cơ sở nuôi trồng</a></li>
-						        <li><a href="#">Lorem ipsum</a></li>
-						        <li><a href="#">Lorem ipsum</a></li>
+						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm") %>">Quản lý cơ sở nuôi trồng</a></li>
+						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=DanhsachHosodangky") %>">Cấp mã số VietGAP</a></li>
+                                <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=TCCN_TaikhoanDangky") %>">Tài khoản CSNT đăng ký</a></li>
+						        
 						        <li><a href="#">Lorem ipsum</a></li>
 						        <li><a href="#">Lorem ipsum</a></li>
 					        </ul>

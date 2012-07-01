@@ -54,26 +54,37 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
    
     private String genVietGapCode(int PK_iCosonuoitrongID, int PK_iTochucchungnhanID)
     {
-        String sVietGapCode = "VietGAP-TT-";
+        String sVietGapCode = string.Empty;
         CosonuoitrongEntity oEntity = CosonuoitrongBRL.GetOne(PK_iCosonuoitrongID);
         ////Cần phải sửa lại chỗ này để lấy ra mã tỉnh + huyện
         QuanHuyenEntity oQuanHuyen = QuanHuyenBRL.GetOne(int.Parse(oEntity.FK_iQuanHuyenID.ToString()));
         TinhEntity oTinh = TinhBRL.GetOne(oQuanHuyen.FK_iTinhThanhID);
         TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
-
-        sVietGapCode += oTochucchungnhan.sKytuviettat + "-";
+        // Theo Thông tư mới - chỗ này phải lấy tiền tố của TCCN
         sVietGapCode += oTinh.sKyhieu + "-";
         //sVietGapCode += oQuanHuyen.sKytuviettat+"-";
         //DoituongnuoiEntity oDoituongnuoi = DoituongnuoiBRL.GetOne(oEntity.FK_iDoituongnuoiID);
         //sVietGapCode += oDoituongnuoi.sKytu + "-";
         // Không sinh ngẫu nhiên nữa mà phải đếm xem có bao nhiêu
-        //1. Lấy danh sách các CSNT đăng ký
-        List<HosodangkychungnhanEntity> lstHosoCSNTDangkyChungnhan = HosodangkychungnhanBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(HosodangkychungnhanEntity oHoso)
+        //1. Lấy danh sách các CSNT đã được cấp mã số
+        List<MasovietgapEntity> lstCSNT_daduocmaso = MasovietgapBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(MasovietgapEntity oHoso)
         {
-            return oHoso.iTrangthai == 2;
+            return oHoso.iTrangthai == 2 && (QuanHuyenBRL.GetOne(CosonuoitrongBRL.GetOne(oHoso.FK_iCosonuoitrongID).FK_iQuanHuyenID).FK_iTinhThanhID == oTinh.PK_iTinhID);
         }
         );
-        String sMasocoso = taoMacoso(lstHosoCSNTDangkyChungnhan.Count);
+        lstCSNT_daduocmaso.Sort(delegate(MasovietgapEntity firstEntity, MasovietgapEntity secondEntity)
+        {
+            return secondEntity.sMaso.CompareTo(firstEntity.sMaso);
+        }
+        );
+        // Sắp xếp rồi lấy ra bác có giá trị lớn nhất rồi cộng
+        String sMasomoinhat = String.Empty;
+        String sMasocoso = String.Empty;
+        if (lstCSNT_daduocmaso.Count > 0)
+            sMasomoinhat = CosonuoitrongBRL.GetOne(lstCSNT_daduocmaso[lstCSNT_daduocmaso.Count - 1].FK_iCosonuoitrongID).sMaso_vietgap;
+        String[] sDulieutrongmaso = sMasomoinhat.Split('-');
+        if (sDulieutrongmaso.Length > 0)
+            sMasocoso = taoMacoso(Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1);
         //Session["sMasocoso"] = sMasocoso;
         sVietGapCode += sMasocoso;
         return sVietGapCode;
@@ -342,11 +353,7 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
                 oMasoVietGap.FK_iTochucchungnhanID = oTochucchungnhan.PK_iTochucchungnhanID;
 
                 //Kiểm tra xem mã số VietGap này đã có hay chưa
-                do
-                {
-                    sMasovietgap = genVietGapCode(PK_iCosonuoitrongID, oTochucchungnhan.PK_iTochucchungnhanID);
-
-                } while (checkIfMasoExist(sMasovietgap));
+                sMasovietgap = genVietGapCode(PK_iCosonuoitrongID, oTochucchungnhan.PK_iTochucchungnhanID);
                 oMasoVietGap.sMaso = sMasovietgap;
                 // Kiểm tra xem CSNT đã tồn tại hay chưa, vì mỗi một CSNT chỉ được cấp mã số 1 lần
                 // Có thể cập nhập mã số - viết một chức năng khác
