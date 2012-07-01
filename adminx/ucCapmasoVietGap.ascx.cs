@@ -70,10 +70,13 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
         //1. Lấy danh sách các CSNT đăng ký
         List<HosodangkychungnhanEntity> lstHosoCSNTDangkyChungnhan = HosodangkychungnhanBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(HosodangkychungnhanEntity oHoso)
         {
-            return oHoso.iTrangthai == 2;
+            return oHoso.iTrangthai == 2&&(QuanHuyenBRL.GetOne(CosonuoitrongBRL.GetOne(oHoso.FK_iCosonuoiID).FK_iQuanHuyenID).FK_iTinhThanhID==oTinh.PK_iTinhID);
         }
         );
-        String sMasocoso = taoMacoso(lstHosoCSNTDangkyChungnhan.Count);
+        // Sắp xếp rồi lấy ra bác có giá trị lớn nhất rồi cộng
+        String sMasomoinhat = CosonuoitrongBRL.GetOne(lstHosoCSNTDangkyChungnhan[lstHosoCSNTDangkyChungnhan.Count - 1].FK_iCosonuoiID).sMaso_vietgap;
+        String[] sDulieutrongmaso = sMasomoinhat.Split('-');
+        String sMasocoso = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1+"";
         //Session["sMasocoso"] = sMasocoso;
         sVietGapCode += sMasocoso;
         return sVietGapCode;
@@ -340,13 +343,7 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
                     }
                 }
                 oMasoVietGap.FK_iTochucchungnhanID = oTochucchungnhan.PK_iTochucchungnhanID;
-
-                //Kiểm tra xem mã số VietGap này đã có hay chưa
-                do
-                {
-                    sMasovietgap = genVietGapCode(PK_iCosonuoitrongID, oTochucchungnhan.PK_iTochucchungnhanID);
-
-                } while (checkIfMasoExist(sMasovietgap));
+                sMasovietgap = genVietGapCode(PK_iCosonuoitrongID, oTochucchungnhan.PK_iTochucchungnhanID);
                 oMasoVietGap.sMaso = sMasovietgap;
                 // Kiểm tra xem CSNT đã tồn tại hay chưa, vì mỗi một CSNT chỉ được cấp mã số 1 lần
                 // Có thể cập nhập mã số - viết một chức năng khác
