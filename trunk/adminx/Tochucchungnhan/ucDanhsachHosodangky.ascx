@@ -63,9 +63,9 @@
                         <asp:Label ID="lblLandangky" runat="server" Text='<%#Boolean.Parse(Eval("bLandau").ToString()) == true ? "Lần đầu" : "Đăng ký lại"%>'/>
                     </td>
                     <td>
-                        <asp:LinkButton ID="lbtnDanhgianoibo" CommandName="Danhgianoibo" CommandArgument='<%#Eval("FK_iCosonuoiID")%>' runat="server">Đánh giá nội bộ</asp:LinkButton>&nbsp;|&nbsp;
-                        <asp:LinkButton ID="lbtnGiaytokemtheo" CommandName="Giaytokemtheo" CommandArgument='<%#Eval("PK_iHosodangkychungnhanID")%>' runat="server">Giấy tờ kèm theo</asp:LinkButton>&nbsp;|&nbsp;
-                        <asp:LinkButton ID="lbtnCapmaso" CommandName="Capmaso" CommandArgument='<%#Eval("FK_iCosonuoiID")%>' runat="server">Cấp mã số VietGAP</asp:LinkButton>
+                        <asp:LinkButton ID="lbtnDanhgianoibo" CommandName="Danhgianoibo" CommandArgument='<%#Eval("FK_iCosonuoiID")%>' runat="server">KQ đánh giá nội bộ</asp:LinkButton>|
+                        <asp:LinkButton ID="lbtnGiaytokemtheo" CommandName="Giaytokemtheo" CommandArgument='<%#Eval("PK_iHosodangkychungnhanID")%>' runat="server">Giấy tờ nộp kèm</asp:LinkButton>|
+                        <asp:LinkButton ID="lbtnCapmaso" CommandName="Capmaso" CommandArgument='<%#Eval("PK_iHosodangkychungnhanID")%>' runat="server">Cấp mã số VietGAP</asp:LinkButton>
                     </td>
                 </tr>
         </ItemTemplate>
@@ -93,9 +93,58 @@
     </fieldset>
 </asp:Panel>
 <asp:Panel runat="server" ID="panCapmaso" Visible="false">
-    <asp:PlaceHolder runat="server" ID="phCapmasoContent"></asp:PlaceHolder><br />
-    <center>
-        <asp:Button ID="btnCapmaso" runat="server" Text="Cấp mã số" 
-            onclick="btnCapmaso_Click"/>
-    </center>
+    <fieldset>
+        <legend>Hồ sơ đăng ký hộ nuôi trồng thủy sản</legend>
+            <asp:PlaceHolder runat="server" ID="phCapmasoContent"></asp:PlaceHolder><br />
+            <fieldset>
+                <legend>Thời hạn chứng nhận</legend>
+                <div class="a">
+                    <div class="l">
+                        Ngày cấp:</div>
+                    <div class="r">
+                        <input id="txtNgaycap_datepicker" class="required" type="text" runat="server" />
+                    </div>
+                    <div class="rr">
+                        <asp:RequiredFieldValidator ID="rfvNgaycap" runat="server" ControlToValidate="txtNgaycap_datepicker"
+                            Display="Dynamic" ValidationGroup="Capphep" Text="*" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="a">
+                    <div class="l">
+                        Thời hạn:</div>
+                    <div class="r">
+                        <input id="txtThoihan" class="required" type="text" runat="server" />
+                        &nbsp;(tháng)</div>
+                    <div class="rr">
+                        <asp:RequiredFieldValidator ID="rfvThoihan" runat="server" ControlToValidate="txtThoihan"
+                            Display="Dynamic" ValidationGroup="Capphep" ForeColor="Red" Text="*" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="a">
+                    <div class="l">
+                        Ngày hết hạn:</div>
+                    <div class="r">
+                        <input id="txtNgayhethan_datepicker" class="required" type="text" runat="server" />
+                    </div>
+                    <div class="rr">
+                        <asp:RequiredFieldValidator ID="rfvNgayhethan" runat="server" ControlToValidate="txtNgayhethan_datepicker"
+                            Display="Dynamic" ValidationGroup="Capphep" ForeColor="Red" Text="*" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="a">
+                    <div class="l">
+                    </div>
+                    <div class="r">
+                        <asp:ValidationSummary ID="vsCapmasoVietGap" ValidationGroup="Capphep" ForeColor="Red"
+                            HeaderText="Phải nhập các trường (*)" runat="server" Font-Names="Times New Roman" />
+                    </div>
+                </div>
+                <center>
+                    <asp:Button ID="btnCapmaso" runat="server" Text="Cấp mã số" 
+                        onclick="btnCapmaso_Click" Enabled="false"/>&nbsp;|&nbsp;
+                    <asp:Button ID="btnAncapmaso" runat="server" Text="Ẩn" 
+                        onclick="btnAncapmaso_Click" />
+                </center>
+            </fieldset>
+    </fieldset>
 </asp:Panel>

@@ -45,18 +45,26 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
     public void HienKetQua()
     {
         int iSochitieudatA = 0, iSochitieudatB = 0;
+        int iSochitieuA = 0, iSochitieuB = 0;
         MucdoEntity oMucdo;
         ChitieuEntity oChitieu;
-        List<DanhgiaketquaEntity> lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
-        int iSochitieuA = 0, iSochitieuB = 0;
-        for (int i = 0; i < lstDanhgiaketqua.Count; ++i)
+        List<ChitieuEntity> lstChitieu = ChitieuBRL.GetAll();
+        int iSochitieu = lstChitieu.Count;
+        foreach(ChitieuEntity oChitieuItem in lstChitieu)
         {
-            oChitieu = ChitieuBRL.GetOne(lstDanhgiaketqua[i].FK_iChitieuID);
-            oMucdo = MucdoBRL.GetOne(oChitieu.FK_iMucdoID);
+            oMucdo = MucdoBRL.GetOne(oChitieuItem.FK_iMucdoID);
             if (oMucdo.sTenmucdo == "A")
                 iSochitieuA++;
             else
                 iSochitieuB++;
+        }
+        lstChitieu = null;
+
+        List<DanhgiaketquaEntity> lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
+        for (int i = 0; i < lstDanhgiaketqua.Count; ++i)
+        {
+            oChitieu = ChitieuBRL.GetOne(lstDanhgiaketqua[i].FK_iChitieuID);
+            oMucdo = MucdoBRL.GetOne(oChitieu.FK_iMucdoID);
             if (lstDanhgiaketqua[i].iKetqua == 1)
             {
                 if (oMucdo.sTenmucdo == "A")
@@ -66,7 +74,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
             }
 
         }
-        int iSochitieu = ChitieuBRL.Count();
+        lstDanhgiaketqua = null;
 
         int iSochitieuDat = DanhgiaketquaBRL.CountTrue(PK_iCosonuoitrongID);
         lblDatyeucau.Text = iSochitieuDat.ToString();
@@ -237,12 +245,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
 
     public void LuuKetqua()
     {
-        if (bDatontai == true)
-        {
-            SetDdlIndex();
-            HienKetQua();
-            return;
-        }
+        dellOldData(); //Xóa dữ liệu đã tồn tại
         int iPhuongphapkiemtra;
         short iKetqua;
         int i = 0;
@@ -270,10 +273,10 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
         }
         lblThongbao.Text = "Lưu kết quả thành công!";
         SetDdlIndex();
+        HienKetQua();
     }
 
-
-    public void ltbnDellAll_Click(object sender, EventArgs e)
+    public void dellOldData()
     {
         if (Session["iCosonuoitrongID"] != null)
             PK_iCosonuoitrongID = Convert.ToInt32(Session["iCosonuoitrongID"].ToString());
@@ -283,21 +286,25 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
         }
         //if (Page.IsValid)
         //{
-            try
+        try
+        {
+            List<DanhgiaketquaEntity> lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
+            foreach (DanhgiaketquaEntity oDanhgiaketqua in lstDanhgiaketqua)
             {
-                List<DanhgiaketquaEntity> lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
-                foreach(DanhgiaketquaEntity oDanhgiaketqua in lstDanhgiaketqua)
-                {
-                    DanhgiaketquaBRL.Remove(oDanhgiaketqua.PK_iDanhgiaketquaID);
-                }
-                lblThongbao.Text = "Hủy kết quả thành công!";
-                napRpt();
+                DanhgiaketquaBRL.Remove(oDanhgiaketqua.PK_iDanhgiaketquaID);
             }
-            catch (Exception ex)
-            {
-                Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Danhgiaketqua';</script>");
-            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Danhgiaketqua';</script>");
+        }
         //}
-      
+    }
+
+    public void ltbnDellAll_Click(object sender, EventArgs e)
+    {
+        dellOldData();
+        napRpt();
+        lblThongbao.Text = "Hủy kết quả thành công!";
     }
 }
