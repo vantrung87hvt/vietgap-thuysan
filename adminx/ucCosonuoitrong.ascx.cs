@@ -90,6 +90,7 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
     }
     protected void lbtnVerify_Click(object sender, EventArgs e)
     {
+        TochucchungnhanEntity oTochucchungnhan=null;
         foreach (GridViewRow row in grvCosonuoitrong.Rows)
         {
             CheckBox chk = row.FindControl("chkVerify") as CheckBox;
@@ -105,16 +106,32 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                         sMacoso = oCosonuoitrong.sMasocoso;
                     else
                     {
-                        TochucchungnhanEntity oTochucchungnhan;
-                        if (Session["oTochucchungnhan"] != null)
+                        
+                        if (Session["userID"] != null)
                         {
-                            oTochucchungnhan = (TochucchungnhanEntity)Session["oTochucchungnhan"];
+                            int iUserID = Convert.ToInt32(Session["userID"].ToString());
+                            List<TochucchungnhanTaikhoanEntity> lstTochucchungnhanTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID);
+                            if (lstTochucchungnhanTaikhoan.Count > 0)
+                                oTochucchungnhan = TochucchungnhanBRL.GetOne(lstTochucchungnhanTaikhoan[0].FK_iTochucchungnhanID);
                             sMacoso = oTochucchungnhan.sKytuviettat;
                         }
                     }
+                    
+                    oCosonuoitrong.sMasocoso = sMacoso;
+                    CosonuoitrongBRL.Edit(oCosonuoitrong);
+                    // Không chơi vụ mã số cơ sơ nữa.
+                    // Đẩy sang tblHosodangkychungnhan
+                    List<HosodangkychungnhanEntity> lstHosodangkychungnhan = HosodangkychungnhanBRL.GetByFK_iCosonuoiID(oCosonuoitrong.PK_iCosonuoitrongID);
+                    if (lstHosodangkychungnhan.Count > 0) continue;
+                    HosodangkychungnhanEntity oHosodangkychungnhan = new HosodangkychungnhanEntity();
+                    oHosodangkychungnhan.bLandau = true;
+                    oHosodangkychungnhan.FK_iCosonuoiID = oCosonuoitrong.PK_iCosonuoitrongID;
+                    oHosodangkychungnhan.FK_iTochucchungnhanID = oTochucchungnhan.PK_iTochucchungnhanID;
+                    oHosodangkychungnhan.dNgaydangky = DateTime.Today;
+                    oHosodangkychungnhan.iTrangthai = 0;
+                    HosodangkychungnhanBRL.Add(oHosodangkychungnhan);
                 }
-                oCosonuoitrong.sMasocoso = sMacoso;
-                CosonuoitrongBRL.Edit(oCosonuoitrong);
+                
             }
         }
         //Nap lai du lieu
