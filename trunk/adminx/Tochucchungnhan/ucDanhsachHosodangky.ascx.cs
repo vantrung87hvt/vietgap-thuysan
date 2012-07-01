@@ -172,7 +172,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
                 {
                     phCapmasoContent.Controls.Remove(ctr);
                 }
-                Control ctrThongtinCapmaso = LoadControl("~/adminx/Tochucchungnhan/ucCapmasoVietGap");
+                Control ctrThongtinCapmaso = LoadControl("~/adminx/Tochucchungnhan/ucCapmasoVietGap.ascx");
                 phCapmasoContent.Controls.Add(ctrThongtinCapmaso);
                 break;
         }

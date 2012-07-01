@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucCapmasoVietGap.ascx.cs" Inherits="adminx_ucCapmasoVietGap" %>
-<%@ Register Src="../UserMethods/ucBaocaodanhgianoibo.ascx" TagName="ucBaocaodanhgianoibo" TagPrefix="uc1" %>
+<%@ Register Src="~/adminx/Tochucchungnhan/ucBaocaodanhgianoibo.ascx" TagName="ucBaocaodanhgianoibo" TagPrefix="uc1" %>
 <%@ Register Src="~/UserMethods/ucDanhgiaketqua.ascx" TagName="ucDanhgiaketqua" TagPrefix="uc2" %>
 <script type="text/javascript">
     function addMonth() {
