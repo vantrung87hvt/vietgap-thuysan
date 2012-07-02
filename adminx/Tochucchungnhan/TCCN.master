@@ -112,25 +112,26 @@
 			        </div> <!-- /padding -->
 
 			        <ul class="box">
-				        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Chuyengia")%>">Quản lý chuyên gia</a></li>
-				        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Dangkytochucchungnhan") %>">Gửi đăng ký hoạt động chứng nhận</a></li>
-                        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Giaydangkyhoatdongchungnhan") %>">Giấy đăng ký hoạt động chứng nhận</a></li>
-                        <li><a href="#">Lorem ipsum</a></li>
+				        <li id="submenu-active"><a href="#">Chức năng Tổ chức chứng nhận</a> <!-- Active -->
+                        <ul>
+                            <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Chuyengia")%>">Quản lý chuyên gia</a></li>
+				            <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Dangkytochucchungnhan") %>">Gửi đăng ký hoạt động chứng nhận</a></li>
+                            <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Giaydangkyhoatdongchungnhan") %>">Giấy đăng ký hoạt động chứng nhận</a></li>
+                            <li><a href="#">Lorem ipsum</a></li>
+                        </ul>
 				        <li id="submenu-active"><a href="#">Cơ sở nuôi trồng</a> <!-- Active -->
 					        <ul>
 						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm") %>">Quản lý cơ sở nuôi trồng</a></li>
 						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=DanhsachHosodangky") %>">Cấp mã số VietGAP</a></li>
                                 <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=TCCN_TaikhoanDangky") %>">Tài khoản CSNT đăng ký</a></li>
 						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=MasoVietGapQuanLy") %>">Quản lý mã số VietGAP</a></li>
-						        <li><a href="#">Lorem ipsum</a></li>
-						        <li><a href="#">Lorem ipsum</a></li>
+                                <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=GiahanGiayphepVietGap") %>">Gia hạn giấy chứng nhận</a></li>
 					        </ul>
 				        </li>
-				        <li><a href="#">Lorem ipsum</a></li>
-				        <li><a href="#">Lorem ipsum</a>
+				        <li id="submenu-active"><a href="#">Thống kê</a> <!-- Active -->
 					        <ul>
-						        <li><a href="#">Lorem ipsum</a></li>
-						        <li><a href="#">Lorem ipsum</a></li>
+						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongThongkeTheoDoituong&ctr=tk")%>">Theo đối tượng nuôi</a></li>
+						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongThongkeTheoTinh1&ctr=tk")%>">Theo tỉnh</a></li>
 						        <li><a href="#">Lorem ipsum</a></li>
 					        </ul>
                         </li>

@@ -125,7 +125,7 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                             sMacoso = oTochucchungnhan.sKytuviettat;
                         }
                     }
-                    
+                    oCosonuoitrong.bDuyet = chk.Checked;   
                     oCosonuoitrong.sMasocoso = sMacoso;
                     CosonuoitrongBRL.Edit(oCosonuoitrong);
                     // Không chơi vụ mã số cơ sơ nữa.

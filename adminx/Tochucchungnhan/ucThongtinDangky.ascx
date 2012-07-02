@@ -26,7 +26,7 @@
                 <table class="full-wide">
                     <tr>
                         <td>
-                            số tiêu chuẩn đạt yêu cầu theo VietGAP - Mức độ A: <asp:Label ID="lblDatyeucauA" runat="server" Text=""></asp:Label>
+                            Số tiêu chuẩn đạt yêu cầu theo VietGAP - Mức độ A: <asp:Label ID="lblDatyeucauA" runat="server" Text=""></asp:Label>
                         </td>
                         <td>
                             Tỷ lệ %: <asp:Label ID="lblPhantramdatyeucauA" runat="server" Text=""></asp:Label>

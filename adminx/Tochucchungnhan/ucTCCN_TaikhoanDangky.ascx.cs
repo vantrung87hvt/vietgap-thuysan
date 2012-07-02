@@ -192,8 +192,7 @@ public partial class adminx_Tochucchungnhan_ucTCCN_TaikhoanDangky : System.Web.U
         if (oGrp != null)
             sGroupName = oGrp.sName;
         return sGroupName;
-    }
-    protected string getPasswordChar(Object x)
+    }    protected string getPasswordChar(Object x)
     {
         int iLen = x.ToString().Length;
         String sPasswordChar = string.Empty;
