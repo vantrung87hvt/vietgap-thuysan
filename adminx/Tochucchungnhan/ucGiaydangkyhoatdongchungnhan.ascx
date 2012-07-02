@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucGiaydangkyhoatdongchungnhan.ascx.cs" Inherits="adminx_ucBaocaodanhgianoibo" %>
+<link href='<%=ResolveUrl("~/adminx/css/report.css") %>' rel="stylesheet" type="text/css" />
 <%--liemqv--%>
 <table>
     <tr>
