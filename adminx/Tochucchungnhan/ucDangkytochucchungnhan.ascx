@@ -195,7 +195,7 @@ td {
             <td>Ký tự viết tắt:</td>
             <td><input runat="server" type="text" name="txtKytuviettat" id="txtKytuviettat" /></td>
             <td>
-                <asp:requiredfieldvalidator ID="Requiredviettat" runat="server" ValidationGroup="required"  ControlToValidate="txtKytuviettat" errormessage="Không được trống!"></asp:requiredfieldvalidator>
+                
             </td>
           </tr>
           <tr>

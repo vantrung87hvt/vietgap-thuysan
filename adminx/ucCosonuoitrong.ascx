@@ -123,7 +123,7 @@
     onclick="lbtnDelete_Click" OnClientClick="return confirm('Chắc chắn xóa?')">Xóa đã chọn</asp:LinkButton>|
 
 <asp:LinkButton ID="lbtnVerify" runat="server" CausesValidation="False" 
-    onclick="lbtnVerify_Click">Kiểm duyệt</asp:LinkButton>|
+    onclick="lbtnVerify_Click">Kiểm duyệt để cấp mã số</asp:LinkButton>|
 <asp:LinkButton ID="lbtnExport" runat="server" CausesValidation="False" 
                 onclick="lbtnExport_Click">Xuất dữ liệu</asp:LinkButton>|
 <asp:LinkButton ID="lbtnExportAll" runat="server" CausesValidation="False" 

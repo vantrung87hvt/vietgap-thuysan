@@ -168,6 +168,19 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                     Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
             }
     }
+    private bool bXoaCosonuoitrong(int iCosonuoitrongID)
+    {
+        bool bThanhcong = true;
+        try
+        {
+
+        }
+        catch (Exception ex)
+        {
+            bThanhcong = false;
+        }
+        return bThanhcong;
+    }
     protected void grvNews_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         grvCosonuoitrong.PageIndex = e.NewPageIndex;
