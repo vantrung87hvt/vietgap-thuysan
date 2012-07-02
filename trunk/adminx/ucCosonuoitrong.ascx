@@ -85,13 +85,20 @@
         <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True"
             Text="Sửa" />
         
-        <asp:HyperLinkField DataNavigateUrlFields="PK_iCosonuoitrongID" 
-            DataNavigateUrlFormatString="~/adminx/default.aspx?page=Xulyvipham&amp;cosonuoitrongID={0}" 
-            Text="Xử lý" />
-
-        <asp:HyperLinkField DataNavigateUrlFields="PK_iCosonuoitrongID" 
-            DataNavigateUrlFormatString="~/adminx/default.aspx?page=GiayphepVietGap&amp;PK_iCosonuoitrongID={0}" 
-            Text="Cấp Giấy phép" />
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:HyperLink ID="hypXuly" runat="server" 
+                    NavigateUrl='<%# Eval("PK_iCosonuoitrongID", "~/adminx/default.aspx?page=Xulyvipham&cosonuoitrongID={0}") %>' 
+                    Text="Xử lý"></asp:HyperLink>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:HyperLink ID="hypCapgiayphep" runat="server" 
+                    NavigateUrl='<%# Eval("PK_iCosonuoitrongID", "~/adminx/default.aspx?page=GiayphepVietGap&PK_iCosonuoitrongID={0}") %>' 
+                    Text="Cấp Giấy phép"></asp:HyperLink>
+            </ItemTemplate>
+        </asp:TemplateField>
 
     </Columns>
     

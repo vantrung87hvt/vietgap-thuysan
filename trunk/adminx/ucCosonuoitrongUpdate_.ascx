@@ -814,7 +814,7 @@
                     &nbsp;</div>
                 <div class="r">
                     <asp:Button ID="btnDKThongtinCoSoNuoi" runat="server" Text="Đồng ý" ValidationGroup="register2"
-                        Width="90" OnClick="btnDKThongtinCoSoNuoi_Click" />
+                        Width="90" OnClick="btnDKThongtinCoSoNuoi_Click" style="height: 26px" />
                 </div>
             </div>
             <div class="a">

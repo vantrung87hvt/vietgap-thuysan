@@ -121,7 +121,7 @@
 						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm") %>">Quản lý cơ sở nuôi trồng</a></li>
 						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=DanhsachHosodangky") %>">Cấp mã số VietGAP</a></li>
                                 <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=TCCN_TaikhoanDangky") %>">Tài khoản CSNT đăng ký</a></li>
-						        
+						        <li><a href="<%=ResolveUrl("~/adminx/Tochucchungnhan/Default.aspx?page=MasoVietGapQuanLy") %>">Quản lý mã số VietGAP</a></li>
 						        <li><a href="#">Lorem ipsum</a></li>
 						        <li><a href="#">Lorem ipsum</a></li>
 					        </ul>

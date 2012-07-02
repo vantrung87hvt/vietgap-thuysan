@@ -353,11 +353,17 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
                 CosonuoitrongBRL.Edit(oCosonuoitrong);
                 if(HttpContext.Current.Request.Url.AbsolutePath.ToString().Contains("Register"))
                 {
-                    Response.Write("<script>alert('Đăng ký cơ sở nuôi trồng thành công!');location='Default.aspx';</script>");
+                    if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+                        Response.Write("<script>alert('Đăng ký cơ sở nuôi trồng thành công!');location='Default.aspx';</script>");
+                    else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+                        Response.Write("<script>alert('Đăng ký cơ sở nuôi trồng thành công!');location='Tochucchungnhan/Default.aspx';</script>");
                 }
                 else
                 {
-                    Response.Write("<script>alert('Cập nhập thành công!');location='Default.aspx?page=Cosonuoitrong'</script>");
+                    if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+                        Response.Write("<script>alert('Cập nhập thành công!');location='Default.aspx?page=Cosonuoitrong'</script>");
+                    else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+                        Response.Write("<script>alert('Cập nhập thành công!');location='Default.aspx?page=Cosonuoitrong&ctr=adm'</script>");
                 }
             }
             else
