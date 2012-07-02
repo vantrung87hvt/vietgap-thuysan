@@ -215,7 +215,7 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             int DangKyID = Convert.ToInt32(btnCapPhep.CommandArgument);
             DangkyHoatdongchungnhanEntity oDangkyhd = DangkyHoatdongchungnhanBRL.GetOne(DangKyID);
             int idTochucchungnhan = oDangkyhd.FK_iTochucchungnhanID;
-            if (TochucchungnhanBRL.GetOne(idTochucchungnhan).sKytuviettat.Trim().Length > 0 && TochucchungnhanBRL.GetOne(idTochucchungnhan).sKytuviettat.Trim()!="Chưa cấp")
+            if (TochucchungnhanBRL.GetOne(idTochucchungnhan).sMaso.Trim().Length > 0 && TochucchungnhanBRL.GetOne(idTochucchungnhan).sKytuviettat.Trim()!="Chưa cấp")
             {
                 lblThongbao.Text = "Tổ chức này đã được cấp phép.";
                 return;
@@ -256,10 +256,10 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             }
             );
             // Lấy thằng mới nhất
-            String sMasomoinhat = lstTochucchungnhan[lstTochucchungnhan.Count - 1].sMaso;
+            String sMasomoinhat = lstTochucchungnhan[0].sMaso;
             String[] sDulieutrongmaso = sMasomoinhat.Split('-');
             int iStt = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1])+1;
-            if (iStt < 0)
+            if (iStt < 10)
                 maso += "0" + iStt;
             else
                 maso += iStt + "";
@@ -267,6 +267,7 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + maso;
             oTCCN.sMaso = maso;
             oTCCN.iTrangthai = 2;
+            
             TochucchungnhanBRL.Edit(oTCCN);
             oDangkyhd.iTrangthaidangky = 2;
             

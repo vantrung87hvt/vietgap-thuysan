@@ -142,12 +142,13 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
             {
 
                 TochucchungnhanEntity entity = new TochucchungnhanEntity();
-                int PK_iUserID = 0;
+                Int64 PK_iUserID = 0;
                 entity.sTochucchungnhan = txtTochucchungnhan.Text;
                 entity.sSodienthoai = txtDienthoai.Text;
                 entity.sDiachi = txtDiachi.Text;
-                if (Session["UserID"] != null)
-                    PK_iUserID = int.Parse(Session["UserID"].ToString());
+                //if (Session["UserID"] != null)
+                //    PK_iUserID = int.Parse(Session["UserID"].ToString());
+                PK_iUserID = Convert.ToInt64(ddlTaikhoan.SelectedValue);
                 List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(PK_iUserID);
 
                 if (lstTochucTaikhoan.Count > 0)
@@ -227,12 +228,15 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                     entity.PK_iTochucchungnhanID = Convert.ToInt32(btnOk.CommandArgument);
                     
                     TochucchungnhanBRL.Edit(entity);
-                    List<TochucchungnhanTaikhoanEntity> lsTochucchungnhantaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(Convert.ToInt32(ddlTaikhoan.SelectedValue));
-                    if (lsTochucchungnhantaikhoan.Count > 0)
+                    // Lấy dữ liệu về Tài khoản theo TCCN
+                    List<TochucchungnhanTaikhoanEntity> lsTochucchungnhantaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTochucchungnhanID(entity.PK_iTochucchungnhanID);
+                    if (lsTochucchungnhantaikhoan.Count > 0) // 
                     {
                         TochucchungnhanTaikhoanEntity oTochucchungnhanTaikhoan = lsTochucchungnhantaikhoan[0];
                         oTochucchungnhanTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
                         oTochucchungnhanTaikhoan.FK_iTochucchungnhanID = entity.PK_iTochucchungnhanID;
+                        oTochucchungnhanTaikhoan.dNgaythuchien = DateTime.Today;
+                        oTochucchungnhanTaikhoan.bActive = true;
                         TochucchungnhanTaikhoanBRL.Edit(oTochucchungnhanTaikhoan);
                     }
                 }
