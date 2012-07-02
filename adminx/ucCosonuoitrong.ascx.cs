@@ -16,6 +16,15 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
         if (!Page.IsPostBack)
         {
             napGridView();
+            if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+            {
+                lnkAdd.NavigateUrl = "~/adminx/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add";
+            }
+            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+            {
+                lnkAdd.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add&ctr=adm";
+                hypImport.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=ImportCSNT";
+            }
         }
     }
     private void napGridView()
@@ -153,7 +162,10 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             }
             catch (Exception ex)
             {
-                Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Cosonuoitrong';</script>");
+                if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+                    Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Cosonuoitrong';</script>");
+                else if(Convert.ToInt64(Session["groupID"].ToString())==4)
+                    Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
             }
     }
     protected void grvNews_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -164,8 +176,11 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
     protected void grvNews_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
     {
         int iCosonuoitrongID = Convert.ToInt32(grvCosonuoitrong.DataKeys[e.NewSelectedIndex].Values["PK_iCosonuoitrongID"]);
-        Session["iCosonuoitrongID"] = iCosonuoitrongID.ToString(); ;
-        Response.Redirect("~/adminx/Default.aspx?page=CosonuoitrongUpdate_");
+        Session["iCosonuoitrongID"] = iCosonuoitrongID.ToString();
+        if(Convert.ToInt64(Session["groupID"].ToString())==1)
+            Response.Redirect("~/adminx/Default.aspx?page=CosonuoitrongUpdate_");
+        else if(Convert.ToInt64(Session["groupID"].ToString())==4)
+            Response.Redirect("~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongUpdate_&ctr=adm");
     }
     protected void grvNews_Sorting(object sender, GridViewSortEventArgs e)
     {
@@ -218,11 +233,16 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
     protected void grvNews_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         Label lblQuanHuyen = null, lblDoituongnuoi = null,lblTrangthai=null;
+        int PK_iCosonuoitrongID = 0;
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             lblQuanHuyen = (Label)e.Row.FindControl("lblTinhthanh");
             lblDoituongnuoi = (Label)e.Row.FindControl("lblDoituongnuoi");
             lblTrangthai = (Label)e.Row.FindControl("lblTrangthai");
+            HyperLink hypXuly, hypCapgiayphep;
+            hypCapgiayphep = (HyperLink)e.Row.FindControl("hypCapgiayphep");
+            hypXuly = (HyperLink)e.Row.FindControl("hypXuly");
+            
             if (lblQuanHuyen != null && lblQuanHuyen.Text != "")
             {
                 int bTinhthanhID = int.Parse(lblQuanHuyen.Text);
@@ -235,7 +255,19 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             }
             if(lblTrangthai!=null)
             {
-                lblTrangthai.Text = getTrangThai(Convert.ToInt32(lblTrangthai.Text));
+                PK_iCosonuoitrongID = Convert.ToInt32(lblTrangthai.Text);
+                lblTrangthai.Text = getTrangThai(PK_iCosonuoitrongID);
+            }
+            // Xử lý các nút bấm
+            if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+            {
+                hypXuly.NavigateUrl = "~/adminx/default.aspx?page=Xulyvipham&cosonuoitrongID="+PK_iCosonuoitrongID;
+                hypCapgiayphep.NavigateUrl = "~/adminx/default.aspx?page=GiayphepVietGap&PK_iCosonuoitrongID="+PK_iCosonuoitrongID;
+            }
+            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+            {
+                hypXuly.NavigateUrl = "~/adminx/Tochucchungnhan/default.aspx?page=Xulyvipham&ctr=adm&cosonuoitrongID=" + PK_iCosonuoitrongID;
+                hypCapgiayphep.NavigateUrl = "~/adminx/Tochucchungnhan/default.aspx?page=GiayphepVietGap&ctr=adm&PK_iCosonuoitrongID=" + PK_iCosonuoitrongID;
             }
         }
         

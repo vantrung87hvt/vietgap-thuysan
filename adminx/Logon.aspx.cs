@@ -36,7 +36,10 @@ public partial class adminx_Logon : System.Web.UI.Page
             Session["UserID"] = oUser.iUserID;
             Session["Username"] = oUser.sUsername;
             Session["GroupID"] = oUser.iGroupID;
-            Response.Write("<script>alert('Đăng nhập thành công');location='./Default.aspx';</script>");
+            if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+                Response.Write("<script>alert('Đăng nhập thành công');location='./Default.aspx';</script>");
+            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+                Response.Write("<script>alert('Đăng nhập thành công');location='Tochucchungnhan/Default.aspx';</script>");
         }
 
         

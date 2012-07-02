@@ -54,7 +54,10 @@ public partial class adminx_ucXulyvipham : System.Web.UI.UserControl
         oPhat.sLydo = txtLydo.Text;
         oPhat.dNgaythuchien = DateTime.Today;
         PhatBRL.Add(oPhat);
-        Response.Write("<script language=\"javascript\">alert('Xử lý thành công!');location='Default.aspx?page=Cosonuoitrong';</script>");
+        if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+            Response.Write("<script language=\"javascript\">alert('Xử lý thành công!');location='Default.aspx?page=Cosonuoitrong';</script>");
+        else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+            Response.Write("<script language=\"javascript\">alert('Xử lý thành công!');location='Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
     }
     private String getTinhtrang(short iTinhtrang)
     {
