@@ -296,50 +296,57 @@ public partial class adminx_ucDangkytochucchungnhan : System.Web.UI.UserControl
     }
     protected void SaveChange(object sender, EventArgs e)
     {
-        TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(iTochucID);
-        oTochucchungnhan.sTochucchungnhan = txtTentochuc.Value;
-        oTochucchungnhan.sKytuviettat = txtKytuviettat.Value;
-        oTochucchungnhan.sDiachi = txtDiachi.Value;
-        oTochucchungnhan.FK_iQuanHuyenID = int.Parse(ddlQuanhuyen.SelectedValue);
-        oTochucchungnhan.sSodienthoai = txtSodienthoai.Value;
-        FileUpload img = (FileUpload)imgUpload;
-        if (img.HasFile)
+        try
         {
-            oTochucchungnhan.imgLogo = CreateImgByte();
-        }
-        oTochucchungnhan.sFax = txtFax.Value;
-        oTochucchungnhan.sEmail = txtEmail.Value;
-        oTochucchungnhan.sSodangkykinhdoanh = txtSodangkydinhdoanh.Value;
-        oTochucchungnhan.sCoquancap = txtCoquancapphep.Value;
-        oTochucchungnhan.dNgaycapdangkykinhdoanh = DateTime.Parse(txtNgaycap_datepicker.Value);
-        oTochucchungnhan.sNoicapdangkykinhdoanh = txtNoicap.Value;
-        oTochucchungnhan.sKytuviettat = " ";
-        TochucchungnhanBRL.Edit(oTochucchungnhan);
-        //---Cập nhật lại tài liệu
-        List<DangkyHoatdongchungnhanEntity> lstDangky = DangkyHoatdongchungnhanBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID);
-        if (lstDangky.Count > 0)
-        {
-            List<HosokemtheoTochucchungnhanEntity> lstHoso = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(lstDangky[0].PK_iDangkyChungnhanVietGapID);
-            for (int i = 0; i < lstHoso.Count; ++i)
+            TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(iTochucID);
+            oTochucchungnhan.sTochucchungnhan = txtTentochuc.Value;
+            oTochucchungnhan.sKytuviettat = txtKytuviettat.Value;
+            oTochucchungnhan.sDiachi = txtDiachi.Value;
+            oTochucchungnhan.FK_iQuanHuyenID = int.Parse(ddlQuanhuyen.SelectedValue);
+            oTochucchungnhan.sSodienthoai = txtSodienthoai.Value;
+            FileUpload img = (FileUpload)imgUpload;
+            if (img.HasFile)
             {
-                HosokemtheoTochucchungnhanBRL.Remove(lstHoso[i].PK_iHosokemtheoID);
+                oTochucchungnhan.imgLogo = CreateImgByte();
             }
-            HosokemtheoTochucchungnhanEntity oHoso = new HosokemtheoTochucchungnhanEntity();
-            //----------Lưu giấy tờ nộp kèm
-            for (int i = 0; i < cblGiaytonopkem.Items.Count; ++i)
+            oTochucchungnhan.sFax = txtFax.Value;
+            oTochucchungnhan.sEmail = txtEmail.Value;
+            oTochucchungnhan.sSodangkykinhdoanh = txtSodangkydinhdoanh.Value;
+            oTochucchungnhan.sCoquancap = txtCoquancapphep.Value;
+            oTochucchungnhan.dNgaycapdangkykinhdoanh = DateTime.Parse(txtNgaycap_datepicker.Value);
+            oTochucchungnhan.sNoicapdangkykinhdoanh = txtNoicap.Value;
+            oTochucchungnhan.sKytuviettat = " ";
+            TochucchungnhanBRL.Edit(oTochucchungnhan);
+            //---Cập nhật lại tài liệu
+            List<DangkyHoatdongchungnhanEntity> lstDangky = DangkyHoatdongchungnhanBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID);
+            if (lstDangky.Count > 0)
             {
-                if (cblGiaytonopkem.Items[i].Selected)
+                List<HosokemtheoTochucchungnhanEntity> lstHoso = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(lstDangky[0].PK_iDangkyChungnhanVietGapID);
+                for (int i = 0; i < lstHoso.Count; ++i)
                 {
-                    oHoso.FK_iDangkyChungnhanVietGapID = lstDangky[0].PK_iDangkyChungnhanVietGapID;
-                    oHoso.FK_iGiaytoID = int.Parse(cblGiaytonopkem.Items[i].Value);
-                    HosokemtheoTochucchungnhanBRL.Add(oHoso);
+                    HosokemtheoTochucchungnhanBRL.Remove(lstHoso[i].PK_iHosokemtheoID);
+                }
+                HosokemtheoTochucchungnhanEntity oHoso = new HosokemtheoTochucchungnhanEntity();
+                //----------Lưu giấy tờ nộp kèm
+                for (int i = 0; i < cblGiaytonopkem.Items.Count; ++i)
+                {
+                    if (cblGiaytonopkem.Items[i].Selected)
+                    {
+                        oHoso.FK_iDangkyChungnhanVietGapID = lstDangky[0].PK_iDangkyChungnhanVietGapID;
+                        oHoso.FK_iGiaytoID = int.Parse(cblGiaytonopkem.Items[i].Value);
+                        HosokemtheoTochucchungnhanBRL.Add(oHoso);
+                    }
                 }
             }
+
+            lblThongbao.Text = "Cập nhật thông tin thành công!";
+            OnOffEdit(false);
+            CheckByUserID(PK_iUserID);
         }
-       
-        lblThongbao.Text = "Cập nhật thông tin thành công!";
-        OnOffEdit(false);
-        CheckByUserID(PK_iUserID);
+        catch (Exception ex)
+        {
+            lblThongbao.Text = ex.Message;
+        }
     }
     protected void Huy(object sender, EventArgs e)
     {
