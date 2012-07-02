@@ -258,7 +258,11 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             // Lấy thằng mới nhất
             String sMasomoinhat = lstTochucchungnhan[lstTochucchungnhan.Count - 1].sMaso;
             String[] sDulieutrongmaso = sMasomoinhat.Split('-');
-            maso += Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1;
+            int iStt = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1])+1;
+            if (iStt < 0)
+                maso += "0" + iStt;
+            else
+                maso += iStt + "";
             //maso += lstTochucchungnhan.Count + 1;
             oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + maso;
             oTCCN.sMaso = maso;

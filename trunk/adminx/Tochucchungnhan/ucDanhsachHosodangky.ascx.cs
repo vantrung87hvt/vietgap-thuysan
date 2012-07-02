@@ -103,9 +103,11 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
         List<HosodangkychungnhanEntity> lstHosodangky = new List<HosodangkychungnhanEntity>();
         if (lstTochucchungnhan_Taikhoan != null && lstTochucchungnhan_Taikhoan.Count > 0)
         {
-            lstHosodangky.AddRange(HosodangkychungnhanBRL.GetByFK_iTochucchungnhanID(lstTochucchungnhan_Taikhoan[0].FK_iTochucchungnhanID));
+            lstHosodangky.AddRange(HosodangkychungnhanBRL.GetByFK_iTochucchungnhanID(lstTochucchungnhan_Taikhoan[0].FK_iTochucchungnhanID).FindAll(delegate(HosodangkychungnhanEntity entity){
+            return entity.iTrangthai == 0;
+        }));
         }
-
+        
         PagedDataSource pds = new PagedDataSource();
         pds.PageSize = m_pagesize;
         pds.CurrentPageIndex = currentPage > 0 ? currentPage : 0;
@@ -381,7 +383,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
     {
         String sVietGapCode = string.Empty;
         CosonuoitrongEntity oEntity = CosonuoitrongBRL.GetOne(PK_iCosonuoitrongID);
-        ////Cần phải sửa lại chỗ này để lấy ra mã tỉnh + huyện
+        ////Cần phải sửa lại chỗ này để lấy ra mã tỉnh + huyện  
         QuanHuyenEntity oQuanHuyen = QuanHuyenBRL.GetOne(int.Parse(oEntity.FK_iQuanHuyenID.ToString()));
         TinhEntity oTinh = TinhBRL.GetOne(oQuanHuyen.FK_iTinhThanhID);
         TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
@@ -395,7 +397,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
         //1. Lấy danh sách các CSNT đã được cấp mã số
         List<MasovietgapEntity> lstCSNT_daduocmaso = MasovietgapBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(MasovietgapEntity oHoso)
         {
-            return oHoso.iTrangthai == 2 && (QuanHuyenBRL.GetOne(CosonuoitrongBRL.GetOne(oHoso.FK_iCosonuoitrongID).FK_iQuanHuyenID).FK_iTinhThanhID == oTinh.PK_iTinhID);
+            return (QuanHuyenBRL.GetOne(CosonuoitrongBRL.GetOne(oHoso.FK_iCosonuoitrongID).FK_iQuanHuyenID).FK_iTinhThanhID == oTinh.PK_iTinhID);
         }
         );
         lstCSNT_daduocmaso.Sort(delegate(MasovietgapEntity firstEntity, MasovietgapEntity secondEntity)
@@ -408,13 +410,13 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
         String sMasocoso = String.Empty;
         String[] sDulieutrongmaso=null;
         if (lstCSNT_daduocmaso.Count > 0)
-            sMasomoinhat = CosonuoitrongBRL.GetOne(lstCSNT_daduocmaso[lstCSNT_daduocmaso.Count - 1].FK_iCosonuoitrongID).sMaso_vietgap;
+            sMasomoinhat = CosonuoitrongBRL.GetOne(lstCSNT_daduocmaso[0].FK_iCosonuoitrongID).sMaso_vietgap;
         else
-            sMasocoso = taoMacoso(1);
+            sMasocoso = taoMacoso(0);
         if(sMasomoinhat.Length>0)
             sDulieutrongmaso = sMasomoinhat.Split('-');
         if (sDulieutrongmaso!=null&&sDulieutrongmaso.Length > 0)
-            sMasocoso = taoMacoso(Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1);
+            sMasocoso = taoMacoso(Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]));
         
         //Session["sMasocoso"] = sMasocoso;
         sVietGapCode += sMasocoso;
@@ -430,8 +432,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
             sMacoso = "00" + (iSoCosonuoitrong + 1);
         else if (iSoCosonuoitrong > 0)
             sMacoso = "000" + (iSoCosonuoitrong + 1);
-        else
-            sMacoso = "000" + iSoCosonuoitrong;
+        
         return sMacoso;
     }
 }

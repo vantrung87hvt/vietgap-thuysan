@@ -27,6 +27,8 @@ public partial class adminx_Tochucchungnhan_Default : System.Web.UI.Page
                     strControl = "../../uc/uc" + Request.QueryString["page"] + ".ascx";
                 else if (Request.QueryString["ctr"] == "adm") // lấy từ thư mục admin
                     strControl = "../uc" + Request.QueryString["page"] + ".ascx";
+                else if (Request.QueryString["ctr"] == "tk") // lấy từ thư mục admin
+                    strControl = "../BaocaoThongke/uc" + Request.QueryString["page"] + ".ascx";
             }
             else
                 strControl += "uc" + Request.QueryString["page"] + ".ascx";

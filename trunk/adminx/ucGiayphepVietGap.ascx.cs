@@ -45,7 +45,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
     
     public void hienChungNhanVietGAPtheoID(Int32 id)
         {
-            String sqlCon = ConfigurationManager.ConnectionStrings["thanglongsport_vietgapConnectionString"].ToString();
+            String sqlCon = ConfigurationManager.ConnectionStrings["db_NewsConnectionString"].ToString();
             SqlConnection Con = new SqlConnection(sqlCon);
             SqlCommand cmd = new SqlCommand();
             SqlDataAdapter adapter = null;
@@ -74,7 +74,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
 
                     if (row["imgLogo"] != null)
                     {
-                        imgTochuc.ImageUrl = ResolveUrl("~/adminx/img/logo thuysan.png");
+                        imgTochuc.ImageUrl = ResolveUrl("~/Images/logoVietGap.jpg");
                     }
                     else
                     {
@@ -140,7 +140,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
         
         private DataTable getGetInforById(int id)
         {
-            String sqlCon = ConfigurationManager.ConnectionStrings["thanglongsport_vietgapConnectionString"].ToString();
+            String sqlCon = ConfigurationManager.ConnectionStrings["db_NewsConnectionString"].ToString();
             SqlConnection Con = new SqlConnection(sqlCon);
             SqlCommand cmd = new SqlCommand();
             SqlDataAdapter adapter = null;
@@ -200,7 +200,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             builder.Writeln();
             if (row["imgLogo"] != null)
             {
-                builder.InsertImage(System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png");
+                builder.InsertImage(System.Web.HttpContext.Current.Server.MapPath("~/") + "\\Images\\logoVietGap.jpg");
             }
             else
             {
