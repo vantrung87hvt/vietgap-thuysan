@@ -200,11 +200,11 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             builder.Writeln();
             if (row["imgLogo"] != null)
             {
-                builder.InsertImage(System.Web.HttpContext.Current.Server.MapPath("~/") + "\\Images\\logoVietGap.jpg");
+                builder.InsertImage(System.Web.HttpContext.Current.Server.MapPath("~/") + "\\Images\\logoVietGap.jpg",105.0, 80.0);
             }
             else
             {
-                builder.InsertImage("ViewImage.aspx?ID=" + row["PK_iTochucchungnhanID"].ToString());
+                builder.InsertImage("ViewImage.aspx?ID=" + row["PK_iTochucchungnhanID"].ToString(), 105.0, 80.0);
             }
             //Tạo ô chứa từ Chứng nhận...
             builder.InsertCell();
