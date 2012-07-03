@@ -123,7 +123,7 @@ public partial class adminx_ucTochuccapphepQuanLy : System.Web.UI.UserControl
     }
     private String getTrangthaixuly(int PK_iTochucchungnhanID)
     {
-        String sTrangthaiXuly = String.Empty;
+        String sTrangthaiXuly = "Hoạt động bình thường";
         List<XulyTochucchungnhanEntity> lstXulyTochucchungnhan = XulyTochucchungnhanBRL.GetByFK_iTochucchungnhanID(PK_iTochucchungnhanID);
         if (lstXulyTochucchungnhan != null && lstXulyTochucchungnhan.Count > 0)
         {
@@ -141,7 +141,7 @@ public partial class adminx_ucTochuccapphepQuanLy : System.Web.UI.UserControl
             case 1:
                 return "Đã duyệt hồ sơ";
             case 2:
-                return "Hồ sơ hoàn chỉnh";
+                return "Đã cấp mã số";
             default:
                 return "";
         }

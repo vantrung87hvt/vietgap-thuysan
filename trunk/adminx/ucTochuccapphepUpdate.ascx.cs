@@ -47,8 +47,17 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 pnDuyet.Visible = true;
                 btnOk.CommandArgument = PK_iTochucchungnhanID.ToString();
             }
+            else if (Session["iTochucchungnhanID"] != null)
+            {
+                int PK_iTochucchungnhanID = Convert.ToInt32(Session["iTochucchungnhanID"].ToString());
+                this.napForm(PK_iTochucchungnhanID);
+                btnOk.CommandName = "Edit";
+                btnOk.Text = "Sửa";
+                pnDuyet.Visible = true;
+                btnOk.CommandArgument = PK_iTochucchungnhanID.ToString();
+            }
             else
-                Response.Redirect("~/adminx/Default.aspx");
+                Response.Redirect("~/adminx/Tochucchungnhan/Default.aspx");
         }
     }
     private void clearForm()
