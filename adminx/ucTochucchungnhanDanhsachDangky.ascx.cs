@@ -256,15 +256,24 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             }
             );
             // Lấy thằng mới nhất
-            String sMasomoinhat = lstTochucchungnhan[0].sMaso;
-            String[] sDulieutrongmaso = sMasomoinhat.Split('-');
-            int iStt = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1])+1;
+            int iStt=0;
+            String sMasomoinhat = String.Empty;
+            String[] sDulieutrongmaso = null;
+            if (lstTochucchungnhan.Count > 0)
+            {
+                sMasomoinhat = lstTochucchungnhan[0].sMaso;
+                sDulieutrongmaso = sMasomoinhat.Split('-');
+                iStt = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1;
+
+            }
+            else
+                iStt = 1;
             if (iStt < 10)
                 maso += "0" + iStt;
             else
                 maso += iStt + "";
             //maso += lstTochucchungnhan.Count + 1;
-            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + maso;
+            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + iStt;
             oTCCN.sMaso = maso;
             oTCCN.iTrangthai = 2;
             
@@ -273,6 +282,7 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             
             DangkyHoatdongchungnhanBRL.Edit(oDangkyhd);
             pnThongTin.Visible = false;
+            Response.Write("<script language=\"javascript\">alert('Tổ chức chứng nhận được cấp mã số:" + maso + "');location='Default.aspx?page=TochuccapphepQuanLy';</script>");
         }
         catch (Exception ex)
         {
