@@ -136,21 +136,23 @@ size: 932x589
 }
 .khunggiahan
 {
-    float:left;
-    width:350px;
-    height:200px;
-    border:1px solid black;
-    margin-top: 10px;
-    margin-left: 15px;
+    border: 1px solid black;
+    float: left;
+    height: 200px;
+    margin-left: 15px !important;
+    margin-top: 10px !important;
+    padding: 10px;
+    width: 470px;
 }
 .khunggiahan ul
 {
     margin:0;
     padding:0;
 }
-.khunggiahan  li
+.khunggiahan li
 {
     list-style-type:none !important;
+    background:none !important;
 }
 #baocao_noibo li
 {
