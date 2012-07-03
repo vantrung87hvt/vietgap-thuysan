@@ -3,11 +3,15 @@
 <style type="text/css">
 	div.chungnhan{
 		width:820px;
-		height:560px;
+		height:590px;
 		font-family:"Times New Roman", Times, serif;
 		padding-top:20px;
 		padding-left:100px;
 		padding-right:50px;
+	}
+	table.chungnhan td
+	{
+	    border:none !important;
 	}
 	.chungnhan .normal-text{
 		font-weight:normal;
@@ -35,6 +39,7 @@
 	    text-transform:uppercase;
 	}
 </style>
+<link href='<%=ResolveUrl("~/adminx/css/report.css")%>' rel="stylesheet" type="text/css" />
 <div>
     <table border="1">
         <tr>
@@ -140,7 +145,7 @@
                         gia hạn hiệu lực
                     </div>
                 </center>
-                <table width="820px">
+                <table width="100%">
                     <tr>
                         <td>
                             <asp:Repeater ID="rptGiaHan" runat="server" 
