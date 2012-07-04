@@ -34,6 +34,7 @@ namespace INVI.DataAccess
 				entity.sMaso = dr["sMaso"].ToString();
 				entity.bDuyet =String.IsNullOrEmpty(dr["bDuyet"].ToString())?false:Boolean.Parse(dr["bDuyet"].ToString());
 				entity.iTrangthai = Int16.Parse("0"+dr["iTrangthai"].ToString());
+                entity.FK_iTrinhdoID = Int16.Parse("0" + dr["FK_iTrinhdoID"].ToString());
                 try
                 {
                     entity.imAnh = (byte[])(dr["imAnh"]);

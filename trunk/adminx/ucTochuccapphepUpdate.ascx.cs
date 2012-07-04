@@ -57,7 +57,12 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 btnOk.CommandArgument = PK_iTochucchungnhanID.ToString();
             }
             else
-                Response.Redirect("~/adminx/Tochucchungnhan/Default.aspx");
+            {
+                if(Convert.ToInt32(Session["GroupID"].ToString())==1)
+                    Response.Redirect("~/adminx/Default.aspx");
+                else if(Convert.ToInt32(Session["GroupID"].ToString())==4)
+                    Response.Redirect("~/adminx/Tochucchungnhan/Default.aspx");
+            }
         }
     }
     private void clearForm()
@@ -111,17 +116,17 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
     {
         ddlTaikhoan.Items.Clear();
         List<UserEntity> lstUser = UserBRL.GetAll();        
-        List<UserEntity> lst = new List<UserEntity>();
-        lstUser.ForEach(
-                delegate(UserEntity oUser)
-                {
-                    if (oUser.iGroupID == 4 && TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(oUser.iUserID).Count==0)
-                        lst.Add(oUser);
-                }
-            );
+        //List<UserEntity> lst = new List<UserEntity>();
+        //lstUser.ForEach(
+        //        delegate(UserEntity oUser)
+        //        {
+        //            if (oUser.iGroupID == 4 && TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(oUser.iUserID).Count==0)
+        //                lst.Add(oUser);
+        //        }
+        //    );
         ddlTaikhoan.DataTextField = "sUsername";
         ddlTaikhoan.DataValueField = "iUserID";
-        ddlTaikhoan.DataSource = lst;
+        ddlTaikhoan.DataSource = lstUser;
         ddlTaikhoan.DataBind();
         ddlTaikhoan.Items.Insert(0, new ListItem("--- Chọn ---", "0"));
 
