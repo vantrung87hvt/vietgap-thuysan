@@ -112,6 +112,8 @@
             <td>
                 <asp:Button ID="btnOK" runat="server" Text="Thêm" OnClick="btnOK_Click" />
                 <asp:Button ID="btnCancel" runat="server" Text="Bỏ qua" OnClick="btnCancel_Click" />
+                <asp:Button ID="btnCapmaso" runat="server" Text="Cấp mã số" 
+                    onclick="btnCapmaso_Click" />
             </td>
         </tr>
         <tr>
@@ -125,7 +127,8 @@
     AllowSorting="True" OnSelectedIndexChanging="grvPosition_SelectedIndexChanging"
     OnSorting="grvPosition_Sorting" Width="100%" AlternatingRowStyle-CssClass="GridAltItem"
     HeaderStyle-CssClass="GridHeader" CssClass="Grid" 
-    onrowdatabound="grvChuyengia_RowDataBound">
+    onrowdatabound="grvChuyengia_RowDataBound" EnableModelValidation="True">
+<AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
     <Columns>
         <asp:TemplateField HeaderText="Chọn tất">
             <HeaderTemplate>
@@ -159,6 +162,8 @@
         <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false"
             Text="Sửa" />
     </Columns>
+
+<HeaderStyle CssClass="GridHeader"></HeaderStyle>
 </asp:GridView>
 <asp:LinkButton ID="lbtnAddnew" runat="server" CausesValidation="False" OnClick="lbtnAddnew_Click">Thêm mới | </asp:LinkButton>
 <asp:LinkButton ID="lbtnDelete" runat="server" CausesValidation="False" OnClick="lbtnDelete_Click"

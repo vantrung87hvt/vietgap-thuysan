@@ -137,7 +137,7 @@
 								<li><a href="../adminx/Default.aspx?m=Tochucchungnhan&page=Giaydangkyhoatdongchungnhan">Giấy đăng ký</a></li>
 								</asp:Panel>
 								<asp:Panel ID="p_45" runat="server" Visible="false">
-								<li><a href="../adminx/Default.aspx?page=DanhgiavienManager">Quản lý Đánh giá viên</a></li>
+								<li><a href="../adminx/Default.aspx?page=Chuyengia">Quản lý chuyên gia</a></li>
 								</asp:Panel>
                                 
 								<asp:Panel ID="p_48" runat="server" Visible="false">
