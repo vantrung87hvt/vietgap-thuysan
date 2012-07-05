@@ -269,8 +269,8 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        if(btnOK.CommandName.ToUpper()=="EDIT")
-            napForm(Convert.ToInt16(btnOK.CommandArgument));
+        if (btnOK.CommandName.ToUpper() == "EDIT")
+            pnlEdit.Visible = false;
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
@@ -306,6 +306,8 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         btnOK.Text = "Lưu";
         btnOK.CommandName = "ADDNEW";
         pnlEdit.Visible = true;
+        foreach (ListItem chk in cblGiaychungnhan.Items)
+            chk.Selected = false;
     }
     protected void grvChuyengia_RowDataBound(object sender, GridViewRowEventArgs e)
     {
