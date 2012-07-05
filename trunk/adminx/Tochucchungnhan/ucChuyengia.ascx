@@ -97,7 +97,7 @@
         </tr>
         <tr>
             <td valign="top" width="20%">
-                <asp:Label ID="lblGiaytokemtheo" runat="server" Text="Giấy chứng nhận:"></asp:Label>
+                <asp:Label ID="lblGiaytokemtheo" runat="server" Text="Các chứng chỉ:"></asp:Label>
             </td>
             <td valign="middle" width="70%">
                 <asp:Panel runat="server" ID="pnlGiaychungnhan" Visible="true">

@@ -53,7 +53,7 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 this.napForm(PK_iTochucchungnhanID);
                 btnOk.CommandName = "Edit";
                 btnOk.Text = "Sửa";
-                pnDuyet.Visible = true;
+                pnDuyet.Visible = false;
                 btnOk.CommandArgument = PK_iTochucchungnhanID.ToString();
             }
             else
