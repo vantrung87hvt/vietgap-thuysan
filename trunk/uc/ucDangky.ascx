@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucDangky.ascx.cs" Inherits="uc_ucDangky" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-
 <link href="../css/formInMain.css" rel="stylesheet" type="text/css" />
+
 <asp:Panel ID="pnDangKyTV" runat="server">
     <div class="m">
         <fieldset>
