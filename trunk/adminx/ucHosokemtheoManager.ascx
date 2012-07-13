@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucHosokemtheoManager.ascx.cs" Inherits="uc_ucTinh" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucHosokemtheoManager.ascx.cs" Inherits="uc_HosokemtheoManager" %>
 <h2>
     Quản Lý Hồ sơ kèm theo
 </h2>
