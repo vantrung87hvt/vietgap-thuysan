@@ -173,6 +173,16 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
     {
         //
         DangkyHoatdongchungnhanEntity oDangkyhd = DangkyHoatdongchungnhanBRL.GetOne(DangKyID);
+        //Kiểm tra đã được duyệt hay chưa
+        if(oDangkyhd.iTrangthaidangky == 2) //Nếu đã duyệt
+        {
+            btnCapPhep.Enabled = false;
+        }
+        else
+            if(oDangkyhd.iTrangthaidangky == 0) //Đánh dấu là tổ chức chứng nhận đã xem
+            {
+                oDangkyhd.iTrangthaidangky = 1;
+            }
         int idTochucchungnhan = oDangkyhd.FK_iTochucchungnhanID;
         Session["PK_iTochucchungnhanID"] = idTochucchungnhan;
         TochucchungnhanEntity oTCCN = TochucchungnhanBRL.GetOne(idTochucchungnhan);
