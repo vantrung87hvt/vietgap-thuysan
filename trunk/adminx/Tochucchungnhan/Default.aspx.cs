@@ -9,11 +9,13 @@ public partial class adminx_Tochucchungnhan_Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (Session["UserID"] == null || Session["GroupID"] == null)
         {
             Response.Write("<script>alert('Bạn không có quyền vào trang này');location='../Logon.aspx'</script>");
             Response.End();
         }
+
         if (Request.QueryString["page"] != null)
         {
             string strControl = "~/adminx/Tochucchungnhan/"; // thư mục admin/Tochucchungnhan
@@ -32,6 +34,20 @@ public partial class adminx_Tochucchungnhan_Default : System.Web.UI.Page
             }
             else
                 strControl += "uc" + Request.QueryString["page"] + ".ascx";
+
+            if (File.Exists(Server.MapPath(strControl)))
+            {
+                Control ctrl = LoadControl(strControl);
+                if (ctrl != null)
+                {
+                    phMain.Controls.Add(ctrl);
+                }
+            }
+        }
+        else if (!Page.IsPostBack) // Tự động hiển thị luôn danh sách các Cơ sở nuôi trồng đăng ký.
+        {
+            string strControl = "~/adminx/Tochucchungnhan/"; // thư mục admin/Tochucchungnhan
+            strControl += "uc" + "DanhsachHosodangky.ascx";
 
             if (File.Exists(Server.MapPath(strControl)))
             {

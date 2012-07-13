@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/29/2012 9:49:27 AM
+Create On:7/13/2012 11:25:43 AM
 ------------------------------------------------------*/
 using System;
 using System.Collections.Generic;
@@ -37,6 +37,7 @@ namespace INVI.Entity
 			m_fk_ihinhthucnuoiid=0;
 			m_fk_itochucchungnhanid=0;
 			m_fk_iuserid=0;
+			m_bxoa=false;
         }
 		private Int64 m_pk_icosonuoitrongid;
 		public Int64 PK_iCosonuoitrongID
@@ -175,6 +176,12 @@ namespace INVI.Entity
 		{
 			get { return m_fk_iuserid ; }
 			set { m_fk_iuserid = value; }
+		}
+		private Boolean m_bxoa;
+		public Boolean bXoa
+		{
+			get { return m_bxoa ; }
+			set { m_bxoa = value; }
 		}
 
         #region Comparison
@@ -418,6 +425,16 @@ namespace INVI.Entity
 				return delegate(CosonuoitrongEntity entity,CosonuoitrongEntity other)
 				{
 					return entity.FK_iUserID.CompareTo(other.FK_iUserID);
+				};
+			}
+		}
+		public static Comparison<CosonuoitrongEntity> COMPARISON_bXoa
+		{
+			get
+			{
+				return delegate(CosonuoitrongEntity entity,CosonuoitrongEntity other)
+				{
+					return entity.bXoa.CompareTo(other.bXoa);
 				};
 			}
 		}

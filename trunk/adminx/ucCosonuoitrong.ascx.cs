@@ -42,11 +42,11 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                 return;
             }
             TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(lstTochucTaikhoan[0].FK_iTochucchungnhanID);
-            lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID);
+            lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
             Session["oTochucchungnhan"] = oTochucchungnhan;
         }
         else
-            lstCosonuoitrong = CosonuoitrongBRL.GetAll();
+            lstCosonuoitrong = CosonuoitrongBRL.GetAll().FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
         grvCosonuoitrong.DataSource = lstCosonuoitrong;
         grvCosonuoitrong.DataKeyNames = new string[] { "PK_iCosonuoitrongID" };
 
@@ -156,9 +156,14 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                     if (chkDelete != null && chkDelete.Checked)
                     {
                         int csntID = Convert.ToInt32(grvCosonuoitrong.DataKeys[row.RowIndex].Values["PK_iCosonuoitrongID"]);
-                        CosonuoitrongBRL.Remove(csntID);
+                        // Không thực hiện việc xóa dữ liệu mà chỉ thiết lập việc ẩn.
+                        CosonuoitrongEntity oCosonuoitrong = new CosonuoitrongEntity();
+                        oCosonuoitrong = CosonuoitrongBRL.GetOne(csntID);
+                        oCosonuoitrong.bXoa = true;
+                        CosonuoitrongBRL.Edit(oCosonuoitrong);
                     }
                 }
+                napGridView();
             }
             catch (Exception ex)
             {
