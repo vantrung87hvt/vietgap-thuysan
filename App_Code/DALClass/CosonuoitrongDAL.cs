@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/29/2012 9:49:30 AM
+Create On:7/13/2012 11:25:46 AM
 ------------------------------------------------------*/
 using INVI.DataAccess.Base;
 using INVI.Entity;
@@ -50,6 +50,7 @@ namespace INVI.DataAccess
 				entity.FK_iHinhthucnuoiID = Int32.Parse("0"+dr["FK_iHinhthucnuoiID"].ToString());
 				entity.FK_iTochucchungnhanID = Int32.Parse("0"+dr["FK_iTochucchungnhanID"].ToString());
 				entity.FK_iUserID = Int64.Parse("0"+dr["FK_iUserID"].ToString());
+				entity.bXoa =String.IsNullOrEmpty(dr["bXoa"].ToString())?false:Boolean.Parse(dr["bXoa"].ToString());
                 return entity;
             };
         }
@@ -122,7 +123,7 @@ namespace INVI.DataAccess
         #region private
         private static SqlParameter[] initParams(CosonuoitrongEntity entity)
         {
-            SqlParameter[] p = new SqlParameter[23];
+            SqlParameter[] p = new SqlParameter[24];
 			p[0] = new SqlParameter("@PK_iCosonuoitrongID", entity.PK_iCosonuoitrongID);
 			p[1] = new SqlParameter("@sMaso_vietgap", entity.sMaso_vietgap);
 			p[2] = new SqlParameter("@sTencoso", entity.sTencoso);
@@ -146,6 +147,7 @@ namespace INVI.DataAccess
 			p[20] = new SqlParameter("@FK_iHinhthucnuoiID", entity.FK_iHinhthucnuoiID);
 			p[21] = new SqlParameter("@FK_iTochucchungnhanID", entity.FK_iTochucchungnhanID);
 			p[22] = new SqlParameter("@FK_iUserID", entity.FK_iUserID);
+			p[23] = new SqlParameter("@bXoa", entity.bXoa);
             return p;
         }
         #endregion

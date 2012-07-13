@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:6/29/2012 9:49:24 AM
+Create On:7/13/2012 11:25:40 AM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
