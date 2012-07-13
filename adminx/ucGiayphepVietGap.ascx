@@ -1,44 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucGiayphepVietGap.ascx.cs"
-    Inherits="adminx_ucGiayphepVietGap" %>
-<style type="text/css">
-	div.chungnhan{
-		width:820px;
-		height:590px;
-		font-family:"Times New Roman", Times, serif;
-		padding-top:20px;
-		padding-left:100px;
-		padding-right:50px;
-	}
-	table.chungnhan td
-	{
-	    border:none !important;
-	}
-	.chungnhan .normal-text{
-		font-weight:normal;
-	}
-	.chungnhan{
-		font-size:19px;
-		font-weight:bold;
-	}
-	.chungnhan td.center{
-		text-align:center;
-	}
-	.chungnhan img.logo{
-		max-height:80px;
-	}
-	.head-1{
-		height:100px;
-		vertical-align:top;
-	}
-	.head-2
-	{
-	    padding-bottom:10px;
-	}
-	.upercase
-	{
-	    text-transform:uppercase;
-	}
-</style>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucGiayphepVietGap.ascx.cs" Inherits="adminx_ucGiayphepVietGap" %>
 <link href='<%=ResolveUrl("~/adminx/css/report.css")%>' rel="stylesheet" type="text/css" />
 <div>
     <table border="1">
@@ -66,7 +26,7 @@
                                 <span>GIẤY CHỨNG NHẬN VietGAP</span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="small-line-height">
                             <td class="center head-2">
                                 <span class="upercase"><asp:Label ID="lblTencoquan" runat="server" Text=""></asp:Label></span><br />
                                 <span class="normal-text">Mã số (chỉ định):

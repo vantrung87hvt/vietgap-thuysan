@@ -11,7 +11,7 @@ using System.Web.UI.WebControls.WebParts;
 using INVI.Entity;
 using INVI.Business;
 
-public partial class uc_ucTinh : System.Web.UI.UserControl
+public partial class uc_HosokemtheoManager : System.Web.UI.UserControl
 {
     public int PK_iUserID;
 

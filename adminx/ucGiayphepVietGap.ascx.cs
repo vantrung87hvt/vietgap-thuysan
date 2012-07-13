@@ -209,6 +209,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             //Tạo ô chứa từ Chứng nhận...
             builder.InsertCell();
             builder.Writeln("");
+            builder.Writeln("");
             builder.Writeln("GIẤY CHỨNG NHẬN VietGAP");
             builder.EndRow();// Kết thúc một hàng
             //Tạo ô rỗng
@@ -307,7 +308,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             builder.EndTable(); //Kết thúc bảng
 
             //----------
-            //InsertWatermarkText(doc,Convert.ToInt32(row["PK_iTochucchungnhanID"]));
+            InsertWatermarkText(doc,Convert.ToInt32(row["PK_iTochucchungnhanID"]));
 
             builder.InsertBreak(BreakType.PageBreak);
             //Gia hạn
@@ -405,41 +406,41 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
             watImg.VerticalAlignment = VerticalAlignment.Center;
             watImg.HorizontalAlignment = HorizontalAlignment.Center;           
             ///
-            Shape watImg2 = new Shape(doc, ShapeType.Image);
-            imgPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png";
-            watImg2.ImageData.SetImage(imgPath);
-            watImg2.Width = 90;
-            watImg2.Height = 75;
-            // Place the watermark in the page center.
-            watImg2.RelativeHorizontalPosition = RelativeHorizontalPosition.Page;
-            watImg2.RelativeVerticalPosition = RelativeVerticalPosition.Page;
-            watImg2.WrapType = WrapType.None;
-            watImg2.Top = 80;
-            watImg2.Left = 90;
+            //Shape watImg2 = new Shape(doc, ShapeType.Image);
+            //imgPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png";
+            //watImg2.ImageData.SetImage(imgPath);
+            //watImg2.Width = 90;
+            //watImg2.Height = 75;
+            //// Place the watermark in the page center.
+            //watImg2.RelativeHorizontalPosition = RelativeHorizontalPosition.Page;
+            //watImg2.RelativeVerticalPosition = RelativeVerticalPosition.Page;
+            //watImg2.WrapType = WrapType.None;
+            //watImg2.Top = 80;
+            //watImg2.Left = 90;
             
-            Shape watImg3 = new Shape(doc, ShapeType.Image);
-            imgPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png";
+            //Shape watImg3 = new Shape(doc, ShapeType.Image);
+            //imgPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "\\adminx\\img\\logo thuysan.png";
          
-            TochucchungnhanEntity entity    = new TochucchungnhanEntity();
-            entity = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
-            Byte[] bytImage = entity.imgLogo;
-            if (bytImage != null)
-            {
-                watImg3.ImageData.SetImage(bytImage);
-            }            
-            watImg3.Width = 90;
-            watImg3.Height = 75;
-            // Place the watermark in the page center.
-            watImg3.RelativeHorizontalPosition = RelativeHorizontalPosition.Page;
-            watImg3.RelativeVerticalPosition = RelativeVerticalPosition.Page;
-            watImg3.WrapType = WrapType.None;
-            watImg3.Top = 80;
-            watImg3.Left = 620;
+            //TochucchungnhanEntity entity    = new TochucchungnhanEntity();
+            //entity = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
+            //Byte[] bytImage = entity.imgLogo;
+            //if (bytImage != null)
+            //{
+            //    watImg3.ImageData.SetImage(bytImage);
+            //}            
+            //watImg3.Width = 90;
+            //watImg3.Height = 75;
+            //// Place the watermark in the page center.
+            //watImg3.RelativeHorizontalPosition = RelativeHorizontalPosition.Page;
+            //watImg3.RelativeVerticalPosition = RelativeVerticalPosition.Page;
+            //watImg3.WrapType = WrapType.None;
+            //watImg3.Top = 80;
+            //watImg3.Left = 620;
             
             // Create a new paragraph and append the watermark to this paragraph.
             Paragraph watermarkParaImg = new Paragraph(doc);            
-            watermarkParaImg.AppendChild(watImg3);
-            watermarkParaImg.AppendChild(watImg2);
+            //watermarkParaImg.AppendChild(watImg3);
+            //watermarkParaImg.AppendChild(watImg2);
             watermarkParaImg.AppendChild(watImg);
             
             
