@@ -138,10 +138,13 @@
                             <asp:TextBox ID="txtTrangthai" runat="server" Text='<%# Bind("PK_iDangkyChungnhanVietGapID") %>'></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:HyperLinkField DataNavigateUrlFields="FK_iTochucchungnhanID,PK_iDangkyChungnhanVietGapID" 
-                        NavigateUrl="" Text="Chi tiết" 
-                        
-                        DataNavigateUrlFormatString="Default.aspx?page=TochucchungnhanDanhsachDangky&amp;iTochucchungnhanID={0}&amp;PK_iDangkyChungnhanVietGapID={1}" />
+                    <asp:HyperLinkField DataNavigateUrlFields="FK_iTochucchungnhanID,PK_iDangkyChungnhanVietGapID"
+                     NavigateUrl="" Text="Chi tiết" DataNavigateUrlFormatString="Default.aspx?page=TochucchungnhanDanhsachDangky&amp;iTochucchungnhanID={0}&amp;PK_iDangkyChungnhanVietGapID={1}" />
+                     <asp:TemplateField HeaderText="Tác vụ">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lbtnGiayto" CommandName="Giayto" CommandArgument='<%# Bind("PK_iDangkyChungnhanVietGapID") %>' runat="server">Giấy tờ kèm theo</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <HeaderStyle CssClass="GridHeader"></HeaderStyle>
                 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
@@ -320,10 +323,23 @@
         </div>
         <div style="text-align:center;width: 100%; padding:15px;">
     <asp:Button ID="btnCapPhep" runat="server" Text="Cấp phép" 
-            onclick="btnCapPhep_Click" style="height: 26px" />
-            
+            onclick="btnCapPhep_Click" style="height: 26px" /> &nbsp;|&nbsp;
+            <asp:Button ID="btnAnChitiet" runat="server" Text="Ẩn" 
+                onclick="btnAnChitiet_Click" />
     </div>
 
     </div>
     <br />
+</asp:Panel>
+<asp:Panel runat="server" ID="panGiayto" Visible="false">
+    <fieldset>
+        <legend>Giấy tờ nộp kèm hồ sơ</legend>
+        <asp:Label runat="server" ID="Label2" ForeColor="Red"></asp:Label>
+        <asp:CheckBoxList ID="cblGiaytonopkem" runat="server">
+        </asp:CheckBoxList>
+        <asp:Button ID="btnLuuGiaytonopkem" runat="server" Text="Lưu" 
+            onclick="btnLuuGiaytonopkem_Click" />&nbsp;&nbsp;
+        <asp:Button ID="btnHuygiaytonopkem" runat="server" Text="Ẩn" 
+            onclick="btnHuygiaytonopkem_Click" />
+    </fieldset>
 </asp:Panel>
