@@ -78,33 +78,41 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
                 
                 VideoClipBRL.Edit(entity);
-                // Lấy dữ liệu về Tài khoản theo TCCN
-                List<TochucchungnhanTaikhoanEntity> lsTochucchungnhantaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTochucchungnhanID(entity.PK_iTochucchungnhanID);
-                if (lsTochucchungnhantaikhoan.Count > 0) // 
-                {
-                    TochucchungnhanTaikhoanEntity oTochucchungnhanTaikhoan = lsTochucchungnhantaikhoan[0];
-                    oTochucchungnhanTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
-                    oTochucchungnhanTaikhoan.FK_iTochucchungnhanID = entity.PK_iTochucchungnhanID;
-                    oTochucchungnhanTaikhoan.dNgaythuchien = DateTime.Today;
-                    oTochucchungnhanTaikhoan.bActive = true;
-                    TochucchungnhanTaikhoanBRL.Edit(oTochucchungnhanTaikhoan);
-                }
+                
             }
             else
             {
-                int iTochucchungnhanID = TochucchungnhanBRL.Add(entity);
-                lblLoi.Text = "Bổ sung thành công";
-                TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
-                oTochucTaikhoan.bActive = cbDuyet.Checked;
+                //int iTochucchungnhanID = TochucchungnhanBRL.Add(entity);
+                //lblLoi.Text = "Bổ sung thành công";
+                //TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
+                //oTochucTaikhoan.bActive = cbDuyet.Checked;
 
-                oTochucTaikhoan.dNgaythuchien = DateTime.Today;
-                oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
-                oTochucTaikhoan.FK_iTochucchungnhanID = iTochucchungnhanID;
-                TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
-                Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
+                //oTochucTaikhoan.dNgaythuchien = DateTime.Today;
+                //oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
+                //oTochucTaikhoan.FK_iTochucchungnhanID = iTochucchungnhanID;
+                //TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
+                //Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
 
             }
             //Nạp lại dữ liệu
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+    private void napForm(int PK_iVideoClipID)
+    {
+        try
+        {
+            VideoClipEntity oVideoClip = VideoClipBRL.GetOne(PK_iVideoClipID);
+            if(oVideoClip!=null)
+            {
+                txtTieude.Text = oVideoClip.sTieude;
+                txtMota.Text = oVideoClip.sMota;
+                rptVideoClips.DataSource = oVideoClip;
+                rptVideoClips.DataBind();
+            }
         }
         catch (Exception ex)
         {

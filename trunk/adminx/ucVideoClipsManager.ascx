@@ -33,7 +33,7 @@
                     </td>
                     <td valign="middle" width="70%">
                         
-                        <asp:TextBox ID="txtChungchi" runat="server" 
+                        <asp:TextBox ID="txtTieude" runat="server" 
                             Width="95%" Height="22px"></asp:TextBox>
                         
                         <asp:RequiredFieldValidator ID="rqTenChungchi" runat="server" 
@@ -56,13 +56,29 @@
                     </td>
                 </tr>
                 <tr>
-                        <td valign="top" width="20%">
-                            <asp:Label ID="lblTep" runat="server" Text="Tệp"></asp:Label>
-                        </td>
-                        <td valign="middle" width="70%">
-                            <asp:FileUpload ID="fluVideoClips" runat="server"/>
-                        </td>
-                    </tr>
+                    <td valign="top" width="20%">
+                        <asp:Label ID="lblTep" runat="server" Text="Tệp"></asp:Label>
+                    </td>
+                    <td valign="middle" width="70%">
+                        <asp:FileUpload ID="fluVideoClips" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" width="20%">
+                    </td>
+                    <td valign="middle" width="70%">
+                        <asp:Repeater ID="rptVideoClips" runat="server">
+                            <ItemTemplate>
+                                <object id="player" classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" height="170"
+                                    width="300">
+                                    <param name="url" value='<%# "VideoHandler.ashx?iVideoID=" + Eval("PK_iVideoID") %>' />
+                                    <param name="showcontrols" value="true" />
+                                    <param name="autostart" value="true" />
+                                </object>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </td>
+                </tr>
                 <tr>
                     <td></td>
                     <td>
