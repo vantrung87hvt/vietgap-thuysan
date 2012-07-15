@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucChuyengia.ascx.cs" Inherits="adminx_Tochucchungnhan_ucChuyengia" %>
+<link href='<%=ResolveUrl("~/adminx/css/report.css")%>' rel="stylesheet" type="text/css" />
 <%--<link rel="Stylesheet" media="screen" type="text/css" href="<%=ResolveUrl("~/adminx/css/Grid_View.css")%>" />--%>
 <asp:Panel ID="pnlEdit" runat="server" Visible="false">
     <table width="100%">
@@ -127,7 +128,8 @@
     AllowSorting="True" OnSelectedIndexChanging="grvPosition_SelectedIndexChanging"
     OnSorting="grvPosition_Sorting" Width="100%" AlternatingRowStyle-CssClass="GridAltItem"
     HeaderStyle-CssClass="GridHeader" CssClass="Grid" 
-    onrowdatabound="grvChuyengia_RowDataBound" EnableModelValidation="True">
+    onrowdatabound="grvChuyengia_RowDataBound" EnableModelValidation="True" 
+    onrowcommand="grvChuyengia_RowCommand">
 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
     <Columns>
         <asp:TemplateField HeaderText="Chọn tất">
@@ -161,6 +163,11 @@
         </asp:TemplateField>
         <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false"
             Text="Sửa" />
+        <asp:TemplateField HeaderText="Tạo thẻ">
+            <ItemTemplate>
+                <asp:LinkButton ID="lbtnThechuyengia" CommandName="Thechuyengia" CommandArgument='<%# Bind("PK_iChuyengiaID") %>' runat="server" Text="Tạo thẻ" />
+            </ItemTemplate>
+        </asp:TemplateField>
     </Columns>
 
 <HeaderStyle CssClass="GridHeader"></HeaderStyle>
@@ -169,3 +176,56 @@
 <asp:LinkButton ID="lbtnDelete" runat="server" CausesValidation="False" OnClick="lbtnDelete_Click"
     OnClientClick="return confirm('Bạn có thực sự muốn xóa không?');">Xóa mục đã chọn</asp:LinkButton>
 </table> 
+<%--Thẻ chuyên gia--%>
+<asp:Panel runat="server" ID="pnThechuyengia" Visible="false">
+    <table class="thechuyengia">
+        	<tr><td class="2"><br /><br /></td></tr>
+        	<tr>
+            	<td class="center bold">
+                	BỘ NÔNG NGHIỆP VÀ PTNT<br />
+                    <asp:Label ID="lblCoquanchidinh" runat="server" Text=""></asp:Label>
+                </td>
+                <td class="center">
+                	CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM<br />Độc lập - Tự do- Hạnh phúc<hr width="40%" />
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2" class="left">
+                    <asp:Image ID="imgAnhtheChuyengia" CssClass="anhthe-chuyengia" runat="server" />
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2" class="center bold">
+                	THẺ CHUYÊN GIA ĐÁNH GIÁ VietGAP
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2" class="left padding-left">
+                	<br /><br />
+                	Họ và tên:&nbsp;<asp:Label ID="lblHoten" runat="server" Text=""></asp:Label><br />
+                    Năm sinh:&nbsp;<asp:Label ID="lblNamsinh" runat="server" Text=""></asp:Label><br />
+                    Đơn vị công tác:&nbsp;<asp:Label ID="lblDonnvicongtac" runat="server" Text=""></asp:Label><br />
+                    Lĩnh vực đánh giá:&nbsp;<asp:Label ID="lblLinhvucdanhgia" runat="server" Text=""></asp:Label><br />
+                    Mã số:&nbsp;<span class="bold"><asp:Label ID="lblMasochuyengia" runat="server" Text=""></asp:Label></span><br />
+                </td>
+            </tr>
+            <tr>
+            	<td class="center">&nbsp;</td>
+                <td class="center">
+                    <asp:Label ID="lblNgayky" runat="server" Text=""></asp:Label><br />
+                	... , ngày ... tháng ... năm 20..<br />
+                    <span class="bold">Thủ trưởng đơn vị</span><br />
+                    ( Ký tên, đóng dấu)<br />
+                    <asp:Label ID="lblTenthutruong" runat="server" Text=""></asp:Label>
+                    <br /><br />
+                </td>
+            </tr>
+        </table>
+        <center>
+            <br />
+            <asp:Button ID="btnExportToWord" runat="server" Text="Xuất ra Word" 
+                onclick="btnExportToWord_Click" />&nbsp;|&nbsp;
+            <asp:Button ID="btnVisiblePannel" runat="server" Text="Ẩn" 
+                onclick="btnVisiblePannel_Click" />
+        </center>
+</asp:Panel>

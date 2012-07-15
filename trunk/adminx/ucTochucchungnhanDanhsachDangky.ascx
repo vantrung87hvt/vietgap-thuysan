@@ -138,11 +138,11 @@
                             <asp:TextBox ID="txtTrangthai" runat="server" Text='<%# Bind("PK_iDangkyChungnhanVietGapID") %>'></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:HyperLinkField DataNavigateUrlFields="FK_iTochucchungnhanID,PK_iDangkyChungnhanVietGapID"
+                    <asp:HyperLinkField DataNavigateUrlFields="FK_iTochucchungnhanID,PK_iDangkyChungnhanVietGapID" HeaderText="Chi tiết"
                      NavigateUrl="" Text="Chi tiết" DataNavigateUrlFormatString="Default.aspx?page=TochucchungnhanDanhsachDangky&amp;iTochucchungnhanID={0}&amp;PK_iDangkyChungnhanVietGapID={1}" />
-                     <asp:TemplateField HeaderText="Tác vụ">
+                     <asp:TemplateField HeaderText="Đánh giá">
                         <ItemTemplate>
-                            <asp:LinkButton ID="lbtnGiayto" CommandName="Giayto" CommandArgument='<%# Bind("PK_iDangkyChungnhanVietGapID") %>' runat="server">Giấy tờ kèm theo</asp:LinkButton>
+                            <asp:LinkButton ID="lbtnDanhgia" CommandName="Danhgia" CommandArgument='<%# Bind("FK_iTochucchungnhanID") %>' runat="server">Đánh giá</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -172,8 +172,7 @@
                     </h1>
                 <ul class="tabs">
                     <li class="active"><a href="#thongtinchung">Thông tin chung</a></li>
-                    <li><a href="#giaytokemtheo">Giấy tờ kèm theo</a></li>                    
-                     <li><a href="#danhgia">Đánh giá</a></li>                    
+                    <li><a href="#giaytokemtheo">Giấy tờ kèm theo</a></li>                                       
                 </ul>
             </div>
             <div class="block-content tab-container">
@@ -316,9 +315,6 @@
         </fieldset>
     </div>
                 </div>
-                <div id="danhgia" class="tab-content" style="display: none;">
-                        <uc1:ucTochuccapphepDanhgia ID="ucTochuccapphepDanhgia1" runat="server" />
-                </div>
             </div>
         </div>
         <div style="text-align:center;width: 100%; padding:15px;">
@@ -331,7 +327,7 @@
     </div>
     <br />
 </asp:Panel>
-<asp:Panel runat="server" ID="panGiayto" Visible="false">
+<%--<asp:Panel runat="server" ID="panGiayto" Visible="false">
     <fieldset>
         <legend>Giấy tờ nộp kèm hồ sơ</legend>
         <asp:Label runat="server" ID="Label2" ForeColor="Red"></asp:Label>
@@ -342,4 +338,7 @@
         <asp:Button ID="btnHuygiaytonopkem" runat="server" Text="Ẩn" 
             onclick="btnHuygiaytonopkem_Click" />
     </fieldset>
+</asp:Panel>--%>
+<asp:Panel runat="server" ID="pnDanhgia" Visible="false">
+    <asp:PlaceHolder runat="server" ID="phDanhgia"></asp:PlaceHolder>
 </asp:Panel>

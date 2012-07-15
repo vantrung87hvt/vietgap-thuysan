@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Globalization;
 using Aspose.Words;
+using System.Transactions;
 
 public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
 {
@@ -21,16 +22,12 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     int PK_iDanhgiatochucID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        //getThongtindanhgia(PK_iDanhgiatochucID);
-        if (!IsPostBack)
+        btnExportToWord.Enabled = false;
+        napDoandanhgiavien(PK_iTochucchungnhanID);
+        if (Session["PK_iTochucchungnhanID"] != null)
         {
-            if (Session["PK_iTochucchungnhanID"] != null)
-            {
-                PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
-                napDoandanhgiavien(PK_iTochucchungnhanID);
-                NapThongtin(PK_iTochucchungnhanID);
-            }
+            PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
+            NapThongtin(PK_iTochucchungnhanID);
         }
     }
 
@@ -44,7 +41,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     }
      public void napDoandanhgiavien(int iTochucchungnhanID)
     {
-        List<ChuyengiaEntity> lstDoandanhgia = ChuyengiaBRL.GetByFK_iTochucchungnhanID(iTochucchungnhanID);
+        List<ChuyengiaEntity> lstDoandanhgia = ChuyengiaBRL.GetAll();
 
         ddlTruongdoan.Items.Clear();
         ddlTruongdoan.DataSource = lstDoandanhgia;
@@ -108,10 +105,10 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                     sDoan += "<li>" + oChuyengia.sHoten + "</li>";
                 sDoan += "</ul>";
                 lblCacthanhvien.Text = sDoan;
-            }
-            //----
-            btnExportToWord.Enabled = true;
-            }
+        }
+        //----
+        btnExportToWord.Enabled = true;
+    }
     
    
     
@@ -252,98 +249,154 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         //String sGio = (DateTime.Parse(txtGiodg.Text)).ToString();
         //Response.Write("Giờ = " + sGio);
         //return;
-        if (Session["PK_iTochucchungnhanID"] != null)
-            PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
-        
-        PK_iDanhgiatochucID = getThongtindanhgia(PK_iTochucchungnhanID);
 
-        DanhgiatochucchungnhanEntity oDanhgia = new DanhgiatochucchungnhanEntity();
-        oDanhgia.sPhamvinghidinh = txtPhamvideghi.InnerText;
-        oDanhgia.dNgaydanhgia = DateTime.Parse(txtNgaydg.Text + " " + txtGiodg.Text);
-        oDanhgia.sCancudanhgia = txtCancudanhgia.InnerText;
-        oDanhgia.sNoidungdanhgia = txtNoidungdanhgia.InnerText;
-        oDanhgia.sKetquadanhgia = txtKetquadanhgia.InnerText;
-        oDanhgia.sKetquadanhgia = txtKetquadanhgia.InnerText;
-        oDanhgia.iKetquadanhgia = short.Parse(ddlKetluan.SelectedItem.Value);
-        oDanhgia.sKiennghi = txtaKiennghi.InnerText;
-        oDanhgia.FK_iTochucchungnhanID = PK_iTochucchungnhanID;
-        oDanhgia.FK_iTruongdoandanhgiaID = int.Parse(ddlTruongdoan.SelectedItem.Value);
-        if (PK_iDanhgiatochucID == 0)
+        //Kiểm tra số lượng thành viên trong đoàn đánh giá
+        //Số lượng <=5 thành viên kể cả trưởng đoàn đánh giá
+        bool bTruongdoancotrongdanhsach = false;
+        int iSoluongchuyengia = 0;
+        for (int i = 0; i < cblDoandanhgia.Items.Count; ++i)
         {
-            bool bTruongdoancotrongdanhsach = false;
-            PK_iDanhgiatochucID = DanhgiatochucchungnhanBRL.Add(oDanhgia);
-            DoandanhgiatochucchungnhanEntity oDoandanhgiaTmp = new DoandanhgiatochucchungnhanEntity();
-            for(int i=0;i<cblDoandanhgia.Items.Count; ++i)
+            if (cblDoandanhgia.Items[i].Selected)
             {
-                if (cblDoandanhgia.Items[i].Selected)
+                iSoluongchuyengia++;
+                if (ddlTruongdoan.SelectedValue == cblDoandanhgia.Items[i].Value)
                 {
-                    oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                    oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
-                    DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
-                    if (ddlTruongdoan.SelectedValue == cblDoandanhgia.Items[i].Value)
-                    {
-                        bTruongdoancotrongdanhsach = true;
-                    }
+                    bTruongdoancotrongdanhsach = true;
                 }
             }
-            if (!bTruongdoancotrongdanhsach)
-            {
-                oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
-                DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
-            }
-            //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
-            TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
-            oTochuc.bDuyet = (Int32.Parse(ddlKetluan.SelectedItem.Value) == 1 ? true : false);
-            oTochuc.iTrangthai = 2; // 2 - Hoàn chỉnh hồ sơ
-            oTochuc.sKytuviettat = " ";
-            // Cập nhập giá trị Trạng thái
-            TochucchungnhanBRL.Edit(oTochuc);
-            lblThongbao.Text = "Lưu thành  công!";
-            btnExportToWord.Enabled = true;
-            NapThongtin(PK_iTochucchungnhanID);
+        }
+        if(!bTruongdoancotrongdanhsach)
+        {
+            iSoluongchuyengia++;
+        }
+        if(iSoluongchuyengia > 5)
+        {
+            lblThongbao.Text = "Chọn không quá 5 chuyên gia cho một đoàn đánh giá!";
+            return;
         }
         else
+            if(iSoluongchuyengia < 3)
+            {
+                lblThongbao.Text = "Đoàn đánh giá phải từ 3 đến 5 chuyên gia!";
+                return;
+            }
+        //-----------------------------------------------------
+        using (TransactionScope transaction = new TransactionScope())
         {
+            try
+            {
+                if (Session["PK_iTochucchungnhanID"] != null)
+                    PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
 
-            oDanhgia.PK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-            DanhgiatochucchungnhanBRL.Edit(oDanhgia);
-            //Xóa danh sách đánh giá viên đã tồn tại
-            List<DoandanhgiatochucchungnhanEntity> lstDoandanhgiaE = DoandanhgiatochucchungnhanBRL.GetByFK_iDanhgiatochucchungnhanID(PK_iDanhgiatochucID);
-            for(int i=0;i<lstDoandanhgiaE.Count;++i)
-            {
-                DoandanhgiatochucchungnhanBRL.Remove(lstDoandanhgiaE[i].PK_iDoandanhgiatochucchungnhanID);
-            }
-            bool bTruongdoancotrongdanhsach = false;
-            DoandanhgiatochucchungnhanEntity oDoandanhgiaTmp = new DoandanhgiatochucchungnhanEntity();
-            for(int i=0;i<cblDoandanhgia.Items.Count; ++i)
-            {
-                if (cblDoandanhgia.Items[i].Selected)
+                PK_iDanhgiatochucID = getThongtindanhgia(PK_iTochucchungnhanID);
+
+                DanhgiatochucchungnhanEntity oDanhgia = new DanhgiatochucchungnhanEntity();
+                oDanhgia.sPhamvinghidinh = txtPhamvideghi.InnerText;
+                oDanhgia.dNgaydanhgia = DateTime.Parse(txtNgaydg.Text + " " + txtGiodg.Text);
+                oDanhgia.sCancudanhgia = txtCancudanhgia.InnerText;
+                oDanhgia.sNoidungdanhgia = txtNoidungdanhgia.InnerText;
+                oDanhgia.sKetquadanhgia = txtKetquadanhgia.InnerText;
+                oDanhgia.sKetquadanhgia = txtKetquadanhgia.InnerText;
+                oDanhgia.iKetquadanhgia = short.Parse(ddlKetluan.SelectedItem.Value);
+                oDanhgia.sKiennghi = txtaKiennghi.InnerText;
+                oDanhgia.FK_iTochucchungnhanID = PK_iTochucchungnhanID;
+                oDanhgia.FK_iTruongdoandanhgiaID = int.Parse(ddlTruongdoan.SelectedItem.Value);
+                if (PK_iDanhgiatochucID == 0)
                 {
-                    oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                    oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
-                    DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
-                    if (ddlTruongdoan.SelectedValue == cblDoandanhgia.Items[i].Value)
+                    bTruongdoancotrongdanhsach = false;
+                    PK_iDanhgiatochucID = DanhgiatochucchungnhanBRL.Add(oDanhgia);
+                    DoandanhgiatochucchungnhanEntity oDoandanhgiaTmp = new DoandanhgiatochucchungnhanEntity();
+                    for (int i = 0; i < cblDoandanhgia.Items.Count; ++i)
                     {
-                        bTruongdoancotrongdanhsach = true;
+                        if (cblDoandanhgia.Items[i].Selected)
+                        {
+                            oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
+                            oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
+                            DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
+                        }
                     }
+                    if (!bTruongdoancotrongdanhsach)
+                    {
+                        oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
+                        oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
+                        DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
+                    }
+                    //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
+                    TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
+                    oTochuc.bDuyet = (Int32.Parse(ddlKetluan.SelectedItem.Value) == 1 ? true : false);
+                    oTochuc.iTrangthai = 2; // 2 - Hoàn chỉnh hồ sơ
+                    oTochuc.sKytuviettat = " ";
+                    // Cập nhập giá trị Trạng thái
+                    TochucchungnhanBRL.Edit(oTochuc);
+                    lblThongbao.Text = "Lưu thành  công!";
+                    btnExportToWord.Enabled = true;
+                    NapThongtin(PK_iTochucchungnhanID);
                 }
+                else
+                {
+
+                    oDanhgia.PK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
+                    DanhgiatochucchungnhanBRL.Edit(oDanhgia);
+                    //Xóa danh sách đánh giá viên đã tồn tại
+                    List<DoandanhgiatochucchungnhanEntity> lstDoandanhgiaE = DoandanhgiatochucchungnhanBRL.GetByFK_iDanhgiatochucchungnhanID(PK_iDanhgiatochucID);
+                    for (int i = 0; i < lstDoandanhgiaE.Count; ++i)
+                    {
+                        DoandanhgiatochucchungnhanBRL.Remove(lstDoandanhgiaE[i].PK_iDoandanhgiatochucchungnhanID);
+                    }
+                    bTruongdoancotrongdanhsach = false;
+                    DoandanhgiatochucchungnhanEntity oDoandanhgiaTmp = new DoandanhgiatochucchungnhanEntity();
+                    DoandanhgiatochucchungnhanEntity oDoandanhgiaFound = null;
+                    for (int i = 0; i < cblDoandanhgia.Items.Count; ++i)
+                    {
+                        oDoandanhgiaFound = null;
+                        oDoandanhgiaFound = lstDoandanhgiaE.Find(
+                            delegate(DoandanhgiatochucchungnhanEntity oDoanDGFind)
+                            {
+                                return oDoanDGFind.FK_iChuyengiaID == int.Parse(cblDoandanhgia.Items[i].Value);
+                            }
+                        );
+                        if (oDoandanhgiaFound != null)
+                        {
+                            if (!cblDoandanhgia.Items[i].Selected)
+                            {
+                                DoandanhgiatochucchungnhanBRL.Remove(oDoandanhgiaFound.PK_iDoandanhgiatochucchungnhanID);
+                            }
+                            lstDoandanhgiaE.Remove(oDoandanhgiaFound);
+                        }
+                        else
+                        {
+                            if (cblDoandanhgia.Items[i].Selected)
+                            {
+                                oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
+                                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(cblDoandanhgia.Items[i].Value);
+                                DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
+                            }
+                        }
+                    }
+                    lstDoandanhgiaE = null;
+                    //Nếu trưởng đoàn không có trong danh sách thì thêm vào danh sách
+                    if (!bTruongdoancotrongdanhsach)
+                    {
+                        oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
+                        oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
+                        DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
+                    }
+                    //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
+                    TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
+                    oTochuc.bDuyet = (Int32.Parse(ddlKetluan.SelectedItem.Value) == 1 ? true : false);
+                    string sNamCapPhep = DateTime.Today.Year.ToString("yy");
+                    string sSoThuTuCuaToChuc = TochucchungnhanBRL.GetAll().Count + 1 + "";
+                    oTochuc.sMaso = "VietGAP-TS-" + sNamCapPhep + "-" + sSoThuTuCuaToChuc;
+                    TochucchungnhanBRL.Edit(oTochuc);
+                    lblThongbao.Text = "Cập nhật thành công!";
+                    NapThongtin(PK_iTochucchungnhanID);
+                }
+                transaction.Complete();
             }
-            if (!bTruongdoancotrongdanhsach)
+            catch(Exception ex)
             {
-                oDoandanhgiaTmp.FK_iDanhgiatochucchungnhanID = PK_iDanhgiatochucID;
-                oDoandanhgiaTmp.FK_iChuyengiaID = int.Parse(ddlTruongdoan.SelectedValue);
-                DoandanhgiatochucchungnhanBRL.Add(oDoandanhgiaTmp);
+                
             }
-            //Cập nhật trạng thái duyệt của tổ chức được chứng nhận
-            TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
-            oTochuc.bDuyet = (Int32.Parse(ddlKetluan.SelectedItem.Value) == 1 ? true : false);
-            string sNamCapPhep = DateTime.Today.Year.ToString("yy");
-            string sSoThuTuCuaToChuc = TochucchungnhanBRL.GetAll().Count + 1+"";
-            oTochuc.sMaso = "VietGAP-TS-"+sNamCapPhep+"-"+sSoThuTuCuaToChuc;
-            TochucchungnhanBRL.Edit(oTochuc);
-            lblThongbao.Text = "Cập nhật thành  công!";
-            NapThongtin(PK_iTochucchungnhanID);
-        } 
+        }
     }
 }

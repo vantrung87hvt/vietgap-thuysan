@@ -137,7 +137,7 @@
   <tr>
     <td><strong>3. Đoàn đánh giá:</strong><br />
         <div class="cuonDoc">
-            <asp:CheckBoxList ID="cblDoandanhgia" Height="2" runat="server" Width="100%" ></asp:CheckBoxList>
+            <asp:CheckBoxList ID="cblDoandanhgia" Height="200px" runat="server" Width="100%" ></asp:CheckBoxList>
         </div>
         <%--<table>
             <tr>

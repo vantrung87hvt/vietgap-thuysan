@@ -22,29 +22,31 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             if (lstDanhsachTochucchungnhan != null && lstDanhsachTochucchungnhan.Count > 0)
                 DanhsachTochucchungnhanDangky = lstDanhsachTochucchungnhan;
             napTochucchungnhanDangky();
-        }
-        // Nếu có tham số truyền vào - nạp thông tin về Tổ chức chứng nhận
-        if (Request.QueryString["iTochucchungnhanID"] != null)
-        {
-            Session["PK_iTochucchungnhanID"] = Request.QueryString["iTochucchungnhanID"].ToString();
-            int PK_iDangkyChungnhanVietGapID = 0;
-            if(Request.QueryString["PK_iDangkyChungnhanVietGapID"] != null)
+
+            // Nếu có tham số truyền vào - nạp thông tin về Tổ chức chứng nhận
+            if (Request.QueryString["iTochucchungnhanID"] != null)
             {
-                PK_iDangkyChungnhanVietGapID = Convert.ToInt32(Request.QueryString["PK_iDangkyChungnhanVietGapID"].ToString());
-                //-----------Check duyệts
-                DangkyHoatdongchungnhanEntity oDangky = DangkyHoatdongchungnhanBRL.GetOne(PK_iDangkyChungnhanVietGapID);
-                if (oDangky != null && oDangky.iTrangthaidangky == 2)
+                Session["PK_iTochucchungnhanID"] = Request.QueryString["iTochucchungnhanID"].ToString();
+                int PK_iDangkyChungnhanVietGapID = 0;
+                if (Request.QueryString["PK_iDangkyChungnhanVietGapID"] != null)
                 {
-                    btnCapPhep.Visible = false;
+                    PK_iDangkyChungnhanVietGapID = Convert.ToInt32(Request.QueryString["PK_iDangkyChungnhanVietGapID"].ToString());
+                    //-----------Check duyệts
+                    DangkyHoatdongchungnhanEntity oDangky = DangkyHoatdongchungnhanBRL.GetOne(PK_iDangkyChungnhanVietGapID);
+                    if (oDangky != null && oDangky.iTrangthaidangky == 2)
+                    {
+                        btnCapPhep.Visible = false;
+                    }
+                    else
+                    {
+                        btnCapPhep.Visible = true;
+                    }
                 }
-                else
-                {
-                    btnCapPhep.Visible = true;
-                }
+                pnThongTin.Visible = true;
+                NapForm(PK_iDangkyChungnhanVietGapID);
             }
-            pnThongTin.Visible = true;
-            NapForm(PK_iDangkyChungnhanVietGapID);
         }
+        
     }
     public List<DangkyHoatdongchungnhanEntity> DanhsachTochucchungnhanDangky
     {
@@ -94,55 +96,61 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
     }
     protected void grvTochuccapphep_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "Giayto")
+        if (e.CommandName == "Danhgia")
         {
-            LinkButton lbtnGiayto = (LinkButton) e.CommandSource;
-            Int16 iDangkyChungnhanID = Int16.Parse(lbtnGiayto.CommandArgument);
-            btnLuuGiaytonopkem.CommandArgument = iDangkyChungnhanID.ToString();
-            napGiaytoNopkemhoso(iDangkyChungnhanID);
-            //
-            pnThongTin.Visible = false;
-            panGiayto.Visible = true;
+            LinkButton lbtnDanhgia = (LinkButton) e.CommandSource;
+            Int16 PK_iTochucchungnhanID = Int16.Parse(lbtnDanhgia.CommandArgument);
+            Session["PK_iTochucchungnhanID"] = PK_iTochucchungnhanID;
+            Response.Redirect("~/adminx/Default.aspx?page=TochuccapphepDanhgia", true);
+            //foreach (Control ctr in phDanhgia.Controls)
+            //{
+            //    phDanhgia.Controls.Remove(ctr);
+            //}
+            //Control ctrDanhgiaTochuc = LoadControl("~/adminx/ucTochuccapphepDanhgia.ascx");
+            //phDanhgia.Controls.Add(ctrDanhgiaTochuc);
+            ////
+            //pnThongTin.Visible = false;
+            //pnDanhgia.Visible = true;
         }
     }
 
 
-    public void napGiaytoNopkemhoso(Int16 iDangkyChungnhanID)
-    {
-        List<HosokemtheoTochucchungnhanEntity> lstHosonopkem = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(iDangkyChungnhanID);
-        List<GiaytoEntity> lstGiayto = GiaytoBRL.GetAll();
-        lstGiayto = lstGiayto.FindAll(
-            delegate(GiaytoEntity oGiaytoFound)
-            {
-                return (oGiaytoFound.bCSNT == false);
-            }
-            );
-        cblGiaytonopkem.DataSource = lstGiayto;
-        cblGiaytonopkem.DataTextField = "sTengiayto";
-        cblGiaytonopkem.DataValueField = "PK_iGiaytoID";
-        cblGiaytonopkem.DataBind();
+    //public void napGiaytoNopkemhoso(Int16 iDangkyChungnhanID)
+    //{
+    //    List<HosokemtheoTochucchungnhanEntity> lstHosonopkem = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(iDangkyChungnhanID);
+    //    List<GiaytoEntity> lstGiayto = GiaytoBRL.GetAll();
+    //    lstGiayto = lstGiayto.FindAll(
+    //        delegate(GiaytoEntity oGiaytoFound)
+    //        {
+    //            return (oGiaytoFound.bCSNT == false);
+    //        }
+    //        );
+    //    cblGiaytonopkem.DataSource = lstGiayto;
+    //    cblGiaytonopkem.DataTextField = "sTengiayto";
+    //    cblGiaytonopkem.DataValueField = "PK_iGiaytoID";
+    //    cblGiaytonopkem.DataBind();
 
-        HosokemtheoTochucchungnhanEntity oHosoNopkem = null;
-        if (lstHosonopkem != null && lstHosonopkem.Count > 0)
-        {
-            foreach (ListItem chk in cblGiaytonopkem.Items)
-            {
-                oHosoNopkem = null;
-                oHosoNopkem = lstHosonopkem.Find(
-                    delegate(HosokemtheoTochucchungnhanEntity oHosoNopkemFound)
-                    {
-                        return oHosoNopkemFound.FK_iGiaytoID.ToString().Equals(chk.Value);
-                    }
-                    );
-                if (oHosoNopkem != null)
-                {
-                    chk.Selected = true;
-                }
-            }
-        }
-        lstGiayto = null;
-        lstHosonopkem = null;
-    }
+    //    HosokemtheoTochucchungnhanEntity oHosoNopkem = null;
+    //    if (lstHosonopkem != null && lstHosonopkem.Count > 0)
+    //    {
+    //        foreach (ListItem chk in cblGiaytonopkem.Items)
+    //        {
+    //            oHosoNopkem = null;
+    //            oHosoNopkem = lstHosonopkem.Find(
+    //                delegate(HosokemtheoTochucchungnhanEntity oHosoNopkemFound)
+    //                {
+    //                    return oHosoNopkemFound.FK_iGiaytoID.ToString().Equals(chk.Value);
+    //                }
+    //                );
+    //            if (oHosoNopkem != null)
+    //            {
+    //                chk.Selected = true;
+    //            }
+    //        }
+    //    }
+    //    lstGiayto = null;
+    //    lstHosonopkem = null;
+    //}
 
     protected void grvTochuccapphep_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -362,50 +370,50 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
     {
         napTochucchungnhanDangky();
     }
-    protected void btnLuuGiaytonopkem_Click(object sender, EventArgs e)
-    {
-        String sDangkyChungnhan = btnLuuGiaytonopkem.CommandArgument;
-        if(sDangkyChungnhan != null)
-        {
-            Int16 iDangkyChungnhan = Int16.Parse(sDangkyChungnhan);
-            List<HosokemtheoTochucchungnhanEntity> lstHosonopkem = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(iDangkyChungnhan);
-            HosokemtheoTochucchungnhanEntity oHosonopkem = null;
-            foreach (ListItem chk in cblGiaytonopkem.Items)
-            {
-                oHosonopkem = null;
-                oHosonopkem = lstHosonopkem.Find(
-                    delegate(HosokemtheoTochucchungnhanEntity oHosonopkemFound)
-                    {
-                        return oHosonopkemFound.FK_iGiaytoID.ToString().Equals(chk.Value);
-                    }
-                    );
-                if (oHosonopkem == null)
-                {
-                    if (chk.Selected)
-                    {
-                        HosokemtheoTochucchungnhanEntity oHosonopkemNew = new HosokemtheoTochucchungnhanEntity();
-                        oHosonopkemNew.FK_iGiaytoID = int.Parse(chk.Value);
-                        oHosonopkemNew.FK_iDangkyChungnhanVietGapID = iDangkyChungnhan;
-                        HosokemtheoTochucchungnhanBRL.Add(oHosonopkemNew);
-                    }
-                }
-                else
-                {
-                    if (!chk.Selected)
-                    {
-                        HosokemtheoTochucchungnhanBRL.Remove(oHosonopkem.PK_iHosokemtheoID);
-                    }
-                    lstHosonopkem.Remove(oHosonopkem); //Loại bỏ phần tử đã tìm thấy để tối ưu
-                }
-            }
-            lstHosonopkem = null;
-            lblThongbao.Text = "Lưu thành công!";
-        }
-    }
-    protected void btnHuygiaytonopkem_Click(object sender, EventArgs e)
-    {
-        panGiayto.Visible = false;
-    }
+    //protected void btnLuuGiaytonopkem_Click(object sender, EventArgs e)
+    //{
+    //    String sDangkyChungnhan = btnLuuGiaytonopkem.CommandArgument;
+    //    if(sDangkyChungnhan != null)
+    //    {
+    //        Int16 iDangkyChungnhan = Int16.Parse(sDangkyChungnhan);
+    //        List<HosokemtheoTochucchungnhanEntity> lstHosonopkem = HosokemtheoTochucchungnhanBRL.GetByFK_iDangkyChungnhanVietGapID(iDangkyChungnhan);
+    //        HosokemtheoTochucchungnhanEntity oHosonopkem = null;
+    //        foreach (ListItem chk in cblGiaytonopkem.Items)
+    //        {
+    //            oHosonopkem = null;
+    //            oHosonopkem = lstHosonopkem.Find(
+    //                delegate(HosokemtheoTochucchungnhanEntity oHosonopkemFound)
+    //                {
+    //                    return oHosonopkemFound.FK_iGiaytoID.ToString().Equals(chk.Value);
+    //                }
+    //                );
+    //            if (oHosonopkem == null)
+    //            {
+    //                if (chk.Selected)
+    //                {
+    //                    HosokemtheoTochucchungnhanEntity oHosonopkemNew = new HosokemtheoTochucchungnhanEntity();
+    //                    oHosonopkemNew.FK_iGiaytoID = int.Parse(chk.Value);
+    //                    oHosonopkemNew.FK_iDangkyChungnhanVietGapID = iDangkyChungnhan;
+    //                    HosokemtheoTochucchungnhanBRL.Add(oHosonopkemNew);
+    //                }
+    //            }
+    //            else
+    //            {
+    //                if (!chk.Selected)
+    //                {
+    //                    HosokemtheoTochucchungnhanBRL.Remove(oHosonopkem.PK_iHosokemtheoID);
+    //                }
+    //                lstHosonopkem.Remove(oHosonopkem); //Loại bỏ phần tử đã tìm thấy để tối ưu
+    //            }
+    //        }
+    //        lstHosonopkem = null;
+    //        lblThongbao.Text = "Lưu thành công!";
+    //    }
+    //}
+    //protected void btnHuygiaytonopkem_Click(object sender, EventArgs e)
+    //{
+    //    panGiayto.Visible = false;
+    //}
     protected void btnAnChitiet_Click(object sender, EventArgs e)
     {
         pnThongTin.Visible = false;
