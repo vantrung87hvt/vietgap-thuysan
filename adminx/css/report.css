@@ -202,3 +202,32 @@ table.chungnhan td
 {
     line-height:20px;
 }
+/*
+Thẻ chuyên gia đánh giá VietGAP
+*******************************/
+.thechuyengia
+{
+	font-family:"Times New Roman", Times, serif;
+	font-size:14px;
+	width:700px;
+	border:1px solid #000;
+}
+.left{text-align:left;}
+.center{text-align:center;}
+.right{text-align:right;}
+.bold{font-weight:bold;}
+.anhthe-chuyengia
+{
+	max-width:100px;
+	max-height:134px;
+	margin-top:20px;
+	margin-left:50px;
+}
+.thechuyengia .padding-left
+{
+	padding-left:150px;
+}
+.thechuyengia hr
+{
+    margin-left:125px;
+}

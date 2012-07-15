@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using INVI.Business;
 using INVI.Entity;
+using Aspose.Words;
+using Aspose.Words.Drawing;
 public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -50,7 +52,12 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                 imgAnhthe.ImageUrl = "../ViewImage.aspx?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
             else if (Convert.ToInt16(Session["GroupID"].ToString()) == 1)
                 imgAnhthe.ImageUrl = "ViewImage.aspx?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
-            ddlTrinhdo.SelectedValue = oChuyengia.FK_iTrinhdoID.ToString();
+            ddlTrinhdo.SelectedItem.Selected = false;
+            if (oChuyengia.FK_iTrinhdoID != null)
+            {
+                ddlTrinhdo.Items.FindByValue(oChuyengia.FK_iTrinhdoID.ToString()).Selected = true;
+            }
+            //ddlTrinhdo.SelectedValue = oChuyengia.FK_iTrinhdoID.ToString();
             //napGridView();
         }
     }
@@ -376,5 +383,154 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         else if (iSochuyengia > 0)
             sMacoso = "000" + (iSochuyengia);
         return sMacoso;
+    }
+    protected void grvChuyengia_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Thechuyengia")
+        {
+            LinkButton lbtnThechuyengia = (LinkButton)e.CommandSource;
+            Int16 PK_iChuyengiaID = Int16.Parse(lbtnThechuyengia.CommandArgument);
+            napThongtinthechuyengia(PK_iChuyengiaID);
+        }
+    }
+
+    private void napThongtinthechuyengia(Int16 _PK_iChuyengiaID)
+    {
+        ChuyengiaEntity oChuyengia = ChuyengiaBRL.GetOne(_PK_iChuyengiaID);
+        TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(oChuyengia.FK_iTochucchungnhanID);
+        lblCoquanchidinh.Text = oTochuc.sCoquancap;
+        lblHoten.Text = oChuyengia.sHoten;
+        lblNamsinh.Text = ""; //Thiếu trường năm sinh
+        lblDonnvicongtac.Text = oTochuc.sTochucchungnhan;
+        lblLinhvucdanhgia.Text = ""; //Thiếu lĩnh vực đánh giá
+        lblMasochuyengia.Text = oChuyengia.sMaso;
+        lblTenthutruong.Text = "";
+        String sUrlViewImage = ResolveUrl("~/adminx/ViewImage.aspx");
+        imgAnhtheChuyengia.ImageUrl = sUrlViewImage + "?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
+        //Gán ID chuyên gia cho nút ExportToWord
+        btnExportToWord.CommandArgument = _PK_iChuyengiaID.ToString();
+        pnThechuyengia.Visible = true;
+        //Disponse
+        oChuyengia = null;
+        oTochuc = null;
+    }
+    protected void btnExportToWord_Click(object sender, EventArgs e)
+    {
+        Int16 PK_iChuyengiaID = Int16.Parse(btnExportToWord.CommandArgument);
+        ChuyengiaEntity oChuyengia = ChuyengiaBRL.GetOne(PK_iChuyengiaID);
+        TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(oChuyengia.FK_iTochucchungnhanID);
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        NodeCollection tables = doc.GetChildNodes(NodeType.Table, true);
+
+        builder.PageSetup.Orientation = Aspose.Words.Orientation.Portrait;
+        builder.PageSetup.VerticalAlignment = PageVerticalAlignment.Top;
+        //builder.PageSetup.LeftMargin = 130;
+        //builder.PageSetup.TopMargin = 20;
+        //builder.PageSetup.RightMargin = 50;
+
+        builder.Font.Size = 12;
+        //------------------------------
+        builder.StartTable(); //Tạo bảng
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 220;
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.InsertCell(); //Ô trái
+        builder.Font.Bold = true;
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        builder.Writeln("BỘ NÔNG NGHIỆP VÀ PTNT");
+        builder.Writeln(oTochuc.sCoquancap);
+        builder.InsertCell(); //Ô phải
+        builder.Font.Bold = false;
+        builder.Writeln("CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM");
+        builder.Writeln("Độc lập - Tự do- Hạnh phúc");
+        builder.InsertHtml("<hr width='40%' />");
+        builder.EndRow(); //Kết thúc hàng
+        //-------------------------------
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 410;
+        builder.InsertCell();
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.Writeln();
+        builder.InsertImage(oChuyengia.imAnh, 100.0, 134.0);
+        builder.EndRow();
+        //-------------------------------
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 500;
+        builder.InsertCell();
+        builder.Font.Bold = true;
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        builder.Writeln("THẺ CHUYÊN GIA ĐÁNH GIÁ VietGAP");
+        builder.EndRow();
+        //-------------------------------
+        builder.RowFormat.AllowAutoFit = false;
+        //builder.CellFormat.Width = 50;
+        //builder.InsertCell();
+        //builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 450;
+        builder.RowFormat.LeftPadding = 50;
+        builder.InsertCell();
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.Font.Bold = false;
+        builder.ParagraphFormat.LineSpacing = 10.0;
+        builder.Writeln("Họ và tên: " + oChuyengia.sHoten);
+        builder.Writeln("Năm sinh: " + "");
+        builder.Writeln("Đơn vị công tác: " + oTochuc.sTochucchungnhan);
+        builder.Writeln("Lĩnh vực đánh giá: " + "");
+        builder.Write("Mã số: ");
+        builder.Font.Bold = true;
+        builder.Writeln(oChuyengia.sMaso);
+        builder.Writeln("");
+        builder.EndRow();
+        //------------------------------
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 220;
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.InsertCell(); //Ô trái
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 220;
+        builder.InsertCell(); //Ô phải
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        builder.Writeln("... , ngày ... tháng ... năm 20..");
+        builder.Font.Bold = true;
+        builder.Writeln("Thủ trưởng đơn vị");
+        builder.Font.Bold = false;
+        builder.Font.Italic = true;
+        builder.Writeln("( Ký tên, đóng dấu)");
+        builder.EndRow(); //Kết thúc hàng
+
+
+
+
+
+
+
+        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        //builder.RowFormat.AllowAutoFit = false;
+        //builder.CellFormat.Width = 250;
+        //builder.InsertCell();
+        //builder.Writeln("");
+        //builder.RowFormat.AllowAutoFit = false;
+        //builder.CellFormat.Width = 250;
+        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        //builder.InsertCell();
+        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        //builder.Font.Bold = false;
+        //builder.Writeln("... , ngày ... tháng ... năm 20..");
+        //builder.Font.Bold = true;
+        //builder.Writeln("Thủ trưởng đơn vị");
+        //builder.Font.Bold = false;
+        //builder.Font.Italic = true;
+        //builder.Writeln("( Ký tên, đóng dấu)");
+        //builder.EndRow();
+        builder.EndTable(); //Kết thúc bảng
+        doc.Save("Thechuyengia_" + oChuyengia.sMaso + ".doc", SaveFormat.Doc, SaveType.OpenInBrowser, Response);
+        //Disponse
+        oChuyengia = null;
+        oTochuc = null;
+    }
+    protected void btnVisiblePannel_Click(object sender, EventArgs e)
+    {
+        pnThechuyengia.Visible = false;
     }
 }
