@@ -200,7 +200,7 @@
                 </td>
             </tr>
             <tr>
-            	<td colspan="2" class="left padding-left">
+            	<td colspan="2" class="left padding-left line-height">
                 	<br /><br />
                 	Họ và tên:&nbsp;<asp:Label ID="lblHoten" runat="server" Text=""></asp:Label><br />
                     Năm sinh:&nbsp;<asp:Label ID="lblNamsinh" runat="server" Text=""></asp:Label><br />
