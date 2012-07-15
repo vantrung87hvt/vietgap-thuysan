@@ -843,4 +843,7 @@
   <data name="lblMota" xml:space="preserve">
     <value>Mô tả</value>
   </data>
+  <data name="lblDanhmucVideo" xml:space="preserve">
+    <value>Danh mục Video</value>
+  </data>
 </root>
