@@ -425,21 +425,20 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
 
         builder.PageSetup.Orientation = Aspose.Words.Orientation.Portrait;
         builder.PageSetup.VerticalAlignment = PageVerticalAlignment.Top;
-        //builder.PageSetup.LeftMargin = 130;
-        //builder.PageSetup.TopMargin = 20;
-        //builder.PageSetup.RightMargin = 50;
 
         builder.Font.Size = 12;
         //------------------------------
         builder.StartTable(); //Tạo bảng
         builder.RowFormat.AllowAutoFit = false;
-        builder.CellFormat.Width = 220;
+        builder.CellFormat.Width = 200;
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
         builder.InsertCell(); //Ô trái
         builder.Font.Bold = true;
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
         builder.Writeln("BỘ NÔNG NGHIỆP VÀ PTNT");
         builder.Writeln(oTochuc.sCoquancap);
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 250;
         builder.InsertCell(); //Ô phải
         builder.Font.Bold = false;
         builder.Writeln("CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM");
@@ -451,7 +450,6 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         builder.CellFormat.Width = 410;
         builder.InsertCell();
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-        builder.Writeln();
         builder.InsertImage(oChuyengia.imAnh, 100.0, 134.0);
         builder.EndRow();
         //-------------------------------
@@ -463,24 +461,19 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         builder.Writeln("THẺ CHUYÊN GIA ĐÁNH GIÁ VietGAP");
         builder.EndRow();
         //-------------------------------
-        builder.RowFormat.AllowAutoFit = false;
-        //builder.CellFormat.Width = 50;
-        //builder.InsertCell();
-        //builder.RowFormat.AllowAutoFit = false;
-        builder.CellFormat.Width = 450;
-        builder.RowFormat.LeftPadding = 50;
-        builder.InsertCell();
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.RowFormat.AllowAutoFit = false;
+        builder.CellFormat.Width = 500;
+        builder.InsertCell();
         builder.Font.Bold = false;
         builder.ParagraphFormat.LineSpacing = 10.0;
-        builder.Writeln("Họ và tên: " + oChuyengia.sHoten);
-        builder.Writeln("Năm sinh: " + "");
-        builder.Writeln("Đơn vị công tác: " + oTochuc.sTochucchungnhan);
-        builder.Writeln("Lĩnh vực đánh giá: " + "");
-        builder.Write("Mã số: ");
+        builder.Writeln("\t\tHọ và tên: " + oChuyengia.sHoten);
+        builder.Writeln("\t\tNăm sinh: " + "");
+        builder.Writeln("\t\tĐơn vị công tác: " + oTochuc.sTochucchungnhan);
+        builder.Writeln("\t\tLĩnh vực đánh giá: " + "");
+        builder.Write("\t\tMã số: ");
         builder.Font.Bold = true;
         builder.Writeln(oChuyengia.sMaso);
-        builder.Writeln("");
         builder.EndRow();
         //------------------------------
         builder.RowFormat.AllowAutoFit = false;
@@ -498,31 +491,6 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         builder.Font.Italic = true;
         builder.Writeln("( Ký tên, đóng dấu)");
         builder.EndRow(); //Kết thúc hàng
-
-
-
-
-
-
-
-        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-        //builder.RowFormat.AllowAutoFit = false;
-        //builder.CellFormat.Width = 250;
-        //builder.InsertCell();
-        //builder.Writeln("");
-        //builder.RowFormat.AllowAutoFit = false;
-        //builder.CellFormat.Width = 250;
-        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-        //builder.InsertCell();
-        //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-        //builder.Font.Bold = false;
-        //builder.Writeln("... , ngày ... tháng ... năm 20..");
-        //builder.Font.Bold = true;
-        //builder.Writeln("Thủ trưởng đơn vị");
-        //builder.Font.Bold = false;
-        //builder.Font.Italic = true;
-        //builder.Writeln("( Ký tên, đóng dấu)");
-        //builder.EndRow();
         builder.EndTable(); //Kết thúc bảng
         doc.Save("Thechuyengia_" + oChuyengia.sMaso + ".doc", SaveFormat.Doc, SaveType.OpenInBrowser, Response);
         //Disponse

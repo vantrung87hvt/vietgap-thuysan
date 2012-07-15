@@ -227,6 +227,10 @@ Thẻ chuyên gia đánh giá VietGAP
 {
 	padding-left:150px;
 }
+.thechuyengia .line-height
+{
+    line-height:20px;
+}
 .thechuyengia hr
 {
     margin-left:125px;
