@@ -26,6 +26,7 @@ namespace INVI.Business
 		private static string EX_IMANH_INVALID="imAnh không hợp lệ";
 		private static string EX_FK_ITRINHDOID_INVALID="FK_iTrinhdoID không hợp lệ";
 		private static string EX_ID_INVALID="PK_iChuyengiaID không hợp lệ";
+        private static string EX_INAMSINH_INVALID = "iNamsinh không hợp lệ";
         #endregion
         #region Public Methods
         /// <summary>
@@ -120,6 +121,8 @@ namespace INVI.Business
 				throw new Exception(EX_IMANH_INVALID);
 			if (entity.FK_iTrinhdoID < 0)
 				throw new Exception(EX_FK_ITRINHDOID_INVALID);
+            if (entity.iNamsinh < 0)
+                throw new Exception(EX_INAMSINH_INVALID);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi

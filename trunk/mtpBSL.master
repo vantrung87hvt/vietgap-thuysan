@@ -5,6 +5,7 @@
 <%@ Register Src="uc/ucThongKe.ascx" TagName="ucThongKe" TagPrefix="uc3" %>
 <%@ Register Src="uc/ucSearchIDInHome.ascx" TagName="ucSearchIDInHome" TagPrefix="uc4" %>
 <%@ Register Src="~/uc/ucSearchByVietGAPID.ascx" TagName="ucSearchByVietGAPID" TagPrefix="uc5" %>
+<%@ Register Src="~/uc/ucListVideoClips.ascx" TagName="ucListVideo" TagPrefix="uc6" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -107,8 +108,9 @@
                 <ul class="sidemenu">
                     <uc2:ucLogin ID="ucLogin1" runat="server" />
                 </ul>
-                
-                
+                 <ul class="sidemenu">
+                    <uc6:ucListVideo ID="ucListVideo" runat="server" />
+                </ul>
             </div>
             <asp:ContentPlaceHolder ID="ctContent" runat="server">
             </asp:ContentPlaceHolder>

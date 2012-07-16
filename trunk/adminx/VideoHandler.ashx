@@ -19,12 +19,15 @@ public class VideoHandler : IHttpHandler {
         VideoClipEntity entity = new VideoClipEntity();
         try
         {
-            int PK_iVideoClipID=Convert.ToInt32(context.Request.QueryString["iVideoID"].ToString());
+            int PK_iVideoClipID = 0;
+            if (context.Request.QueryString["iVideoID"] != null)
+                PK_iVideoClipID=Convert.ToInt32(context.Request.QueryString["iVideoID"].ToString());
             entity = VideoClipBRL.GetOne(PK_iVideoClipID);
             if (entity!=null)
             {
-                    context.Response.ContentType = entity.sTentep.ToString();
-                    context.Response.BinaryWrite((byte[])entity.bVideoClip);
+                context.Response.Clear();
+                context.Response.AddHeader("Content-Type", entity.sTentep.ToString());
+                context.Response.BinaryWrite((byte[])entity.bVideoClip);
             }
         }
         finally
