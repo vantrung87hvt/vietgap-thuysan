@@ -18,7 +18,16 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     private static byte[] bVideoClip = null;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!Page.IsPostBack)
+        {
+            napGridView();
+        }
+    }
+    private void napGridView()
+    {
+        grvVideoClips.DataSource = VideoClipBRL.GetAll();
+        grvVideoClips.DataKeyNames = new string[] { "PK_iVideoID" };
+        grvVideoClips.DataBind();
     }
     protected void btnOK_Click(object sender, EventArgs e)
     {
@@ -33,7 +42,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             {
                 if (fluVideoClips.PostedFile.ContentLength > 0)
                 {
-                    string strEx = "jpg|jpeg|bmp|png|gif";
+                    string strEx = "wmv|mpg|avi|mpeg|mp4";
                     string fileEx = fluVideoClips.FileName.Substring(fluVideoClips.FileName.LastIndexOf('.')).Remove(0, 1);
                     string[] arrEx = strEx.Split('|');
                     bool valid = false;
@@ -51,12 +60,15 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         objHttpPostedFile.InputStream.Read(bytVideo, 0, intContentlength);
                         entity.bVideoClip = bytVideo;
                         entity.iDungluong = bytVideo.Length;
-
+                        entity.sMota = txtMota.Text;
+                        entity.sTieude = txtTieude.Text;
+                        entity.sTentep = fileEx;
+                        entity.FK_iCategoryID = 9;
                     }
                 }
                 else if (btnOK.CommandName == "Add")
                 {
-                    lblLoi.Text = "Bạn chưa chọn logo";
+                    lblLoi.Text = "Bạn chưa chọn tệp video";
                     return;
                 }
                 else if (bVideoClip != null)
@@ -68,7 +80,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 {
                     // Nếu là sửa chữa thì check xem nếu đã có logo trong CSDL thì thôi không thông báo
                     if (!Convert.ToBoolean(Session["hasLogo"].ToString()) == true)
-                        lblLoi.Text = "Bạn chưa chọn logo";
+                        lblLoi.Text = "Bạn chưa chọn tệp video";
                     return;
                 }
             }
@@ -76,29 +88,30 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             if (btnOK.CommandName == "Edit")
             {
                 entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
-                
+                entity.iSolanxem = entity.iSolanxem + 1;
                 VideoClipBRL.Edit(entity);
-                
+                List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
+                lstClips.Add(entity);
+                rptVideoClips.DataSource = lstClips;
+                rptVideoClips.DataBind();
             }
             else
             {
-                //int iTochucchungnhanID = TochucchungnhanBRL.Add(entity);
-                //lblLoi.Text = "Bổ sung thành công";
-                //TochucchungnhanTaikhoanEntity oTochucTaikhoan = new TochucchungnhanTaikhoanEntity();
-                //oTochucTaikhoan.bActive = cbDuyet.Checked;
-
-                //oTochucTaikhoan.dNgaythuchien = DateTime.Today;
-                //oTochucTaikhoan.FK_iTaikhoanID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
-                //oTochucTaikhoan.FK_iTochucchungnhanID = iTochucchungnhanID;
-                //TochucchungnhanTaikhoanBRL.Add(oTochucTaikhoan);
-                //Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=TochuccapphepQuanly';</script>");
+                entity.iSolanxem = 0;
+                VideoClipBRL.Add(entity);
+                lblLoi.Text = "Bổ sung thành công";
+                List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
+                lstClips.Add(entity);
+                rptVideoClips.DataSource = lstClips;
+                rptVideoClips.DataBind();
+                Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
 
             }
             //Nạp lại dữ liệu
         }
         catch (Exception ex)
         {
-
+            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
     private void napForm(int PK_iVideoClipID)
@@ -110,13 +123,16 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             {
                 txtTieude.Text = oVideoClip.sTieude;
                 txtMota.Text = oVideoClip.sMota;
-                rptVideoClips.DataSource = oVideoClip;
+                bVideoClip = oVideoClip.bVideoClip;
+                List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
+                lstClips.Add(oVideoClip);
+                rptVideoClips.DataSource = lstClips;
                 rptVideoClips.DataBind();
             }
         }
         catch (Exception ex)
         {
-
+            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
@@ -125,18 +141,32 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     }
     protected void lbtnAddnew_Click(object sender, EventArgs e)
     {
-
+        pnlEdit.Visible = true;
+        btnOK.CommandName = "Add";
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
 
     }
-    protected void grvChungchi_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+    protected void grvVideoClips_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
     {
-
+        short PK_iVideoID = Convert.ToInt16(grvVideoClips.DataKeys[e.NewSelectedIndex].Values["PK_iVideoID"]);
+        btnOK.CommandName = "EDIT";
+        btnOK.Text = "Sửa";
+        pnlEdit.Visible = true;
+        btnOK.CommandArgument = PK_iVideoID.ToString();
+        napForm(PK_iVideoID);
     }
-    protected void grvChungchi_Sorting(object sender, GridViewSortEventArgs e)
+    protected void grvVideoClips_Sorting(object sender, GridViewSortEventArgs e)
     {
-
+        if (ViewState["SortDirection"] == null)
+            ViewState["SortDirection"] = "ASC";
+        else
+        {
+            ViewState["SortDirection"] = ViewState["SortDirection"].ToString() == "ASC" ? "DESC" : "ASC";
+        }
+        List<VideoClipEntity> list = VideoClipBRL.GetAll();
+        grvVideoClips.DataSource = VideoClipEntity.Sort(list, e.SortExpression, ViewState["SortDirection"].ToString());
+        grvVideoClips.DataBind();
     }
 }

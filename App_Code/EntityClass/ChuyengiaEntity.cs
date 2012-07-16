@@ -23,6 +23,7 @@ namespace INVI.Entity
 			m_itrangthai=0;
 			m_imanh=null;
 			m_fk_itrinhdoid=0;
+            m_inamsinh = 0;
         }
 		private Int32 m_pk_ichuyengiaid;
 		public Int32 PK_iChuyengiaID
@@ -79,6 +80,12 @@ namespace INVI.Entity
 			get { return m_fk_itrinhdoid ; }
 			set { m_fk_itrinhdoid = value; }
 		}
+        private Int32 m_inamsinh;
+        public Int32 iNamsinh
+        {
+            get { return m_inamsinh; }
+            set { m_inamsinh = value; }
+        }
 
         #region Comparison
         public static List<ChuyengiaEntity> Sort(List<ChuyengiaEntity> list, String SortExpression, String SortDirection)
@@ -188,6 +195,16 @@ namespace INVI.Entity
 				};
 			}
 		}
+        public static Comparison<ChuyengiaEntity> COMPARISON_iNamsinh
+        {
+            get
+            {
+                return delegate(ChuyengiaEntity entity, ChuyengiaEntity other)
+                {
+                    return entity.iNamsinh.CompareTo(other.iNamsinh);
+                };
+            }
+        }
         #endregion
     }
 }

@@ -14,7 +14,6 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Globalization;
 using Aspose.Words;
-using System.Transactions;
 
 public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
 {
@@ -149,7 +148,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         builder.Writeln("BÁO CÁO ĐÁNH GIÁ TỔ CHỨC CHỨNG NHẬN");
         builder.Writeln("");
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-        builder.Writeln("1. Tên tổ chức chứng nhận được đánh giá;");
+        builder.Writeln("1. Tên tổ chức chứng nhận được đánh giá");
         builder.Writeln("\t" + oTochuc.sTochucchungnhan);
         builder.Write("\tĐịa chỉ: ");
         builder.Bold = false;
@@ -281,15 +280,11 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                 return;
             }
         //-----------------------------------------------------
-        using (TransactionScope transaction = new TransactionScope())
-        {
             try
             {
                 if (Session["PK_iTochucchungnhanID"] != null)
                     PK_iTochucchungnhanID = Convert.ToInt32(Session["PK_iTochucchungnhanID"].ToString());
-
                 PK_iDanhgiatochucID = getThongtindanhgia(PK_iTochucchungnhanID);
-
                 DanhgiatochucchungnhanEntity oDanhgia = new DanhgiatochucchungnhanEntity();
                 oDanhgia.sPhamvinghidinh = txtPhamvideghi.InnerText;
                 oDanhgia.dNgaydanhgia = DateTime.Parse(txtNgaydg.Text + " " + txtGiodg.Text);
@@ -391,7 +386,6 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                     lblThongbao.Text = "Cập nhật thành công!";
                     NapThongtin(PK_iTochucchungnhanID);
                 }
-                transaction.Complete();
             }
             catch(Exception ex)
             {
@@ -399,4 +393,3 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             }
         }
     }
-}

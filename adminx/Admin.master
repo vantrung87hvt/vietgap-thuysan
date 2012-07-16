@@ -70,6 +70,9 @@
 								<asp:Panel ID="p_5" runat="server" Visible="false">
 									<li><a href="../adminx/Default.aspx?page=NewsManager">Quản lý bài viết</a></li>
 								</asp:Panel>
+                                <asp:Panel ID="p_70" runat="server" Visible="false">
+									<li><a href="../adminx/Default.aspx?page=VideoClipsManager">Quản lý các đoạn Video</a></li>
+								</asp:Panel>
 							</ul> 
 						</li> 
 						<li>

@@ -23,6 +23,8 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
             napDdlTrinhdo();
             napCblGiaychungnhan();
             this.napGridView();
+            lblCoquanchidinh.Text = "TỔNG CỤC THỦY SẢN";
+            lblLinhvucdanhgia.Text = "Thủy sản";
         }
         
     }
@@ -53,10 +55,12 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
             else if (Convert.ToInt16(Session["GroupID"].ToString()) == 1)
                 imgAnhthe.ImageUrl = "ViewImage.aspx?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
             ddlTrinhdo.SelectedItem.Selected = false;
+            lblNamsinh.Text = oChuyengia.iNamsinh.ToString();
             if (oChuyengia.FK_iTrinhdoID != null)
             {
                 ddlTrinhdo.Items.FindByValue(oChuyengia.FK_iTrinhdoID.ToString()).Selected = true;
             }
+
             //ddlTrinhdo.SelectedValue = oChuyengia.FK_iTrinhdoID.ToString();
             //napGridView();
         }
@@ -198,6 +202,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                 oChuyengia.iNamkinhnghiem = short.Parse(txtSonamkinhnghiem.Text);
                 oChuyengia.sMaso = txtMaso.Text;
                 oChuyengia.FK_iTrinhdoID = short.Parse(ddlTrinhdo.SelectedValue);
+                oChuyengia.iNamsinh = Convert.ToInt16(txtNamsinh.Text);
                 if (ddlDuyet.SelectedValue.Equals("1"))
                 {
                     oChuyengia.bDuyet = true;
@@ -398,11 +403,11 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
     {
         ChuyengiaEntity oChuyengia = ChuyengiaBRL.GetOne(_PK_iChuyengiaID);
         TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(oChuyengia.FK_iTochucchungnhanID);
-        lblCoquanchidinh.Text = oTochuc.sCoquancap;
+        lblCoquanchidinh.Text = "Tổng Cục Thủy Sản";
         lblHoten.Text = oChuyengia.sHoten;
-        lblNamsinh.Text = ""; //Thiếu trường năm sinh
+        lblNamsinhThe.Text = oChuyengia.iNamsinh.ToString();
         lblDonnvicongtac.Text = oTochuc.sTochucchungnhan;
-        lblLinhvucdanhgia.Text = ""; //Thiếu lĩnh vực đánh giá
+        lblLinhvucdanhgia.Text = "Thủy sản"; //Thiếu lĩnh vực đánh giá
         lblMasochuyengia.Text = oChuyengia.sMaso;
         lblTenthutruong.Text = "";
         String sUrlViewImage = ResolveUrl("~/adminx/ViewImage.aspx");

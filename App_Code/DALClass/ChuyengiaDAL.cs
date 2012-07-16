@@ -35,6 +35,7 @@ namespace INVI.DataAccess
 				entity.bDuyet =String.IsNullOrEmpty(dr["bDuyet"].ToString())?false:Boolean.Parse(dr["bDuyet"].ToString());
 				entity.iTrangthai = Int16.Parse("0"+dr["iTrangthai"].ToString());
                 entity.FK_iTrinhdoID = Int16.Parse("0" + dr["FK_iTrinhdoID"].ToString());
+                entity.iNamsinh = Int32.Parse("0" + dr["iNamsinh"].ToString());
                 try
                 {
                     entity.imAnh = (byte[])(dr["imAnh"]);
@@ -88,7 +89,7 @@ namespace INVI.DataAccess
         #region private
         private static SqlParameter[] initParams(ChuyengiaEntity entity)
         {
-            SqlParameter[] p = new SqlParameter[9];
+            SqlParameter[] p = new SqlParameter[10];
 			p[0] = new SqlParameter("@PK_iChuyengiaID", entity.PK_iChuyengiaID);
 			p[1] = new SqlParameter("@sHoten", entity.sHoten);
 			p[2] = new SqlParameter("@FK_iTochucchungnhanID", entity.FK_iTochucchungnhanID);
@@ -98,6 +99,7 @@ namespace INVI.DataAccess
 			p[6] = new SqlParameter("@iTrangthai", entity.iTrangthai);
 			p[7] = new SqlParameter("@imAnh", entity.imAnh);
 			p[8] = new SqlParameter("@FK_iTrinhdoID", entity.FK_iTrinhdoID);
+            p[9] = new SqlParameter("@iNamsinh", entity.iNamsinh);
             return p;
         }
         #endregion

@@ -36,8 +36,8 @@
                         <asp:TextBox ID="txtTieude" runat="server" 
                             Width="95%" Height="22px"></asp:TextBox>
                         
-                        <asp:RequiredFieldValidator ID="rqTenChungchi" runat="server" 
-                            ControlToValidate="txtChungchi" ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rqTieude" runat="server" 
+                            ControlToValidate="txtTieude" ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
                         
                     </td>
                 </tr>
@@ -100,13 +100,13 @@
     <tr>
         <td></td>
         <td align="center">
-            <asp:GridView ID="grvChungchi" runat="server" AutoGenerateColumns="False"
+            <asp:GridView ID="grvVideoClips" runat="server" AutoGenerateColumns="False"
                 AllowPaging="True" AllowSorting="True" 
-                            onsorting="grvChungchi_Sorting" Width="100%"
+                            onsorting="grvVideoClips_Sorting" Width="100%"
                             AlternatingRowStyle-CssClass="GridAltItem"
                             HeaderStyle-CssClass="GridHeader"
                             CssClass="Grid" EnableModelValidation="True" 
-                onselectedindexchanging="grvChungchi_SelectedIndexChanging">
+                onselectedindexchanging="grvVideoClips_SelectedIndexChanging">
 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
                 <Columns>
                      <asp:TemplateField HeaderText="Chọn tất">
@@ -118,8 +118,8 @@
                         </ItemTemplate>
                         <HeaderStyle Width="25px" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="PK_iChungchiID" HeaderText="ID" 
-                        SortExpression="PK_iChungchiID" />
+                    <asp:BoundField DataField="PK_iVideoID" HeaderText="ID" 
+                        SortExpression="PK_iVideoID" />
                     <asp:BoundField DataField="sTieude" HeaderText="Tiêu đề" 
                         SortExpression="sTieude" >
                         <ItemStyle HorizontalAlign="Left" />

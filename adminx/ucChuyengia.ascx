@@ -61,6 +61,16 @@
         </tr>
         <tr>
             <td valign="top" width="20%">
+                <asp:Label ID="lblNamsinh" runat="server" Text="Năm sinh:"></asp:Label>
+            </td>
+            <td valign="middle" width="70%">
+                <asp:TextBox ID="txtNamsinh" runat="server" Width="95%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtNamsinh"
+                    ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" width="20%">
                 <asp:Label ID="Label2" runat="server" Text="Mã số:"></asp:Label>
             </td>
             <td valign="middle" width="70%">
@@ -145,6 +155,8 @@
         <asp:BoundField DataField="sHoten" HeaderText="Họ tên" SortExpression="sHoten">
             <ItemStyle HorizontalAlign="Left" />
         </asp:BoundField>
+        <asp:BoundField DataField="iNamsinh" HeaderText="Năm sinh" 
+            SortExpression="iNamsinh" />
         <asp:BoundField DataField="sMaso" HeaderText="Mã số" SortExpression="sMaso">
             <ItemStyle HorizontalAlign="Left" />
         </asp:BoundField>
@@ -203,7 +215,7 @@
             	<td colspan="2" class="left padding-left line-height">
                 	<br /><br />
                 	Họ và tên:&nbsp;<asp:Label ID="lblHoten" runat="server" Text=""></asp:Label><br />
-                    Năm sinh:&nbsp;<asp:Label ID="lblNamsinh" runat="server" Text=""></asp:Label><br />
+                    Năm sinh:&nbsp;<asp:Label ID="lblNamsinhThe" runat="server" Text=""></asp:Label><br />
                     Đơn vị công tác:&nbsp;<asp:Label ID="lblDonnvicongtac" runat="server" Text=""></asp:Label><br />
                     Lĩnh vực đánh giá:&nbsp;<asp:Label ID="lblLinhvucdanhgia" runat="server" Text=""></asp:Label><br />
                     Mã số:&nbsp;<span class="bold"><asp:Label ID="lblMasochuyengia" runat="server" Text=""></asp:Label></span><br />

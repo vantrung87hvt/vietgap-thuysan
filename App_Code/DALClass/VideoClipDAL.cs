@@ -83,7 +83,7 @@ namespace INVI.DataAccess
         #region private
         private static SqlParameter[] initParams(VideoClipEntity entity)
         {
-            SqlParameter[] p = new SqlParameter[9];
+            SqlParameter[] p = new SqlParameter[10];
 			p[0] = new SqlParameter("@PK_iVideoID", entity.PK_iVideoID);
 			p[1] = new SqlParameter("@sTentep", entity.sTentep);
 			p[2] = new SqlParameter("@sTieude", entity.sTieude);
