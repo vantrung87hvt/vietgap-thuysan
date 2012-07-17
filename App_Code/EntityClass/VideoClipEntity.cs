@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:7/15/2012 8:51:39 AM
+Create On:7/17/2012 4:55:53 PM
 ------------------------------------------------------*/
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,7 @@ namespace INVI.Entity
 			m_iwidth=0;
 			m_iheight=0;
 			m_fk_icategoryid=0;
-			m_bvideoclip=null;
-            m_smota = "";
+			m_smota="";
         }
 		private Int32 m_pk_ivideoid;
 		public Int32 PK_iVideoID
@@ -73,18 +72,13 @@ namespace INVI.Entity
 			get { return m_fk_icategoryid ; }
 			set { m_fk_icategoryid = value; }
 		}
-		private Byte[] m_bvideoclip;
-		public Byte[] bVideoClip
+		private String m_smota;
+		public String sMota
 		{
-			get { return m_bvideoclip ; }
-			set { m_bvideoclip = value; }
+			get { return m_smota ; }
+			set { m_smota = value; }
 		}
-        private String m_smota;
-        public String sMota
-        {
-            get { return m_smota; }
-            set { m_smota = value; }
-        }
+
         #region Comparison
         public static List<VideoClipEntity> Sort(List<VideoClipEntity> list, String SortExpression, String SortDirection)
         {
@@ -179,20 +173,7 @@ namespace INVI.Entity
 				};
 			}
 		}
-		public static Comparison<VideoClipEntity> COMPARISON_bVideoClip
-		{
-			get
-			{
-				return delegate(VideoClipEntity entity,VideoClipEntity other)
-				{
-                    if (entity.bVideoClip.Equals(other.bVideoClip) == true)
-                        return 1;
-                    else
-                        return 0;
-				};
-			}
-		}
-        public static Comparison<VideoClipEntity> COMPARISON_sMota
+		public static Comparison<VideoClipEntity> COMPARISON_sMota
 		{
 			get
 			{

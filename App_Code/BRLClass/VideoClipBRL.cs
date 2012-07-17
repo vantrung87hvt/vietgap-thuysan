@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:7/15/2012 8:51:34 AM
+Create On:7/17/2012 4:55:50 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -19,7 +19,6 @@ namespace INVI.Business
     {
         #region Init
         private static string EX_NOT_EXIST="Không Tồn Tại VideoClip Này";
-		private static string EX_PK_IVIDEOID_INVALID="PK_iVideoID không hợp lệ";
 		private static string EX_STENTEP_EMPTY="sTentep không được để trống";
 		private static string EX_STIEUDE_EMPTY="sTieude không được để trống";
 		private static string EX_ISOLANXEM_INVALID="iSolanxem không hợp lệ";
@@ -27,7 +26,6 @@ namespace INVI.Business
 		private static string EX_IWIDTH_INVALID="iWidth không hợp lệ";
 		private static string EX_IHEIGHT_INVALID="iHeight không hợp lệ";
 		private static string EX_FK_ICATEGORYID_INVALID="FK_iCategoryID không hợp lệ";
-		private static string EX_BVIDEOCLIP_INVALID="bVideoClip không hợp lệ";
 		private static string EX_ID_INVALID="PK_iVideoID không hợp lệ";
         #endregion
         #region Public Methods
@@ -106,8 +104,6 @@ namespace INVI.Business
         /// <param name="entity">VideoClipEntity: entity</param>
         private static void checkLogic(VideoClipEntity entity)
         {   
-			if (entity.PK_iVideoID < 0)
-				throw new Exception(EX_PK_IVIDEOID_INVALID);
 			if (String.IsNullOrEmpty(entity.sTentep))
 				throw new Exception(EX_STENTEP_EMPTY);
 			if (String.IsNullOrEmpty(entity.sTieude))
@@ -122,8 +118,6 @@ namespace INVI.Business
 				throw new Exception(EX_IHEIGHT_INVALID);
 			if (entity.FK_iCategoryID < 0)
 				throw new Exception(EX_FK_ICATEGORYID_INVALID);
-			if (entity.bVideoClip ==null)
-				throw new Exception(EX_BVIDEOCLIP_INVALID);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi

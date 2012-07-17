@@ -67,16 +67,16 @@
                     <td valign="top" width="20%">
                     </td>
                     <td valign="middle" width="70%">
-                        <asp:Repeater ID="rptVideoClips" runat="server">
-                            <ItemTemplate>
+                        <%--<asp:Repeater ID="rptVideoClips" runat="server">
+                            <ItemTemplate>--%>
                                 <object id="player" classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" height="170"
                                     width="300">
-                                    <param name="url" value='<%# "VideoHandler.ashx?iVideoID=" + Eval("PK_iVideoID") %>' />
+                                    <param name="url" value='<%=ResolveUrl("~/adminx/VideoHandler.aspx")%><%# "?iVideoID=1"%>' />
                                     <param name="showcontrols" value="true" />
                                     <param name="autostart" value="true" />
                                 </object>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                         <%--   </ItemTemplate>
+                        </asp:Repeater>--%>
                     </td>
                 </tr>
                 <tr>
