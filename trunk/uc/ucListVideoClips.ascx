@@ -1,20 +1,26 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucListVideoClips.ascx.cs"
     Inherits="uc_ucListVideoClips" %>
+<%@ Register Assembly="ASPNetVideo.NET2" Namespace="ASPNetVideo" TagPrefix="ASPNetVideo" %>
 <table>
+    <tr>
+        <td>
+            <asp:HyperLink ID="hypVideoLink" runat="server" NavigateUrl="~/Content.aspx?mode=uc&page=ListVideoInCat">Video
+            </asp:HyperLink>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ASPNetVideo:WindowsMedia ID="WindowsMedia1" runat="server" Height="145px" Width="180px"
+                AutoPlay="false" UIMode="None" ShowContextMenu="False">
+            </ASPNetVideo:WindowsMedia>
+        </td>
+    </tr>
+    </table>
+<div>
     <asp:Repeater ID="rptVideoClips" runat="server">
         <ItemTemplate>
-            <tr>
-                <td>
-                    <object id="player" classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" height="90"
-                        width="150">
-                        <param name="url" value='<%=ResolveUrl("~/adminx/VideoHandler.ashx")%><%# "?iVideoID=" + Eval("PK_iVideoID") %>' />
-                        <param name="showcontrols" value="true" />
-                        <param name="autostart" value="true" />
-                    </object>
-                    
-                </td>
-            </tr>
-            
+                <asp:HyperLink ID="hypVideoLink" runat="server" NavigateUrl='<%#"~/Content.aspx?VideoID="+Eval("PK_iVideoID") %>'><%#Eval("sTieude")%>
+                </asp:HyperLink>
         </ItemTemplate>
     </asp:Repeater>
-</table>
+</div>

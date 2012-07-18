@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:7/17/2012 4:55:50 PM
+Create On:7/18/2012 5:20:37 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -26,6 +26,8 @@ namespace INVI.Business
 		private static string EX_IWIDTH_INVALID="iWidth không hợp lệ";
 		private static string EX_IHEIGHT_INVALID="iHeight không hợp lệ";
 		private static string EX_FK_ICATEGORYID_INVALID="FK_iCategoryID không hợp lệ";
+		private static string EX_DNGAYTAI_INVALID="dNgaytai không hợp lệ";
+		private static string EX_SANHMINHHOA_EMPTY="sAnhMinhHoa không được để trống";
 		private static string EX_ID_INVALID="PK_iVideoID không hợp lệ";
         #endregion
         #region Public Methods
@@ -118,6 +120,10 @@ namespace INVI.Business
 				throw new Exception(EX_IHEIGHT_INVALID);
 			if (entity.FK_iCategoryID < 0)
 				throw new Exception(EX_FK_ICATEGORYID_INVALID);
+			if (DateTime.Parse("1753-01-01")>entity.dNgaytai)
+				throw new Exception(EX_DNGAYTAI_INVALID);
+			if (String.IsNullOrEmpty(entity.sAnhMinhHoa))
+				throw new Exception(EX_SANHMINHHOA_EMPTY);
         }
         /// <summary>
         /// Kiểm tra trùng lặp bản ghi

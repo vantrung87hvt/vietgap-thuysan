@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucVideoClipsManager.ascx.cs" Inherits="adminx_ucVideoClipsManager" %>
+<%@ Register Assembly="Media-Player-ASP.NET-Control" Namespace="Media_Player_ASP.NET_Control"
+    TagPrefix="cc1" %>
+<%@ Register Assembly="ASPNetVideo.NET2" Namespace="ASPNetVideo" TagPrefix="ASPNetVideo" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <table width="100%">
     <tr>
@@ -67,17 +70,12 @@
                     <td valign="top" width="20%">
                     </td>
                     <td valign="middle" width="70%">
-                        <%--<asp:Repeater ID="rptVideoClips" runat="server">
-                            <ItemTemplate>--%>
-                                <object id="player" classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" height="170"
-                                    width="300">
-                                    <param name="url" value='<%=ResolveUrl("~/adminx/VideoHandler.aspx")%><%# "?iVideoID=1"%>' />
-                                    <param name="showcontrols" value="true" />
-                                    <param name="autostart" value="true" />
-                                </object>
-                         <%--   </ItemTemplate>
-                        </asp:Repeater>--%>
+                        
+                        <%--<ASPNetVideo:WindowsMedia ID="WindowsMedia1" runat="server">
+                        </ASPNetVideo:WindowsMedia>--%>
+                        <cc1:Media_Player_Control ID="Media_Player_Control1" runat="server" />    
                     </td>
+                    
                 </tr>
                 <tr>
                     <td></td>

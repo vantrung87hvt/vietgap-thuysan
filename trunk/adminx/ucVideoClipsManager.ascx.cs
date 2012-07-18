@@ -4,6 +4,7 @@ using INVI.INVILibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JockerSoft.Media;
 using System.Configuration;
 using System.Data;
 using System.Web;
@@ -14,6 +15,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Globalization;
 using System.IO;
+using System.Drawing;
 public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
 {
     private static byte[] bVideoClip = null;
@@ -43,7 +45,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             {
                 if (fluVideoClips.PostedFile.ContentLength > 0)
                 {
-                    string strEx = "flv";
+                    string strEx = "flv|mp4";
                     string fileEx = fluVideoClips.FileName.Substring(fluVideoClips.FileName.LastIndexOf('.')).Remove(0, 1);
                     string[] arrEx = strEx.Split('|');
                     bool valid = false;
@@ -57,7 +59,6 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         string Path = GetUplaodImagePhysicalPath();
                         DirectoryInfo dirUploadImage = new DirectoryInfo(Path);
                         string fileUrl = Path + fluVideoClips.PostedFile.FileName;
-                        
                         HttpPostedFile objHttpPostedFile = fluVideoClips.PostedFile;
                         int intContentlength = objHttpPostedFile.ContentLength;
                         bytVideo = new Byte[intContentlength];
@@ -68,6 +69,9 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         entity.sTieude = txtTieude.Text;
                         entity.sTentep = fileUrl;
                         entity.FK_iCategoryID = 9;
+                        entity.sAnhMinhHoa = createThumbnailImage(fileUrl, fluVideoClips.PostedFile.FileName);
+                        Media_Player_Control1.MovieURL = fileUrl;
+                        entity.dNgaytai = DateTime.Today;
                     }
                 }
                 else if (btnOK.CommandName == "Add")
@@ -82,7 +86,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 else
                 {
                     // Nếu là sửa chữa thì check xem nếu đã có logo trong CSDL thì thôi không thông báo
-                    if (!Convert.ToBoolean(Session["hasLogo"].ToString()) == true)
+                    if (!Convert.ToBoolean(Session["hasVideo"].ToString()) == true)
                         lblLoi.Text = "Bạn chưa chọn tệp video";
                     return;
                 }
@@ -90,23 +94,15 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             // Xử lý nút bấm
             if (btnOK.CommandName == "Edit")
             {
-                entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
+                entity = VideoClipBRL.GetOne(Convert.ToInt32(btnOK.CommandArgument));
                 entity.iSolanxem = entity.iSolanxem + 1;
                 VideoClipBRL.Edit(entity);
-                //List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
-                //lstClips.Add(entity);
-                //rptVideoClips.DataSource = lstClips;
-                //rptVideoClips.DataBind();
             }
             else
             {
                 entity.iSolanxem = 0;
                 VideoClipBRL.Add(entity);
                 lblLoi.Text = "Bổ sung thành công";
-                //List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
-                //lstClips.Add(entity);
-                //rptVideoClips.DataSource = lstClips;
-                //rptVideoClips.DataBind();
                 Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
 
             }
@@ -117,10 +113,50 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
+    private String createThumbnailImage(String sPathVideoFile,String sFilename)
+    {
+        string _imagepath = GetUplaodImagePhysicalPath() + sFilename+".jpg";
+        Bitmap bmp = FrameGrabber.GetFrameFromVideo(sPathVideoFile, 0.2d);
+        bmp.Save(_imagepath, System.Drawing.Imaging.ImageFormat.Gif);
+        // Save directly frame on specified location
+        FrameGrabber.SaveFrameFromVideo(sPathVideoFile, 0.2d, _imagepath);
+        return _imagepath;
+    }
     string GetUplaodImagePhysicalPath()
     {
         return System.Web.HttpContext.Current.Request.PhysicalApplicationPath + "upload\\videos\\";
     }
+    public byte[] FileToByteArray(string _FileName)
+    {
+        byte[] _Buffer = null;
+       try
+        {
+            // Open file for reading
+            System.IO.FileStream _FileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+            // attach filestream to binary reader
+            System.IO.BinaryReader _BinaryReader = new System.IO.BinaryReader(_FileStream);
+
+            // get total byte length of the file
+            long _TotalBytes = new System.IO.FileInfo(_FileName).Length;
+
+            // read entire file into buffer
+            _Buffer = _BinaryReader.ReadBytes((Int32)_TotalBytes);
+
+            // close file reader
+            _FileStream.Close();
+            _FileStream.Dispose();
+            _BinaryReader.Close();
+        }
+        catch (Exception _Exception)
+        {
+            // Error
+            Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+        }
+
+        return _Buffer;
+    }
+
     private void napForm(int PK_iVideoClipID)
     {
         try
@@ -130,6 +166,11 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             {
                 txtTieude.Text = oVideoClip.sTieude;
                 txtMota.Text = oVideoClip.sMota;
+                Media_Player_Control1.MovieURL = oVideoClip.sTentep;
+
+                bVideoClip = FileToByteArray(oVideoClip.sTentep);
+                if (bVideoClip != null && bVideoClip.Length > 0)
+                    Session["hasVideo"] = true;
                 //List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
                 //lstClips.Add(oVideoClip);
                 //rptVideoClips.DataSource = lstClips;
@@ -152,7 +193,24 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
-
+        try
+        {
+            foreach (GridViewRow row in grvVideoClips.Rows)
+            {
+                CheckBox chkDelete = row.FindControl("chkDelete") as CheckBox;
+                short PK_iVideoID = Convert.ToInt16(grvVideoClips.DataKeys[row.RowIndex].Values["PK_iVideoID"]);
+                if (chkDelete != null && chkDelete.Checked)
+                {
+                    VideoClipBRL.Remove(PK_iVideoID);
+                }
+            }
+            //Nap lai du lieu
+            Response.Redirect(Request.Url.ToString());
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
+        }
     }
     protected void grvVideoClips_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
     {

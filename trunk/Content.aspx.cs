@@ -98,6 +98,12 @@ public partial class Content : MyUI
                     strControl += Request.QueryString["page"] + ".ascx";
                 }
             }
+            else if (Request.QueryString["VideoID"] != null)
+            {
+                int PK_iVideoID = Convert.ToInt16(Request.QueryString["VideoID"].ToString());
+                Session["VideoID"] = PK_iVideoID;
+                strControl = "~/uc/ucViewVideoClip.ascx";
+            }
             if (File.Exists(Server.MapPath(strControl)))
             {
                 Control ctrl = LoadControl(strControl);
