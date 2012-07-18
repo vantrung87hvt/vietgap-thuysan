@@ -233,4 +233,24 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
         grvVideoClips.DataSource = VideoClipEntity.Sort(list, e.SortExpression, ViewState["SortDirection"].ToString());
         grvVideoClips.DataBind();
     }
+    protected void grvVideoClips_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if(e.CommandName == "Xem")
+        {
+            LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
+            String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
+            String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+            String sVideoContent = String.Format(@"
+                <a  
+			         href='{0}'
+			         style='display:block;width:520px;height:330px'
+			         id='player'> 
+		        </a>
+		        <script>
+		            flowplayer('player', '{1}');
+		        </script>
+            ", sVideoUploadPath + lbtnXemvideo.CommandArgument, swfUrl);
+            divVideo.InnerHtml = sVideoContent;
+        }
+    }
 }
