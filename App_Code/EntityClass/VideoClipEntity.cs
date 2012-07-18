@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:7/17/2012 4:55:53 PM
+Create On:7/18/2012 5:20:41 PM
 ------------------------------------------------------*/
 using System;
 using System.Collections.Generic;
@@ -23,6 +23,8 @@ namespace INVI.Entity
 			m_iheight=0;
 			m_fk_icategoryid=0;
 			m_smota="";
+			m_dngaytai=DateTime.Now;
+			m_sanhminhhoa="";
         }
 		private Int32 m_pk_ivideoid;
 		public Int32 PK_iVideoID
@@ -77,6 +79,18 @@ namespace INVI.Entity
 		{
 			get { return m_smota ; }
 			set { m_smota = value; }
+		}
+		private DateTime m_dngaytai;
+		public DateTime dNgaytai
+		{
+			get { return m_dngaytai ; }
+			set { m_dngaytai = value; }
+		}
+		private String m_sanhminhhoa;
+		public String sAnhMinhHoa
+		{
+			get { return m_sanhminhhoa ; }
+			set { m_sanhminhhoa = value; }
 		}
 
         #region Comparison
@@ -180,6 +194,26 @@ namespace INVI.Entity
 				return delegate(VideoClipEntity entity,VideoClipEntity other)
 				{
 					return entity.sMota.CompareTo(other.sMota);
+				};
+			}
+		}
+		public static Comparison<VideoClipEntity> COMPARISON_dNgaytai
+		{
+			get
+			{
+				return delegate(VideoClipEntity entity,VideoClipEntity other)
+				{
+					return entity.dNgaytai.CompareTo(other.dNgaytai);
+				};
+			}
+		}
+		public static Comparison<VideoClipEntity> COMPARISON_sAnhMinhHoa
+		{
+			get
+			{
+				return delegate(VideoClipEntity entity,VideoClipEntity other)
+				{
+					return entity.sAnhMinhHoa.CompareTo(other.sAnhMinhHoa);
 				};
 			}
 		}

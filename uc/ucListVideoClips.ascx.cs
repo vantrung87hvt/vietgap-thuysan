@@ -18,14 +18,20 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
-            //lstVideo_napDulieu();
+            lstVideo_napDulieu();
         }
     }
     private void lstVideo_napDulieu()
     {
         List<VideoClipEntity> lstVideoClips = new List<VideoClipEntity>();
         lstVideoClips = VideoClipBRL.GetAll();
-        rptVideoClips.DataSource = lstVideoClips;
-        rptVideoClips.DataBind();
+        if (lstVideoClips.Count > 0)
+        {
+            lstVideoClips = VideoClipEntity.Sort(lstVideoClips, "dNgaytai", "DESC");
+            WindowsMedia1.VideoURL = lstVideoClips[0].sTentep;
+
+            rptVideoClips.DataSource = lstVideoClips;
+            rptVideoClips.DataBind();
+        }
     }
 }

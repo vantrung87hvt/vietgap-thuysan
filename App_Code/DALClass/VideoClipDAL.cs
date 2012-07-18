@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:7/17/2012 4:55:56 PM
+Create On:7/18/2012 5:20:45 PM
 ------------------------------------------------------*/
 using INVI.DataAccess.Base;
 using INVI.Entity;
@@ -36,6 +36,8 @@ namespace INVI.DataAccess
 				entity.iHeight = Int32.Parse("0"+dr["iHeight"].ToString());
 				entity.FK_iCategoryID = Int32.Parse("0"+dr["FK_iCategoryID"].ToString());
 				entity.sMota = dr["sMota"].ToString();
+				entity.dNgaytai =String.IsNullOrEmpty(dr["dNgaytai"].ToString())?DateTime.Now:DateTime.Parse(dr["dNgaytai"].ToString());
+				entity.sAnhMinhHoa = dr["sAnhMinhHoa"].ToString();
                 return entity;
             };
         }
@@ -78,7 +80,7 @@ namespace INVI.DataAccess
         #region private
         private static SqlParameter[] initParams(VideoClipEntity entity)
         {
-            SqlParameter[] p = new SqlParameter[9];
+            SqlParameter[] p = new SqlParameter[11];
 			p[0] = new SqlParameter("@PK_iVideoID", entity.PK_iVideoID);
 			p[1] = new SqlParameter("@sTentep", entity.sTentep);
 			p[2] = new SqlParameter("@sTieude", entity.sTieude);
@@ -88,6 +90,8 @@ namespace INVI.DataAccess
 			p[6] = new SqlParameter("@iHeight", entity.iHeight);
 			p[7] = new SqlParameter("@FK_iCategoryID", entity.FK_iCategoryID);
 			p[8] = new SqlParameter("@sMota", entity.sMota);
+			p[9] = new SqlParameter("@dNgaytai", entity.dNgaytai);
+			p[10] = new SqlParameter("@sAnhMinhHoa", entity.sAnhMinhHoa);
             return p;
         }
         #endregion

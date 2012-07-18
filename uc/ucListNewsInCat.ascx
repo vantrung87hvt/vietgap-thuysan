@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucListNewsInCat.ascx.cs"
     Inherits="uc_ListNews" %>
-<style>
+<style type="text/css">
     .bluelink
     {
         clear: both;
