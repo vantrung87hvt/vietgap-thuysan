@@ -3,6 +3,7 @@
     TagPrefix="cc1" %>
 <%@ Register Assembly="ASPNetVideo.NET2" Namespace="ASPNetVideo" TagPrefix="ASPNetVideo" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
+<script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
 <table width="100%">
     <tr>
         <td></td>
@@ -92,6 +93,10 @@
                 </tr>
             </table>
             </asp:Panel>
+            <asp:Panel runat="server" ID="pnXemvideo">
+                <div runat="server" id="divVideo"></div>
+                
+            </asp:Panel>
         </td>
         <td style="width: 10%"></td>
     </tr>
@@ -104,7 +109,8 @@
                             AlternatingRowStyle-CssClass="GridAltItem"
                             HeaderStyle-CssClass="GridHeader"
                             CssClass="Grid" EnableModelValidation="True" 
-                onselectedindexchanging="grvVideoClips_SelectedIndexChanging">
+                onselectedindexchanging="grvVideoClips_SelectedIndexChanging" 
+                onrowcommand="grvVideoClips_RowCommand">
 <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
                 <Columns>
                      <asp:TemplateField HeaderText="Chọn tất">
@@ -133,6 +139,11 @@
                          </EditItemTemplate>
                          <ItemTemplate>
                              <asp:Label ID="Label1" runat="server"></asp:Label>
+                         </ItemTemplate>
+                     </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Chạy thử">
+                         <ItemTemplate>
+                             <asp:LinkButton CommandName="Xem" CommandArgument='<%# Bind("sTentep") %>' ID="lbtnXemvideo" runat="server">Chạy thử</asp:LinkButton>
                          </ItemTemplate>
                      </asp:TemplateField>
                     <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false" Text="Sửa" />
