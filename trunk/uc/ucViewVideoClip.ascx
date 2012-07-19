@@ -10,10 +10,38 @@
     <div class="post-date"><asp:Label ID="lblDateTime" runat="server" /></div>
 	<div class="post-body">
         <asp:Panel runat="server" ID="pnXemvideo">
-                <div runat="server" id="divVideo"></div>
-            </asp:Panel>
+            <div runat="server" id="divVideo">
+                 <a  
+			         style='display:block;width:520px;height:330px'
+			         id='player'> 
+		        </a>
+                <label id="lblTrangthai"></label>
+            </div>
+        </asp:Panel>
 		<asp:Label ID="lblDesc" runat="server" />
 	</div>	
 </div>
 <hr />
 <uc1:ucListVideoInCat runat="server" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lblTrangthai = $("#lblTrangthai");
+        var swfUrl = '<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf") %>';
+        var player = $f("player_content", swfUrl, {
+            // this will enable pseudostreaming support
+            plugins: {
+                pseudo: {
+                    url: "http://releases.flowplayer.org/swf/flowplayer.pseudostreaming-3.2.9.swf"
+                }
+            },
+            // listen to following clip events
+            clip: {
+                // these two settings will make the first frame visible
+                autoPlay: false,
+                autoBuffering: true,
+                // make this clip use pseudostreaming plugin with "provider" property
+                provider: 'pseudo'
+            }
+        });
+    });
+</script>
