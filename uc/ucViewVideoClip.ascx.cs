@@ -28,18 +28,14 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
     private void showVideo(String sVideoPath)
     {
         //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
-        String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
         String sVideoUploadPath = ResolveUrl("~/upload/videos/");
         String sVideoContent = String.Format(@"
                 <a  
 			         href='{0}'
 			         style='display:block;width:520px;height:330px'
-			         id='player'> 
+			         id='player_content'> 
 		        </a>
-		        <script>
-		            flowplayer('player', '{1}');
-		        </script>
-            ", sVideoUploadPath + sVideoPath, swfUrl);
+            ", sVideoUploadPath + sVideoPath);
         divVideo.InnerHtml = sVideoContent;
         divVideo.Visible = true;
     }
