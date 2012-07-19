@@ -94,7 +94,12 @@
             </asp:Panel>
             <asp:Panel runat="server" ID="pnXemvideo">
                 <div runat="server" id="divVideo"></div>
-                
+                <script type="text/javascript">
+                    var swfUrl = '<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf") %>';
+                    $(document).ready(function () {
+                        flowplayer('player', swfUrl, { clip: { autoPlay: false}});
+                    });
+                </script>
             </asp:Panel>
         </td>
         <td style="width: 10%"></td>

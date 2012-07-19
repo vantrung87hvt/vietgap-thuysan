@@ -278,9 +278,9 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
 			         id='player'> 
 		        </a>
 		        <script>
-		            flowplayer('player', '{1}');
+		            
 		        </script>
-            ", sVideoUploadPath + lbtnXemvideo.CommandArgument, swfUrl);
+            ", sVideoUploadPath + lbtnXemvideo.CommandArgument);
             divVideo.InnerHtml = sVideoContent;
         }
     }
