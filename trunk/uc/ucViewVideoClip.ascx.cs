@@ -29,6 +29,7 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
     {
         //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
         String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+        String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
         String sVideoContent = String.Format(@"
                 <a  
 			         href='{0}'
@@ -38,7 +39,7 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
                 <script>
 		            flowplayer('player', '{1}');
 		        </script>
-            ", sVideoUploadPath + sVideoPath);
+            ", sVideoUploadPath + sVideoPath,swfUrl);
         divVideo.InnerHtml = sVideoContent;
         divVideo.Visible = true;
     }
