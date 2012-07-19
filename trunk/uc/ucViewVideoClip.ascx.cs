@@ -35,6 +35,9 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
 			         style='display:block;width:520px;height:330px'
 			         id='player_content'> 
 		        </a>
+                <script>
+		            flowplayer('player', '{1}');
+		        </script>
             ", sVideoUploadPath + sVideoPath);
         divVideo.InnerHtml = sVideoContent;
         divVideo.Visible = true;

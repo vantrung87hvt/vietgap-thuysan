@@ -8,7 +8,7 @@
     <script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ctContent" Runat="Server">
-<link href="css/formInMain.css" rel="stylesheet" type="text/css" />
+    <link href="css/formInMain.css" rel="stylesheet" type="text/css" />
     <div id="main" style="width:78%;margin-left:10px;text-align:justify;">
         <asp:PlaceHolder ID="phMain" runat="server"></asp:PlaceHolder>
     </div>
