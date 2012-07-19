@@ -74,7 +74,6 @@
                         
                         <%--<ASPNetVideo:WindowsMedia ID="WindowsMedia1" runat="server">
                         </ASPNetVideo:WindowsMedia>--%>
-                        <cc1:Media_Player_Control ID="Media_Player_Control1" runat="server" />    
                     </td>
                     
                 </tr>
@@ -141,9 +140,9 @@
                              <asp:Label ID="Label1" runat="server"></asp:Label>
                          </ItemTemplate>
                      </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Chạy thử">
+                     <asp:TemplateField HeaderText="Duyệt">
                          <ItemTemplate>
-                             <asp:LinkButton CommandName="Xem" CommandArgument='<%# Bind("sTentep") %>' ID="lbtnXemvideo" runat="server">Chạy thử</asp:LinkButton>
+                             <asp:LinkButton CommandName="Xem" CommandArgument='<%# Bind("sTentep") %>' ID="lbtnXemvideo" runat="server">Duyệt</asp:LinkButton>
                          </ItemTemplate>
                      </asp:TemplateField>
                     <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false" Text="Sửa" />

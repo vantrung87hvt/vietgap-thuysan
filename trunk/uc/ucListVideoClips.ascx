@@ -10,9 +10,9 @@
     </tr>
     <tr>
         <td>
-            <ASPNetVideo:WindowsMedia ID="WindowsMedia1" runat="server" Height="145px" Width="180px"
-                AutoPlay="false" UIMode="None" ShowContextMenu="False">
-            </ASPNetVideo:WindowsMedia>
+            <asp:Panel runat="server" ID="pnXemvideo">
+                <div runat="server" id="divVideo"></div>
+            </asp:Panel>
         </td>
     </tr>
     </table>

@@ -25,16 +25,33 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
             }
         }
     }
+    private void showVideo(String sVideoPath)
+    {
+        //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
+        String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
+        String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+        String sVideoContent = String.Format(@"
+                <a  
+			         href='{0}'
+			         style='display:block;width:520px;height:330px'
+			         id='player'> 
+		        </a>
+		        <script>
+		            flowplayer('player', '{1}');
+		        </script>
+            ", sVideoUploadPath + sVideoPath, swfUrl);
+        divVideo.InnerHtml = sVideoContent;
+        divVideo.Visible = true;
+    }
     private void loadVideoClips(int PK_iVideoID)
     {
         VideoClipEntity oVideoClip = VideoClipBRL.GetOne(PK_iVideoID);
         if (oVideoClip != null)
         {
-            Media_Player_Control1.MovieURL = oVideoClip.sTentep;
-            Media_Player_Control1.AutoStart = true;
             lblTitle.Text = oVideoClip.sTieude;
             lblDesc.Text = oVideoClip.sMota;
             lblDateTime.Text = oVideoClip.dNgaytai.ToShortDateString();
+            showVideo(oVideoClip.sTentep);
         }
     }
 }
