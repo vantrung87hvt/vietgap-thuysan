@@ -3,6 +3,7 @@
     TagPrefix="cc1" %>
 <%@ Register src="~/uc/ucListVideoInCat.ascx" tagname="ucListVideoInCat" tagprefix="uc1" %>
 <link href="<%=ResolveUrl("css/uc-style.css") %>" rel="stylesheet" type="text/css" />
+<script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
 <div class="post">
 	<div class="post-title"><h2>
         <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>

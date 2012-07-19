@@ -33,9 +33,19 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
 			         id='player'> 
 		        </a>
 		        <script>
-		            flowplayer('player', '{1}');
+		            var  player = $f('player_content', {1}, {
+                },
+            clip:   {
+                        autoPlay: false,
+                        autoBuffering: true,
+                        provider: 'pseudo'
+                        }
+                    }
+                }
+            }
 		        </script>
             ", sVideoUploadPath + sVideoPath, swfUrl);
+            //flowplayer('player', '{1}');
             divVideo.InnerHtml = sVideoContent;
             divVideo.Visible = true;
     }
