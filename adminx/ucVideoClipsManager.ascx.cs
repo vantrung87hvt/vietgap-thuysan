@@ -67,7 +67,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         entity.iDungluong = bytVideo.Length;
                         entity.sMota = txtMota.Text;
                         entity.sTieude = txtTieude.Text;
-                        entity.sTentep = fluVideoClips.PostedFile.FileName;
+                        entity.sTentep = fluVideoClips.PostedFile.FileName.Trim();
                         entity.FK_iCategoryID = 9;
                         //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName);
                         entity.sAnhMinhHoa = " ";
@@ -193,13 +193,22 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
         String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
         String sVideoUploadPath = ResolveUrl("~/upload/videos/");
         String sVideoContent = String.Format(@"
-                <a  
+                <a
 			         href='{0}'
 			         style='display:block;width:520px;height:330px'
 			         id='player'> 
 		        </a>
 		        <script>
-		            flowplayer('player', '{1}');
+		            var  player = $f('player_content', {1}, {
+                },
+            clip:   {
+                        autoPlay: false,
+                        autoBuffering: true,
+                        provider: 'pseudo'
+                        }
+                    }
+                }
+            }
 		        </script>
             ", sVideoUploadPath + sVideoPath, swfUrl);
         divVideo.InnerHtml = sVideoContent;
