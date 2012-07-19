@@ -67,10 +67,10 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         entity.iDungluong = bytVideo.Length;
                         entity.sMota = txtMota.Text;
                         entity.sTieude = txtTieude.Text;
-                        entity.sTentep = fileUrl;
+                        entity.sTentep = fluVideoClips.PostedFile.FileName;
                         entity.FK_iCategoryID = 9;
-                        entity.sAnhMinhHoa = createThumbnailImage(fileUrl, fluVideoClips.PostedFile.FileName);
-                        Media_Player_Control1.MovieURL = fileUrl;
+                        //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName);
+                        entity.sAnhMinhHoa = " ";
                         entity.dNgaytai = DateTime.Today;
                     }
                 }
@@ -94,9 +94,10 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             // Xử lý nút bấm
             if (btnOK.CommandName == "Edit")
             {
-                entity = VideoClipBRL.GetOne(Convert.ToInt32(btnOK.CommandArgument));
+                entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
                 entity.iSolanxem = entity.iSolanxem + 1;
                 VideoClipBRL.Edit(entity);
+                Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
             }
             else
             {
@@ -113,13 +114,15 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
-    private String createThumbnailImage(String sPathVideoFile,String sFilename)
+    private String createThumbnailImage(String sFilename)
     {
-        string _imagepath = GetUplaodImagePhysicalPath() + sFilename+".jpg";
-        Bitmap bmp = FrameGrabber.GetFrameFromVideo(sPathVideoFile, 0.2d);
+        string _imagepath = ResolveUrl("~/upload/videos/") + sFilename.Split('.')[0] + ".jpg";
+        String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+        sVideoUploadPath += sFilename;
+        Bitmap bmp = FrameGrabber.GetFrameFromVideo(sVideoUploadPath, 0.2d);
         bmp.Save(_imagepath, System.Drawing.Imaging.ImageFormat.Gif);
         // Save directly frame on specified location
-        FrameGrabber.SaveFrameFromVideo(sPathVideoFile, 0.2d, _imagepath);
+        FrameGrabber.SaveFrameFromVideo(sVideoUploadPath, 0.2d, _imagepath);
         return _imagepath;
     }
     string GetUplaodImagePhysicalPath()
@@ -166,11 +169,13 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             {
                 txtTieude.Text = oVideoClip.sTieude;
                 txtMota.Text = oVideoClip.sMota;
-                Media_Player_Control1.MovieURL = oVideoClip.sTentep;
+                
 
                 bVideoClip = FileToByteArray(oVideoClip.sTentep);
                 if (bVideoClip != null && bVideoClip.Length > 0)
                     Session["hasVideo"] = true;
+                btnOK.CommandName = "Edit";
+                showVideo(oVideoClip.sTentep);
                 //List<VideoClipEntity> lstClips = new List<VideoClipEntity>();
                 //lstClips.Add(oVideoClip);
                 //rptVideoClips.DataSource = lstClips;
@@ -181,6 +186,23 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
         {
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
+    }
+    private void showVideo(String sVideoPath)
+    {
+        //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
+        String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
+        String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+        String sVideoContent = String.Format(@"
+                <a  
+			         href='{0}'
+			         style='display:block;width:520px;height:330px'
+			         id='player'> 
+		        </a>
+		        <script>
+		            flowplayer('player', '{1}');
+		        </script>
+            ", sVideoUploadPath + sVideoPath, swfUrl);
+        divVideo.InnerHtml = sVideoContent;
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {

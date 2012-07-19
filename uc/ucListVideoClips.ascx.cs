@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Globalization;
-
+using System.IO;
 
 public partial class uc_ucListVideoClips : System.Web.UI.UserControl
 {
@@ -21,6 +21,24 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
             lstVideo_napDulieu();
         }
     }
+    private void showVideo(String sVideoPath)
+    {
+        //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
+        String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
+            String sVideoUploadPath = ResolveUrl("~/upload/videos/");
+            String sVideoContent = String.Format(@"
+                <a  
+			         href='{0}'
+			         style='display:block;width:145px;height:100px'
+			         id='player'> 
+		        </a>
+		        <script>
+		            flowplayer('player', '{1}');
+		        </script>
+            ", sVideoUploadPath + sVideoPath, swfUrl);
+            divVideo.InnerHtml = sVideoContent;
+            divVideo.Visible = true;
+    }
     private void lstVideo_napDulieu()
     {
         List<VideoClipEntity> lstVideoClips = new List<VideoClipEntity>();
@@ -28,7 +46,7 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
         if (lstVideoClips.Count > 0)
         {
             lstVideoClips = VideoClipEntity.Sort(lstVideoClips, "dNgaytai", "DESC");
-            WindowsMedia1.VideoURL = lstVideoClips[0].sTentep;
+            showVideo(lstVideoClips[0].sTentep);
 
             rptVideoClips.DataSource = lstVideoClips;
             rptVideoClips.DataBind();
