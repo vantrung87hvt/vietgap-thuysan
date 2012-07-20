@@ -18,10 +18,19 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
         if (!Page.IsPostBack)
         {
             int PK_iVideoID = 0;
-            if(Session["VideoID"]!=null)
+            if (Session["VideoID"] != null)
             {
                 PK_iVideoID = Convert.ToInt32(Session["VideoID"].ToString());
                 loadVideoClips(PK_iVideoID);
+            }
+            else // hiển thị Video mới nhất trong danh sách
+            {
+                List<VideoClipEntity> lstVideoClips = VideoClipBRL.GetAll();
+                if (lstVideoClips.Count > 0)
+                {
+                    VideoClipEntity.Sort(lstVideoClips, "dNgaytai", "DESC");
+                    loadVideoClips(lstVideoClips[0].PK_iVideoID);
+                }
             }
         }
     }
@@ -41,7 +50,6 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
 		        </script>
             ", sVideoUploadPath + sVideoPath,swfUrl);
         divVideo.InnerHtml = sVideoContent;
-        divVideo.Visible = true;
     }
     private void loadVideoClips(int PK_iVideoID)
     {

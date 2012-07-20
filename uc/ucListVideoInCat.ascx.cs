@@ -20,6 +20,7 @@ public partial class uc_ucListVideoInCat : System.Web.UI.UserControl
             lstVideo_napDulieu();
         }
     }
+
     private void lstVideo_napDulieu()
     {
         List<VideoClipEntity> lstVideoClips = new List<VideoClipEntity>();
