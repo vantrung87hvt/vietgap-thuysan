@@ -58,7 +58,10 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
         {
             lblTitle.Text = oVideoClip.sTieude;
             lblDesc.Text = oVideoClip.sMota;
+            lblLuotxem.Text = oVideoClip.iSolanxem + " Lượt xem.";
             lblDateTime.Text = oVideoClip.dNgaytai.ToShortDateString();
+            oVideoClip.iSolanxem += 1;
+            VideoClipBRL.Edit(oVideoClip);
             showVideo(oVideoClip.sTentep);
         }
     }

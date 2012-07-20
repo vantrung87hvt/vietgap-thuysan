@@ -34,7 +34,7 @@
             <div class="img">
                 <asp:HyperLink ID="hypVideoLink" runat="server" NavigateUrl='<%#"~/Content.aspx?VideoID="+Eval("PK_iVideoID") %>'>
                 <%--<asp:Image ID="imMinhhoa" runat="server" />--%>
-                <img src='<%#Eval("sAnhminhhoa")%>' alt="Klematis" width="110" height="90" />
+                <img src='<%#Eval("sAnhminhhoa")%>' alt="Ảnh minh họa" width="110" height="90" />
                 <%--<img src="" alt="Video" width="110" height="90" />--%>
                 <%--<%#Eval("sTieude")%>--%>
                 </asp:HyperLink>

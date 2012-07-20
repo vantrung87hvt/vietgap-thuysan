@@ -39,8 +39,8 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
 //                    });
 //		        </script>
 //            ", sVideoUploadPath + sVideoPath, swfUrl);
-            String sVideoContent = "<a href='" + sVideoUploadPath + sVideoPath + "' style='display:block;width:145px;height:100px' id='player'></a>";
-            sVideoContent += "<script>var player = $f('player', '" + swfUrl + "',{clip:  {autoPlay: false,autoBuffering: true});";
+            String sVideoContent = "<div id='player' style='display:block;width:180px;height:120px'></div>";
+            sVideoContent += "<script>var player = $f('player', '" + swfUrl + "',{clip:  { url: '" + sVideoUploadPath + sVideoPath + "',autoPlay: false,autoBuffering: true}});";
             sVideoContent += "</script>";
             
             divVideo.InnerHtml = sVideoContent;
@@ -54,9 +54,20 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
         {
             lstVideoClips = VideoClipEntity.Sort(lstVideoClips, "dNgaytai", "DESC");
             showVideo(lstVideoClips[0].sTentep);
-
-            rptVideoClips.DataSource = lstVideoClips;
+            lblMota.Text = lstVideoClips[0].sMota;
+            List<VideoClipEntity> lstTop5VideoClips = new List<VideoClipEntity>(5);
+            int iVideoNums = lstVideoClips.Count > 5 ? 5 : lstVideoClips.Count;
+            for (int i = 1; i < iVideoNums-1; i++)
+                lstTop5VideoClips.Add(lstVideoClips[i]);
+            rptVideoClips.DataSource = lstTop5VideoClips;
             rptVideoClips.DataBind();
         }
+    }
+    protected string getSubString(String sTieude)
+    {
+        if (sTieude.Length > 15)
+            return sTieude.Substring(0, 14)+"...";
+        else
+            return sTieude;
     }
 }
