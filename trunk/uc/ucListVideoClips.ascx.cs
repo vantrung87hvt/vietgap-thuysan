@@ -26,26 +26,23 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
         //LinkButton lbtnXemvideo = (LinkButton)e.CommandSource;
         String swfUrl = ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf");
             String sVideoUploadPath = ResolveUrl("~/upload/videos/");
-            String sVideoContent = String.Format(@"
-                <a  
-			         href='{0}'
-			         style='display:block;width:145px;height:100px'
-			         id='player'> 
-		        </a>
-		        <script>
-		            var  player = $f('player_content', {1}, {
-                },
-            clip:   {
-                        autoPlay: false,
-                        autoBuffering: true,
-                        provider: 'pseudo'
-                        }
-                    }
-                }
-            }
-		        </script>
-            ", sVideoUploadPath + sVideoPath, swfUrl);
-            //flowplayer('player', '{1}');
+//            String sVideoContent = String.Format(@"<a  
+//			         href='{0}'
+//			         style='display:block;width:145px;height:100px'
+//			         id='player'> 
+//		        </a>
+//		        <script>
+//		        var player = $f('player', '{1}',{
+//                    clip:  {
+//                        autoPlay: false,
+//                        autoBuffering: true
+//                    });
+//		        </script>
+//            ", sVideoUploadPath + sVideoPath, swfUrl);
+            String sVideoContent = "<a href='" + sVideoUploadPath + sVideoPath + "' style='display:block;width:145px;height:100px' id='player'></a>";
+            sVideoContent += "<script>var player = $f('player', '" + swfUrl + "',{clip:  {autoPlay: false,autoBuffering: true});";
+            sVideoContent += "</script>";
+            
             divVideo.InnerHtml = sVideoContent;
             divVideo.Visible = true;
     }

@@ -57,7 +57,6 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                     if (valid)
                     {
                         string Path = GetUplaodImagePhysicalPath();
-                        DirectoryInfo dirUploadImage = new DirectoryInfo(Path);
                         string fileUrl = Path + fluVideoClips.PostedFile.FileName;
                         HttpPostedFile objHttpPostedFile = fluVideoClips.PostedFile;
                         int intContentlength = objHttpPostedFile.ContentLength;
@@ -69,8 +68,8 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                         entity.sTieude = txtTieude.Text;
                         entity.sTentep = fluVideoClips.PostedFile.FileName.Trim();
                         entity.FK_iCategoryID = 9;
-                        //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName);
-                        entity.sAnhMinhHoa = " ";
+                        //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName,fileUrl);
+                        entity.sAnhMinhHoa = ResolveUrl("~/upload/videos/Foldermovies.png");
                         entity.dNgaytai = DateTime.Today;
                     }
                 }
@@ -114,11 +113,11 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
-    private String createThumbnailImage(String sFilename)
+    private String createThumbnailImage(String sFilename, String sVideoUploadPath)
     {
-        string _imagepath = ResolveUrl("~/upload/videos/") + sFilename.Split('.')[0] + ".jpg";
-        String sVideoUploadPath = ResolveUrl("~/upload/videos/");
-        sVideoUploadPath += sFilename;
+        string Path = GetUplaodImagePhysicalPath();
+        //DirectoryInfo dirUploadImage = new DirectoryInfo(Path);
+        string _imagepath = Path+ sFilename.Split('.')[0] + ".jpg";
         Bitmap bmp = FrameGrabber.GetFrameFromVideo(sVideoUploadPath, 0.2d);
         bmp.Save(_imagepath, System.Drawing.Imaging.ImageFormat.Gif);
         // Save directly frame on specified location
@@ -199,16 +198,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
 			         id='player'> 
 		        </a>
 		        <script>
-		            var  player = $f('player_content', {1}, {
-                },
-            clip:   {
-                        autoPlay: false,
-                        autoBuffering: true,
-                        provider: 'pseudo'
-                        }
-                    }
-                }
-            }
+		            flowplayer('player', '{1}');
 		        </script>
             ", sVideoUploadPath + sVideoPath, swfUrl);
         divVideo.InnerHtml = sVideoContent;

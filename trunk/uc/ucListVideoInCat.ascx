@@ -4,7 +4,7 @@
     div.img
     {
         margin: 2px;
-        border: 1px solid #0000ff;
+        
         height: auto;
         width: auto;
         float: left;
@@ -14,7 +14,7 @@
     {
         display: inline;
         margin: 3px;
-        border: 1px solid #ffffff;
+        
     }
     div.img a:hover img
     {
@@ -39,7 +39,7 @@
                 <%--<%#Eval("sTieude")%>--%>
                 </asp:HyperLink>
                 <div class="desc">
-                    <asp:Label ID="lblMota" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lblMota" runat="server" Text='<%#Eval("sTieude")%>'></asp:Label>
                 </div>
             </div>
             
