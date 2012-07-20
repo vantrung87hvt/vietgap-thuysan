@@ -12,10 +12,11 @@
     </tr>
     <tr>
         <td>
+            <asp:Label ID="lblMota" runat="server" Text=""></asp:Label>
             <asp:Panel runat="server" ID="pnXemvideo">
                 <div runat="server" id="divVideo">
                 </div>
-                <script type="text/javascript">
+                <%--<script type="text/javascript">
                     var swfUrl = '<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.11.swf") %>';
                     $(document).ready(function () {
                         flowplayer("player", swfUrl, {
@@ -25,15 +26,16 @@
                             }
                         });
                     });
-                </script>
+                </script>--%>
             </asp:Panel>
         </td>
     </tr>
 </table>
 <div>
+    Video mới nhất:<br/>
     <asp:Repeater ID="rptVideoClips" runat="server">
         <ItemTemplate>
-            <asp:HyperLink ID="hypVideoLink" runat="server" NavigateUrl='<%#"~/Content.aspx?VideoID="+Eval("PK_iVideoID") %>'><%#Eval("sTieude")%>
+            <asp:HyperLink ID="hypVideoLink" runat="server" NavigateUrl='<%#"~/Content.aspx?VideoID="+Eval("PK_iVideoID") %>'><%#getSubString(Eval("sTieude").ToString())%>
             </asp:HyperLink>
         </ItemTemplate>
     </asp:Repeater>

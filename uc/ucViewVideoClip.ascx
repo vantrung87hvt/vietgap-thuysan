@@ -8,7 +8,9 @@
 	<div class="post-title"><h2>
         <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
     </h2></div>
-    <div class="post-date"><asp:Label ID="lblDateTime" runat="server" /></div>
+    <div class="post-date"><asp:Label ID="lblDateTime" runat="server" /> &nbsp;
+        <asp:Label ID="lblLuotxem" runat="server" Text=""></asp:Label>
+    </div>
 	<div class="post-body">
         <asp:Panel runat="server" ID="pnXemvideo">
             <div runat="server" id="divVideo">
