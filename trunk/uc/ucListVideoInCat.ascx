@@ -26,6 +26,16 @@
         width: 120px;
         margin: 2px;
     }
+     .dvFooter
+    {
+         font-size: 12px;
+        background: #fff;
+        margin-left:30px;
+        margin-top: 5px;
+        width: 90%;
+        border-collapse: collapse;
+        text-align: right;
+    }
 </style>
 <div>
     <asp:Repeater ID="rptVideoClips" runat="server">
@@ -59,3 +69,9 @@
         </ItemTemplate>
     </asp:Repeater>
 </div>
+<div class="dvFooter">
+        <asp:LinkButton ID="lbnPrev" runat="server" onclick="lbnPrev_Click"> <asp:Label ID="lblPreviousPage" runat="server" Text="<%$ Resources:Language, lblPreviousPage%>"></asp:Label>
+        </asp:LinkButton>&nbsp;
+        <asp:LinkButton ID="lbnNext" runat="server" onclick="lbnNext_Click"><asp:Label ID="lblNextPage" runat="server" Text="<%$ Resources:Language, lblNextPage%>"></asp:Label>
+        </asp:LinkButton>
+    </div>
