@@ -272,11 +272,20 @@ input.button {
 	text-decoration:none;	
 	padding:2px 5px 2px 10px;
 	background:url("images/icon_bullet.gif") no-repeat 0px 6px;
-	
-	
 	min-height:18px;
 }
-
+#sidebar ul.sidemenu div.video-icon
+{
+    height:20px;
+    background:url("images/video-icon.png") no-repeat top left;
+    width:178px;
+}
+#sidebar ul.sidemenu div.video-icon a
+{
+    margin-left:22px;
+    background:none;
+    padding-left:0;
+}
 * html body #sidebar ul.sidemenu a { height: 18px; }
 
 #sidebar ul.sidemenu a:hover {

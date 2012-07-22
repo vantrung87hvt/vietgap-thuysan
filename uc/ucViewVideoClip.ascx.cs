@@ -42,7 +42,7 @@ public partial class uc_ucViewVideoClip : System.Web.UI.UserControl
         String sVideoContent = String.Format(@"
                 <a  
 			         href='{0}'
-			         style='display:block;width:520px;height:330px'
+			         style='display:block;width:709px;height:350px'
 			         id='player_content'> 
 		        </a>
                 <script>

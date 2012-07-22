@@ -39,12 +39,12 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
 //                    });
 //		        </script>
 //            ", sVideoUploadPath + sVideoPath, swfUrl);
-            String sVideoContent = "<div id='player' style='display:block;width:180px;height:120px'></div>";
-            sVideoContent += "<script>var player = $f('player', '" + swfUrl + "',{clip:  { url: '" + sVideoUploadPath + sVideoPath + "',autoPlay: false,autoBuffering: true}});";
-            sVideoContent += "</script>";
+            //String sVideoContent = "<div id='player' style='display:block;width:180px;height:120px'></div>";
+            //sVideoContent += "<script>var player = $f('player', '" + swfUrl + "',{clip:  { url: '" + sVideoUploadPath + sVideoPath + "',autoPlay: false,autoBuffering: true}});";
+            //sVideoContent += "</script>";
             
-            divVideo.InnerHtml = sVideoContent;
-            divVideo.Visible = true;
+            //divVideo.InnerHtml = sVideoContent;
+            //divVideo.Visible = true;
     }
     private void lstVideo_napDulieu()
     {
@@ -54,7 +54,7 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
         {
             lstVideoClips = VideoClipEntity.Sort(lstVideoClips, "dNgaytai", "DESC");
             showVideo(lstVideoClips[0].sTentep);
-            lblMota.Text = lstVideoClips[0].sMota;
+            //lblMota.Text = lstVideoClips[0].sMota;
             List<VideoClipEntity> lstTop5VideoClips = new List<VideoClipEntity>(5);
             int iVideoNums = lstVideoClips.Count > 5 ? 5 : lstVideoClips.Count;
             for (int i = 1; i < iVideoNums-1; i++)
@@ -65,8 +65,8 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
     }
     protected string getSubString(String sTieude)
     {
-        if (sTieude.Length > 15)
-            return sTieude.Substring(0, 14)+"...";
+        if (sTieude.Length > 22)
+            return sTieude.Substring(0, 21)+"...";
         else
             return sTieude;
     }
