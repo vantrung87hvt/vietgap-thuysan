@@ -2,15 +2,10 @@
 <%@ Register Assembly="Media-Player-ASP.NET-Control" Namespace="Media_Player_ASP.NET_Control"
     TagPrefix="cc1" %>
 <%@ Register src="~/uc/ucListVideoInCat.ascx" tagname="ucListVideoInCat" tagprefix="uc1" %>
-<link href="<%=ResolveUrl("css/uc-style.css") %>" rel="stylesheet" type="text/css" />
+<link href="<%=ResolveUrl("~/uc/css/uc-style.css") %>" rel="stylesheet" type="text/css" />
+<link href="<%=ResolveUrl("~/css/video.css") %>" rel="stylesheet" type="text/css" />
 <script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
 <div class="post">
-	<div class="post-title"><h2>
-        <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
-    </h2></div>
-    <div class="post-date"><asp:Label ID="lblDateTime" runat="server" /> &nbsp;
-        <asp:Label ID="lblLuotxem" runat="server" Text=""></asp:Label>
-    </div>
 	<div class="post-body">
         <asp:Panel runat="server" ID="pnXemvideo">
             <div runat="server" id="divVideo">
@@ -18,13 +13,20 @@
 			         style='display:block;width:520px;height:330px'
 			         id='player'> 
 		        </a>
-                <label id="lblTrangthai"></label>
             </div>
         </asp:Panel>
-		<asp:Label ID="lblDesc" runat="server" />
-	</div>	
+	</div>
+    <div class="post-title">
+        <h2>
+            <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
+        </h2>
+        <asp:Label CssClass="desc" ID="lblDesc" runat="server" />
+    </div>
+    <div class="post-date">
+        <asp:Label ID="lblDateTime" CssClass="date" runat="server" /> &nbsp;|&nbsp;
+        <asp:Label CssClass="view" ID="lblLuotxem" runat="server" Text=""></asp:Label>
+    </div>	
 </div>
-<hr />
 <uc1:ucListVideoInCat runat="server" />
 <script type="text/javascript">
     $(document).ready(function () {
