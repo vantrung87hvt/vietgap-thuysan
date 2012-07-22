@@ -195,7 +195,7 @@
         	<tr>
             	<td class="center bold">
                 	BỘ NÔNG NGHIỆP VÀ PTNT<br />
-                    <asp:Label ID="lblCoquanchidinh" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lblCoquanchidinh" runat="server" Text="Tổng cục Thủy Sản"></asp:Label>
                 </td>
                 <td class="center">
                 	CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM<br />Độc lập - Tự do- Hạnh phúc<hr width="40%" />
@@ -217,7 +217,8 @@
                 	Họ và tên:&nbsp;<asp:Label ID="lblHoten" runat="server" Text=""></asp:Label><br />
                     Năm sinh:&nbsp;<asp:Label ID="lblNamsinhThe" runat="server" Text=""></asp:Label><br />
                     Đơn vị công tác:&nbsp;<asp:Label ID="lblDonnvicongtac" runat="server" Text=""></asp:Label><br />
-                    Lĩnh vực đánh giá:&nbsp;<asp:Label ID="lblLinhvucdanhgia" runat="server" Text=""></asp:Label><br />
+                    Lĩnh vực đánh giá:&nbsp;<asp:Label ID="lblLinhvucdanhgia" runat="server" 
+                        Text="Thủy sản"></asp:Label><br />
                     Mã số:&nbsp;<span class="bold"><asp:Label ID="lblMasochuyengia" runat="server" Text=""></asp:Label></span><br />
                 </td>
             </tr>
