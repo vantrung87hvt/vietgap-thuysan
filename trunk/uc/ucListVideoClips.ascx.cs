@@ -57,7 +57,7 @@ public partial class uc_ucListVideoClips : System.Web.UI.UserControl
             //lblMota.Text = lstVideoClips[0].sMota;
             List<VideoClipEntity> lstTop5VideoClips = new List<VideoClipEntity>(5);
             int iVideoNums = lstVideoClips.Count > 5 ? 5 : lstVideoClips.Count;
-            for (int i = 1; i < iVideoNums-1; i++)
+            for (int i = 1; i <= iVideoNums-1; i++)
                 lstTop5VideoClips.Add(lstVideoClips[i]);
             rptVideoClips.DataSource = lstTop5VideoClips;
             rptVideoClips.DataBind();
