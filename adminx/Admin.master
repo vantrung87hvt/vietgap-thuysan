@@ -70,7 +70,7 @@
 								<asp:Panel ID="p_5" runat="server" Visible="false">
 									<li><a href="../adminx/Default.aspx?page=NewsManager">Quản lý bài viết</a></li>
 								</asp:Panel>
-                                <asp:Panel ID="p_70" runat="server" Visible="false">
+                                <asp:Panel ID="p_66" runat="server" Visible="false">
 									<li><a href="../adminx/Default.aspx?page=VideoClipsManager">Quản lý các đoạn Video</a></li>
 								</asp:Panel>
 							</ul> 
@@ -241,7 +241,7 @@
 								<asp:Panel ID="p_63" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=GiaytoManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Quản lý Giấy tờ kèm theo</a></li> 
 								</asp:Panel>
-                                <asp:Panel ID="p_66" runat="server" Visible="false">
+                                <asp:Panel ID="p_67" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=ChungchiManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Loại chứng chỉ</a></li> 
 								</asp:Panel>
 							</ul> 
