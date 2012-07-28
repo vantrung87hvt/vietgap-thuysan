@@ -5,7 +5,7 @@
 <%@ Register src="ucVideoUploader.ascx" tagname="ucVideoUploader" tagprefix="uc1" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
-<%@ Register Assembly="FlashUpload" Namespace="FlashUpload" TagPrefix="FlashUpload" %>
+
 <table width="100%">
     <tr>
         <td>
