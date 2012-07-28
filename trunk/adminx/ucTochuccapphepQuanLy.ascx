@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucTochuccapphepQuanLy.ascx.cs"
     Inherits="adminx_ucTochuccapphepQuanLy" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <link href="../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <link href="<%=ResolveUrl("~/adminx/css/popupStyle.css")%>" rel="stylesheet" type="text/css" />
 <asp:ScriptManager ID="ScriptManager1" runat="server">

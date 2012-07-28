@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucListVideoClips.ascx.cs"
     Inherits="uc_ucListVideoClips" %>
-<%@ Register Assembly="ASPNetVideo.NET2" Namespace="ASPNetVideo" TagPrefix="ASPNetVideo" %>
+
 <%--<script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
 <script src='<%=ResolveUrl("../js/jquery-1.7.1.js")%>' type="text/javascript"></script>
 <table>

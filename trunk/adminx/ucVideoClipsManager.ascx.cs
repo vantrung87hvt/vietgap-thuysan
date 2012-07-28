@@ -4,7 +4,7 @@ using INVI.INVILibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using JockerSoft.Media;
+
 using System.Configuration;
 using System.Data;
 using System.Web;
@@ -32,63 +32,129 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
         grvVideoClips.DataKeyNames = new string[] { "PK_iVideoID" };
         grvVideoClips.DataBind();
     }
+    //protected void btnOK_Click(object sender, EventArgs e)
+    //{
+    //    byte[] bytVideo = null;
+    //    VideoClipEntity entity = new VideoClipEntity();
+    //    try
+    //    {
+    //        entity.FK_iCategoryID = 0;
+
+    //        // xu ly anh
+    //        if (fluVideoClips.PostedFile != null)
+    //        {
+    //            if (fluVideoClips.PostedFile.ContentLength > 0)
+    //            {
+    //                string strEx = "flv|mp4";
+    //                string fileEx = fluVideoClips.FileName.Substring(fluVideoClips.FileName.LastIndexOf('.')).Remove(0, 1);
+    //                string[] arrEx = strEx.Split('|');
+    //                bool valid = false;
+    //                foreach (string ex in arrEx)
+    //                {
+    //                    if (ex.Equals(fileEx, StringComparison.OrdinalIgnoreCase))
+    //                        valid = true;
+    //                }
+    //                if (valid)
+    //                {
+    //                    string Path = GetUplaodImagePhysicalPath();
+    //                    string fileUrl = Path + fluVideoClips.PostedFile.FileName;
+    //                    HttpPostedFile objHttpPostedFile = fluVideoClips.PostedFile;
+    //                    int intContentlength = objHttpPostedFile.ContentLength;
+    //                    bytVideo = new Byte[intContentlength];
+    //                    bVideoClip = bytVideo;
+    //                    fluVideoClips.PostedFile.SaveAs(fileUrl);
+    //                    System.Threading.Thread.Sleep(8000);
+    //                    lblThongbao.Text = "Upload successfull!";
+    //                    entity.iDungluong = bytVideo.Length;
+    //                    entity.sMota = txtMota.Text;
+    //                    entity.sTieude = txtTieude.Text;
+    //                    entity.sTentep = fluVideoClips.PostedFile.FileName.Trim();
+    //                    entity.FK_iCategoryID = 9;
+    //                    //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName,fileUrl);
+    //                    entity.sAnhMinhHoa = ResolveUrl("~/upload/videos/Foldermovies.png");
+    //                    entity.dNgaytai = DateTime.Today;
+    //                }
+    //            }
+    //            else if (btnOK.CommandName == "Add")
+    //            {
+    //                lblLoi.Text = "Bạn chưa chọn tệp video";
+    //                return;
+    //            }
+    //            else if (bVideoClip != null)
+    //            {
+    //                bVideoClip = null;
+    //            }
+    //            else
+    //            {
+    //                // Nếu là sửa chữa thì check xem nếu đã có logo trong CSDL thì thôi không thông báo
+    //                if (!Convert.ToBoolean(Session["hasVideo"].ToString()) == true)
+    //                    lblLoi.Text = "Bạn chưa chọn tệp video";
+    //                return;
+    //            }
+    //        }
+    //        // Xử lý nút bấm
+    //        if (btnOK.CommandName == "Edit")
+    //        {
+    //            entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
+    //            entity.iSolanxem = entity.iSolanxem + 1;
+    //            VideoClipBRL.Edit(entity);
+    //            Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+    //        }
+    //        else
+    //        {
+    //            entity.iSolanxem = 0;
+    //            VideoClipBRL.Add(entity);
+    //            lblLoi.Text = "Bổ sung thành công";
+    //            //Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+
+    //        }
+    //        //Nạp lại dữ liệu
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
+    //    }
+    //}
+    private byte[] StreamFile(string filename)
+    {
+        FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+        // Create a byte array of file stream length
+        byte[] ImageData = new byte[fs.Length];
+
+        //Read block of bytes from stream into the byte array
+        fs.Read(ImageData, 0, System.Convert.ToInt32(fs.Length));
+
+        //Close the File Stream
+        fs.Close();
+        return ImageData; //return the byte data
+    }
     protected void btnOK_Click(object sender, EventArgs e)
     {
         byte[] bytVideo = null;
         VideoClipEntity entity = new VideoClipEntity();
         try
         {
-            entity.FK_iCategoryID = 0;
-
-            // xu ly anh
-            if (fluVideoClips.PostedFile != null)
+            if (Convert.ToBoolean(Session["uploadOK"].ToString())==true&&Session["strUploadedFile"]!=null)
             {
-                if (fluVideoClips.PostedFile.ContentLength > 0)
-                {
-                    string strEx = "flv|mp4";
-                    string fileEx = fluVideoClips.FileName.Substring(fluVideoClips.FileName.LastIndexOf('.')).Remove(0, 1);
-                    string[] arrEx = strEx.Split('|');
-                    bool valid = false;
-                    foreach (string ex in arrEx)
-                    {
-                        if (ex.Equals(fileEx, StringComparison.OrdinalIgnoreCase))
-                            valid = true;
-                    }
-                    if (valid)
-                    {
-                        string Path = GetUplaodImagePhysicalPath();
-                        string fileUrl = Path + fluVideoClips.PostedFile.FileName;
-                        HttpPostedFile objHttpPostedFile = fluVideoClips.PostedFile;
-                        int intContentlength = objHttpPostedFile.ContentLength;
-                        bytVideo = new Byte[intContentlength];
-                        bVideoClip = bytVideo;
-                        fluVideoClips.PostedFile.SaveAs(fileUrl);
+                // Sửa đoạn này lại để có thể đọc được dung lượng tệp
+                bytVideo = StreamFile(Session["strUploadedFile"].ToString());
+                bVideoClip = bytVideo;
                         entity.iDungluong = bytVideo.Length;
                         entity.sMota = txtMota.Text;
                         entity.sTieude = txtTieude.Text;
-                        entity.sTentep = fluVideoClips.PostedFile.FileName.Trim();
+                FileInfo fUploadded = new FileInfo(Session["strUploadedFile"].ToString());
+                entity.sTentep = fUploadded.Name;
                         entity.FK_iCategoryID = 9;
-                        //entity.sAnhMinhHoa = createThumbnailImage(fluVideoClips.PostedFile.FileName,fileUrl);
                         entity.sAnhMinhHoa = ResolveUrl("~/upload/videos/Foldermovies.png");
                         entity.dNgaytai = DateTime.Today;
-                    }
-                }
-                else if (btnOK.CommandName == "Add")
-                {
+            }
+            else
+            {
+                // Nếu là sửa chữa thì check xem nếu đã có logo trong CSDL thì thôi không thông báo
+                if (!Convert.ToBoolean(Session["hasVideo"].ToString()) == true)
                     lblLoi.Text = "Bạn chưa chọn tệp video";
-                    return;
-                }
-                else if (bVideoClip != null)
-                {
-                    bVideoClip = null;
-                }
-                else
-                {
-                    // Nếu là sửa chữa thì check xem nếu đã có logo trong CSDL thì thôi không thông báo
-                    if (!Convert.ToBoolean(Session["hasVideo"].ToString()) == true)
-                        lblLoi.Text = "Bạn chưa chọn tệp video";
-                    return;
-                }
+                return;
             }
             // Xử lý nút bấm
             if (btnOK.CommandName == "Edit")
@@ -96,14 +162,15 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 entity.PK_iVideoID = Convert.ToInt32(btnOK.CommandArgument);
                 entity.iSolanxem = entity.iSolanxem + 1;
                 VideoClipBRL.Edit(entity);
-                Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+                lblThongbao.Text = "Cập nhập thành công";
+                //Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
             }
             else
             {
                 entity.iSolanxem = 0;
                 VideoClipBRL.Add(entity);
-                lblLoi.Text = "Bổ sung thành công";
-                Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+                lblThongbao.Text = "Bổ sung thành công";
+                //Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
 
             }
             //Nạp lại dữ liệu
@@ -113,46 +180,36 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=VideoClipsManager';</script>");
         }
     }
-    private String createThumbnailImage(String sFilename, String sVideoUploadPath)
-    {
-        string Path = GetUplaodImagePhysicalPath();
-        //DirectoryInfo dirUploadImage = new DirectoryInfo(Path);
-        string _imagepath = Path+ sFilename.Split('.')[0] + ".jpg";
-        Bitmap bmp = FrameGrabber.GetFrameFromVideo(sVideoUploadPath, 0.2d);
-        bmp.Save(_imagepath, System.Drawing.Imaging.ImageFormat.Gif);
-        // Save directly frame on specified location
-        FrameGrabber.SaveFrameFromVideo(sVideoUploadPath, 0.2d, _imagepath);
-        return _imagepath;
-    }
+    //private String createThumbnailImage(String sFilename, String sVideoUploadPath)
+    //{
+    //    string Path = GetUplaodImagePhysicalPath();
+    //    //DirectoryInfo dirUploadImage = new DirectoryInfo(Path);
+    //    string _imagepath = Path+ sFilename.Split('.')[0] + ".jpg";
+    //    Bitmap bmp = FrameGrabber.GetFrameFromVideo(sVideoUploadPath, 0.2d);
+    //    bmp.Save(_imagepath, System.Drawing.Imaging.ImageFormat.Gif);
+    //    // Save directly frame on specified location
+    //    FrameGrabber.SaveFrameFromVideo(sVideoUploadPath, 0.2d, _imagepath);
+    //    return _imagepath;
+    //}
     string GetUplaodImagePhysicalPath()
     {
         return System.Web.HttpContext.Current.Request.PhysicalApplicationPath + "upload\\videos\\";
     }
     public byte[] FileToByteArray(string _FileName)
     {
-        byte[] _Buffer = null;
+       byte[] _Buffer = null;
        try
         {
-            // Open file for reading
             System.IO.FileStream _FileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-
-            // attach filestream to binary reader
             System.IO.BinaryReader _BinaryReader = new System.IO.BinaryReader(_FileStream);
-
-            // get total byte length of the file
             long _TotalBytes = new System.IO.FileInfo(_FileName).Length;
-
-            // read entire file into buffer
             _Buffer = _BinaryReader.ReadBytes((Int32)_TotalBytes);
-
-            // close file reader
             _FileStream.Close();
             _FileStream.Dispose();
             _BinaryReader.Close();
         }
         catch (Exception _Exception)
         {
-            // Error
             Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
         }
 
