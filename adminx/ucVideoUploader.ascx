@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucVideoUploader.ascx.cs"
     Inherits="adminx_ucVideoUploader" %>
-<%@ Register Assembly="EO.Web" Namespace="EO.Web" TagPrefix="eo" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
     <title>Demo Page</title>
