@@ -146,7 +146,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 FileInfo fUploadded = new FileInfo(Session["strUploadedFile"].ToString());
                 entity.sTentep = fUploadded.Name;
                         entity.FK_iCategoryID = 9;
-                        entity.sAnhMinhHoa = ResolveUrl("~/upload/videos/Foldermovies.png");
+                        entity.sAnhMinhHoa = ResolveUrl("~/upload/videos/play-default.png");
                         entity.dNgaytai = DateTime.Today;
             }
             else
@@ -174,6 +174,8 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
 
             }
             //Nạp lại dữ liệu
+            napGridView();
+            pnlEdit.Visible = false;
         }
         catch (Exception ex)
         {
@@ -262,7 +264,11 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        if(Session["uploadOK"] != null && bool.Parse(Session["uploadOK"].ToString()) == true)
+        {
+            deleteVideo(Path.GetFileName(Session["strUploadedFile"].ToString()));
+        }
+        pnlEdit.Visible = false;
     }
     protected void lbtnAddnew_Click(object sender, EventArgs e)
     {
@@ -279,7 +285,10 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 short PK_iVideoID = Convert.ToInt16(grvVideoClips.DataKeys[row.RowIndex].Values["PK_iVideoID"]);
                 if (chkDelete != null && chkDelete.Checked)
                 {
+                    VideoClipEntity oVideo = VideoClipBRL.GetOne(PK_iVideoID);
+                    deleteVideo(oVideo.sTentep);
                     VideoClipBRL.Remove(PK_iVideoID);
+                    oVideo = null;
                 }
             }
             //Nap lai du lieu
@@ -329,6 +338,15 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
 		        </script>
             ", sVideoUploadPath + lbtnXemvideo.CommandArgument);
             divVideo.InnerHtml = sVideoContent;
+        }
+    }
+
+    private void deleteVideo(String sUrl)
+    {
+        string completePath = Server.MapPath("~/Upload/Videos/" + sUrl);
+        if (System.IO.File.Exists(completePath))
+        {
+            System.IO.File.Delete(completePath);
         }
     }
 }

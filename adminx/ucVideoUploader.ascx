@@ -1,41 +1,54 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucVideoUploader.ascx.cs"
     Inherits="adminx_ucVideoUploader" %>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1">
-    <title>Demo Page</title>
     <script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
     <script type="text/javascript" src="js/jquery.ajax_upload.0.6.min.js"></script>
     <script type="text/javascript">/*<![CDATA[*/
 $(document).ready(function(){
-	var button = $('#button1'), interval;
+	var button = $('#btn-upload'), interval;
 	$.ajax_upload(button,{
 		action: 'FileHandler.ashx',
 		name: 'myfile',
 		onSubmit : function(file, ext){
-			button.text('Tải lên');
+            showLoading(true);
+//			button.text('Tải lên');
 			this.disable();
-			interval = window.setInterval(function(){
-				var text = button.text();
-				if (button.text().length < 13){
-					button.text(button.text() + '.');					
-				} else {
-					button.text('Tải lên');				
-				}
-			}, 200);
+
+//			interval = window.setInterval(function(){
+//				var text = button.text();
+//				if (button.text().length < 13){
+//					button.text(button.text() + '.');					
+//				} else {
+//					button.text('Tải lên');				
+//				}
+//			}, 200);
 		},
 		onComplete: function(file, response){
-			button.text('Upload');
-			button.removeClass('hover');
-			window.clearInterval(interval);
-			this.enable();
-			$('<li></li>').appendTo('#example1 .files').text(file);						
+            showLoading(false);
+            $('#btn-upload').css("display", "none");
+//			button.text('Upload');
+//			button.removeClass('hover');
+//			window.clearInterval(interval);
+//			this.enable();
+			$('<li></li>').appendTo('#li-upload .files').text(file);						
 		}
 	});
 	
-	
-});/*]]>*/
+});
+function showLoading(_status)
+{
+    if(_status)
+    {
+        $("#loading").css("display", "table-cell");
+    }
+    else
+    {
+        $("#loading").css("display", "none");
+    }
+}
+/*]]>*/
     </script>
     <style type="text/css">
+        /*
         h1
         {
             color: #C7D92C;
@@ -64,7 +77,7 @@ $(document).ready(function(){
         
         .wrapper
         {
-            width: 133px; /* Centering button will not work, so we need to use additional div */
+            width: 133px;
             margin: 0 auto;
         }
         
@@ -83,21 +96,53 @@ $(document).ready(function(){
             background: url(img/button.png) 0 56px;
             color: #95A226;
         }
+        */
+        /***Loading popup - liemqv - 28/07/2012*****/
+        #li-upload
+        {
+            list-style-type:none;
+            cursor:pointer;
+        }
+        #loading
+        {
+            width:100%;
+            height:100%;
+            display:none;
+            background-color:#fff;
+            opacity:0.5;
+            text-align:center;
+            vertical-align:middle;
+            position:absolute;
+        }
+        #loading .img
+        {
+            width:235px;
+            height:235px;
+        }
+
+        /*** button upload ***/
+        .button-upload
+        {
+            height:35px;
+            padding-top:25px;
+            font-weight:bold;
+            width:135px;
+            background:url(<%=ResolveUrl("~/css/Images/find_file.png")%>) no-repeat top left;
+            padding-left: 65px;
+            cursor:pointer;
+        }
     </style>
-</head>
-<body>
-    <ul>
-        <li id="example1" class="example">
-            <div class="wrapper">
-                <div id="button1" class="button">
-                    Tải lên</div>
-            </div>
-            <p>
-                Các tệp đã tải lên:</p>
+    <div id="li-upload">
+        <div class="wrapper">
+            <div id="btn-upload" class="button-upload">Chọn video</div>
+        </div>
+        <p>Tệp đã tải lên:</p>
             
-            <ol class="files">
-            </ol>
-        </li>
-    </ul>
-</body>
-</html>
+        <ol class="files">
+        </ol>
+    </div>
+    <div id="loading">
+        <div class="img">
+            <img src="<%=ResolveUrl("~/css/Images/loading.gif") %>" alt="Vui lòng đợi" />
+        </div>
+    </div>
