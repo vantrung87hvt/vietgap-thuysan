@@ -28,7 +28,8 @@
                 </tr>
                 <tr>
                     <td valign="top" width="20%">
-                        <asp:Label ID="lblName" runat="server" Text="<%$Resources:language,lblChungchi %>"></asp:Label>
+                        <asp:Label ID="lblName" runat="server" 
+                            Text="Trình độ"></asp:Label>
                     </td>
                     <td valign="middle" width="70%">
                         
