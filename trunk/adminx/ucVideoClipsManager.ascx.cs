@@ -274,6 +274,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     {
         pnlEdit.Visible = true;
         btnOK.CommandName = "Add";
+        reset();
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
@@ -348,5 +349,12 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
         {
             System.IO.File.Delete(completePath);
         }
+    }
+
+    private void reset()
+    {
+        txtTieude.Text = "";
+        txtMota.Text = "";
+        divVideo.InnerHtml = "";
     }
 }

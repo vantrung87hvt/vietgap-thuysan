@@ -48,40 +48,7 @@ function showLoading(_status)
 /*]]>*/
     </script>
     <style type="text/css">
-        /***Loading popup - liemqv - 28/07/2012*****/
-        #li-upload
-        {
-            list-style-type:none;
-            cursor:pointer;
-        }
-        #loading
-        {
-            width:100%;
-            height:100%;
-            display:none;
-            background-color:#fff;
-            opacity:0.5;
-            text-align:center;
-            vertical-align:middle;
-            position:absolute;
-        }
-        #loading .img
-        {
-            width:235px;
-            height:235px;
-        }
-
-        /*** button upload ***/
-        .button-upload
-        {
-            height:35px;
-            padding-top:25px;
-            font-weight:bold;
-            width:135px;
-            background:url(<%=ResolveUrl("~/css/Images/find_file.png")%>) no-repeat top left;
-            padding-left: 65px;
-            cursor:pointer;
-        }
+        
     </style>
     <div id="li-upload">
         <div class="wrapper">
@@ -91,9 +58,4 @@ function showLoading(_status)
             
         <ol class="files">
         </ol>
-    </div>
-    <div id="loading">
-        <div class="img">
-            <img src="<%=ResolveUrl("~/css/Images/loading.gif") %>" alt="Vui lòng đợi" />
-        </div>
     </div>

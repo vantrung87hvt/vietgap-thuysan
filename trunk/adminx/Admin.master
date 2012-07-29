@@ -28,6 +28,11 @@
 </head>
 <body id="top">
     <form id="form1" runat="server">
+    <div id="loading">
+        <div class="img">
+            <img src="<%=ResolveUrl("~/css/Images/loading.gif") %>" alt="Vui lòng đợi" />
+        </div>
+    </div>
     <div id="container">
         <div id="header-surround">
             <header id="header">
