@@ -17,17 +17,17 @@ public partial class adminx_AdvManager : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Dangquangcao")) Response.End();
             this.napNhomcaptren(0, Server.HtmlDecode("&nbsp;"));
             ddlPosition_loadData();
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
             {
-                if (!PermissionBRL.CheckPermission("ManagerAdv")) Response.End();
+                
                 setText("");
 
             }
             else if (Session["AdvID"] != null)
             {
-                if (!PermissionBRL.CheckPermission("ManagerAdv")) Response.End();
                 int AdvID = Convert.ToInt32(Session["AdvID"]);
 
                 this.napForm(AdvID);

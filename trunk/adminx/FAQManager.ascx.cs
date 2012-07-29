@@ -17,7 +17,7 @@ namespace INVI.INVINews.Admin
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!PermissionBRL.CheckPermission("ManagerFAQ")) Response.End();
+            if (!PermissionBRL.CheckPermission("QLFAQ")) Response.End();
             if (!IsPostBack)
             {
                 this.napGridView();

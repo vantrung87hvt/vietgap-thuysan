@@ -24,7 +24,7 @@ public partial class adminx_ucBaocaodanhgianoibo : System.Web.UI.UserControl
 
     public void napDulieu()
     {
-        if (Session["userID"] == null) return;
+        if (Session["userID"] == null&&Convert.ToInt32(Session["groupID"].ToString())!=4) return;
         iUserID = Convert.ToInt32(Session["userID"].ToString());
         List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID);
         if (lstTochucTaikhoan.Count > 0)

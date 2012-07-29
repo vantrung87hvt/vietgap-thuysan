@@ -14,6 +14,7 @@ public partial class adminx_Tochucchungnhan_ucThongtinDangky : System.Web.UI.Use
     {
         //if(!IsPostBack)
         //{
+        if (!PermissionBRL.CheckPermission("DuyethosodangkycuaCNST")) Response.End();
             napRptGiaytonopkem();
             HienKetQua();
         //}

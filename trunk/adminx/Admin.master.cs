@@ -12,17 +12,18 @@ public partial class CMS_CMS_5B : System.Web.UI.MasterPage
     {
         if (!IsPostBack)
         {
-            BuildMenu();
-            if(Session["UserID"] != null)
-            {
-                int PK_iUser = int.Parse(Session["UserID"].ToString());
-                List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(PK_iUser);
-                if (lstTochucTaikhoan.Count > 0)
-                {
-                    lblTentochuc.Text = TochucchungnhanBRL.GetOne(lstTochucTaikhoan[0].FK_iTochucchungnhanID).sTochucchungnhan;
-                    //Response.Redirect("Default.aspx?m=Tochucchungnhan&page=Dangkytochucchungnhan");
-                }
-            }
+            if (Session["userID"] == null) return;
+            //BuildMenu();
+            //if(Session["UserID"] != null)
+            //{
+            //    int PK_iUser = int.Parse(Session["UserID"].ToString());
+            //    List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(PK_iUser);
+            //    if (lstTochucTaikhoan.Count > 0)
+            //    {
+            //        lblTentochuc.Text = TochucchungnhanBRL.GetOne(lstTochucTaikhoan[0].FK_iTochucchungnhanID).sTochucchungnhan;
+            //        //Response.Redirect("Default.aspx?m=Tochucchungnhan&page=Dangkytochucchungnhan");
+            //    }
+            //}
         }
         
     }

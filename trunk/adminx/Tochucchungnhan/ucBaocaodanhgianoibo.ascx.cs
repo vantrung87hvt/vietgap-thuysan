@@ -17,6 +17,7 @@ public partial class adminx_ucBaocaodanhgianoibo : System.Web.UI.UserControl
     {
             //if (Session["UserID"] != null)
             //    iUserID = Convert.ToInt32(Session["UserID"].ToString());
+        if (!PermissionBRL.CheckPermission("Truynhapbaocaodanhgianoibo")) Response.End();
             napDulieu();
     }
     public CosonuoitrongEntity Cosonuoitrong

@@ -20,7 +20,7 @@ public partial class adminx_CategoryEdit : System.Web.UI.UserControl
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("ManagerCategory")) Response.End();
+        if (!PermissionBRL.CheckPermission("Quanlychuyenmuc")) Response.End();
         bool valid = true;
         if (Request.QueryString["id"] != null)
         {

@@ -27,6 +27,7 @@ public partial class uc_ListDocument : System.Web.UI.UserControl
        
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Quanlytailieu")) Response.End();
             LoadLoaiVanBan();
 
             try

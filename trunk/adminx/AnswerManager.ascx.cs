@@ -13,7 +13,7 @@ namespace INVI.INVINews.Admin
         {
             if (!IsPostBack)
             {
-                if (!PermissionBRL.CheckPermission("ManagerPoll")) Response.End();
+                if (!PermissionBRL.CheckPermission("Quanlytrungcau")) Response.End();
                 this.NapListbox();
             }
         }

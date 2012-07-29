@@ -23,12 +23,12 @@ public partial class adminx_NewsUpdate : System.Web.UI.UserControl
             this.napNhomcaptren(0, Server.HtmlDecode("&nbsp;"));
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
             {
-                if (!PermissionBRL.CheckPermission("AddNews")) Response.End();
+                if (!PermissionBRL.CheckPermission("Dangtin")) Response.End();
                 clearForm();
             }
             else if (Session["newsID"] != null)
             {
-                if (!PermissionBRL.CheckPermission("EditNews")) Response.End();
+                if (!PermissionBRL.CheckPermission("Capnhaptintuc")) Response.End();
                 int newsID = Convert.ToInt32(Session["NewsID"]);
                 this.napForm(newsID);
                 btnOK.CommandName = "Edit";
@@ -82,8 +82,7 @@ public partial class adminx_NewsUpdate : System.Web.UI.UserControl
     }
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        if (Page.IsValid)
-        {
+            if (!PermissionBRL.CheckPermission("Capnhaptintuc")) Response.End();
             try
             {
                 NewsEntity entity = new NewsEntity();
@@ -154,8 +153,6 @@ public partial class adminx_NewsUpdate : System.Web.UI.UserControl
             {
                 Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=NewsUpdate';</script>");
             }
-        }
-
     }
     protected void btnReset_Click(object sender, EventArgs e)
     {

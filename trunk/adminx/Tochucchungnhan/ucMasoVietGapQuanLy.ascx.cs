@@ -11,6 +11,7 @@ public partial class adminx_ucMasoVietGapQuanLy : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QuanlymasoVietGap")) Response.End();
             napDllCosonuoitrong();
             napGridView();
         }

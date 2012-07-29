@@ -16,7 +16,7 @@ public partial class adminx_Tochucchungnhan_ucTCCN_TaikhoanDangky : System.Web.U
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("QuanlyThanhvienDangkyBoiTochucchungnhan")) Response.End();
+        if (!PermissionBRL.CheckPermission("QLTaikhoandangkyvoiTCCN")) Response.End();
         if (!IsPostBack)
         {
             this.napGridView();

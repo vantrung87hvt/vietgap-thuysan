@@ -29,88 +29,106 @@ namespace INVI.Business
         #region Public Methods
 
         public static Dictionary<string,int> Permission;
+        private static List<PermissionEntity> lstPermission;
         static PermissionBRL()
         {
+            
             Permission= new Dictionary<string,int>();
-            Permission.Add("EditNews",5);
-            Permission.Add("AddNews",2);
-            Permission.Add("ManagerCategory", 25);
-            Permission.Add("ManagerPoll", 32);
-            Permission.Add("VerifyFeedback", 33);
-            Permission.Add("ManagerUser",3);
-            Permission.Add("ManagerGroupPermission",4);
-            Permission.Add("ManagerDocument",6);
-            Permission.Add("ManagerAdv", 18);
-            Permission.Add("EditConfig",50);
-            Permission.Add("DeleteNews", 9);
-            Permission.Add("VerifyNews", 10);
-            Permission.Add("ManagerGroup", 8);
-            Permission.Add("licenseGAP",12);
-            Permission.Add("AddCosonuoi", 13);
-            Permission.Add("EditCosonuoi", 14);
-            Permission.Add("AddTochuccapphep", 15);
-            Permission.Add("EditTochuccapphep", 16);
-            Permission.Add("VerifyCosonuoitrong", 17);
-            Permission.Add("Manageprovince",19);
-            Permission.Add("QuanlyDoituongnuoi", 21);
-            Permission.Add("CapgiayphepVietGAP", 22);
-            Permission.Add("ManageFeedback", 25);
-            Permission.Add("ThemmoiQuyen", 26);
-            Permission.Add("ManageNews", 27);
-            Permission.Add("QuanlyTCCN", 28);
-            Permission.Add("XoaCSNT", 30);
-            Permission.Add("ManageFAQCate", 34);
-            Permission.Add("ManageNewCateTree", 36);
-            Permission.Add("ManageNewCatTable", 35);
-            Permission.Add("ManageDoc", 37);
-            Permission.Add("GiahanGCN", 38);
-            Permission.Add("ManageMSVietGAP", 39);
-            Permission.Add("Thongketheodoituong", 40);
-            Permission.Add("Thongketheodialy", 41);
-            Permission.Add("ThongketheoTCCN", 42);
-            Permission.Add("GuiGiayCNVietGAP", 43);
-            Permission.Add("QuanlyCSNT", 44);
-            Permission.Add("QuanlyDanhgiavien", 45);
-            Permission.Add("QuanlyHinhthucnuoi", 46);
-            Permission.Add("Xemchitietgiaydangkyhoatdongchungnhan", 47);
-            Permission.Add("Quanlycoquancaptren", 48);
-            Permission.Add("Duyettochucchungnhan", 49);
-            Permission.Add("EditContact", 7);
-            Permission.Add("QuanlyQuanHuyen", 51);
-            Permission.Add("QuanlyDanhmucchitieu", 52);
-            Permission.Add("QuanlyMucdoChitieu", 53);
-            Permission.Add("QuanlyPhuongphapkiemtra", 54);
-            Permission.Add("Quanlychitieu", 55);
-            Permission.Add("ManageFAQ", 57);
-            Permission.Add("QuanlyPhongban", 58);
-            Permission.Add("QuanlyChucvu", 59);
-            Permission.Add("QuanlyDanhba", 60);
-            Permission.Add("QuanlyDanhsachDanhba", 61);
-            Permission.Add("QuanlyGiayto", 63);
-            Permission.Add("Xemcacthongketonghop", 65);
-            Permission.Add("QuanlyThanhvienDangkyBoiTochucchungnhan", 65);
-            Permission.Add("QuanlyCacloaichungchiMachuyengiacotheco", 66);
-            Permission.Add("Dangkyhoatdongchungnhan", 67);
-            Permission.Add("Xemgiaydangkyhoatdongchungnhan_TCCN", 68);
-            Permission.Add("Quanlycacloaitrinhdocuachuyengia", 69);
+            lstPermission = PermissionBRL.GetAll();
+            if (lstPermission.Count > 0)
+            {
+                foreach (PermissionEntity oPermission in lstPermission)
+                    Permission.Add(oPermission.sName, oPermission.iPermissionID);
+            }
+            else
+            {
+                Permission.Add("EditNews", 5);
+                Permission.Add("AddNews", 2);
+                Permission.Add("ManagerCategory", 25);
+                Permission.Add("ManagerPoll", 32);
+                Permission.Add("VerifyFeedback", 33);
+                Permission.Add("ManagerUser", 3);
+                Permission.Add("ManagerGroupPermission", 4);
+                Permission.Add("ManagerDocument", 6);
+                Permission.Add("ManagerAdv", 18);
+                Permission.Add("EditConfig", 50);
+                Permission.Add("DeleteNews", 9);
+                Permission.Add("VerifyNews", 10);
+                Permission.Add("ManagerGroup", 8);
+                Permission.Add("licenseGAP", 12);
+                Permission.Add("AddCosonuoi", 13);
+                Permission.Add("EditCosonuoi", 14);
+                Permission.Add("AddTochuccapphep", 15);
+                Permission.Add("EditTochuccapphep", 16);
+                Permission.Add("VerifyCosonuoitrong", 17);
+                Permission.Add("Manageprovince", 19);
+                Permission.Add("QuanlyDoituongnuoi", 21);
+                Permission.Add("CapgiayphepVietGAP", 22);
+                Permission.Add("ManageFeedback", 25);
+                Permission.Add("ThemmoiQuyen", 26);
+                Permission.Add("ManageNews", 27);
+                Permission.Add("QuanlyTCCN", 28);
+                Permission.Add("XoaCSNT", 30);
+                Permission.Add("ManageFAQCate", 34);
+                Permission.Add("ManageNewCateTree", 36);
+                Permission.Add("ManageNewCatTable", 35);
+                Permission.Add("ManageDoc", 37);
+                Permission.Add("GiahanGCN", 38);
+                Permission.Add("ManageMSVietGAP", 39);
+                Permission.Add("Thongketheodoituong", 40);
+                Permission.Add("Thongketheodialy", 41);
+                Permission.Add("ThongketheoTCCN", 42);
+                Permission.Add("GuiGiayCNVietGAP", 43);
+                Permission.Add("QuanlyCSNT", 44);
+                Permission.Add("QuanlyDanhgiavien", 45);
+                Permission.Add("QuanlyHinhthucnuoi", 46);
+                Permission.Add("Xemchitietgiaydangkyhoatdongchungnhan", 47);
+                Permission.Add("Quanlycoquancaptren", 48);
+                Permission.Add("Duyettochucchungnhan", 49);
+                Permission.Add("EditContact", 7);
+                Permission.Add("QuanlyQuanHuyen", 51);
+                Permission.Add("QuanlyDanhmucchitieu", 52);
+                Permission.Add("QuanlyMucdoChitieu", 53);
+                Permission.Add("QuanlyPhuongphapkiemtra", 54);
+                Permission.Add("Quanlychitieu", 55);
+                Permission.Add("ManageFAQ", 57);
+                Permission.Add("QuanlyPhongban", 58);
+                Permission.Add("QuanlyChucvu", 59);
+                Permission.Add("QuanlyDanhba", 60);
+                Permission.Add("QuanlyDanhsachDanhba", 61);
+                Permission.Add("QuanlyGiayto", 63);
+                Permission.Add("Xemcacthongketonghop", 65);
+                Permission.Add("QuanlyThanhvienDangkyBoiTochucchungnhan", 65);
+                Permission.Add("QuanlyCacloaichungchiMachuyengiacotheco", 66);
+                Permission.Add("Dangkyhoatdongchungnhan", 67);
+                Permission.Add("Xemgiaydangkyhoatdongchungnhan_TCCN", 68);
+                Permission.Add("Quanlycacloaitrinhdocuachuyengia", 69);
+            }
         }
         public static bool CheckPermission(string key)
         {
             if (HttpContext.Current.Session["GroupID"] == null)
                 return false;
-            int groupID = Convert.ToInt32(HttpContext.Current.Session["GroupID"]);
-            List<PermissionEntity> lstPer = PermissionBRL.GetByGroupID(groupID);
-            if (!lstPer.Exists(
-                delegate(PermissionEntity obj)
-                {
-                    return obj.iPermissionID == PermissionBRL.Permission[key];
-                }
-            ))
+            try
             {
+                int groupID = Convert.ToInt32(HttpContext.Current.Session["GroupID"]);
+                List<PermissionEntity> lstPer = PermissionBRL.GetByGroupID(groupID);
+                if (!lstPer.Exists(
+                    delegate(PermissionEntity obj)
+                    {
+                        return obj.iPermissionID == PermissionBRL.Permission[key];
+                    }
+                ))
+                {
+                    HttpContext.Current.Response.Write("<script type='text/javascript'>alert('Bạn ko có quyền sử dụng chức năng này');history.back()</script>");
+                    return false;
+                }
+                return true;
+            }
+            catch {
                 HttpContext.Current.Response.Write("<script type='text/javascript'>alert('Bạn ko có quyền sử dụng chức năng này');history.back()</script>");
                 return false;
             }
-            return true;
         }
         public static List<PermissionEntity> GetByGroupID(int groupID)
         {
