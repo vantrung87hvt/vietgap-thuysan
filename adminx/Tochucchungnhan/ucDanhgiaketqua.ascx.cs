@@ -24,6 +24,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
     List<DanhgiaketquaEntity> lstDanhgiaketqua = null;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Danhgianoibo")) Response.End();
         lblThongbao.Text = "";
       
             if (Session["iCosonuoitrongID"] != null)

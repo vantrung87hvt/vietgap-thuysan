@@ -26,6 +26,7 @@ public partial class adminx_ucDangkytochucchungnhan : System.Web.UI.UserControl
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Dangkyhoatdongchungnhan")) Response.End();
         if (Session["userID"] == null)
             Response.Redirect("~/");
         else

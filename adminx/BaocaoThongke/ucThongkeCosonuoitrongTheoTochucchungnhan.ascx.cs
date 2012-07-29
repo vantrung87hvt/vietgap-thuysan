@@ -18,7 +18,7 @@ public partial class adminx_BaocaoThongke_ucThongkeCosonuoitrongTheoTochucchungn
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("Xemcacthongketonghop")) Response.End();
+        if (!PermissionBRL.CheckPermission("TruycapthongketheoTCCN")) Response.End();
         if (!Page.IsPostBack)
         {
             List<TochucchungnhanEntity> lstTochucchungnhan = TochucchungnhanBRL.GetAll();

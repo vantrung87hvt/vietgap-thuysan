@@ -17,7 +17,7 @@ public partial class adminx_BaocaoThongke_ucCosonuoitrongThongkeTheoDoituong : S
     private static List<CosonuoitrongEntity> lstCoso = null;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("Xemcacthongketonghop")) Response.End();
+        if (!PermissionBRL.CheckPermission("Truycapthongketheodoituong")) Response.End();
         if (!Page.IsPostBack)
         {
             napDoituong();

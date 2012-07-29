@@ -14,9 +14,10 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (!PermissionBRL.CheckPermission("ManagerGroup")) Response.End();
+        
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Quanlychuyengia")) Response.End();
             napDdlTochucchungnhan();
             napDdlTrinhdo();
             napCblGiaychungnhan();

@@ -17,7 +17,7 @@ namespace INVI.INVINews.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PermissionBRL.CheckPermission("VerifyFeedback")) Response.End();
+            if (!PermissionBRL.CheckPermission("Quanlyphanhoi")) Response.End();
             if (!IsPostBack)
                 this.napGridView();
         }

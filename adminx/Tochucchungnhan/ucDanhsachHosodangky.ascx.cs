@@ -19,6 +19,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("DuyethosodangkycuaCNST")) Response.End();
         if (!Page.IsPostBack)
         {
             List<CosonuoitrongEntity> lstCosonuoitrong = CosonuoitrongBRL.GetAll();

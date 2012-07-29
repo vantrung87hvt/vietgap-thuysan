@@ -114,7 +114,7 @@
     </tr>
     <tr>
         <td>
-            <asp:Panel ID="pnThongtinCosonuoitrong" runat="server" Visible="false">
+            <asp:Panel ID="pnThongtinCosonuoitrong" runat="server" >
                 <div class="grid_12">
                     <div class="block-border" id="tab-panel-2">
                         <div class="block-header">

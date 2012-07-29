@@ -28,10 +28,10 @@ public partial class uc_ucListVideoInCat : System.Web.UI.UserControl
         {
             try
             {
-                if (Session["currentDocPage"] != null)
+                if (Session["curVideoPage"] != null)
                     try
                     {
-                        currentPage = Convert.ToInt32(Session["currentDocPage"]);
+                        currentPage = Convert.ToInt32(Session["curVideoPage"]);
                     }
                     catch { }
                 lstVideo_napDulieu(currentPage);
