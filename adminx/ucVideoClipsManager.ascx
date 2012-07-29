@@ -5,6 +5,16 @@
 <%@ Register src="ucVideoUploader.ascx" tagname="ucVideoUploader" tagprefix="uc1" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
+<style type="text/css">
+    #<%=pnXemvideo.ClientID%>
+    {
+        margin-left:200px;
+    }
+    #<%=divVideo.ClientID%>
+    {
+        z-index:99;
+    }
+</style>
 <table width="100%">
     <tr>
         <td>
