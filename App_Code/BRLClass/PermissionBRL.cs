@@ -113,19 +113,17 @@ namespace INVI.Business
             {
                 int groupID = Convert.ToInt32(HttpContext.Current.Session["GroupID"]);
                 List<PermissionEntity> lstPer = PermissionBRL.GetByGroupID(groupID);
-                if (!lstPer.Exists(
-                    delegate(PermissionEntity obj)
-                    {
-                        return obj.iPermissionID == PermissionBRL.Permission[key];
-                    }
-                ))
+                foreach (PermissionEntity objPermiss in lstPer)
                 {
-                    HttpContext.Current.Response.Write("<script type='text/javascript'>alert('Bạn ko có quyền sử dụng chức năng này');history.back()</script>");
-                    return false;
+                    if(objPermiss!=null)
+                        if (objPermiss.iPermissionID == PermissionBRL.Permission[key])
+                            return true;
+                    
                 }
-                return true;
+                HttpContext.Current.Response.Write("<script type='text/javascript'>alert('Bạn ko có quyền sử dụng chức năng này');history.back()</script>");
+                return false;
             }
-            catch {
+            catch (Exception ex) {
                 HttpContext.Current.Response.Write("<script type='text/javascript'>alert('Bạn ko có quyền sử dụng chức năng này');history.back()</script>");
                 return false;
             }
