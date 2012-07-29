@@ -48,55 +48,6 @@ function showLoading(_status)
 /*]]>*/
     </script>
     <style type="text/css">
-        /*
-        h1
-        {
-            color: #C7D92C;
-            font-size: 18px;
-            font-weight: 400;
-        }
-        a
-        {
-            color: white;
-        }
-        #text
-        {
-            margin: 25px;
-        }
-        ul
-        {
-            list-style: none;
-        }
-        
-        .example
-        {
-            padding: 0 20px;
-            float: left;
-            width: 230px;
-        }
-        
-        .wrapper
-        {
-            width: 133px;
-            margin: 0 auto;
-        }
-        
-        div.button
-        {
-            height: 29px;
-            width: 133px;
-            background: url(img/button.png) 0 0;
-            font-size: 14px;
-            color: #C7D92C;
-            text-align: center;
-            padding-top: 15px;
-        }
-        div.button.hover
-        {
-            background: url(img/button.png) 0 56px;
-            color: #95A226;
-        }
-        */
         /***Loading popup - liemqv - 28/07/2012*****/
         #li-upload
         {
