@@ -5,7 +5,6 @@
 <%@ Register src="ucVideoUploader.ascx" tagname="ucVideoUploader" tagprefix="uc1" %>
 <link href="../../css/Grid_View.css" rel="stylesheet" type="text/css" />
 <script src='<%=ResolveUrl("~/Plugin/flowplayer/flowplayer-3.2.10.min.js") %>' type="text/javascript"></script>
-
 <table width="100%">
     <tr>
         <td>
@@ -24,7 +23,9 @@
                 <table width="100%">
                     <tr>
                         <td width="30%" colspan="2" style="width: 100%" align="center">
-                            <asp:Label ID="lblInfo" runat="server" Text="<%$ Resources:language,lblDanhmucVideo %>"></asp:Label>
+                            <h2>
+                                <asp:Label ID="lblInfo" runat="server" Text="<%$ Resources:language,lblDanhmucVideo %>"></asp:Label>
+                            </h2>
                         </td>
                     </tr>
                     <tr>
@@ -83,8 +84,8 @@
                         <td>
                         </td>
                         <td>
-                            <asp:Button ID="btnOK" runat="server" Text="Thêm" OnClick="btnOK_Click" />
-                            <asp:Button ID="btnCancel" runat="server" Text="Bỏ qua" OnClick="btnCancel_Click" />
+                            <asp:Button ID="btnOK" runat="server" Text="Lưu" OnClick="btnOK_Click" />
+                            <asp:Button ID="btnCancel" runat="server" Text="Hủy" OnClick="btnCancel_Click" />
                         </td>
                     </tr>
                     <tr>
