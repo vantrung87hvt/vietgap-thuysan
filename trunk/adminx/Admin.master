@@ -21,7 +21,7 @@
     <link href="css/FormInAdmin.css" rel="stylesheet" type="text/css" />
     <%--Script--%>
     <script src="../js/jquery-1.7.1.js" type="text/javascript"></script>
-    <script defer src="js/8f71c247c4dadc837fe569208a7a1dc0f7625c46.js"></script>
+    <script src="js/8f71c247c4dadc837fe569208a7a1dc0f7625c46.js" type="text/javascript"></script>
     <script src="js/CheckAllCheckBox.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -87,14 +87,14 @@
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Hộ nuôi trồng Thủy Sản<span class="badge grey"></span></a> 
 							<ul class="sub"> 
-									<li><a href="../adminx/Default.aspx?ctr=uc&page=CosonuoitrongUpdate_&do=add">Bổ sung</a></li>
-								<li><a href="../adminx/Default.aspx?page=Cachochuacapphep">Duyệt hồ sơ Cơ sở nuôi trồng</a></li>
+								<%--<li><a href="../adminx/Default.aspx?ctr=uc&page=CosonuoitrongUpdate_&do=add">Bổ sung</a></li>
+								<li><a href="../adminx/Default.aspx?page=Cachochuacapphep">Duyệt hồ sơ Cơ sở nuôi trồng</a></li>--%>
 									<li><a href="../adminx/Default.aspx?page=Cosonuoitrong">Quản lý cơ sở nuôi trồng</a></li>
-								<li><a href="../adminx/Default.aspx?page=CapmasoVietGap">Cấp mã số VietGAP</a></li>
+								<%--<li><a href="../adminx/Default.aspx?page=CapmasoVietGap">Cấp mã số VietGAP</a></li>
 								<li><a href="../adminx/Default.aspx?page=MasoVietGapQuanLy">Quản lý mã số VietGAP</a></li>
 								<li><a href="../adminx/Default.aspx?m=Tochucchungnhan&page=TCCN_TaikhoanDangky">Tài khoản CSNT đăng ký</a></li>
 								<li><a href="../adminx/Default.aspx?page=GiayphepVietGap">Cấp giấy chứng nhận</a></li>
-								<li><a href="../adminx/Default.aspx?page=GiahanGiayphepVietGap">Gia hạn giấy chứng nhận</a></li>
+								<li><a href="../adminx/Default.aspx?page=GiahanGiayphepVietGap">Gia hạn giấy chứng nhận</a></li>--%>
 							</ul> 
 						</li> 
 						<li> 
