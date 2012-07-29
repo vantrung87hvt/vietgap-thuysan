@@ -18,9 +18,12 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             napGridView();
             if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
             {
-                lnkAdd.NavigateUrl = "~/adminx/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add";
+                //lnkAdd.NavigateUrl = "~/adminx/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add";
+                lnkAdd.Visible = false;
+                lbtnVerify.Visible = false;
+                hypImport.Visible = false;
             }
-            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4) // nếu là tổ chức chứng nhận
             {
                 lnkAdd.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add&ctr=adm";
                 hypImport.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=ImportCSNT";
@@ -282,7 +285,7 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                 hypXuly.NavigateUrl = "~/adminx/default.aspx?page=Xulyvipham&cosonuoitrongID="+PK_iCosonuoitrongID;
                 hypCapgiayphep.NavigateUrl = "~/adminx/default.aspx?page=GiayphepVietGap&PK_iCosonuoitrongID="+PK_iCosonuoitrongID;
             }
-            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+            else if (Convert.ToInt64(Session["groupID"].ToString()) == 4) // nếu là Tổ chức chứng nhận
             {
                 hypXuly.NavigateUrl = "~/adminx/Tochucchungnhan/default.aspx?page=Xulyvipham&ctr=adm&cosonuoitrongID=" + PK_iCosonuoitrongID;
                 hypCapgiayphep.NavigateUrl = "~/adminx/Tochucchungnhan/default.aspx?page=GiayphepVietGap&ctr=adm&PK_iCosonuoitrongID=" + PK_iCosonuoitrongID;

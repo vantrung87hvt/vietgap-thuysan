@@ -89,14 +89,14 @@
             <ItemTemplate>
                 <asp:HyperLink ID="hypXuly" runat="server" 
                     NavigateUrl='<%# Eval("PK_iCosonuoitrongID", "~/adminx/default.aspx?page=Xulyvipham&cosonuoitrongID={0}") %>' 
-                    Text="Xử lý" Visible="false"></asp:HyperLink>
+                    Text="Xử lý" Visible="true"></asp:HyperLink>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField>
             <ItemTemplate>
                 <asp:HyperLink ID="hypCapgiayphep" runat="server" 
                     NavigateUrl='<%# Eval("PK_iCosonuoitrongID", "~/adminx/default.aspx?page=GiayphepVietGap&PK_iCosonuoitrongID={0}") %>' 
-                    Text="Cấp Giấy phép" Visible="false"></asp:HyperLink>
+                    Text="Cấp Giấy phép" Visible="true"></asp:HyperLink>
             </ItemTemplate>
         </asp:TemplateField>
 
@@ -117,14 +117,13 @@
     <tr>
         <td>
        <asp:HyperLink ID="lnkAdd" runat="server" Text="Thêm mới|" 
-                NavigateUrl="~/adminx/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add" 
-                Visible="False" />
+                NavigateUrl="~/adminx/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add" />
           
 <asp:LinkButton ID="lbtnDelete" runat="server" CausesValidation="False" 
     onclick="lbtnDelete_Click" OnClientClick="return confirm('Chắc chắn xóa?')">Xóa đã chọn</asp:LinkButton>|
 
 <asp:LinkButton ID="lbtnVerify" runat="server" CausesValidation="False" 
-    onclick="lbtnVerify_Click" Visible="False">Kiểm duyệt để cấp mã số</asp:LinkButton>|
+    onclick="lbtnVerify_Click">Kiểm duyệt để cấp mã số</asp:LinkButton>|
 <asp:LinkButton ID="lbtnExport" runat="server" CausesValidation="False" 
                 onclick="lbtnExport_Click">Xuất dữ liệu</asp:LinkButton>|
 <asp:LinkButton ID="lbtnExportAll" runat="server" CausesValidation="False" 

@@ -302,7 +302,9 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         txtHoten.Text = "";
         txtMaso.Text = "";
         txtSonamkinhnghiem.Text = "";
-        ddlDuyet.SelectedItem.Selected = ddlTochucchungnhan.SelectedItem.Selected = ddlTrinhdo.SelectedItem.Selected = false;
+        //ddlDuyet.SelectedItem.Selected = false;
+        //ddlTochucchungnhan.SelectedItem.Selected = false;
+        //ddlTrinhdo.SelectedItem.Selected = false;
         btnOK.Text = "Lưu";
         btnOK.CommandName = "ADDNEW";
         pnlEdit.Visible = true;
