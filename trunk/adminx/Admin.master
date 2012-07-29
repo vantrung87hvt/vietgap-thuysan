@@ -142,7 +142,9 @@
 								<asp:Panel ID="p_45" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=Chuyengia">Quản lý chuyên gia</a></li>
 								</asp:Panel>
-                                
+                                <asp:Panel ID="p_68" runat="server" Visible="false">
+								<li><a href="../adminx/Default.aspx?page=TrinhdoChuyengia">Quản lý trình độ chuyên gia</a></li>
+								</asp:Panel>
 								<asp:Panel ID="p_48" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=CoquancaptrenQuanly">Quản lý Cơ quan cấp trên</a></li>
 								</asp:Panel>
@@ -241,7 +243,7 @@
 								<asp:Panel ID="p_63" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=GiaytoManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Quản lý Giấy tờ kèm theo</a></li> 
 								</asp:Panel>
-                                <asp:Panel ID="p_67" runat="server" Visible="false">
+                                <asp:Panel ID="p_69" runat="server" Visible="false">
 								<li><a href="../adminx/Default.aspx?page=ChungchiManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Loại chứng chỉ</a></li> 
 								</asp:Panel>
 							</ul> 
