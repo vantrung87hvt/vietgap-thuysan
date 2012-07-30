@@ -12,6 +12,7 @@ public partial class adminx_ucFaqCategory : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QuanlychuyenmucFAQ")) Response.End();
             napGridView();
         }
         if (Request.QueryString["do"] != null)

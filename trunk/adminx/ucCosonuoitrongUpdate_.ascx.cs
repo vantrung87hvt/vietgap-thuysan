@@ -29,7 +29,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
     {       
         if (!Page.IsPostBack)
         {
-            
+            if (!PermissionBRL.CheckPermission("QuanlyCSNT")) Response.End();
             napTinh();
             LoadQuanHuyen(Convert.ToInt32(ddlTinh.SelectedValue));
             napDoituongnuoi();

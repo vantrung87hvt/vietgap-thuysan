@@ -15,7 +15,7 @@ public partial class adminx_ucGroupPermission : System.Web.UI.UserControl
     //private bool bAddnew = false;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("ManagerGroupPermission")) Response.End();
+        if (!PermissionBRL.CheckPermission("Phanquyenuser")) Response.End();
         if (!IsPostBack)
         {
             this.napGridView();

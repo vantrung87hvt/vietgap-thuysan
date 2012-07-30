@@ -14,7 +14,7 @@ public partial class UC_ucConfig : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("EditConfig")) Response.End();
+        if (!PermissionBRL.CheckPermission("Cauhinhhethong")) Response.End();
         if (!IsPostBack)
         {
             ddlConfig_loadData();

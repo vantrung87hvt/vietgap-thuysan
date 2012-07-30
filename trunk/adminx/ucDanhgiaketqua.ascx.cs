@@ -25,27 +25,26 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         lblThongbao.Text = "";
-      
-            if (Session["iCosonuoitrongID"] != null)
-                PK_iCosonuoitrongID = Convert.ToInt32(Session["iCosonuoitrongID"].ToString());
-            else
+        if (!PermissionBRL.CheckPermission("Danhgianoibo")) Response.End();
+        if (Session["iCosonuoitrongID"] != null)
+            PK_iCosonuoitrongID = Convert.ToInt32(Session["iCosonuoitrongID"].ToString());
+        else
+        {
+            if (Session["UserID"] != null)
             {
-                if (Session["UserID"] != null)
-                {
-                    int iUserID = Convert.ToInt32(Session["UserID"].ToString());
-                    List<CosonuoitrongEntity> lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iUserID(iUserID);
-                    if (lstCosonuoitrong != null && lstCosonuoitrong.Count > 0)
-                        PK_iCosonuoitrongID = (int) lstCosonuoitrong[0].PK_iCosonuoitrongID;
-                }
+                int iUserID = Convert.ToInt32(Session["UserID"].ToString());
+                List<CosonuoitrongEntity> lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iUserID(iUserID);
+                if (lstCosonuoitrong != null && lstCosonuoitrong.Count > 0)
+                    PK_iCosonuoitrongID = (int) lstCosonuoitrong[0].PK_iCosonuoitrongID;
             }
+        }
 
-            lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
-            if (lstDanhgiaketqua.Count > 0)
-                bDatontai = true;
-            else
-                bDatontai = false;
-            napRpt();
-        
+        lstDanhgiaketqua = DanhgiaketquaBRL.GetByFK_iCosonuoiID(PK_iCosonuoitrongID);
+        if (lstDanhgiaketqua.Count > 0)
+            bDatontai = true;
+        else
+            bDatontai = false;
+        napRpt();
     }
 
 

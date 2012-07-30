@@ -18,6 +18,7 @@ public partial class adminx_ucDoituongnuoiManager : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Quanlydoituongnuoi")) Response.End();
             napgrvDoituongnuoi();
         }
     }

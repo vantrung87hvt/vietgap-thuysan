@@ -18,6 +18,7 @@ public partial class adminx_ucTinhMa : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Quanlytinh")) Response.End();
             napgrvTinh();
         }
     }    

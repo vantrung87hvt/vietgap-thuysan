@@ -23,6 +23,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLVideo")) Response.End();
             napGridView();
         }
     }

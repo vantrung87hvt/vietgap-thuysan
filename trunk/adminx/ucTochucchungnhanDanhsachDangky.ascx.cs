@@ -18,6 +18,7 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
         //}
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Dangkyhoatdongchungnhan")) Response.End();
             List<DangkyHoatdongchungnhanEntity> lstDanhsachTochucchungnhan = DangkyHoatdongchungnhanBRL.GetAll();
             if (lstDanhsachTochucchungnhan != null && lstDanhsachTochucchungnhan.Count > 0)
                 DanhsachTochucchungnhanDangky = lstDanhsachTochucchungnhan;

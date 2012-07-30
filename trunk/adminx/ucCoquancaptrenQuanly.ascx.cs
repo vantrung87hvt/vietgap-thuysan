@@ -9,6 +9,7 @@ public partial class adminx_ucCoquancaptrenQuanly : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("Quanlycoquancaptren")) Response.End();
         napGrid();
     }
     private void napGrid()

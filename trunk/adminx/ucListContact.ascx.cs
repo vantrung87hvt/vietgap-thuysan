@@ -18,6 +18,7 @@ public partial class adminx_ucListContact : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLDanhsachdanhba")) Response.End();
             napgrvContact();
         }
     }

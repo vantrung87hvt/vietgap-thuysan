@@ -15,6 +15,7 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QuanlyCSNT")) Response.End();
             napGridView();
             if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
             {

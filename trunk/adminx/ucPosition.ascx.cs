@@ -21,7 +21,6 @@ public partial class adminx_ucPosition : System.Web.UI.UserControl
         {
             this.napGridView();
             ddlPosition_loadData();
-            
         }
     }
     private void ddlPosition_loadData()

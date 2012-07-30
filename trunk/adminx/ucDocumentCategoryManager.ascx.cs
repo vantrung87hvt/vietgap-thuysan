@@ -11,7 +11,10 @@ public partial class adminx_ucDocumentCategoryManager : System.Web.UI.UserContro
      protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
+                if (!PermissionBRL.CheckPermission("Quanlytailieuquypham")) Response.End();
                 this.napGridView();
+            }
         }
 
         private void napGridView()
