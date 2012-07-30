@@ -19,6 +19,7 @@ public partial class adminx_ucXulyvipham : System.Web.UI.UserControl
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("XulyviphamCSNT")) Response.End();
         if (Request.QueryString["cosonuoitrongID"] != null)
         {
             int iCosonuoitrongID = Convert.ToInt32(Request.QueryString["cosonuoitrongID"].ToString());
