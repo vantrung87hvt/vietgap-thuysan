@@ -12,6 +12,7 @@ public partial class adminx_ucCachochuacapphep : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QuanlyCSNT")) Response.End();
             napGridView();
         }
     }
