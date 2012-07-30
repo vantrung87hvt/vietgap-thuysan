@@ -163,14 +163,16 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
                 entity.iSolanxem = entity.iSolanxem + 1;
                 VideoClipBRL.Edit(entity);
                 lblThongbao.Text = "Cập nhập thành công";
-                //Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+                divVideo.InnerHtml = "";
+                Response.Write("<script language=\"javascript\">alert('Cập nhập thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
             }
             else
             {
                 entity.iSolanxem = 0;
                 VideoClipBRL.Add(entity);
                 lblThongbao.Text = "Bổ sung thành công";
-                //Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
+                divVideo.InnerHtml = "";
+                Response.Write("<script language=\"javascript\">alert('Bổ sung thành công!');location='Default.aspx?page=VideoClipsManager';</script>");
 
             }
             //Nạp lại dữ liệu
@@ -269,6 +271,7 @@ public partial class adminx_ucVideoClipsManager : System.Web.UI.UserControl
             deleteVideo(Path.GetFileName(Session["strUploadedFile"].ToString()));
         }
         pnlEdit.Visible = false;
+        divVideo.InnerHtml = "";
     }
     protected void lbtnAddnew_Click(object sender, EventArgs e)
     {

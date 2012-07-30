@@ -16,7 +16,7 @@ public class FileHandler : IHttpHandler,IReadOnlySessionState
         if (context.Request.QueryString["FileName"] != null)
         {
             strFileName = context.Request.QueryString["FileName"];
-            ReadFile(strFileName.Trim(), context);
+            //ReadFile(strFileName.Trim(), context);
         }
         else
         {
@@ -89,39 +89,39 @@ public class FileHandler : IHttpHandler,IReadOnlySessionState
         }
     }
 
-    public void ReadFile(string fileName, HttpContext context)
-    {
-        using (SqlConnection sCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DbCon"].ConnectionString))
-        {
-            using (SqlCommand sCmd = new SqlCommand("usp_Media_rd", sCon))
-            {
-                sCmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter spFileName = sCmd.Parameters.Add("@i_FileName", SqlDbType.VarChar);
-                spFileName.Value = fileName;
-                sCon.Open();
-                using (SqlDataReader sReader = sCmd.ExecuteReader())
-                {
-                    if (sReader.Read())
-                    {
-                        byte[] buffer;
-                        string mimeType;
+    //public void ReadFile(string fileName, HttpContext context)
+    //{
+    //    using (SqlConnection sCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DbCon"].ConnectionString))
+    //    {
+    //        using (SqlCommand sCmd = new SqlCommand("usp_Media_rd", sCon))
+    //        {
+    //            sCmd.CommandType = CommandType.StoredProcedure;
+    //            SqlParameter spFileName = sCmd.Parameters.Add("@i_FileName", SqlDbType.VarChar);
+    //            spFileName.Value = fileName;
+    //            sCon.Open();
+    //            using (SqlDataReader sReader = sCmd.ExecuteReader())
+    //            {
+    //                if (sReader.Read())
+    //                {
+    //                    byte[] buffer;
+    //                    string mimeType;
 
-                        buffer = (byte[])sReader["File_BLOB"];
-                        mimeType = sReader["File_MIME_Type"].ToString();
+    //                    buffer = (byte[])sReader["File_BLOB"];
+    //                    mimeType = sReader["File_MIME_Type"].ToString();
 
-                        context.Response.ContentType = mimeType;
+    //                    context.Response.ContentType = mimeType;
 
-                        //  Uncomment this if you want file as attachment
-                        //context.Response.AddHeader("content-disposition", "attachment; filename=" + strFileName);
+    //                    //  Uncomment this if you want file as attachment
+    //                    //context.Response.AddHeader("content-disposition", "attachment; filename=" + strFileName);
 
-                        context.Response.BinaryWrite(buffer);
-                        context.Response.Flush();
-                        context.Response.Close();
-                    }
-                }
-            }
-        }
-    }
+    //                    context.Response.BinaryWrite(buffer);
+    //                    context.Response.Flush();
+    //                    context.Response.Close();
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
     public bool IsReusable
     {
         get
