@@ -16,7 +16,7 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("Quanlycacloaitrinhdocuachuyengia")) Response.End();
+        if (!PermissionBRL.CheckPermission("QLDanhmucTrinhdochuyengia")) Response.End();
         if (!IsPostBack)
         {
             this.napGridView();
@@ -36,7 +36,7 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
     private void napGridView()
     {
         grvTrinhdoChuyengia.DataSource = TrinhdoChuyengiaBRL.GetAll();
-        grvTrinhdoChuyengia.DataKeyNames = new string[] { "PK_PK_iTrinhdoChuyengiaID" };
+        grvTrinhdoChuyengia.DataKeyNames = new string[] { "PK_iTrinhdoChuyengiaID" };
         grvTrinhdoChuyengia.DataBind();
     }
     protected void grvPosition_Sorting(object sender, GridViewSortEventArgs e)
@@ -76,12 +76,14 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
                 {
                     oTrinhdoChuyengia.PK_iTrinhdoChuyengiaID = Convert.ToInt16(btnOK.CommandArgument);
                     TrinhdoChuyengiaBRL.Edit(oTrinhdoChuyengia);
-                    lblThongbao.Text = "Cập nhật thành công";
+                    pnlEdit.Visible = false;
+                    Response.Write("<script language=\"javascript\">alert('Cập nhập thành công');location='Default.aspx?page=TrinhdoChuyengia';</script>");
                 }
                 else if(btnOK.CommandName.ToUpper()=="ADDNEW")
                 {
                         TrinhdoChuyengiaBRL.Add(oTrinhdoChuyengia);
-                        lblThongbao.Text = "Thêm nhóm thành công";
+                        pnlEdit.Visible = false;
+                        Response.Write("<script language=\"javascript\">alert('Bổ sung thành công');location='Default.aspx?page=TrinhdoChuyengia';</script>");
                 }
             }
             catch (Exception ex)
@@ -93,8 +95,7 @@ public partial class adminx_Tochucchungnhan_ucTrinhdoChuyengia : System.Web.UI.U
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        if(btnOK.CommandName.ToUpper()=="EDIT")
-            napForm(Convert.ToInt16(btnOK.CommandArgument));
+        pnlEdit.Visible = false;
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {
