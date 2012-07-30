@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ctContent" Runat="Server">
 <link href="css/formInMain.css" rel="stylesheet" type="text/css" />
-<div id="main" style="width:610px;margin-left:10px;text-align:justify;">    
+<div id="main" style="width:530px;margin-left:10px;text-align:justify;">    
     
 <asp:Panel ID="pnDangKyTV" runat="server">
     <div class="m">
