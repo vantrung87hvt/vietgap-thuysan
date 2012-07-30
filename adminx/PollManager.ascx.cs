@@ -12,7 +12,7 @@ namespace INVI.INVINews.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PermissionBRL.CheckPermission("ManagerPoll")) Response.End();
+            if (!PermissionBRL.CheckPermission("Quanlytrungcau")) Response.End();
             if (!IsPostBack)
             {
 
