@@ -40,9 +40,10 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
             ddlTochucchungnhan.SelectedItem.Selected = false;
             ddlTochucchungnhan.Items.FindByValue(oChuyengia.FK_iTochucchungnhanID.ToString()).Selected = true;
             txtSonamkinhnghiem.Text = oChuyengia.iNamkinhnghiem.ToString();
+            btnCapmaso.Visible = oChuyengia.sMaso.Contains("CGĐG-VietGAP-TS") ? false : true;
             txtMaso.Text = oChuyengia.sMaso;
             txtMaso.Enabled = false;
-            btnCapmaso.Visible = oChuyengia.sMaso.Length>0?true:false;
+            txtNamsinh.Text = oChuyengia.iNamsinh.ToString();
             if (oChuyengia.bDuyet)
             {
                 ddlDuyet.Items[0].Selected = true;
@@ -56,7 +57,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
             else if (Convert.ToInt16(Session["GroupID"].ToString()) == 1)
                 imgAnhthe.ImageUrl = "ViewImage.aspx?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
             ddlTrinhdo.SelectedItem.Selected = false;
-            lblNamsinh.Text = oChuyengia.iNamsinh.ToString();
+            
             if (oChuyengia.FK_iTrinhdoID != null)
             {
                 ddlTrinhdo.Items.FindByValue(oChuyengia.FK_iTrinhdoID.ToString()).Selected = true;
@@ -149,7 +150,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         ddlTochucchungnhan.DataTextField = "sTochucchungnhan";
         ddlTochucchungnhan.DataValueField = "PK_iTochucchungnhanID";
         ddlTochucchungnhan.DataBind();
-        ddlTochucchungnhan.Enabled = false;
+        
     }
 
     private void napDdlTrinhdo()
@@ -304,7 +305,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                     }
                 }
                 //Nap lai du lieu
-                Response.Redirect(Request.Url.ToString());
+                Response.Write("<script language=\"javascript\">alert('Xóa thành công!');location='Default.aspx?page=Chuyengia';</script>");
             }
             catch (Exception ex)
             {
@@ -348,49 +349,45 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
     }
     protected void btnCapmaso_Click(object sender, EventArgs e)
     {
-        String sMaso = "CGĐG-VietGAP-TS";
-        int iSochuyengia=0;
-        try
+        String sMasoChuyengia = "CGĐG-VietGAP-TS";
+        // Thực hiện việc cấp mã số
+        // 1. Lấy ID của Chuyên gia
+        int iChuyengiaID = Convert.ToInt32(btnOK.CommandArgument);
+        if (iChuyengiaID <= 0) return;
+        ChuyengiaEntity oChuyengia = ChuyengiaBRL.GetOne(iChuyengiaID);
+        List<ChuyengiaEntity> lstChuyengia = ChuyengiaBRL.GetAll().FindAll(delegate(ChuyengiaEntity objChuyengia)
         {
-            //Lấy danh sách các Chuyên gia đã được cấp phép
-            List<ChuyengiaEntity> lstChuyengiadaduoccapphep = ChuyengiaBRL.GetAll().FindAll(delegate(ChuyengiaEntity oChuyengia)
-            {
-                return oChuyengia.sMaso.Length > 0;
-            });
-            //Sắp xếp danh sách theo chiều giảm dần của mã số VietGAP
-            if (lstChuyengiadaduoccapphep.Count > 0)
-            {
-                ChuyengiaEntity.Sort(lstChuyengiadaduoccapphep, "sMaso", "DESC");
-                String sMasomoinhat = lstChuyengiadaduoccapphep[0].sMaso;
-                iSochuyengia = Convert.ToInt16(sMasomoinhat.Substring(sMasomoinhat.LastIndexOf(' '), sMasomoinhat.Length - 1 - sMasomoinhat.LastIndexOf(' ')));
-                sMaso +=" "+taoDinhdangMaso(iSochuyengia + 1);
-            }
-            else
-            {
-                iSochuyengia = 1;
-                sMaso += " "+taoDinhdangMaso(iSochuyengia);
-            }
-            int PK_iChuyengiaID = Convert.ToInt32(btnOK.CommandArgument);
-            ChuyengiaEntity oChuyengiacancapmaso = ChuyengiaBRL.GetOne(PK_iChuyengiaID);
-            oChuyengiacancapmaso.sMaso = sMaso;
-            ChuyengiaBRL.Edit(oChuyengiacancapmaso);
-            Response.Write("<script language=\"javascript\">alert('Chuyên gia đã được cấp mã số:" + sMaso + ".');></script>");
+            return objChuyengia.sMaso.Length > 0 && objChuyengia.sMaso.Contains("CGĐG-VietGAP-TS");
+        });
+        if (lstChuyengia.Count > 0)
+        {
+            int iMasomoinhat = oChuyengia.PK_iChuyengiaID;
+            sMasoChuyengia +=" " + sFormat(iMasomoinhat);
         }
-        catch (Exception ex)
+        else
         {
-            Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Chuyengia';</script>");
+            sMasoChuyengia = "CGĐG-VietGAP-TS 0001";
+        }
+        // 3. Cập nhập mã số 
+        if (oChuyengia != null)
+        {
+            oChuyengia.sMaso = sMasoChuyengia;
+            ChuyengiaBRL.Edit(oChuyengia);
+            pnlEdit.Visible = false;
+            btnCapmaso.Visible = false;
+            Response.Write("<script language=\"javascript\">alert('Mã số " + sMasoChuyengia + " được cấp cho chuyên gia.');location='Default.aspx?page=Chuyengia';</script>");
         }
     }
-    private String taoDinhdangMaso(int iSochuyengia)
+    private String sFormat(int iMasomoinhat)
     {
-        String sMacoso = String.Empty;
-        if (iSochuyengia > 100)
-            sMacoso = "0" + (iSochuyengia);
-        else if (iSochuyengia > 10)
-            sMacoso = "00" + (iSochuyengia);
-        else if (iSochuyengia > 0)
-            sMacoso = "000" + (iSochuyengia);
-        return sMacoso;
+        if (iMasomoinhat < 10)
+            return "000" + iMasomoinhat;
+        else if (iMasomoinhat < 100)
+            return "00" + iMasomoinhat;
+        else if (iMasomoinhat < 1000)
+            return "0" + iMasomoinhat;
+        else
+            return iMasomoinhat + "";
     }
     protected void grvChuyengia_RowCommand(object sender, GridViewCommandEventArgs e)
     {

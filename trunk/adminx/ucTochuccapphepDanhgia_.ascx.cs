@@ -91,8 +91,10 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     {
         //Nếu chưa tồn tại báo  cáo đánh giá --> thêm vào danh sách đoàn đánh giá tất cả các đánh giá viên
         List<ChuyengiaEntity> lstDanhgiavien = new List<ChuyengiaEntity>();
-        
-            lstDanhgiavien = ChuyengiaBRL.GetByFK_iTochucchungnhanID(iTochuchungnhanID);
+        // Lấy tất cả các chuyên gia trừ các chuyên gia thuộc biên chế của TCCN đang thực hiện việc đánh giá
+        lstDanhgiavien = ChuyengiaBRL.GetAll().FindAll(delegate(ChuyengiaEntity oChuyengia) {
+            return oChuyengia.FK_iTochucchungnhanID == iTochuchungnhanID;
+        });
             lstDoandanhgia.DataSource = lstDanhgiavien;
             lstDoandanhgia.DataTextField = "sHoten";
             lstDoandanhgia.DataValueField = "PK_iDanhgiavienID";
@@ -159,7 +161,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             }
             catch (Exception ex)
             {
-                Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=TochuccapphepDanhgia';</script>");
+                Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=TochuccapphepDanhgia_';</script>");
             }
         }
        
@@ -310,6 +312,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             // Cập nhập giá trị Trạng thái
             TochucchungnhanBRL.Edit(oTochuc);
             lblThongbao.Text = "Lưu thành  công!";
+            btnLuu.Visible = false;
             btnExportToWord.Enabled = true;
         }
         else
@@ -333,7 +336,12 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             TochucchungnhanEntity oTochuc = TochucchungnhanBRL.GetOne(PK_iTochucchungnhanID);
             oTochuc.bDuyet = (Int32.Parse(ddlKetluan.SelectedItem.Value) == 1 ? true : false);
             TochucchungnhanBRL.Edit(oTochuc);
+            btnLuu.Visible = false;
             lblThongbao.Text = "Cập nhật thành  công!";
         } 
+    }
+    protected void btnHuy_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Default.aspx?page=TochucchungnhanDanhsachDangky");
     }
 }
