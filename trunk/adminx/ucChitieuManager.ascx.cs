@@ -18,6 +18,7 @@ public partial class uc_ucChitieuManager : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLDanhmucchitieu")) Response.End();
             napGrvChitieu();
             napDllDanhmucchitieu();
             napDllMucdo();
