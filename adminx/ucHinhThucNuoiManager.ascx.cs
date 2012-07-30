@@ -12,6 +12,7 @@ public partial class adminx_ucHinhThucNuoiManager : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Quanlyhinhthucnuoi")) Response.End();
             napgrvHinhThucNuoi();
         }
     }

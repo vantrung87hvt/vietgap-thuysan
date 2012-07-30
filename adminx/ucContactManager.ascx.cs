@@ -18,6 +18,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLDanhba")) Response.End();
             LoadDropDownList();
             napgrvContact();
         }

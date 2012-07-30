@@ -20,6 +20,7 @@ namespace INVI.INVINews.Admin
             //if (!PermissionBRL.CheckPermission("ManagerFAQ")) Response.End();
             if (!IsPostBack)
             {
+                if (!PermissionBRL.CheckPermission("QLFAQ")) Response.End();
                 this.napGridView();
                 napDdlLoaicauhoi();
             }

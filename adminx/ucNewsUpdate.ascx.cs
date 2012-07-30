@@ -20,6 +20,7 @@ public partial class adminx_NewsUpdate : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Capnhaptintuc")) Response.End();
             this.napNhomcaptren(0, Server.HtmlDecode("&nbsp;"));
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
             {

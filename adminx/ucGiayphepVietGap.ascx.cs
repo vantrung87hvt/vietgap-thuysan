@@ -25,6 +25,7 @@ public partial class adminx_ucGiayphepVietGap : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("IngiayphepVietGap")) Response.End();
             if (Request.QueryString["PK_iCosonuoitrongID"] != null)
             {
                 // Phải lấy ID của Mã số VIỆT GAP theo Cơ sở nuôi trồng

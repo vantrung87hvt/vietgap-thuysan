@@ -11,7 +11,8 @@ public partial class adminx_ucDocumentCategoryUpdate : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {           
+        {
+            if (!PermissionBRL.CheckPermission("QuanlychuyenmucFAQ")) Response.End();
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
             {
                 //if (!PermissionBRL.CheckPermission("")) Response.End();

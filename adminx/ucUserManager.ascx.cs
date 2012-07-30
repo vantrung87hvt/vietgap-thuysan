@@ -16,7 +16,7 @@ public partial class adminx_ucUserManager : System.Web.UI.UserControl
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("ManagerUser")) Response.End();
+        if (!PermissionBRL.CheckPermission("Quanlyuser")) Response.End();
         if (!IsPostBack)
         {
             ddlGroup_loadData();

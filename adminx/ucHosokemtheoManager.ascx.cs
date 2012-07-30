@@ -17,6 +17,7 @@ public partial class uc_HosokemtheoManager : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("DuyethosodangkycuaCNST")) Response.End();
         if (Session["userID"] == null)
             Response.Redirect("~/");
         else

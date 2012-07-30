@@ -17,6 +17,7 @@ public partial class adminx_ucPermission : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Phanquyenuser")) Response.End();
             napGridView();
         }
     }

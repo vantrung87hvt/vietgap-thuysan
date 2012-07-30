@@ -18,6 +18,7 @@ public partial class uc_ucGiaytoManager : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLDanhmucgiaytokemtheo")) Response.End();
             napgrvGrayto();
         }
     }

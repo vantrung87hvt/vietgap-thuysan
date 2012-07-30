@@ -12,7 +12,10 @@ namespace INVI.INVINews.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
+                if (!PermissionBRL.CheckPermission("Kiemduyettintuc")) Response.End();
                 this.napGridView();
+            }
         }
         private void napGridView()
         {

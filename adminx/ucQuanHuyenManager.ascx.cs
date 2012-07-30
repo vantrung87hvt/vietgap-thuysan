@@ -18,6 +18,7 @@ public partial class adminx_ucQuanHuyenManager : System.Web.UI.UserControl
         lblThongbao.Text = "";
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("QLDanhmucquanhuyen")) Response.End();
             LoadDropDownList();
             napgrvQuanHuyen();
         }
