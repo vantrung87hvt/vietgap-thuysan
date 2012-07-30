@@ -18,6 +18,7 @@ public partial class adminx_ucBaocaodanhgianoibo : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            if (!PermissionBRL.CheckPermission("Truynhapbaocaodanhgianoibo")) Response.End();
             napDulieu();
         }
     }
