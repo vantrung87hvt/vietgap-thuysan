@@ -38,7 +38,8 @@ namespace INVI.Business
             if (lstPermission.Count > 0)
             {
                 foreach (PermissionEntity oPermission in lstPermission)
-                    Permission.Add(oPermission.sName, oPermission.iPermissionID);
+                    if(!Permission.ContainsKey(oPermission.sName))
+                        Permission.Add(oPermission.sName, oPermission.iPermissionID);
             }
             else
             {
