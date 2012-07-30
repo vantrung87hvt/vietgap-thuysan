@@ -270,8 +270,8 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        if (btnOK.CommandName.ToUpper() == "EDIT")
-            pnlEdit.Visible = false;
+        //if (btnOK.CommandName.ToUpper() == "EDIT")
+        pnlEdit.Visible = false;
     }
     protected void lbtnDelete_Click(object sender, EventArgs e)
     {

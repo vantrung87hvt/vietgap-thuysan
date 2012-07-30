@@ -29,7 +29,7 @@ $(document).ready(function(){
 //			button.removeClass('hover');
 //			window.clearInterval(interval);
 //			this.enable();
-			$('<li></li>').appendTo('#li-upload .files').text(file);						
+			//$('<li></li>').appendTo('#li-upload .files').text(file);						
 		}
 	});
 	
