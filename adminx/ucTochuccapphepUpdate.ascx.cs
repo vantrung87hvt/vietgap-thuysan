@@ -20,6 +20,7 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         lblLoi.Text = "";
+        if (!PermissionBRL.CheckPermission("CapnhatTCCN")) Response.End();
         if (!Page.IsPostBack)
         {
             napTinh();

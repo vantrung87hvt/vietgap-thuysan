@@ -12,7 +12,7 @@ public partial class adminx_ucTochuccapphepQuanLy : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
-            
+            if (!PermissionBRL.CheckPermission("QuanlyTCCN")) Response.End();   
             List<TochucchungnhanEntity> lstTochucchungnhan = TochucchungnhanBRL.GetAll();
             if (lstTochucchungnhan != null && lstTochucchungnhan.Count > 0)
                 //    DanhsachTochucchungnhan = lstTochucchungnhan.FindAll(delegate(TochucchungnhanEntity oTochucchungnhan) { return oTochucchungnhan.iTrangthai == 2; });
