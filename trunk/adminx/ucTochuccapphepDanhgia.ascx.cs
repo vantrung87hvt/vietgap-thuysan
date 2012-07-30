@@ -21,6 +21,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     int PK_iDanhgiatochucID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!PermissionBRL.CheckPermission("DanhgiaTCCN")) Response.End();
         btnExportToWord.Enabled = false;
         napDoandanhgiavien(PK_iTochucchungnhanID);
         if (Session["PK_iTochucchungnhanID"] != null)
