@@ -159,7 +159,7 @@
     <td colspan="2" align="left">
         <asp:button runat="server" text="Lưu" ValidationGroup="required" id="btnLuu" 
             onclick="btnLuu_Click" /> | 
-        <asp:button runat="server" text="Hủy" id="btnHuy" /> | 
+        <asp:button runat="server" text="Hủy" id="btnHuy" onclick="btnHuy_Click" /> | 
         <asp:button runat="server" text="Xuất ra Word" id="btnExportToWord" onclick="btnExportToWord_Click" Enabled="false" />
     </td>
   </tr>

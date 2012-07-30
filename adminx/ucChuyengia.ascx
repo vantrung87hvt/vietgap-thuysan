@@ -124,7 +124,7 @@
                 <asp:Button ID="btnOK" runat="server" Text="Thêm" OnClick="btnOK_Click" />
                 <asp:Button ID="btnCancel" runat="server" Text="Bỏ qua" OnClick="btnCancel_Click" />
                 <asp:Button ID="btnCapmaso" runat="server" Text="Cấp mã số" 
-                    onclick="btnCapmaso_Click" />
+                    onclick="btnCapmaso_Click" Visible="False" />
             </td>
         </tr>
         <tr>

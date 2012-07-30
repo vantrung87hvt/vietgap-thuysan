@@ -37,7 +37,10 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
             ddlTochucchungnhan.Items.FindByValue(oChuyengia.FK_iTochucchungnhanID.ToString()).Selected = true;
             txtSonamkinhnghiem.Text = oChuyengia.iNamkinhnghiem.ToString();
             txtMaso.Text = oChuyengia.sMaso;
+            
             txtMaso.Enabled = false;
+            txtNamsinh.Text = oChuyengia.iNamsinh + "";
+
             if (oChuyengia.bDuyet)
             {
                 ddlDuyet.Items[0].Selected = true;
@@ -47,7 +50,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                 ddlDuyet.Items[1].Selected = true;
             }
             imgAnhthe.ImageUrl = "../ViewImage.aspx?ID=" + oChuyengia.PK_iChuyengiaID + "&type=Chuyengia";
-            
+            //btnCapMasoVietGap.Visible = oChuyengia.sMaso.Contains("CGĐG -VietGAP-TS") ? false : true;
             ddlTrinhdo.SelectedValue = oChuyengia.FK_iTrinhdoID.ToString();
             //napGridView();
         }
@@ -169,6 +172,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         short PK_iChuyengiaID = Convert.ToInt16(grvChuyengia.DataKeys[e.NewSelectedIndex].Values["PK_iChuyengiaID"]);
         btnOK.CommandName = "EDIT";
         btnOK.Text = "Sửa";
+        btnCapMasoVietGap.Visible = true;
         pnlEdit.Visible = true;
         btnOK.CommandArgument = PK_iChuyengiaID.ToString();
         napForm(PK_iChuyengiaID);
@@ -189,6 +193,8 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                 oChuyengia.iNamkinhnghiem = short.Parse(txtSonamkinhnghiem.Text);
                 oChuyengia.sMaso = txtMaso.Text;
                 oChuyengia.FK_iTrinhdoID = short.Parse(ddlTrinhdo.SelectedValue);
+                oChuyengia.iNamsinh = Convert.ToInt16(txtNamsinh.Text);
+                
                 if (ddlDuyet.SelectedValue.Equals("1"))
                 {
                     oChuyengia.bDuyet = true;
@@ -235,6 +241,7 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                     oChuyengia.imAnh = oChuyengiaOld.imAnh;
                     oChuyengia.iTrangthai = oChuyengiaOld.iTrangthai;
                     oChuyengia.PK_iChuyengiaID = PK_iChuyengiaID;
+                    oChuyengia.iNamsinh = Convert.ToInt16(txtNamsinh.Text);
                     luuChungchi(PK_iChuyengiaID);
                     ChuyengiaBRL.Edit(oChuyengia);
                     lblThongbao.Text = "Cập nhật thành công";
@@ -332,5 +339,48 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
                     lblTrinhdo.Text = TrinhdoChuyengiaBRL.GetOne(FK_iTrinhdoID).sTrinhdo;
             }
         }
+    }
+    protected void btnCapMasoVietGap_Click(object sender, EventArgs e)
+    {
+        String sMasoChuyengia = "CGĐG -VietGAP-TS";
+        // Thực hiện việc cấp mã số
+        // 1. Lấy ID của Chuyên gia
+        int iChuyengiaID = Convert.ToInt32(btnOK.CommandArgument);
+        if (iChuyengiaID <= 0) return;
+        ChuyengiaEntity oChuyengia = ChuyengiaBRL.GetOne(iChuyengiaID);
+        //2. Lấy danh sách các chuyên gia để từ đó xác định được mã số mới nhất.
+        List<ChuyengiaEntity> lstChuyengia = ChuyengiaBRL.GetAll().FindAll(delegate(ChuyengiaEntity objChuyengia) {
+            return objChuyengia.sMaso.Length > 0 && objChuyengia.sMaso.Contains("CGĐG -VietGAP-TS");
+        });
+        if (lstChuyengia.Count > 0)
+        {
+            ChuyengiaEntity.Sort(lstChuyengia,"sMaso","DESC");
+            int iMasomoinhat = Convert.ToInt32(lstChuyengia[0].sMaso.Split(' ')[0]);
+            sMasoChuyengia += sFormat(iMasomoinhat);
+        }
+        else
+        {
+            sMasoChuyengia = "CGĐG -VietGAP-TS 0001";
+        }
+        // 3. Cập nhập mã số 
+        if (oChuyengia != null)
+        {
+            oChuyengia.sMaso = sMasoChuyengia;
+            ChuyengiaBRL.Edit(oChuyengia);
+            pnlEdit.Visible = false;
+            btnCapMasoVietGap.Visible = false;
+            Response.Write("<script language=\"javascript\">alert('Mã số " + sMasoChuyengia + " được cấp cho chuyên gia.');location='Default.aspx?page=Chuyengia';</script>");
+        }
+    }
+    private String sFormat(int iMasomoinhat)
+    {
+        if (iMasomoinhat < 10)
+            return "000" + iMasomoinhat;
+        else if (iMasomoinhat < 100)
+            return "00" + iMasomoinhat;
+        else if (iMasomoinhat < 1000)
+            return "0" + iMasomoinhat;
+        else
+            return iMasomoinhat+"";
     }
 }

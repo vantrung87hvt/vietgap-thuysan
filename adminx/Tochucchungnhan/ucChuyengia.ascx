@@ -26,7 +26,17 @@
             </td>
             <td valign="middle" width="70%">
                 <asp:TextBox ID="txtHoten" runat="server" Width="95%"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rqTentrinhdo" runat="server" ControlToValidate="txtHoten"
+                <asp:RequiredFieldValidator ID="rqHoten" runat="server" ControlToValidate="txtHoten"
+                    ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" width="20%">
+                <asp:Label ID="lblNamsinh" runat="server" Text="Năm sinh:"></asp:Label>
+            </td>
+            <td valign="middle" width="70%">
+                <asp:TextBox ID="txtNamsinh" runat="server" Width="95%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rqNamsinh" runat="server" ControlToValidate="txtNamsinh"
                     ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
             </td>
         </tr>
@@ -63,7 +73,7 @@
                 <asp:Label ID="Label2" runat="server" Text="Mã số:"></asp:Label>
             </td>
             <td valign="middle" width="70%">
-                <asp:TextBox ID="txtMaso" runat="server" Width="95%"></asp:TextBox>
+                <asp:TextBox ID="txtMaso" runat="server" Width="95%" Enabled="False"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtMaso"
                     ErrorMessage="*" ValidationGroup="vgGroup"></asp:RequiredFieldValidator>
             </td>
@@ -85,7 +95,6 @@
             </td>
             <td valign="middle" width="70%">
                 <asp:Image ID="imgAnhthe" runat="server" Height="110px" Width="110px" />
-                
             </td>
         </tr>
         <tr>
@@ -101,8 +110,8 @@
             </td>
             <td valign="middle" width="70%">
                 <asp:Panel runat="server" ID="pnlGiaychungnhan" Visible="true">
-                        <asp:CheckBoxList ID="cblGiaychungnhan" runat="server">
-                        </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="cblGiaychungnhan" runat="server">
+                    </asp:CheckBoxList>
                 </asp:Panel>
             </td>
         </tr>
@@ -111,6 +120,10 @@
             </td>
             <td>
                 <asp:Button ID="btnOK" runat="server" Text="Thêm" OnClick="btnOK_Click" />
+                &nbsp;
+                <asp:Button ID="btnCapMasoVietGap" runat="server" Text="Cấp mã số" OnClick="btnCapMasoVietGap_Click"
+                    Visible="False" />
+                &nbsp;
                 <asp:Button ID="btnCancel" runat="server" Text="Bỏ qua" OnClick="btnCancel_Click" />
             </td>
         </tr>
@@ -124,8 +137,9 @@
 <asp:GridView ID="grvChuyengia" runat="server" AutoGenerateColumns="False" AllowPaging="True"
     AllowSorting="True" OnSelectedIndexChanging="grvPosition_SelectedIndexChanging"
     OnSorting="grvPosition_Sorting" Width="100%" AlternatingRowStyle-CssClass="GridAltItem"
-    HeaderStyle-CssClass="GridHeader" CssClass="Grid" 
-    onrowdatabound="grvChuyengia_RowDataBound">
+    HeaderStyle-CssClass="GridHeader" CssClass="Grid" OnRowDataBound="grvChuyengia_RowDataBound"
+    EnableModelValidation="True">
+    <AlternatingRowStyle CssClass="GridAltItem"></AlternatingRowStyle>
     <Columns>
         <asp:TemplateField HeaderText="Chọn tất">
             <HeaderTemplate>
@@ -140,6 +154,7 @@
         <asp:BoundField DataField="sHoten" HeaderText="Họ tên" SortExpression="sHoten">
             <ItemStyle HorizontalAlign="Left" />
         </asp:BoundField>
+        <asp:BoundField DataField="iNamsinh" HeaderText="Năm sinh" SortExpression="iNamsinh" />
         <asp:BoundField DataField="sMaso" HeaderText="Mã số" SortExpression="sMaso">
             <ItemStyle HorizontalAlign="Left" />
         </asp:BoundField>
@@ -159,6 +174,7 @@
         <asp:ButtonField CommandName="Select" HeaderText="Sửa" ShowHeader="True" CausesValidation="false"
             Text="Sửa" />
     </Columns>
+    <HeaderStyle CssClass="GridHeader"></HeaderStyle>
 </asp:GridView>
 <asp:LinkButton ID="lbtnAddnew" runat="server" CausesValidation="False" OnClick="lbtnAddnew_Click">Thêm mới | </asp:LinkButton>
 <asp:LinkButton ID="lbtnDelete" runat="server" CausesValidation="False" OnClick="lbtnDelete_Click"
