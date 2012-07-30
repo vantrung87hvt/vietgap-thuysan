@@ -11,7 +11,7 @@ namespace INVI.INVINews.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!PermissionBRL.CheckPermission("ManagerCategory"))Response.End();
+            if (!PermissionBRL.CheckPermission("Quanlychuyenmuc")) Response.End();
             if (!IsPostBack)
             {
                 this.napGridView();
