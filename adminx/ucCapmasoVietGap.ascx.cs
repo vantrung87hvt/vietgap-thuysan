@@ -11,7 +11,7 @@ public partial class adminx_ucCapmasoVietGap : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("licenseGAP")) Response.End();
+        if (!PermissionBRL.CheckPermission("CapmasoVietgap")) Response.End();
         if (!Page.IsPostBack)
         {
             
