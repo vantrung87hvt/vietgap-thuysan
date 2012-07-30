@@ -17,7 +17,7 @@ public partial class adminx_AdvManager : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            if (!PermissionBRL.CheckPermission("ManagerAdv")) Response.End();
+            if (!PermissionBRL.CheckPermission("Dangquangcao")) Response.End();
             this.napNhomcaptren(0, Server.HtmlDecode("&nbsp;"));
             ddlPosition_loadData();
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")

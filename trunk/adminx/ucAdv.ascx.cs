@@ -15,7 +15,7 @@ public partial class adminx_ucAdv : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("ManagerAdv")) Response.End();
+        if (!PermissionBRL.CheckPermission("Dangquangcao")) Response.End();
         if (!IsPostBack)
         {
             this.napGridView();
