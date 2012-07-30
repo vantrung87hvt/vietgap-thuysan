@@ -17,7 +17,7 @@ public partial class adminx_Tochucchungnhan_ucChungchiChuyengia : System.Web.UI.
     private bool bAddnew;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!PermissionBRL.CheckPermission("QuanlyCacloaichungchiMachuyengiacotheco")) Response.End();
+        if (!PermissionBRL.CheckPermission("QLCacloaichungchichuyengia")) Response.End();
         if (!Page.IsPostBack)
             napGridView();
     }
