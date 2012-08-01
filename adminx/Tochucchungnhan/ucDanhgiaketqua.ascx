@@ -46,7 +46,8 @@
                 <div class="r" style="text-align: center;">
                     <asp:Button ID="btnOK" CssClass="button" runat="server" Text="Lưu lại" Width="90"
                         OnClick="btnOK_Click" ValidationGroup="adding" Visible="true" />
-                    <asp:Button ID="btnCancel" CssClass="button" runat="server" Text="Huỷ" Width="90" />
+                    <asp:Button ID="btnCancel" CssClass="button" runat="server" Text="Huỷ" 
+                        Width="90" onclick="btnCancel_Click" />
                     <asp:LinkButton ID="ltbnDellAll" OnClick="ltbnDellAll_Click" runat="server" OnClientClick="return confirm('Chắc chắn hủy kết quả?')" >Hủy kết quả đánh giá</asp:LinkButton>
                 </div>
             </div>

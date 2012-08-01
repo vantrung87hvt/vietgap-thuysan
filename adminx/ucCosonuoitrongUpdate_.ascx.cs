@@ -31,6 +31,8 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         {
             if (!PermissionBRL.CheckPermission("QuanlyCSNT")) Response.End();
             napTinh();
+            FK_iUser.Value = null;
+
             LoadQuanHuyen(Convert.ToInt32(ddlTinh.SelectedValue));
             napDoituongnuoi();
             napHinhThucNuoi();
@@ -107,7 +109,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
     protected void napNamsanxuat()
     {
         ddlNamSanXuat.Items.Insert(0, new ListItem("--- Chọn ---", "0"));
-        for (int i = 2011; i >= 1990; i--)
+        for (int i = DateTime.Today.Year; i >= 1990; i--)
         {
             ddlNamSanXuat.Items.Add(i.ToString());
         }
@@ -185,6 +187,8 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             us.iGroupID = 2;
             fk_user = UserBRL.Add(us);
             FK_iUser.Value = fk_user.ToString();
+            lblLoi.Text = "Tài khoản đã được tạo thành công";
+            pnDangKyTV.Visible = false;
             //Thêm cơ sở nuôi trồng giả định
             List<ToadoEntity> lstToado = ToadoBRL.GetAll();
             List<DoituongnuoiEntity> lstDoituong = DoituongnuoiBRL.GetAll();
@@ -233,6 +237,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         catch (Exception ex)
         {
             lblLoi.Text = ex.Message.ToString();
+            UserBRL.Remove(Convert.ToInt32(FK_iUser.Value));
         }
     }
     public void SendEmailVerificationToUser(string strUsername,string iduser)

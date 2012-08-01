@@ -20,7 +20,7 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         lblLoi.Text = "";
-        if (!PermissionBRL.CheckPermission("CapnhatTCCN")) Response.End();
+        if (!PermissionBRL.CheckPermission("CapnhapTCCN")) Response.End();
         if (!Page.IsPostBack)
         {
             napTinh();
@@ -29,8 +29,8 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
             napCoquancaptrenDll();
             pnTochuccaphep.Visible = true;
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
-            {                
-                if (!PermissionBRL.CheckPermission("AddTochuccapphep")) Response.End();
+            {
+                if (!PermissionBRL.CheckPermission("BosungTCCN")) Response.End();
                 clearForm();
                 pnDuyet.Visible = false;
                 btnOk.CommandName = "Add";
@@ -38,8 +38,8 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
             }
             else if (Request.QueryString["PK_iTochucchungnhanID"] != null)
             {
-                
-                if (!PermissionBRL.CheckPermission("EditTochuccapphep")) Response.End();
+
+                if (!PermissionBRL.CheckPermission("CapnhapTCCN")) Response.End();
                 // Bị lỗi cái chỗ khỉ này
                 int PK_iTochucchungnhanID = Convert.ToInt32(Request.QueryString["PK_iTochucchungnhanID"].ToString());
                 this.napForm(PK_iTochucchungnhanID);

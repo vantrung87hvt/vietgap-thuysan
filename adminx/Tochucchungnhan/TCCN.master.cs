@@ -25,6 +25,8 @@ public partial class adminx_Tochucchungnhan_TCCN : System.Web.UI.MasterPage
         }
         if (!Page.IsPostBack)
             napLogo();
+        LanguageManager.CurrentCulture = (new System.Globalization.CultureInfo("vi-VN"));
+        Session["Lang"] = LanguageManager.CurrentCulture;
     }
     private void napLogo()
     {

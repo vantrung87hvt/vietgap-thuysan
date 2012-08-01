@@ -46,14 +46,15 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                 return;
             }
             TochucchungnhanEntity oTochucchungnhan = TochucchungnhanBRL.GetOne(lstTochucTaikhoan[0].FK_iTochucchungnhanID);
-            lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
+            //lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID).FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
+            lstCosonuoitrong = CosonuoitrongBRL.GetByFK_iTochucchungnhanID(oTochucchungnhan.PK_iTochucchungnhanID);
             Session["oTochucchungnhan"] = oTochucchungnhan;
         }
         else
-            lstCosonuoitrong = CosonuoitrongBRL.GetAll().FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
+            //lstCosonuoitrong = CosonuoitrongBRL.GetAll().FindAll(delegate(CosonuoitrongEntity oCosonuoitrong) { return oCosonuoitrong.bXoa==false; });
+            lstCosonuoitrong = CosonuoitrongBRL.GetAll();
         grvCosonuoitrong.DataSource = lstCosonuoitrong;
         grvCosonuoitrong.DataKeyNames = new string[] { "PK_iCosonuoitrongID" };
-
         grvCosonuoitrong.DataBind();
     }
 
@@ -161,10 +162,14 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
                     {
                         int csntID = Convert.ToInt32(grvCosonuoitrong.DataKeys[row.RowIndex].Values["PK_iCosonuoitrongID"]);
                         // Không thực hiện việc xóa dữ liệu mà chỉ thiết lập việc ẩn.
-                        CosonuoitrongEntity oCosonuoitrong = new CosonuoitrongEntity();
-                        oCosonuoitrong = CosonuoitrongBRL.GetOne(csntID);
-                        oCosonuoitrong.bXoa = true;
-                        CosonuoitrongBRL.Edit(oCosonuoitrong);
+                        //CosonuoitrongEntity oCosonuoitrong = new CosonuoitrongEntity();
+                        //oCosonuoitrong = CosonuoitrongBRL.GetOne(csntID);
+                        //oCosonuoitrong.bXoa = true;
+                        CosonuoitrongBRL.Remove(csntID);
+                        if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
+                            Response.Write("<script language=\"javascript\">alert('Xóa thành công!');location='Default.aspx?page=Cosonuoitrong';</script>");
+                        else if (Convert.ToInt64(Session["groupID"].ToString()) == 4)
+                            Response.Write("<script language=\"javascript\">alert('Xóa thành công!');location='Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
                     }
                 }
                 napGridView();
@@ -172,9 +177,9 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             catch (Exception ex)
             {
                 if (Convert.ToInt64(Session["groupID"].ToString()) == 1)
-                    Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=Cosonuoitrong';</script>");
+                    Response.Write("<script language=\"javascript\">alert('Lỗi trong quá trình xóa!!!');location='Default.aspx?page=Cosonuoitrong';</script>");
                 else if(Convert.ToInt64(Session["groupID"].ToString())==4)
-                    Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Tochucchungnhan/Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
+                    Response.Write("<script language=\"javascript\">alert('Lỗi trong quá trình xóa!!!');location='Default.aspx?page=Cosonuoitrong&ctr=adm';</script>");
             }
     }
     private bool bXoaCosonuoitrong(int iCosonuoitrongID)

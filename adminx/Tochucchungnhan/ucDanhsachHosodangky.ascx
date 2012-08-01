@@ -17,16 +17,16 @@
         <thead>
             <tr>
                 <th scope="col">
-                    <asp:Label ID="lblSTTL" runat="server" Text="<%$ Resources:Language, lblSTTL%>"></asp:Label>
+                    <asp:Label ID="lblSTTL" runat="server" Text="STT"></asp:Label>
                 </th>
                 <th scope="col">
-                    <asp:Label ID="lblCoSoNuoiTrong" runat="server" Text="<%$ Resources:Language, lblCoSoNuoiTrong%>"></asp:Label>
+                    <asp:Label ID="lblCoSoNuoiTrong" runat="server" Text="Cơ sở nuôi trồng"></asp:Label>
                 </th>
                 <th scope="col">
-                     <asp:Label ID="lblChuSoHuu" runat="server" Text="<%$ Resources:Language, lblChuSoHuu%>"></asp:Label>
+                     <asp:Label ID="lblChuSoHuu" runat="server" Text="Chủ sở hữu"></asp:Label>
                 </th>
                 <th scope="col">
-                    <asp:Label ID="lblDiaChiL" runat="server" Text="<%$ Resources:Language, lblDiaChiL%>"></asp:Label>
+                    <asp:Label ID="lblDiaChiL" runat="server" Text="Địa chỉ"></asp:Label>
                 </th>
                 <th scope="col">
                     <asp:Label ID="Label1" runat="server" Text="Ngày đăng ký"></asp:Label>
