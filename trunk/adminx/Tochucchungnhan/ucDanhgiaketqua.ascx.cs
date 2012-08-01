@@ -16,7 +16,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
 {
     //===============================
     // ID cơ sở nuôi trồng, sau này sẽ thay bằng ID cơ sở của user đăng nhập
-    int PK_iCosonuoitrongID = 3;
+    int PK_iCosonuoitrongID = 0;
     //===============================
     bool bDatontai = false;//Kiểm tra cơ sở nuôi trồng hiện tại đã có bảng đánh giá nội bộ chưa
     List<PhuongphapkiemtraEntity> lstPhuongphapkiemtra;
@@ -151,6 +151,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
     {
         btnOK.CommandName = "Add";
         pnAdd.Visible = false;
+        Response.Redirect("Default.aspx?page=DanhsachHosodangky");
     }
     protected void btnShowAll_Click(object sender, EventArgs e)
     {
@@ -163,6 +164,7 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
             try
             {
                 LuuKetqua();
+                btnCancel.Text = "Quay lại";
             }
             catch (Exception ex)
             {
@@ -308,4 +310,5 @@ public partial class uc_ucTinh : System.Web.UI.UserControl
         napRpt();
         lblThongbao.Text = "Hủy kết quả thành công!";
     }
+    
 }

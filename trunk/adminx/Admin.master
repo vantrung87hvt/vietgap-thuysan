@@ -106,6 +106,7 @@
 								<li><a href="../adminx/Default.aspx?page=TrinhdoChuyengia">Quản lý trình độ chuyên gia</a></li>
 								<li><a href="../adminx/Default.aspx?page=CoquancaptrenQuanly">Quản lý Cơ quan cấp trên</a></li>
 								<li><a href="../adminx/Default.aspx?page=TochucchungnhanDanhsachDangky">Danh sách tổ chức đăng ký</a></li>
+                                <li><a href="../adminx/Default.aspx?page=ChungchiManager">Danh mục chứng chỉ chuyên gia</a></li> 
 							</ul> 
 						</li> 
 						<li> 
@@ -122,15 +123,16 @@
 								<li><a href="../adminx/Default.aspx?page=Permission">Cập nhập Quyền</a></li>
 								<li><a href="../adminx/Default.aspx?page=GroupPermission">Phân quyền</a></li>
 								<li><a href="../adminx/Default.aspx?page=Group">Nhóm</a></li>
+                                <li><a href="../adminx/Default.aspx?page=UserManager">Thành viên</a></li> 
 							</ul> 
 						</li> 
-						<li> <a href="javascript:void(0);">
+					<%--	<li> <a href="javascript:void(0);">
 						<img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Quảng cáo<span class="badge grey"></span></a> 
 						<ul class="sub"> 
 						<li><a href="../adminx/Default.aspx?page=AdvUpdate&amp;do=add">Quảng cáo mới</a></li>
 						<li><a href="../adminx/Default.aspx?page=Adv">Quản lý Quảng cáo</a></li>
 						</ul> 
-						</li> 
+						</li> --%>
 						<li> 
 							<a href="javascript:void(0);"><img src="img/icons/packs/fugue/16x16/clipboard-list.png" >Chuyên mục<span class="badge grey"></span></a> 
 							<ul class="sub"> 
@@ -157,9 +159,9 @@
 								<li><a href="../adminx/Default.aspx?page=HinhThucNuoiManager">Quản lý hình thức nuôi</a></li>
 								<li><a href="../adminx/Default.aspx?page=ChitieuManager">
 								<img src="img/icons/packs/fugue/16x16/newspaper.png">Chỉ tiêu</a></li> 
-								<li><a href="../adminx/Default.aspx?page=UserManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Thành viên</a></li> 
+								
 								<li><a href="../adminx/Default.aspx?page=GiaytoManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Quản lý Giấy tờ kèm theo</a></li> 
-								<li><a href="../adminx/Default.aspx?page=ChungchiManager"><img src="img/icons/packs/fugue/16x16/door-open-in.png" >Loại chứng chỉ</a></li> 
+								
 							</ul> 
 						</li> 
 						<li> 

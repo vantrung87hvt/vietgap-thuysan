@@ -46,17 +46,7 @@ public partial class adminx_Tochucchungnhan_Default : System.Web.UI.Page
         }
         else if (!Page.IsPostBack) // Tự động hiển thị luôn danh sách các Cơ sở nuôi trồng đăng ký.
         {
-            string strControl = "~/adminx/Tochucchungnhan/"; // thư mục admin/Tochucchungnhan
-            strControl += "uc" + "DanhsachHosodangky.ascx";
-
-            if (File.Exists(Server.MapPath(strControl)))
-            {
-                Control ctrl = LoadControl(strControl);
-                if (ctrl != null)
-                {
-                    phMain.Controls.Add(ctrl);
-                }
-            }
+            Response.Redirect("~/adminx/Tochucchungnhan/Default.aspx?page=DanhsachHosodangky");
         }
     }
 }

@@ -300,7 +300,7 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
             HosodangkychungnhanEntity oHosodangky = HosodangkychungnhanBRL.GetOne(PK_iHosodangky);
             Int64 PK_iCosonuoitrongID = oHosodangky.FK_iCosonuoiID;
 
-            if (!PermissionBRL.CheckPermission("licenseGAP")) Response.End();
+            if (!PermissionBRL.CheckPermission("CapmasoVietgap")) Response.End();
             String sMasovietgap = String.Empty;
             CosonuoitrongEntity oCosonuoitrong = new CosonuoitrongEntity();
             //if (Session["iCosonuoitrongID"] == null) return;
@@ -409,16 +409,22 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
         // Sắp xếp rồi lấy ra bác có giá trị lớn nhất rồi cộng
         String sMasomoinhat = String.Empty;
         String sMasocoso = String.Empty;
-        String[] sDulieutrongmaso=null;
+        // Đếm xem có bao nhiêu ông đã được cấp mã số, đặt mã số mới nhất bằng số ông
         if (lstCSNT_daduocmaso.Count > 0)
-            sMasomoinhat = CosonuoitrongBRL.GetOne(lstCSNT_daduocmaso[0].FK_iCosonuoitrongID).sMaso_vietgap;
+            sMasocoso = taoMacoso(lstCSNT_daduocmaso.Count + 1);
         else
-            sMasocoso = taoMacoso(0);
-        if(sMasomoinhat.Length>0)
-            sDulieutrongmaso = sMasomoinhat.Split('-');
-        if (sDulieutrongmaso!=null&&sDulieutrongmaso.Length > 0)
-            sMasocoso = taoMacoso(Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]));
-        
+            sMasocoso = taoMacoso(1);
+        // Đặt ra 1 biến, nếu có mã số rồi thì bTrue;
+        bool bMasodatontai = false;
+        do
+        {
+            bMasodatontai = lstCSNT_daduocmaso.FindAll(delegate(MasovietgapEntity oMasoVietGap) {
+                return oMasoVietGap.sMaso == sVietGapCode + sMasocoso;
+            }).Count>0?true:false;
+            if (bMasodatontai)
+                sMasocoso = taoMacoso(lstCSNT_daduocmaso.Count + 2);
+        }
+        while (bMasodatontai);
         //Session["sMasocoso"] = sMasocoso;
         sVietGapCode += sMasocoso;
         return sVietGapCode;
@@ -427,12 +433,12 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
     private String taoMacoso(int iSoCosonuoitrong)
     {
         String sMacoso = String.Empty;
-        if (iSoCosonuoitrong > 100)
-            sMacoso = "0" + (iSoCosonuoitrong + 1);
-        else if (iSoCosonuoitrong > 10)
-            sMacoso = "00" + (iSoCosonuoitrong + 1);
-        else if (iSoCosonuoitrong > 0)
-            sMacoso = "000" + (iSoCosonuoitrong + 1);
+        if (iSoCosonuoitrong < 100)
+            sMacoso = "0" + iSoCosonuoitrong;
+        else if (iSoCosonuoitrong < 10)
+            sMacoso = "00" + iSoCosonuoitrong;
+        else if (iSoCosonuoitrong < 0)
+            sMacoso = "000" + iSoCosonuoitrong;
         
         return sMacoso;
     }

@@ -77,7 +77,7 @@ namespace INVI.INVINews.Admin
         }
         protected void lbtnVerify_Click(object sender, EventArgs e)
         {
-            if (!PermissionBRL.CheckPermission("VerifyNews")) Response.End();
+            if (!PermissionBRL.CheckPermission("Kiemduyettintuc")) Response.End();
             foreach (GridViewRow row in grvNews.Rows)
             {
                 CheckBox chk = row.FindControl("chkVerify") as CheckBox;
@@ -94,7 +94,7 @@ namespace INVI.INVINews.Admin
         {
                 try
                 {
-                    if (!PermissionBRL.CheckPermission("DeleteNews")) Response.End();
+                    if (!PermissionBRL.CheckPermission("Xoatintuc")) Response.End();
                     foreach (GridViewRow row in grvNews.Rows)
                     {
                         CheckBox chkDelete = row.FindControl("chkDelete") as CheckBox;

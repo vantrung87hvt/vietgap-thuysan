@@ -20,16 +20,16 @@ public partial class adminx_NewsUpdate : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            if (!PermissionBRL.CheckPermission("Capnhaptintuc")) Response.End();
+            if (!PermissionBRL.CheckPermission("QLTintuc")) Response.End();
             this.napNhomcaptren(0, Server.HtmlDecode("&nbsp;"));
             if (Request.QueryString["do"] != null && Request.QueryString["do"] == "add")
             {
-                if (!PermissionBRL.CheckPermission("AddNews")) Response.End();
+                if (!PermissionBRL.CheckPermission("Dangtin")) Response.End();
                 clearForm();
             }
             else if (Session["newsID"] != null)
             {
-                if (!PermissionBRL.CheckPermission("EditNews")) Response.End();
+                if (!PermissionBRL.CheckPermission("Capnhaptintuc")) Response.End();
                 int newsID = Convert.ToInt32(Session["NewsID"]);
                 this.napForm(newsID);
                 btnOK.CommandName = "Edit";
