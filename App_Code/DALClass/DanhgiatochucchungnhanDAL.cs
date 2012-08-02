@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:12/26/2011 9:58:23 PM
+Create On:8/2/2012 10:16:44 PM
 ------------------------------------------------------*/
 using INVI.DataAccess.Base;
 using INVI.Entity;
@@ -41,7 +41,7 @@ namespace INVI.DataAccess
                 return entity;
             };
         }
-        public static DanhgiatochucchungnhanEntity GetOne(Int32 PK_iDanhgiatochucchungnhanID)
+        public static DanhgiatochucchungnhanEntity GetOne(int PK_iDanhgiatochucchungnhanID)
         {
             string cmdName = "spDanhgiatochucchungnhan_GetByPK";
             SqlParameter p = new SqlParameter("@PK_iDanhgiatochucchungnhanID", PK_iDanhgiatochucchungnhanID);

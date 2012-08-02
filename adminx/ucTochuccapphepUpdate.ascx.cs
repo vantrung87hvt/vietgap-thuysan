@@ -291,10 +291,17 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
     {
         int iUserID = Convert.ToInt32(ddlTaikhoan.SelectedValue);
         List<TochucchungnhanTaikhoanEntity> lstTochucTaikhoan = TochucchungnhanTaikhoanBRL.GetByFK_iTaikhoanID(iUserID);
-        if (lstTochucTaikhoan != null && lstTochucTaikhoan.Count > 0 && lstTochucTaikhoan[0].FK_iTochucchungnhanID!=Convert.ToInt32(btnOk.CommandArgument))
+        // Kiểm tra xem liệu btnOK có được gắn với ID không
+        if (lstTochucTaikhoan != null && lstTochucTaikhoan.Count > 0)
         {
-            lblLoi.Text = "User này đã sử dụng cho Tổ chức CN khác";
-            return;
+            int iTochucchungnhanID = 0;
+            if (btnOk.CommandArgument.Length>0)
+                iTochucchungnhanID = Convert.ToInt32(btnOk.CommandArgument.ToString());
+            if (lstTochucTaikhoan[0].FK_iTochucchungnhanID != iTochucchungnhanID)
+            {
+                lblLoi.Text = "User này đã sử dụng cho Tổ chức CN khác";
+                return;
+            }
         }
         else if (UserBRL.GetOne(iUserID).bActive == false)
         {

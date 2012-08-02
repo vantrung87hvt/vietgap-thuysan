@@ -12,6 +12,9 @@ public partial class adminx_ucMasoVietGapQuanLy : System.Web.UI.UserControl
         if (!Page.IsPostBack)
         {
             if (!PermissionBRL.CheckPermission("QuanlymasoVietGap")) Response.End();
+            if (Session["MasoVietGap"] != null)
+                if (Session["MasoVietGap"].ToString().Length <= 0)
+                    Response.Write("<script language=\"javascript\">alert('Tổ chức của bạn chưa được cấp mã số.Nên không thể thực hiện được thao tác này.');location='Default.aspx';</script>");
             napDllCosonuoitrong();
             napGridView();
         }

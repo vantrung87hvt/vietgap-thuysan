@@ -2,7 +2,7 @@
                 INVIGEN beta v1.0
 Author: xtrung.net@gmail.com
 Write On: 04/27/2008
-Create On:12/26/2011 9:55:50 PM
+Create On:8/2/2012 10:16:37 PM
 ------------------------------------------------------*/
 using INVI.Entity;
 using INVI.DataAccess;
@@ -165,8 +165,8 @@ namespace INVI.Business
 			{
 				throw new Exception("Không tìm thấy :FK_iTochucchungnhanID");
 			}
-            ChuyengiaEntity oDanhgiavien = ChuyengiaDAL.GetOne(entity.FK_iTruongdoandanhgiaID);
-			if (oDanhgiavien==null)
+			ChuyengiaEntity oChuyengia = ChuyengiaDAL.GetOne(entity.FK_iTruongdoandanhgiaID);
+			if (oChuyengia==null)
 			{
 				throw new Exception("Không tìm thấy :FK_iTruongdoandanhgiaID");
 			}

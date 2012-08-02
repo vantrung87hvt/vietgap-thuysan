@@ -176,6 +176,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
         {
             for (int i = 0; i < lstDoandanhgia.Count; ++i)
             {
+                
                 builder.Writeln("\t- " + ChuyengiaBRL.GetOne(lstDoandanhgia[i].FK_iChuyengiaID).sHoten);
             }
         }
@@ -240,16 +241,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
     }
     protected void btnLuu_Click(object sender, EventArgs e)
     {
-        //DateTime dt = DateTime.Parse(txtNgaydg.Text);
-        //Response.Write("Ngày = " + dt.ToString());
-        //String sGio = (DateTime.Parse(txtGiodg.Text)).ToString();
-        //Response.Write("Giờ = " + sGio);
-        //DateTime dt = DateTime.Parse(txtNgaydg.Text);
-        //Response.Write("Ngày = " + dt.ToString());
-        //String sGio = (DateTime.Parse(txtGiodg.Text)).ToString();
-        //Response.Write("Giờ = " + sGio);
-        //return;
-
+        
         //Kiểm tra số lượng thành viên trong đoàn đánh giá
         //Số lượng <=5 thành viên kể cả trưởng đoàn đánh giá
         bool bTruongdoancotrongdanhsach = false;
@@ -299,7 +291,6 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
                 oDanhgia.FK_iTruongdoandanhgiaID = int.Parse(ddlTruongdoan.SelectedItem.Value);
                 if (PK_iDanhgiatochucID == 0)
                 {
-                    bTruongdoancotrongdanhsach = false;
                     PK_iDanhgiatochucID = DanhgiatochucchungnhanBRL.Add(oDanhgia);
                     DoandanhgiatochucchungnhanEntity oDoandanhgiaTmp = new DoandanhgiatochucchungnhanEntity();
                     for (int i = 0; i < cblDoandanhgia.Items.Count; ++i)

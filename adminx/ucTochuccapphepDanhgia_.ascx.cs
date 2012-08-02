@@ -313,6 +313,7 @@ public partial class adminx_ucTochuccapphepDanhgia : System.Web.UI.UserControl
             TochucchungnhanBRL.Edit(oTochuc);
             lblThongbao.Text = "Lưu thành  công!";
             btnLuu.Visible = false;
+            btnHuy.Text = "Quay lại";
             btnExportToWord.Enabled = true;
         }
         else

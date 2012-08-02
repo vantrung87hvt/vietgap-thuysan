@@ -26,6 +26,9 @@ public partial class adminx_ucCosonuoitrong : System.Web.UI.UserControl
             }
             else if (Convert.ToInt64(Session["groupID"].ToString()) == 4) // nếu là tổ chức chứng nhận
             {
+                if (Session["MasoVietGap"] != null)
+                    if (Session["MasoVietGap"].ToString().Length <= 0)
+                        Response.Write("<script language=\"javascript\">alert('Tổ chức của bạn chưa được cấp mã số. Nên không thể thực hiện được thao tác này.');location='Default.aspx';</script>");
                 lnkAdd.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=CosonuoitrongUpdate_&amp;do=add&ctr=adm";
                 hypImport.NavigateUrl = "~/adminx/Tochucchungnhan/Default.aspx?page=ImportCSNT";
             }

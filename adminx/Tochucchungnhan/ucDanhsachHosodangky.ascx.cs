@@ -433,11 +433,11 @@ public partial class uc_ucDanhsachHosodangky : System.Web.UI.UserControl
     private String taoMacoso(int iSoCosonuoitrong)
     {
         String sMacoso = String.Empty;
-        if (iSoCosonuoitrong < 100)
+        if (iSoCosonuoitrong < 1000)
             sMacoso = "0" + iSoCosonuoitrong;
-        else if (iSoCosonuoitrong < 10)
+        else if (iSoCosonuoitrong < 100)
             sMacoso = "00" + iSoCosonuoitrong;
-        else if (iSoCosonuoitrong < 0)
+        else if (iSoCosonuoitrong < 10)
             sMacoso = "000" + iSoCosonuoitrong;
         
         return sMacoso;

@@ -17,6 +17,9 @@ public partial class adminx_Tochucchungnhan_ucTCCN_TaikhoanDangky : System.Web.U
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!PermissionBRL.CheckPermission("QLTaikhoandangkyvoiTCCN")) Response.End();
+        if (Session["MasoVietGap"] != null)
+            if (Session["MasoVietGap"].ToString().Length <= 0)
+                Response.Write("<script language=\"javascript\">alert('Tổ chức của bạn chưa được cấp mã số. Nên không thể thực hiện được thao tác này.');location='Default.aspx';</script>");
         if (!IsPostBack)
         {
             this.napGridView();

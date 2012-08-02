@@ -151,7 +151,24 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
 
     private void napGridView()
     {
-        grvChuyengia.DataSource = ChuyengiaBRL.GetAll();
+        // Lọc để chỉ lấy ra danh sách các chuyên gia thuộc TCCN hiện tại
+        if(Convert.ToInt32(Session["GroupID"].ToString())==1)
+            grvChuyengia.DataSource = ChuyengiaBRL.GetAll();
+        else if (Convert.ToInt32(Session["GroupID"].ToString()) == 4)
+        {
+            if (Session["iTochucchungnhanID"] != null)
+            {
+                int iTCCNID = Convert.ToInt32(Session["iTochucchungnhanID"].ToString());
+                grvChuyengia.DataSource = ChuyengiaBRL.GetAll().FindAll(delegate(ChuyengiaEntity oChuyengia)
+                {
+                    return oChuyengia.FK_iTochucchungnhanID == iTCCNID;
+                });
+            }
+            else
+            {
+                grvChuyengia.DataSource = ChuyengiaBRL.GetAll();
+            }
+        }
         grvChuyengia.DataKeyNames = new string[] { "PK_iChuyengiaID" };
         grvChuyengia.DataBind();
     }
@@ -314,6 +331,12 @@ public partial class adminx_Tochucchungnhan_ucChuyengia : System.Web.UI.UserCont
         //ddlTochucchungnhan.SelectedItem.Selected = false;
         //ddlTrinhdo.SelectedItem.Selected = false;
         btnOK.Text = "Lưu";
+        if (Session["iTochucchungnhanID"] != null)
+        {
+            int iTCCNID = Convert.ToInt32(Session["iTochucchungnhanID"].ToString());
+            if(ddlTochucchungnhan.Items.Count>0)
+                ddlTochucchungnhan.SelectedValue = iTCCNID.ToString();
+        }
         btnOK.CommandName = "ADDNEW";
         pnlEdit.Visible = true;
         foreach (ListItem chk in cblGiaychungnhan.Items)

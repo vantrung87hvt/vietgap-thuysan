@@ -186,6 +186,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
             us.sIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
             us.iGroupID = 2;
             fk_user = UserBRL.Add(us);
+            
             FK_iUser.Value = fk_user.ToString();
             lblLoi.Text = "Tài khoản đã được tạo thành công";
             pnDangKyTV.Visible = false;
@@ -217,8 +218,23 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
                     Response.Write("<script>alert('Tổ chức chứng nhận không hợp lệ!');</script>");
                 }
             }
-            
-            iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
+            try
+            {
+                iCosonuoitrongID = CosonuoitrongBRL.Add(oCoso);
+            }
+            catch // Không thêm được thì mới xóa User đi
+            {
+                UserBRL.Remove(fk_user);
+            }
+            if (fk_user > 0)
+            {
+                TaiKhoanDangKyToChucChungNhanEntity oTaikhoandangkyVoiTCCN = new TaiKhoanDangKyToChucChungNhanEntity();
+                oTaikhoandangkyVoiTCCN.bDuyet = false;
+                oTaikhoandangkyVoiTCCN.dNgaydangky = DateTime.Today;
+                oTaikhoandangkyVoiTCCN.FK_iTaikhoanID = fk_user;
+                oTaikhoandangkyVoiTCCN.FK_iTochucchungnhanID = oCoso.FK_iTochucchungnhanID;
+                TaiKhoanDangKyToChucChungNhanBRL.Add(oTaikhoandangkyVoiTCCN);
+            }
             FK_iCosonuoitrong.Value = iCosonuoitrongID.ToString();
             btnDKThongtinCoSoNuoi.CommandName = "Edit";
             //List<UserEntity> list = UserBRL.GetAll();
@@ -237,7 +253,7 @@ public partial class adminx_ucCosonuoitrongUpdate : System.Web.UI.UserControl
         catch (Exception ex)
         {
             lblLoi.Text = ex.Message.ToString();
-            UserBRL.Remove(Convert.ToInt32(FK_iUser.Value));
+            
         }
     }
     public void SendEmailVerificationToUser(string strUsername,string iduser)

@@ -15,6 +15,9 @@ public partial class adminx_Tochucchungnhan_ucThongtinDangky : System.Web.UI.Use
         //if(!IsPostBack)
         //{
         if (!PermissionBRL.CheckPermission("DuyethosodangkycuaCNST")) Response.End();
+        if (Session["MasoVietGap"] != null)
+            if (Session["MasoVietGap"].ToString().Length <= 0)
+                Response.Write("<script language=\"javascript\">alert('Tổ chức của bạn chưa được cấp mã số.Nên không thể thực hiện được thao tác này.');location='Default.aspx';</script>");
             napRptGiaytonopkem();
             HienKetQua();
         //}

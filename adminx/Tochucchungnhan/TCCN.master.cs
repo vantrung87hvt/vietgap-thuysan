@@ -40,6 +40,7 @@ public partial class adminx_Tochucchungnhan_TCCN : System.Web.UI.MasterPage
         {
             iTochucchungnhanID = lstTochucchungnhan[0].FK_iTochucchungnhanID;
             Session["iTochucchungnhanID"]=iTochucchungnhanID;
+            Session["MasoVietGap"] = TochucchungnhanBRL.GetOne(iTochucchungnhanID).sMaso; // được dùng để check xem đã được cấp mã số chưa
             imgLogo.ImageUrl = "../ViewImage.aspx?ID=" + iTochucchungnhanID;
         }
         else
