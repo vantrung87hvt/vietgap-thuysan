@@ -211,20 +211,31 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
         rptHoSoKemTheo.DataSource = lst;
         rptHoSoKemTheo.DataBind();
         int iSodanhgiavien = 0;
-        //Kiểm tra số đánh giá viên
+        
         List<ChuyengiaEntity> lstChuyengia = ChuyengiaBRL.GetByFK_iTochucchungnhanID(oTCCN.PK_iTochucchungnhanID);
+        //Kiểm tra số đánh giá viên
+        
         if (lstChuyengia != null && lstChuyengia.Count > 2)
         {
-            btnCapPhep.Enabled = true;
+            // Kiểm tra xem là kết quả đánh giá có đạt không thì mới cho phép nhấn Cấp phép.
+            List<DanhgiatochucchungnhanEntity> lstDanhgiaTCCN = DanhgiatochucchungnhanBRL.GetByFK_iTochucchungnhanID(oTCCN.PK_iTochucchungnhanID);
+            if (lstDanhgiaTCCN.Count > 0)
+            {
+                if (lstDanhgiaTCCN[0].iKetquadanhgia == 1)
+                    btnCapPhep.Enabled = true;
+                else
+                {
+                    btnCapPhep.Enabled = false;
+                    lblThongbao.Text = "Tổ chức của bạn không được chấp nhận bởi đoàn đánh giá.";
+                }
+            }
         }
         else
         {
             btnCapPhep.Enabled = false;
+            lblThongbao.Text = "Tổ chức của bạn chưa có đủ 2 chuyên gia theo quy định";
         }
-        //if(Session["iSodanhgiavien"]!=null)
-        //    iSodanhgiavien = Convert.ToInt32(Session["iSodanhgiavien"].ToString());
-        //btnCapPhep.Enabled = iSodanhgiavien > 0 ? true : false;
-
+        
         btnCapPhep.CommandArgument = DangKyID.ToString();
     
     }
@@ -293,7 +304,8 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             int DangKyID = Convert.ToInt32(btnCapPhep.CommandArgument);
             DangkyHoatdongchungnhanEntity oDangkyhd = DangkyHoatdongchungnhanBRL.GetOne(DangKyID);
             int idTochucchungnhan = oDangkyhd.FK_iTochucchungnhanID;
-            if (TochucchungnhanBRL.GetOne(idTochucchungnhan).sMaso.Trim().Length > 0 && TochucchungnhanBRL.GetOne(idTochucchungnhan).sKytuviettat.Trim()!="Chưa cấp")
+
+            if (TochucchungnhanBRL.GetOne(idTochucchungnhan).sMaso.Contains("VietGAP-TS")&&oDangkyhd.iTrangthaidangky==2)
             {
                 lblThongbao.Text = "Tổ chức này đã được cấp phép.";
                 return;
@@ -305,17 +317,7 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
             // Theo cái mới thì không phải ngẫu nhiên mã số
             // mà con số sau là 2 con số của năm
             // và số lượng mã số được cấp
-            //List<TochucchungnhanEntity> lstTochucchungnhan = new List<TochucchungnhanEntity>();
-            //do
-            //{
-            //    maso = randomString(3);
-            //    lstTochucchungnhan = TochucchungnhanBRL.GetAll().FindAll(delegate(TochucchungnhanEntity oTochucchungnhan)
-            //    {
-            //        return oTochucchungnhan.sKytuviettat == maso;
-            //    }
-            //    );
-            //} while (lstTochucchungnhan.Count > 0);
-            
+           
             // Đếm số lượng tổ chức chứng nhận đã được chỉ định
 
             List<TochucchungnhanEntity> lstTochucchungnhan = new List<TochucchungnhanEntity>();
@@ -327,31 +329,26 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
                 if (!lstTochucchungnhan.Contains(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID)) && oDanhsachTCCN.iTrangthaidangky==2)
                     //if((QuanHuyenBRL.GetOne(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID).FK_iQuanHuyenID).FK_iTinhThanhID)==oTinh.PK_iTinhID)
                         lstTochucchungnhan.Add(TochucchungnhanBRL.GetOne(oDanhsachTCCN.FK_iTochucchungnhanID));
-            // Sắp xếp lại Danh sách các tổ chức chứng nhận để lấy mã số của TCCN có giá trị lớn nhất + 1.
-            lstTochucchungnhan.Sort(delegate(TochucchungnhanEntity firstEntity, TochucchungnhanEntity secondEntity)
-            {
-                return secondEntity.sMaso.CompareTo(firstEntity.sMaso);
-            }
-            );
-            // Lấy thằng mới nhất
-            int iStt=0;
-            String sMasomoinhat = String.Empty;
-            String[] sDulieutrongmaso = null;
-            if (lstTochucchungnhan.Count > 0)
-            {
-                sMasomoinhat = lstTochucchungnhan[0].sMaso;
-                sDulieutrongmaso = sMasomoinhat.Split('-');
-                iStt = Convert.ToInt16(sDulieutrongmaso[sDulieutrongmaso.Length - 1]) + 1;
 
-            }
-            else
-                iStt = 1;
-            if (iStt < 10)
-                maso += "0" + iStt;
-            else
-                maso += iStt + "";
-            //maso += lstTochucchungnhan.Count + 1;
-            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + iStt;
+            String sDuoiMaso = String.Empty;
+            bool bDaco = false;
+            do
+            {
+                sDuoiMaso = dinhDangmaso(lstTochucchungnhan.Count + 1);
+                lstTochucchungnhan = TochucchungnhanBRL.GetAll().FindAll(delegate(TochucchungnhanEntity oTochucchungnhan)
+                {
+                    return oTochucchungnhan.sKytuviettat == maso;
+                }
+                );
+                if (lstTochucchungnhan.Count > 0)
+                {
+                    bDaco = true;
+                    sDuoiMaso = dinhDangmaso(lstTochucchungnhan.Count + 2);
+                }
+
+            } while (bDaco);
+            maso += sDuoiMaso;
+            oTCCN.sKytuviettat = DateTime.Now.Year.ToString().Substring(2, 2) + "-" + lstTochucchungnhan.Count+1;
             oTCCN.sMaso = maso;
             oTCCN.iTrangthai = 2;
             
@@ -366,6 +363,12 @@ public partial class adminx_ucTochucchungnhanDanhsachDangky : System.Web.UI.User
         {
             Response.Write("<script language=\"javascript\">alert('" + ex.Message + "');location='Default.aspx?page=TochucchungnhanDanhsachDangky';</script>");
         }
+    }
+    private string dinhDangmaso(int iSoTCCN)
+    {
+        if (iSoTCCN < 10)
+            return "0" + iSoTCCN;
+            return iSoTCCN+"";
     }
     protected void ddlLandangky_SelectedIndexChanged(object sender, EventArgs e)
     {

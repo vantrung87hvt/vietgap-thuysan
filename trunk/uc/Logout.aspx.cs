@@ -11,6 +11,7 @@ public partial class uc_Logout : System.Web.UI.Page
         Session["UserID"] = "";
         string a = Session["UserID"].ToString();
         Session["UserName"] = "";
+        Session.RemoveAll();
         Session.Abandon();
         Response.Redirect("../");
     }

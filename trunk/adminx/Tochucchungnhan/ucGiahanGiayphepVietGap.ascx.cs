@@ -12,6 +12,9 @@ public partial class adminx_ucGiahanGiayphepVietGap : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!PermissionBRL.CheckPermission("GiahangiaychungnhanVietGap")) Response.End();
+        if (Session["MasoVietGap"] != null)
+            if (Session["MasoVietGap"].ToString().Length <= 0)
+                Response.Write("<script language=\"javascript\">alert('Tổ chức của bạn chưa được cấp mã số. Nên không thể thực hiện được thao tác này.');location='Default.aspx';</script>");
         if (!Page.IsPostBack)
         {
             //napTinh();
