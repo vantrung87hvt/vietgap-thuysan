@@ -310,8 +310,18 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
         }
         else if (UserBRL.GetOne(iUserID).bActive == false)
         {
-            lblLoi.Text = "Tài khoản này chưa được kích hoạt";
+            lblLoi.Text = "Tài khoản này chưa được kích hoạt.";
+            lbtnKichhoat.Visible = true;
             return;
+        }
+    }
+    protected void lbtnKichhoat_Click(object sender, EventArgs e)
+    {
+        if (ddlTaikhoan.SelectedIndex > 0)
+        {
+            UserEntity oUser = UserBRL.GetOne(Convert.ToInt32(ddlTaikhoan.SelectedValue));
+            oUser.bActive = true;
+            UserBRL.Edit(oUser);
         }
     }
 }
