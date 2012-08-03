@@ -303,6 +303,11 @@ public partial class ucTochuccapphepUpdate : System.Web.UI.UserControl
                 return;
             }
         }
+        else if (CosonuoitrongBRL.GetByFK_iUserID(iUserID).Count > 0)
+        {
+            lblLoi.Text = "User này đã sử dụng cho một Cơ sở nuôi trồng.";
+            return;
+        }
         else if (UserBRL.GetOne(iUserID).bActive == false)
         {
             lblLoi.Text = "Tài khoản này chưa được kích hoạt";
