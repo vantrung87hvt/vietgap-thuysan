@@ -36,8 +36,10 @@
 </div>
 <div class="a"><div class="l">Địa chỉ:</div><div class="r">
     <asp:TextBox ID="txtDiachi" runat="server" ></asp:TextBox>
+    
 </div>
     <div class="rr">
+        
         <asp:RequiredFieldValidator ID="rfvDiachi" runat="server" ControlToValidate="txtDiachi" Display="Dynamic" 
                     ValidationGroup="register" ForeColor="Red"  Text="*" SetFocusOnError="true"></asp:RequiredFieldValidator>
     </div>
@@ -71,6 +73,8 @@
     <asp:DropDownList ID="ddlTaikhoan" runat="server" AutoPostBack="True" 
         onselectedindexchanged="ddlTaikhoan_SelectedIndexChanged">
     </asp:DropDownList>
+    
+    <asp:LinkButton ID="lbtnKichhoat" runat="server" onclick="lbtnKichhoat_Click">Kích hoạt</asp:LinkButton>
     
 </div> <div class="rr">
 </div></div>
